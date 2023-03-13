@@ -8,8 +8,9 @@
  */
 
 // Seccion de includess.
-#include "lcd.h"
 #include "lcd_module.h"
+
+#include "lcd.h"
 #include "pcf8553.h"
 
 // Varibles global static, solo visibles en este modulo.

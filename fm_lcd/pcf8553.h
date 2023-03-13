@@ -1,9 +1,13 @@
 /* @file lcd_module.h
  *
- * @brief Libreria para manejo de lcd driver de la marca nxp pcf8553
+ * @brief Libreria para manejo de lcd driver de la marca nxp pcf8553.
+ *
+ *
+ * @exepción Para la regla "el nombre de un moudlo que fabricamo en FLOMEET
+ * comienza con fm_nombre_modulo", no se aplica en este caso por ser nombre
+ * singular.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
- *
  */
 
 #ifndef PCF8553_H_
@@ -105,7 +109,7 @@ typedef union
 
 /*
  * Las funciones cumplen con:
- * Se listan alfabeticamente aqui y en el .c
+ * Ordenadas alfabeticamente aqui y en el .c
  * Para los nombres se usa la regla: noun-verb
  * Las funciones publicas comienzan con el nombre del modulo
  *
@@ -117,6 +121,6 @@ void pcf8553_reset();
 void pcf8553_write_all(uint8_t data);
 void pcf8553_write_byte(uint8_t add, uint8_t data);
 
-#endif /* PCF8553_H_ */
+#endif /* FM_PCF8553_H_ */
 
 /*** end of file ***/

@@ -12,9 +12,16 @@
  */
 
 // Includes.
+
 #include "lcd.h"
-#include "pcf8553.h"
+
+/*
+ * Si no es ovbio deberida decir porque incluyo un modulo, en este caso no lo
+ * hice y ahora no lo recuerdo.
+ */
 #include "ctype.h"
+
+#include "pcf8553.h"
 
 // Typedef.
 

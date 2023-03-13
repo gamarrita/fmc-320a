@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef LCD_H_
-#define LCD_H_
+#ifndef FM_LCD_H_
+#define FM_LCD_H_
 
 #include "main.h"
 
@@ -60,6 +60,6 @@ typedef struct
 void lcd_put_char(char c, uint8_t col, lcd_row_t row);
 void lcd_init();
 
-#endif /* LCD_H_ */
+#endif /* FM_LCD_H_ */
 
 /*** end of file ***/
