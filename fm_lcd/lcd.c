@@ -12,7 +12,6 @@
  */
 
 // Includes.
-
 #include "lcd.h"
 
 /*
@@ -44,7 +43,6 @@
 #define SEG_H 7
 
 // Project variables, non-static, at least usedd in other file.
-
 
 // Extern variables.
 
@@ -160,9 +158,9 @@ void lcd_init()
 	 * Inicializo a cero todos los elemento del buffer.
 	 */
 
-	for(int row = 0; row < LCD_ROWS; row++)
+	for (int row = 0; row < LCD_ROWS; row++)
 	{
-		for(int col = 0; col < LCD_COLS; col++)
+		for (int col = 0; col < LCD_COLS; col++)
 		{
 			g_buf[row][col] = 0;
 		}

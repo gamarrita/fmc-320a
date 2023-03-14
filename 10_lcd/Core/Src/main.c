@@ -134,7 +134,7 @@ int main(void)
 	HAL_Delay(1000);
 	pcf8553_write_all(0X00);
 
-	HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 4096, RTC_WAKEUPCLOCK_RTCCLK_DIV16); //
+	HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 4096, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
 	HAL_TIM_Base_Start(&htim16);
 
 	while (1)
@@ -175,14 +175,19 @@ int main(void)
 				time_delta = time_end - time_start;
 
 				HAL_SuspendTick();
-				HAL_PWREx_EnterSTOP2Mode(PWR_STOPENTRY_WFI); // stop1 mode
-				SystemClock_Config(); //al salir del modo de bajo consumo hay que volver a configurar el clock
-				HAL_ResumeTick();
-			break;
 
 				/*
-				 *
+				 * Ingrea en stop mode 1
 				 */
+				HAL_PWREx_EnterSTOP2Mode(PWR_STOPENTRY_WFI); // stop1 mode
+
+				/*
+				 * Al salir del modo de bajo consumo hay que volver a configurar el clock
+				 */
+				SystemClock_Config();
+
+				HAL_ResumeTick();
+			break;
 			default:
 			break;
 		}
