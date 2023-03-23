@@ -1,10 +1,10 @@
 # fmc_320a - Computador de Caudales.
 
 Instrucciones de clonar el branch master:
-  El proyecto corre en STM32Cube IDE 1.12
-  Aunque trabaja con carpetas no absolutas clonar el proyecto en d:\githubs\fm-320a\
-  File -> Switch Workspace -> d:\githubs\fmc-320a
-  File -> Open Project From File System -> Directory -> d:\githubs\fmc-320a -> Select All -> Finish
+- El proyecto corre en STM32Cube IDE 1.12
+- Aunque trabaja con carpetas no absolutas clonar el proyecto en d:\githubs\fm-320a\
+- File -> Switch Workspace -> d:\githubs\fmc-320a
+- File -> Open Project From File System -> Directory -> d:\githubs\fmc-320a -> Select All -> Finish
 
 En este punto deberia ver en Project Explorer todos los protyectos relacionado, si no los ve es posible que precionand en el pequeño icono restore, arriba a la izquierda los muestre.
 
