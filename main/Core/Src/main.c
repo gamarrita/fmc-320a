@@ -22,9 +22,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../../../libs/fm_lcd/fm_lcd.h"
 #include "../../../libs/fm_keypad/fm_keypad.h"
-#include "../../../libs/fm_menu/fm_menu.h"
+#include "../../../libs/fm_menu_user/fm_menu_user.h"
 
 /* USER CODE END Includes */
 
@@ -72,8 +71,8 @@ const osMessageQueueAttr_t MENU_QUEUE_attributes = {
   .name = "MENU_QUEUE"
 };
 /* USER CODE BEGIN PV */
-fm_menu_t g_menu = MENU_TTL_RATE;
-
+extern uint16_t g_key_up_counter;
+extern uint16_t g_key_down_counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,7 +128,10 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-	fm_lcd_init();
+  fm_menu_begin();
+  fm_menu_show_temp_temp();
+  HAL_Delay(3000);
+  fm_menu_show_version();
 
   /* USER CODE END 2 */
 
@@ -454,20 +456,8 @@ void menu_task(void *argument)
 	/* Infinite loop */
 	for (;;)
 	{
-		switch(g_menu)
-		{
-			case MENU_TTL_RATE:
-				fm_menu_ttl_rate();
-				break;
-			case MENU_ACM_RATE:
-				fm_menu_acm_rate();
-				break;
-			case MENU_END:
-				break;
-			default:
-				break;
-		}
-		osDelay(4000);
+
+	  osDelay(1000);
 	}
   /* USER CODE END 5 */
 }

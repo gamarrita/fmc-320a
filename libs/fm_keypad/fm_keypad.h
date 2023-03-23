@@ -8,7 +8,6 @@
  */
 
 // includes
-
 #ifndef FM_KEYPAD_H_
 #define FM_KEYPAD_H_
 
@@ -18,11 +17,8 @@
 
 typedef enum
 {
-	KEY_UP,
-	KEY_DOWN,
-	KEY_ENTER,
-	KEY_ESC
-}fm_keypad_t;
+	KEY_UP, KEY_DOWN, KEY_ENTER, KEY_ESC
+} fm_keypad_t;
 
 // Defines.
 

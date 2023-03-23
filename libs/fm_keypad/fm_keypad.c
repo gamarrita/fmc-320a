@@ -8,7 +8,6 @@
  */
 
 // Includes.
-
 #include "main.h"
 #include "string.h"
 #include "fm_keypad.h"
@@ -25,9 +24,7 @@
  */
 
 // Const data.
-
 // Defines.
-
 /*
  * Mapeo que tecla correspondea que pin
  */
@@ -48,8 +45,8 @@
 #endif
 
 // Project variables, non-static, at least used in other file.
-uint16_t g_key_up_counter = 1;
-uint16_t g_key_down_counter = 2;
+uint16_t g_key_up_counter = 3;
+uint16_t g_key_down_counter = 0;
 uint16_t g_key_enter_counter = 3;
 uint16_t g_key_esc_counter = 4;
 
@@ -67,22 +64,30 @@ uint16_t g_key_esc_counter = 4;
 
 void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for function")
 {
-	switch(gpio_pin)
+	switch (gpio_pin)
 	{
 		case KEY_ESC:
 			g_key_esc_counter++;
-			break;
+		break;
 		case KEY_ENTER:
 			g_key_enter_counter++;
-			break;
+		break;
 		case KEY_UP:
-			g_key_up_counter++;
-			break;
+			if(g_key_up_counter < 3)
+			{
+				g_key_up_counter++;
+				g_key_down_counter--;
+			}
+		break;
 		case KEY_DOWN:
-			g_key_down_counter++;
-			break;
+			if(g_key_down_counter < 3)
+			{
+				g_key_down_counter++;
+				g_key_up_counter--;
+			}
+		break;
 		default:
-			break;
+		break;
 	}
 }
 

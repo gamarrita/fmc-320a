@@ -1,11 +1,16 @@
 /* @file lcd.c
  *
- * @brief Este es un driver intermedio entre lcd_module.c y pcf8553. Entre las
- * responsabilidades de este modulo estan:
- * Dar accesos a la escritura de cada caracter y simbolo en el LCD custom:
- * Linea 1 de 8 caracteres
- * Linea 2 de 7 caracteres
- * Simbolos RATE, BACH, TTL, ACM, H, M, S, D....
+ * @brief Este es un driver intermedio entre fm_lcd.c y pcf8553.c. Entre las
+ * responsabilidades de este modulo están:
+ * Dar accesos a la escritura y borrado de cada caracter, punto y simbolo en el
+ * LCD custom:
+ * Fila HIGH de 8 caracteres
+ * Fila LOW de 7 caracteres
+ * Símbolos RATE, BACH, TTL, ACM, H, M, S, D....
+ * Puntos para números decimales de cada fila (7 puntos en la fila HIGH, y
+ * 6 en la fila LOW).
+ * Tambien formatea los datos pasados como parámetros en funciones de fm_lcd.c
+ * con la función lcd_format_number_in_line().
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -15,12 +20,11 @@
 #include "lcd.h"
 
 /*
- * Si no es ovbio deberida decir porque incluyo un modulo, en este caso no lo
+ * Si no es obvio debería decir porque incluyo un modulo, en este caso no lo
  * hice y ahora no lo recuerdo.
  */
 #include "ctype.h"
-
-#include "pcf8553.h"
+#include "stdio.h"
 
 // Typedef.
 
@@ -39,10 +43,10 @@ typedef struct
 /*
  * Ver hoja de datos del lcd, cada segmento se identifica con una letra, se
  * codifica a numero. Cada segmento esta conectado a un pin del pcf8553, luego
- * cada pin esta relacionado con bit de un resgitro de 8 bits en el mapa de
+ * cada pin esta relacionado con bit de un registro de 8 bits en el mapa de
  * memoria del pcf8553. Se debe construir una matiz que relacione los segmentos
- * con el bit que se quiere encender, esto se hara para un solo digito, luego
- * por se obtendran las posiciones de los siguientes digitos.
+ * con el bit que se quiere encender, esto se hará para un solo digito, luego
+ * por se obtendrán las posiciones de los siguientes dígitos.
  *
  */
 #define SEG_A 0
@@ -54,7 +58,9 @@ typedef struct
 #define SEG_G 6
 #define SEG_H 7
 
-// Project variables, non-static, at least usedd in other file.
+#define LCD_MSG_LENGTH 12
+
+// Project variables, non-static, at least used in other file.
 
 // Extern variables.
 
@@ -62,8 +68,10 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 
 // Global variables, statics.
 
+char lcd_msg[LCD_MSG_LENGTH];
+
 /*
- * Lo que se quiera escribir en las lineas 1 y 2 primero se vuelca a este
+ * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
  * buffer. Leer el buffer es la unica manera practica que se tiene para
  * saber que esta escrito en la pantalla, no de debe corromper esta ,condicion.
  *
@@ -79,7 +87,7 @@ static uint8_t g_row;
  *  siguiente arreglo. Ver tabla memoria del PCF8553, el encendido/apagado
  *  de cada segmento esta controlado por un bit en esta tabla, son 20 registros
  *  de 8 bits cada uno, 160 bits par controlar la misma cantidad de segmentos.
- *  Los valores de inicializacion de la siguiente tabla corresponde al caracter
+ *  Los valores de inicialización de la siguiente tabla corresponde al caracter
  *  ubicado mas a la derecha en la tabla superior, ver datasheet del LCD.
  *  Cada par de valores pos y reg se corresponden a la direccion de un registro
  *  y el bit correspondiente que controlan los segmentos de A a G.
@@ -161,9 +169,244 @@ void lcd_write_line(uint8_t seg, uint8_t data);
 // Public function bodies.
 
 /*
- * @brief
- *
+ * @brief Función que limpia toda la pantalla.
+ * @param  None
+ * @retval None
  */
+void lcd_clear_all()
+{
+	pcf8553_write_all(NONE_SEGMENTS);
+}
+
+/*
+ * @brief Función que borra un punto en específico que estaba escrito en la
+ * pantalla.
+ * @param Enumeraciones rows_t y point_t de lcd.h
+ * @retval None
+ */
+
+void lcd_clear_point(rows_t line, point_t point)
+{
+	if (line == HIGH_ROW)
+	{
+		switch (point)
+		{
+			case PNT_0:
+				g_lcd_map[REG_7] &= ~(1 << BIT_7);
+			break;
+			case PNT_1:
+				g_lcd_map[REG_8] &= ~(1 << BIT_1);
+			break;
+			case PNT_2:
+				g_lcd_map[REG_8] &= ~(1 << BIT_3);
+			break;
+			case PNT_3:
+				g_lcd_map[REG_8] &= ~(1 << BIT_5);
+			break;
+			case PNT_4:
+				g_lcd_map[REG_8] &= ~(1 << BIT_7);
+			break;
+			case PNT_5:
+				g_lcd_map[REG_9] &= ~(1 << BIT_1);
+			break;
+			case PNT_6:
+				g_lcd_map[REG_9] &= ~(1 << BIT_3);
+			break;
+			default:
+			break;
+		}
+	}
+	else if (line == LOW_ROW)
+	{
+		switch (point)
+		{
+			case PNT_0:
+				g_lcd_map[REG_7] &= ~(1 << BIT_2);
+			break;
+			case PNT_1:
+				g_lcd_map[REG_7] &= ~(1 << BIT_0);
+			break;
+			case PNT_2:
+				g_lcd_map[REG_6] &= ~(1 << BIT_6);
+			break;
+			case PNT_3:
+				g_lcd_map[REG_6] &= ~(1 << BIT_4);
+			break;
+			case PNT_4:
+				g_lcd_map[REG_6] &= ~(1 << BIT_2);
+			break;
+			case PNT_5:
+				g_lcd_map[REG_6] &= ~(1 << BIT_0);
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+/*
+ * @brief Función que borra un símbolo en específico que estaba escrito en la
+ * pantalla.
+ * @param Enumeraciones symbols_t y blink_t de lcd.h
+ * @retval None
+ */
+
+void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
+{
+	switch (symbol)
+	{
+		case POWER:
+			g_lcd_map[REG_2] &= ~(1 << BIT_5);
+		break;
+		case BATTERY:
+			g_lcd_map[REG_7] &= ~(1 << BIT_5);
+		break;
+		case BATCH:
+			g_lcd_map[REG_12] &= ~(1 << BIT_5);
+		break;
+		case RATE:
+			g_lcd_map[REG_17] &= ~(1 << BIT_5);
+		break;
+		case E:
+			g_lcd_map[REG_2] &= ~(1 << BIT_4);
+		break;
+		case POINT:
+			g_lcd_map[REG_7] &= ~(1 << BIT_4);
+		break;
+		case ACM:
+			g_lcd_map[REG_12] &= ~(1 << BIT_4);
+		break;
+		case TTL:
+			g_lcd_map[REG_17] &= ~(1 << BIT_4);
+		break;
+		case BACKSLASH:
+			g_lcd_map[REG_10] &= ~(1 << BIT_1);
+		break;
+		case CELSIUS:
+			g_lcd_map[REG_10] &= (1 << BIT_3);
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_15] &= (1 << BIT_3);
+			g_lcd_map[REG_15] &= (1 << BIT_2);
+			g_lcd_map[REG_0] &= (1 << BIT_4);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_15] &= (1 << BIT_1);
+			g_lcd_map[REG_0] &= (1 << BIT_1);
+			g_lcd_map[REG_5] &= (1 << BIT_1);
+		break;
+		case H:
+			g_lcd_map[REG_5] &= (1 << BIT_6);
+		break;
+		case D:
+			g_lcd_map[REG_9] &= (1 << BIT_5);
+		break;
+		case S:
+			g_lcd_map[REG_10] &= (1 << BIT_5);
+		break;
+		case M:
+			g_lcd_map[REG_9] &= (1 << BIT_7);
+		break;
+		case LT:
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_0] &= (1 << BIT_5);
+			g_lcd_map[REG_5] &= (1 << BIT_5);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_10] &= (1 << BIT_0);
+			g_lcd_map[REG_9] &= (1 << BIT_6);
+		break;
+		case KG:
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_15] &= (1 << BIT_4);
+			g_lcd_map[REG_15] &= (1 << BIT_2);
+			g_lcd_map[REG_0] &= (1 << BIT_5);
+			g_lcd_map[REG_5] &= (1 << BIT_4);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_15] &= (1 << BIT_1);
+			g_lcd_map[REG_0] &= (1 << BIT_0);
+			g_lcd_map[REG_0] &= (1 << BIT_1);
+			g_lcd_map[REG_4] &= (1 << BIT_7);
+			g_lcd_map[REG_5] &= (1 << BIT_1);
+		break;
+		case M3:
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_10] &= (1 << BIT_2);
+			g_lcd_map[REG_15] &= (1 << BIT_4);
+			g_lcd_map[REG_15] &= (1 << BIT_3);
+			g_lcd_map[REG_0] &= (1 << BIT_5);
+			g_lcd_map[REG_0] &= (1 << BIT_3);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_19] &= (1 << BIT_7);
+			g_lcd_map[REG_19] &= (1 << BIT_6);
+			g_lcd_map[REG_0] &= (1 << BIT_0);
+			g_lcd_map[REG_4] &= (1 << BIT_7);
+			g_lcd_map[REG_5] &= (1 << BIT_1);
+		break;
+		case BR:
+			g_lcd_map[REG_10] &= (1 << BIT_3);
+			g_lcd_map[REG_10] &= (1 << BIT_4);
+			g_lcd_map[REG_15] &= (1 << BIT_3);
+			g_lcd_map[REG_0] &= (1 << BIT_4);
+			g_lcd_map[REG_5] &= (1 << BIT_2);
+			g_lcd_map[REG_0] &= (1 << BIT_3);
+			g_lcd_map[REG_5] &= (1 << BIT_5);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_15] &= (1 << BIT_1);
+			g_lcd_map[REG_19] &= (1 << BIT_7);
+			g_lcd_map[REG_19] &= (1 << BIT_6);
+			g_lcd_map[REG_0] &= (1 << BIT_0);
+			g_lcd_map[REG_0] &= (1 << BIT_1);
+			g_lcd_map[REG_5] &= (1 << BIT_0);
+		break;
+		case GL:
+			g_lcd_map[REG_10] &= (1 << BIT_3);
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_0] &= (1 << BIT_4);
+			g_lcd_map[REG_0] &= (1 << BIT_5);
+			g_lcd_map[REG_0] &= (1 << BIT_3);
+			g_lcd_map[REG_5] &= (1 << BIT_5);
+
+			g_lcd_map[REG_15] &= (1 << BIT_1);
+			g_lcd_map[REG_0] &= (1 << BIT_1);
+			g_lcd_map[REG_5] &= (1 << BIT_1);
+		break;
+		case NOTHING:
+			g_lcd_map[REG_15] &= (1 << BIT_2);
+			g_lcd_map[REG_0] &= (1 << BIT_4);
+
+			g_lcd_map[REG_19] &= (1 << BIT_6);
+			g_lcd_map[REG_0] &= (1 << BIT_0);
+		break;
+		case VE:
+			g_lcd_map[REG_15] &= (1 << BIT_5);
+			g_lcd_map[REG_15] &= (1 << BIT_4);
+			g_lcd_map[REG_0] &= (1 << BIT_5);
+			g_lcd_map[REG_0] &= (1 << BIT_2);
+
+			g_lcd_map[REG_14] &= (1 << BIT_7);
+			g_lcd_map[REG_15] &= (1 << BIT_1);
+			g_lcd_map[REG_19] &= (1 << BIT_6);
+			g_lcd_map[REG_0] &= (1 << BIT_0);
+			g_lcd_map[REG_0] &= (1 << BIT_1);
+			g_lcd_map[REG_5] &= (1 << BIT_1);
+		break;
+		default:
+		break;
+	}
+
+	pcf8553_blink(blink_speed);
+}
+
+/*
+ * @brief Inicialización de la pantalla LCD escribiéndola por completo y luego
+ * borrándola.
+ * @param  None
+ * @retval None
+ */
+
 void lcd_init()
 {
 	/*
@@ -182,18 +425,20 @@ void lcd_init()
 }
 
 /*
- * @brief
- *
+ * @brief Función que escribe en pantalla un caracter en la columna y fila
+ * elegida.
+ * @param caracter a escribir tipo char, columna y fila de tipo uint8_t
+ * @retval None
  */
 void lcd_put_char(char c, uint8_t col, uint8_t row)
 {
 	g_row = row + 1;
 
 	/*
-	 * Si el buffer contiene lo mismo que se va a esribir salteo la escritura.
+	 * Si el buffer contiene lo mismo que se va a escribir salteo la escritura.
 	 * Aunque esto mejora mucho la eficiencia, no tengo que escribir
-	 * por SPI este caracter, considero mu resgiosa esta tecnica, la
-	 * sincronizacion entre el buffer y el contenido de la memoria del pcf8553
+	 * por SPI este caracter, considero muy riesgosa esta tecnica, la
+	 * sincronización entre el buffer y el contenido de la memoria del pcf8553
 	 * se debe asegurar. El uso del return prematuro no se si es buena practica.
 	 *
 	 */
@@ -339,18 +584,272 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 	}
 }
 
+/*
+ * @brief Función que envía por medio de un buffer lo escrito en la pantalla
+ * anteriormente. Es un método mas eficiente primero escribir todo lo que se
+ * quiera enviar en dicho buffer y luego escribir todo junto.
+ * @param Enumeraciones rows_t y point_t de lcd.h
+ * @retval None
+ */
+
+void lcd_refresh()
+{
+	pcf8553_dump();
+}
+
+/*
+ * @brief Función que formatea información pasada como parámetro para ser
+ * colocada en una de las dos filas de la pantalla LCD.
+ * @param Enumeraciones rows_t y point_t de lcd.h
+ * @retval arreglo con la información formateada tipo char.
+ */
+
+char* lcd_format_number_in_line(rows_t line, uint32_t data)
+{
+	if (line == HIGH_ROW)
+	{
+		snprintf(lcd_msg, sizeof(lcd_msg), "%8lu", data);
+	}
+	else if (line == LOW_ROW)
+	{
+		snprintf(lcd_msg, sizeof(lcd_msg), "%7lu", data);
+	}
+
+	return (lcd_msg);
+}
+
+/*
+ * @brief Función que escribe un punto en específico en la pantalla.
+ * @param Enumeraciones rows_t y point_t de lcd.h
+ * @retval None
+ */
+
+void lcd_set_point(rows_t line, point_t point)
+{
+	if (line == HIGH_ROW)
+	{
+		switch (point)
+		{
+			case PNT_0:
+				g_lcd_map[REG_7] |= (1 << BIT_7);
+			break;
+			case PNT_1:
+				g_lcd_map[REG_8] |= (1 << BIT_1);
+			break;
+			case PNT_2:
+				g_lcd_map[REG_8] |= (1 << BIT_3);
+			break;
+			case PNT_3:
+				g_lcd_map[REG_8] |= (1 << BIT_5);
+			break;
+			case PNT_4:
+				g_lcd_map[REG_8] |= (1 << BIT_7);
+			break;
+			case PNT_5:
+				g_lcd_map[REG_9] |= (1 << BIT_1);
+			break;
+			case PNT_6:
+				g_lcd_map[REG_9] |= (1 << BIT_3);
+			break;
+			default:
+			break;
+		}
+	}
+	else if (line == LOW_ROW)
+	{
+		switch (point)
+		{
+			case PNT_0:
+				g_lcd_map[REG_7] |= (1 << BIT_2);
+			break;
+			case PNT_1:
+				g_lcd_map[REG_7] |= (1 << BIT_0);
+			break;
+			case PNT_2:
+				g_lcd_map[REG_6] |= (1 << BIT_6);
+			break;
+			case PNT_3:
+				g_lcd_map[REG_6] |= (1 << BIT_4);
+			break;
+			case PNT_4:
+				g_lcd_map[REG_6] |= (1 << BIT_2);
+			break;
+			case PNT_5:
+				g_lcd_map[REG_6] |= (1 << BIT_0);
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+/*
+ * @brief Función que escribe un símbolo en específico en la pantalla.
+ * @param Enumeraciones symbols_t y blink_t de lcd.h
+ * @retval None
+ */
+
+void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
+{
+	switch (symbol)
+	{
+		case POWER:
+			g_lcd_map[REG_2] |= (1 << BIT_5);
+		break;
+		case BATTERY:
+			g_lcd_map[REG_7] |= (1 << BIT_5);
+		break;
+		case BATCH:
+			g_lcd_map[REG_12] |= (1 << BIT_5);
+		break;
+		case RATE:
+			g_lcd_map[REG_17] |= (1 << BIT_5);
+		break;
+		case E:
+			g_lcd_map[REG_2] |= (1 << BIT_4);
+		break;
+		case POINT:
+			g_lcd_map[REG_7] |= (1 << BIT_4);
+		break;
+		case ACM:
+			g_lcd_map[REG_12] |= (1 << BIT_4);
+		break;
+		case TTL:
+			g_lcd_map[REG_17] |= (1 << BIT_4);
+		break;
+		case BACKSLASH:
+			g_lcd_map[REG_10] |= (1 << BIT_1);
+		break;
+		case CELSIUS:
+			g_lcd_map[REG_10] |= (1 << BIT_3);
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_15] |= (1 << BIT_3);
+			g_lcd_map[REG_15] |= (1 << BIT_2);
+			g_lcd_map[REG_0] |= (1 << BIT_4);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_15] |= (1 << BIT_1);
+			g_lcd_map[REG_0] |= (1 << BIT_1);
+			g_lcd_map[REG_5] |= (1 << BIT_1);
+		break;
+		case H:
+			g_lcd_map[REG_5] |= (1 << BIT_6);
+		break;
+		case D:
+			g_lcd_map[REG_9] |= (1 << BIT_5);
+		break;
+		case S:
+			g_lcd_map[REG_10] |= (1 << BIT_5);
+		break;
+		case M:
+			g_lcd_map[REG_9] |= (1 << BIT_7);
+		break;
+		case LT:
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_0] |= (1 << BIT_5);
+			g_lcd_map[REG_5] |= (1 << BIT_5);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_10] |= (1 << BIT_0);
+			g_lcd_map[REG_9] |= (1 << BIT_6);
+		break;
+		case KG:
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_15] |= (1 << BIT_4);
+			g_lcd_map[REG_15] |= (1 << BIT_2);
+			g_lcd_map[REG_0] |= (1 << BIT_5);
+			g_lcd_map[REG_5] |= (1 << BIT_4);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_15] |= (1 << BIT_1);
+			g_lcd_map[REG_0] |= (1 << BIT_0);
+			g_lcd_map[REG_0] |= (1 << BIT_1);
+			g_lcd_map[REG_4] |= (1 << BIT_7);
+			g_lcd_map[REG_5] |= (1 << BIT_1);
+		break;
+		case M3:
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_10] |= (1 << BIT_2);
+			g_lcd_map[REG_15] |= (1 << BIT_4);
+			g_lcd_map[REG_15] |= (1 << BIT_3);
+			g_lcd_map[REG_0] |= (1 << BIT_5);
+			g_lcd_map[REG_0] |= (1 << BIT_3);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_19] |= (1 << BIT_7);
+			g_lcd_map[REG_19] |= (1 << BIT_6);
+			g_lcd_map[REG_0] |= (1 << BIT_0);
+			g_lcd_map[REG_4] |= (1 << BIT_7);
+			g_lcd_map[REG_5] |= (1 << BIT_1);
+		break;
+		case BR:
+			g_lcd_map[REG_10] |= (1 << BIT_3);
+			g_lcd_map[REG_10] |= (1 << BIT_4);
+			g_lcd_map[REG_15] |= (1 << BIT_3);
+			g_lcd_map[REG_0] |= (1 << BIT_4);
+			g_lcd_map[REG_5] |= (1 << BIT_2);
+			g_lcd_map[REG_0] |= (1 << BIT_3);
+			g_lcd_map[REG_5] |= (1 << BIT_5);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_15] |= (1 << BIT_1);
+			g_lcd_map[REG_19] |= (1 << BIT_7);
+			g_lcd_map[REG_19] |= (1 << BIT_6);
+			g_lcd_map[REG_0] |= (1 << BIT_0);
+			g_lcd_map[REG_0] |= (1 << BIT_1);
+			g_lcd_map[REG_5] |= (1 << BIT_0);
+		break;
+		case GL:
+			g_lcd_map[REG_10] |= (1 << BIT_3);
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_0] |= (1 << BIT_4);
+			g_lcd_map[REG_0] |= (1 << BIT_5);
+			g_lcd_map[REG_0] |= (1 << BIT_3);
+			g_lcd_map[REG_5] |= (1 << BIT_5);
+
+			g_lcd_map[REG_15] |= (1 << BIT_1);
+			g_lcd_map[REG_0] |= (1 << BIT_1);
+			g_lcd_map[REG_5] |= (1 << BIT_1);
+		break;
+		case NOTHING:
+			g_lcd_map[REG_15] |= (1 << BIT_2);
+			g_lcd_map[REG_0] |= (1 << BIT_4);
+			g_lcd_map[REG_19] |= (1 << BIT_6);
+			g_lcd_map[REG_0] |= (1 << BIT_0);
+		break;
+		case VE:
+			g_lcd_map[REG_15] |= (1 << BIT_5);
+			g_lcd_map[REG_15] |= (1 << BIT_4);
+			g_lcd_map[REG_0] |= (1 << BIT_5);
+			g_lcd_map[REG_0] |= (1 << BIT_2);
+
+			g_lcd_map[REG_14] |= (1 << BIT_7);
+			g_lcd_map[REG_15] |= (1 << BIT_1);
+			g_lcd_map[REG_19] |= (1 << BIT_6);
+			g_lcd_map[REG_0] |= (1 << BIT_0);
+			g_lcd_map[REG_0] |= (1 << BIT_1);
+			g_lcd_map[REG_5] |= (1 << BIT_1);
+		break;
+		default:
+		break;
+	}
+
+	pcf8553_blink(blink_speed);
+}
+
 // Private function bodies.
 
 /*
  * @brief Esta funcion ajusta el estado de un segmento, encendido o apagado,
- * por cada llamada. La caracter a manipular, linea 1 o linea 2 y la posicion
+ * por cada llamada. El caracter a manipular, linea 1 o linea 2 y la posicion
  * del cursor, son informaciones guardadas en dos variables globales, g_cursor
  * y g_line. Con el mapeo de los segmentos, y sabiendo que segmento se quiere
- * manipular, notar que para el primer carcter de cada linea se tiene una matriz
- * con la posicion en el mapa de mempria para el pcf8553, con lo cual no se
+ * manipular, notar que para el primer caracter de cada linea se tiene una matriz
+ * con la posicion en el mapa de memoria para el pcf8553, con lo cual no se
  * requiere calculo, el calculo es de utilidad para los caracteres que no ocupan
- * la primera posicion de cada liena.
- *
+ * la primera posicion de cada linea.
+ * @param
+ * @retval None
  */
 void lcd_write_line(uint8_t seg, uint8_t data)
 {

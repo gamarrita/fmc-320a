@@ -11,7 +11,7 @@
  * MSI -> 24MHZ
  *
  * Nota: Es importante completar las configuracion de cube MX que falten, si
- * se inicia un proyecto de cero se deberian tener los datos de configuracion.
+ * se inicia un proyecto de cero se deberían tener los datos de configuracion.
  *
  * (datasheet pcf8553)
  * Input data are sampled on the rising edge of SCL:
@@ -20,7 +20,7 @@
  * When HIGH, the interface is reset. The SPI-bus is initialized.
  * whenever the chip enable line pin CE is pulled down.
  * RESET -> Power-On enabled.
- * Conected to pint PA6, just incase it is need in future.
+ * Conected to pint PA6, just in case it is need in future.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -28,7 +28,6 @@
 
 // Includes.
 #include "pcf8553.h"
-
 #include "main.h"
 
 // Typedef.
@@ -57,7 +56,7 @@ const uint32_t DEFAULT_DELAY = 20;
 // Defines.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *
@@ -66,7 +65,7 @@ const uint32_t DEFAULT_DELAY = 20;
 #endif
 
 /*
- * Tamaño de la memoria interna del pcf8553 para controlas el encendido/apgado
+ * Tamaño de la memoria interna del pcf8553 para controlas el encendido/apagado
  * de los segmentos, con 20 bytes se controlan 20 * 8 =  160 segmentos.
  *
  */
@@ -77,9 +76,9 @@ const uint32_t DEFAULT_DELAY = 20;
 /*
  *
  * Los dos siguientes #defines se crean para poder inicializar el miembro
- * read_write de strcut register_address_t, la solucion actual no me parece
+ * read_write de struct register_address_t, la solucion actual no me parece
  * buena, dos bloques separados, estimo que incluyendo un enum declarado
- * dendro de struct register_address_t se tendria una mejor solucion.
+ * dentro de struct register_address_t se tendría una mejor solucion.
  *
  */
 #define WRITE_DATA	0	//
@@ -96,7 +95,7 @@ const uint32_t DEFAULT_DELAY = 20;
 #define COM_3_ADDRESS 			0xE
 #define COM_4_ADDRESS 			0x13
 
-// Project variables, non-static, at least usedd in other file.
+// Project variables, non-static, at least used in other file.
 
 // Extern data, defined on other modules.
 SPI_HandleTypeDef h_spi1;
@@ -115,15 +114,15 @@ uint8_t g_lcd_map[PCF8553_DATA_SIZE];
  */
 static device_ctrl_t g_device_ctrl =
 {
-	.reg_bits.clock_ouput = 0, /* disabled (defaul)*/
+	.reg_bits.clock_ouput = 0, /* disabled (default)*/
 	.reg_bits.internal_oscilator = 0, /* disabled (default)*/
-	.reg_bits.frame_frequency = 0, /* 64Hz (customt)*/
+	.reg_bits.frame_frequency = 0, /* 64Hz (custom)*/
 	.reg_bits.default_value = 0
 };
 
 /*
  * Display_ctrl_1 register, valores de inicio.
- * Display disabled at Power-On, DE msut be change to 1.
+ * Display disabled at Power-On, DE must be change to 1.
  *
  */
 static display_ctrl_1_t g_display_ctrl_1 =
@@ -179,30 +178,30 @@ void static prepare_to_send(uint8_t add)
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void spi1_init(void)
 {
-  h_spi1.Instance = SPI1;
-  h_spi1.Init.Mode = SPI_MODE_MASTER;
-  h_spi1.Init.Direction = SPI_DIRECTION_1LINE;
-  h_spi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  h_spi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  h_spi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  h_spi1.Init.NSS = SPI_NSS_SOFT;
-  h_spi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
-  h_spi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  h_spi1.Init.TIMode = SPI_TIMODE_DISABLE;
-  h_spi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  h_spi1.Init.CRCPolynomial = 7; // @suppress("Avoid magic numbers")
-  h_spi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  h_spi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
-  if (HAL_SPI_Init(&h_spi1) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	h_spi1.Instance = SPI1;
+	h_spi1.Init.Mode = SPI_MODE_MASTER;
+	h_spi1.Init.Direction = SPI_DIRECTION_1LINE;
+	h_spi1.Init.DataSize = SPI_DATASIZE_8BIT;
+	h_spi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+	h_spi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+	h_spi1.Init.NSS = SPI_NSS_SOFT;
+	h_spi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+	h_spi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+	h_spi1.Init.TIMode = SPI_TIMODE_DISABLE;
+	h_spi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+	h_spi1.Init.CRCPolynomial = 7; // @suppress("Avoid magic numbers")
+	h_spi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+	h_spi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
+	if (HAL_SPI_Init(&h_spi1) != HAL_OK)
+	{
+		Error_Handler();
+	}
 }
 
 // Public function bodies.
@@ -215,6 +214,7 @@ static void spi1_init(void)
  * PCF_BLINK_TWO_SECOND
  * PCF_BLINK_ONE_SECOND,
  * PCF_BLINK_HALF_SECOND
+ * @retval None
  */
 void pcf8553_blink(pcf_blink_mode_t mode)
 {
@@ -226,21 +226,23 @@ void pcf8553_blink(pcf_blink_mode_t mode)
 }
 
 /*
- * @brief Aunque es posible encender o apagar los segmentos/symbolos/caracteres
- * en forma individual, lo mas practio es escribir todos los cambios en un
+ * @brief Aunque es posible encender o apagar los segmentos/símbolos/caracteres
+ * en forma individual, lo mas practico es escribir todos los cambios en un
  * buffer y luego volcar el buffer completo al driver pcf83553. Esto responde
  * a dos motivos:
  *
- * 1. Los segmentos pertenecientes a un caracter estan disribuidos en diferentes
- * posiciones de memoria del pcf8553 no consecutivas.
+ * 1. Los segmentos pertenecientes a un caracter estan distribuidos en
+ * diferentes posiciones de memoria del pcf8553 no consecutivas.
  *
- * 2. LA forma mas sencilla de modificas varias posiciones en el mapa de memoria
+ * 2. La forma mas sencilla de modificar varias posiciones en el mapa de memoria
  * del pcf8553 es ir de manera secuencial una posicion tras otra.
  *
- * Esta funcion permite volvar el contenido completo de un buffer a la memoria
- * del pcf8553. El buffer mantendra un mapa completo de los caracteres que se
- * descean en el lcd y la memoria del pcf8553.
+ * Esta funcion permite devolver el contenido completo de un buffer a la memoria
+ * del pcf8553. El buffer mantendrá un mapa completo de los caracteres que se
+ * desean en el lcd y la memoria del pcf8553.
  *
+ * @param None
+ * @retval None
  */
 void pcf8553_dump()
 {
@@ -254,8 +256,9 @@ void pcf8553_dump()
 }
 
 /*
- * @brief Call this function before start working with driver.
- *
+ * @brief Llamar a esta función antes de empezar a trabajar con el driver.
+ * @param None
+ * @retval None
  */
 void pcf8553_init()
 {
@@ -264,7 +267,7 @@ void pcf8553_init()
 	HAL_Delay(DEFAULT_DELAY);
 
 	/*
-	 * @brief El pcf8553 tiene un pin de chip selec, la siguiente instruccion
+	 * @brief El pcf8553 tiene un pin de chip select, la siguiente instruccion
 	 * habilita el chip, el parametro GPIO_PIN_RESET es muy parecido a un
 	 * numero magico, se debe buscar una mejor solucion.
 	 *
@@ -273,7 +276,7 @@ void pcf8553_init()
 
 	/*
 	 *  Display_crtl_2 = 1 to enable display.
-	 *  Luego de un tiuempo olvide porque hice este comentario, no parece
+	 *  Luego de un tiempo olvidé porque hice este comentario, no parece
 	 *  tener sentido.
 	 *
 	 */
@@ -293,6 +296,8 @@ void pcf8553_init()
  * @brief If the internal POR is disabled by connecting pin PORE to VSS,
  * the chip must be reset by driving the RST pin to logic 0 for
  * at least 10 μs.
+ * @param  None
+ * @retval None
  */
 void pcf8553_reset()
 {
@@ -302,14 +307,16 @@ void pcf8553_reset()
 }
 
 /*
- * @brief Esbrite las 160 posiciones de memoria del pcf8553 con el mismo
+ * @brief Escribe las 160 posiciones de memoria del pcf8553 con el mismo
  * byte, notar que no hay relacion 1 a 1 entre las posiciones de memoria
  * y los segmentos de los caracteres, esta funcion es util mas que nada
- * para borrar o llegar la pantalla.
+ * para borrar o llenar la pantalla.
  *
- *
- * @param
- *
+ * @param data es los bits a escribir, al ser "write_all" debería ser o 0xFF o
+ * 0x00 para imprimir todos los caracteres o ninguno, respectivamente. En un
+ * futuro se hará con una enumeración que lo deje claro, ya sea en esta función
+ * o en una de mas alto nivel.
+ * @retval None
  */
 void pcf8553_write_all(uint8_t data)
 {
@@ -321,12 +328,12 @@ void pcf8553_write_all(uint8_t data)
 }
 
 /*
- * @brief Write any data address. Esta funcion fue usa al comenzar el desarrollo
- * del drive. Desde etapas muy tempranas dejo de ser usada.
+ * @brief Write any data address. Esta funcion fue usada al comenzar el
+ * desarrollo del drive. Desde etapas muy tempranas dejo de ser usada.
  *
- * @param add es la direccion de memoria a escribir
- * @param data es el valor a escribir
- *
+ * @param add es la direccion de memoria a escribir, y data es el valor a
+ * escribir.
+ * @retval None
  */
 void pcf8553_write_byte(uint8_t add, uint8_t data)
 {
@@ -335,6 +342,5 @@ void pcf8553_write_byte(uint8_t add, uint8_t data)
 	HAL_SPI_Transmit(&h_spi1, &data, 1, DEFAULT_DELAY);
 	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
-
 
 /*** end of file ***/
