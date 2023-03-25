@@ -38,9 +38,7 @@
  */
 
 // Const data.
-
 // Defines.
-
 /*
  * Default minimo 1 mili-segundos,  por defecto 50 mili-segundos, para todo
  * otro deday hay que justificar.
@@ -80,7 +78,7 @@ void fm_debug_uint8_uart(uint8_t num)
 {
 	char str[5];
 	snprintf(str, sizeof(str), "%u\n", num);
-	fm_debug_msg_uart((uint8_t *)str, strlen(str));
+	fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
 
 /*
@@ -91,7 +89,7 @@ void fm_debug_uint32_uart(uint32_t num)
 {
 	char str[12];
 	snprintf(str, sizeof(str), "%lu\n", num);
-	fm_debug_msg_uart((uint8_t *)str, strlen(str));
+	fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
 
 /*
@@ -141,7 +139,7 @@ void fm_debug_msg_uart(const uint8_t *p_msg, uint8_t len)
 	 * por un corto tiempo, aun mejor seria implementar algo con RTOS.
 	 *
 	 */
-	while(ret == HAL_BUSY)
+	while (ret == HAL_BUSY)
 	{
 		ret = HAL_UART_Transmit(&huart2, p_msg, len, DELAY_DEFAULT);
 	}

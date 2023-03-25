@@ -31,7 +31,6 @@ void fm_debug_msg_uart(const uint8_t *p_msg, uint8_t len);
 void fm_debug_uint8_uart(uint8_t num);
 void fm_debug_uint32_uart(uint32_t num);
 
-
 #endif /* FM_DEBUG_H */
 
 /*** end of file ***/
