@@ -1,6 +1,6 @@
 # fmc_320a - Computador de Caudales.
 
-Instrucciones de clonar el branch master:
+Instruccion Para Clonar y Version del STM32CubeIDE:
 - El proyecto corre en STM32Cube IDE 1.12
 - Aunque trabaja con carpetas no absolutas clonar el proyecto en d:\githubs\fm-320a\
 - File -> Switch Workspace -> d:\githubs\fmc-320a
@@ -13,7 +13,7 @@ Configurar el limite de linea par que sea visible en 80 caracteres
 - Macar Show print margin
 - Print margin columm: 80
 
-Configuraciones code analysis
+Configuraciones Code Analysis
   Windows -> Preferenes -> C/C++ -> Code Analysis ->  Seleccionar lodos los items de todos los Names menos Line comments.
  
 Para el codigo que no generemos nosotros habra que que incluir excepciones en la erramienta de Code Analysis, las librerias HAL y los archivos del RTOS, es codigo que no estara exluido del Code Analysis. Para un warining o error que nos marque el code analysis, notamos de cual se trata con este dato el procedimiento para exlcuirlo es:
@@ -21,3 +21,8 @@ Para el codigo que no generemos nosotros habra que que incluir excepciones en la
 - Customize Selected -> Scope -> Exclusion patterns Add ... tipidamente se hace Add para dos reglas
 Core/
 Source/
+
+Configuracion Formato:
+
+Configuracion Diccionario:
+
