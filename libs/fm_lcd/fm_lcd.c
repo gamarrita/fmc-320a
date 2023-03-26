@@ -14,8 +14,8 @@
 // Includes.
 #include "fm_lcd.h"
 #include "lcd.h"
-#include "../../../libs/fm_computer/fm_computer.h"
-#include "stdio.h"
+#include "../fm_computer/fm_computer.h"
+
 
 // Typedef.
 

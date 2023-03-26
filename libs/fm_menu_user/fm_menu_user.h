@@ -26,16 +26,21 @@
 
 // Typedef.
 
+// Lo siguiente es una tecnica para lograr que:
+// Una funcion retorna un puntero a funcion, donde
+// el tipo de funcion retornada es el de la funcion que se esta ejecutando.
+typedef void* (*ptr_ret_menu_t)(void);      // Un puntero a funcion
+typedef ptr_ret_menu_t (*ptr_fun_menu_t)(void);   //
+
 // Defines.
 
 // Function prototypes
-void fm_menu_begin();
-void fm_menu_show_acm_rate();
-void fm_menu_show_alert_battery();
-void fm_menu_show_date_hour();
-void fm_menu_show_temp_temp();
-void fm_menu_show_ttl_rate();
-void fm_menu_show_version();
+ptr_ret_menu_t fm_menu_show_acm_rate();
+ptr_ret_menu_t fm_menu_show_alert_battery();
+ptr_ret_menu_t fm_menu_show_date_hour();
+ptr_ret_menu_t fm_menu_show_temp_temp();
+ptr_ret_menu_t fm_menu_show_ttl_rate();
+ptr_ret_menu_t fm_menu_show_version();
 
 #endif /* FM_MENU_USER_H_ */
 

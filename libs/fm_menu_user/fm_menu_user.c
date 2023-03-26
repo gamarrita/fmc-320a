@@ -55,31 +55,18 @@
 // Public function bodies.
 
 /*
- * @brief Función que inicializa la pantalla dejándola en blanco luego de unos
- * segundos.
- * @param  None
- * @retval None
- */
-
-void fm_menu_begin()
-{
-	fm_lcd_clear();
-	fm_lcd_init();
-	fm_lcd_refresh();
-}
-
-/*
  * @brief Función que imprime el menú de acm y rate en la pantalla, con
  * unidades y puntos específicos.
  * @param  None
  * @retval None
  */
 
-void fm_menu_show_acm_rate()
+ptr_ret_menu_t fm_menu_show_acm_rate()
 {
 	fm_lcd_clear();
 	fm_lcd_acm_rate(PNT_5, PNT_5, GL, H);
 	fm_lcd_refresh();
+	return  ((ptr_ret_menu_t) fm_menu_show_alert_battery);
 }
 
 /*
@@ -89,10 +76,11 @@ void fm_menu_show_acm_rate()
  * @retval None
  */
 
-void fm_menu_show_alert_battery()
+ptr_ret_menu_t fm_menu_show_alert_battery()
 {
 	fm_lcd_battery_low(HIGH_SPEED);
 	fm_lcd_refresh();
+	return ((ptr_ret_menu_t) fm_menu_show_date_hour);
 }
 
 /*
@@ -102,11 +90,12 @@ void fm_menu_show_alert_battery()
  * @retval None
  */
 
-void fm_menu_show_date_hour()
+ptr_ret_menu_t fm_menu_show_date_hour()
 {
 	fm_lcd_clear();
 	fm_lcd_date_hour(PNT_1, PNT_3, PNT_2, PNT_4);
 	fm_lcd_refresh();
+	return ((ptr_ret_menu_t)fm_menu_show_temp_temp);
 }
 
 /*
@@ -116,11 +105,12 @@ void fm_menu_show_date_hour()
  * @retval None
  */
 
-void fm_menu_show_temp_temp()
+ptr_ret_menu_t fm_menu_show_temp_temp()
 {
 	fm_lcd_clear();
 	fm_lcd_temp_temp(PNT_6, PNT_5);
 	fm_lcd_refresh();
+	return ((ptr_ret_menu_t)fm_menu_show_ttl_rate);
 }
 
 /*
@@ -130,11 +120,12 @@ void fm_menu_show_temp_temp()
  * @retval None
  */
 
-void fm_menu_show_ttl_rate()
+ptr_ret_menu_t fm_menu_show_ttl_rate()
 {
 	fm_lcd_clear();
 	fm_lcd_ttl_rate(PNT_4, PNT_5, LT, S);
 	fm_lcd_refresh();
+	return ((ptr_ret_menu_t)fm_menu_show_version);
 }
 
 /*
@@ -144,11 +135,12 @@ void fm_menu_show_ttl_rate()
  * @retval None
  */
 
-void fm_menu_show_version()
+ptr_ret_menu_t fm_menu_show_version()
 {
 	fm_lcd_clear();
 	fm_lcd_version(PNT_5);
 	fm_lcd_refresh();
+	return ((ptr_ret_menu_t)fm_menu_show_acm_rate);
 }
 
 // Interrupts

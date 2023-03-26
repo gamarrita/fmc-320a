@@ -67,18 +67,6 @@ void Error_Handler(void);
 #define PCF8553_RESET_GPIO_Port GPIOA
 #define PCF8553_SDIO_Pin GPIO_PIN_7
 #define PCF8553_SDIO_GPIO_Port GPIOA
-#define KEY_DOWN_Pin GPIO_PIN_13
-#define KEY_DOWN_GPIO_Port GPIOB
-#define KEY_DOWN_EXTI_IRQn EXTI15_10_IRQn
-#define KEY_ESC_Pin GPIO_PIN_10
-#define KEY_ESC_GPIO_Port GPIOA
-#define KEY_ESC_EXTI_IRQn EXTI15_10_IRQn
-#define KEY_ENTER_Pin GPIO_PIN_11
-#define KEY_ENTER_GPIO_Port GPIOA
-#define KEY_ENTER_EXTI_IRQn EXTI15_10_IRQn
-#define KEY_UP_Pin GPIO_PIN_12
-#define KEY_UP_GPIO_Port GPIOA
-#define KEY_UP_EXTI_IRQn EXTI15_10_IRQn
 
 /* USER CODE BEGIN Private defines */
 

@@ -25,6 +25,7 @@
 #include "../../../libs/fm_keypad/fm_keypad.h"
 #include "../../../libs/fm_menu_user/fm_menu_user.h"
 
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,24 +52,12 @@ TIM_HandleTypeDef htim16;
 
 UART_HandleTypeDef huart2;
 
-/* Definitions for MENU_TASK */
-osThreadId_t MENU_TASKHandle;
-const osThreadAttr_t MENU_TASK_attributes = {
-  .name = "MENU_TASK",
-  .stack_size = 256 * 4,
+/* Definitions for MenuTask */
+osThreadId_t MenuTaskHandle;
+const osThreadAttr_t MenuTask_attributes = {
+  .name = "MenuTask",
+  .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for KEYPAD_TASK */
-osThreadId_t KEYPAD_TASKHandle;
-const osThreadAttr_t KEYPAD_TASK_attributes = {
-  .name = "KEYPAD_TASK",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for MENU_QUEUE */
-osMessageQueueId_t MENU_QUEUEHandle;
-const osMessageQueueAttr_t MENU_QUEUE_attributes = {
-  .name = "MENU_QUEUE"
 };
 /* USER CODE BEGIN PV */
 extern uint16_t g_key_up_counter;
@@ -83,7 +72,6 @@ static void MX_RTC_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_USART2_UART_Init(void);
 void menu_task(void *argument);
-void keypad_task(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -127,11 +115,9 @@ int main(void)
   MX_TIM16_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
-  fm_menu_begin();
-  fm_menu_show_temp_temp();
-  HAL_Delay(3000);
-  fm_menu_show_version();
+  fm_lcd_clear();
+  fm_lcd_init();
+  fm_lcd_refresh();
 
   /* USER CODE END 2 */
 
@@ -150,20 +136,13 @@ int main(void)
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
-  /* Create the queue(s) */
-  /* creation of MENU_QUEUE */
-  MENU_QUEUEHandle = osMessageQueueNew (4, sizeof(fm_keypad_t), &MENU_QUEUE_attributes);
-
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of MENU_TASK */
-  MENU_TASKHandle = osThreadNew(menu_task, NULL, &MENU_TASK_attributes);
-
-  /* creation of KEYPAD_TASK */
-  KEYPAD_TASKHandle = osThreadNew(keypad_task, NULL, &KEYPAD_TASK_attributes);
+  /* creation of MenuTask */
+  MenuTaskHandle = osThreadNew(menu_task, NULL, &MenuTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -211,10 +190,8 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_LSE
-                              |RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_9;
@@ -419,22 +396,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : KEY_DOWN_Pin */
-  GPIO_InitStruct.Pin = KEY_DOWN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(KEY_DOWN_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : KEY_ESC_Pin KEY_ENTER_Pin KEY_UP_Pin */
-  GPIO_InitStruct.Pin = KEY_ESC_Pin|KEY_ENTER_Pin|KEY_UP_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -453,31 +414,15 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
+    ptr_fun_menu_t ptr_menu = fm_menu_show_acm_rate;
+
 	/* Infinite loop */
 	for (;;)
 	{
-
-	  osDelay(1000);
+	    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)();
+	    osDelay(5000);
 	}
   /* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_keypad_task */
-/**
-* @brief Function implementing the KEYPAD_TASK thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_keypad_task */
-void keypad_task(void *argument)
-{
-  /* USER CODE BEGIN keypad_task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END keypad_task */
 }
 
 /**

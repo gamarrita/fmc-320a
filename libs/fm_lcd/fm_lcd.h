@@ -36,6 +36,7 @@
 
 #include "main.h"
 #include "lcd.h"
+#include "stdio.h"
 
 // Macros, defines, microcontroller pins (dhs).
 
