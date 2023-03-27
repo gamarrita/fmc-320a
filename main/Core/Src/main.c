@@ -414,15 +414,16 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
-    ptr_fun_menu_t ptr_menu = fm_menu_show_acm_rate;
+	ptr_fun_menu_t ptr_menu = fm_menu_show_acm_rate;
 
 	/* Infinite loop */
 	for (;;)
 	{
-	    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)();
+		ptr_menu = (ptr_fun_menu_t)(*ptr_menu)();
 	    osDelay(5000);
 	}
   /* USER CODE END 5 */
+
 }
 
 /**

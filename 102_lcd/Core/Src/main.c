@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /*
- * Este proyecto es para hacer pruebas dek FreeRTOS tickless mode en stop
+ * Este proyecto es para hacer pruebas del FreeRTOS tickless mode en stop
  * mode 2 (en stop mode 2 para STM32L452 LPTIM 2 se apaga), se usa el RTC como
  * fuente de interrupcion de wakeup.
  *
  * Se usan dos delay en la unica tarea creada:
  *
  * Un hal_delay, que mantiene encendido un led mientras se ejecuta, para este
- * caso si todo funciona bien nunca se deberia entrar en task idle, es
- * importante comprar esto porque hay mucho bug dando vuelta y no confio.
+ * caso si todo funciona bien nunca se debería entrar en task idle, es
+ * importante comprobar esto porque hay mucho bug dando vuelta y no confío.
  *
  * Un osDelay, aqui se entra en idle task de ahi al modo de bajo consumo
  * seleccionado, se usa el RTC para despertar. Aqui se debe cumplir que el
  * el tiempo que se manda a dormir sea menor al tiempo restante en idle.
- * Para el caso donde se usaba el LPTIM para tiempos de de idel alto el
- * contador desbordaba y volvia a entrar, usando el RTC no se deberian
+ * Para el caso donde se usaba el LPTIM para tiempos de idle alto el
+ * contador desbordaba y volvía a entrar, usando el RTC no se deberían
  * tener estos problema. Hay que estudiar bien el funcionamiento para no tener
  * dudas.
  *
@@ -24,27 +24,27 @@
  *
  * - En freeRTOSConfig.h, la macro configPRE_SLEEP_PROCESSING hay que eliminar
  * la sentencia x = 0, notar que este cambio no es persistente al ejecutar
- * CubeMX  Generate Code. Se debe volver a eleimiar esta linea si se ejecuta
+ * CubeMX  Generate Code. Se debe volver a eliminar esta linea si se ejecuta
  * CubeMX.
  * - En port.c hay que comentar la instruccion:
  * //portNVIC_SYSTICK_CTRL_REG |= portNVIC_SYSTICK_ENABLE_BIT;
- * Al igual que antes este cambio no es percistente si se hace Generate Code
+ * Al igual que antes este cambio no es persistente si se hace Generate Code
  * - En el MX para el RTC -> Wakeup -> Internal Wakeup luego en NVIC hay que
- * seleccionar RTC wale-up Interrupt throught EXT1 line 20, esto habilita
+ * seleccionar RTC wake-up Interrupt throught EXT1 line 20, esto habilita
  * la interrupcion, debo investigar mejor como funciona.
  *
  * - Demas codigo en freertos.c, si es presevado luego de un Code Generator:
  * extern RTC_HandleTypeDef hrtc;
  * Codigo en pre y post sleep processing, calcular el tiempo en ms que el micro
- * debe dormir, preparar al RTC para que despuestre al sistema, detener ticks
- * ir a dormir, reanudad ticks....
+ * debe dormir, preparar al RTC para que despierte al sistema, detener ticks
+ * ir a dormir, reanudar ticks....
  *
  * Esta solucion tiene como ventaja que se deja libre el LPTIM 1, ademas que
  * se puede usar el LPTIM 2 de cambiar stop 2 por stop 1.
  * La solucion de usar LPTIM 1 como fuente de systick, en lugar de TIM6, es
- * superior, no tiene drift, el problema es que solo nos dejaria con LPTIM 2
+ * superior, no tiene drift, el problema es que solo nos dejaría con LPTIM 2
  * en stop mode 1, stop mode 2 no representa un gran ahorro.
- * Las version de FreeRTOS tickless no tienen implementacion oficial, esta
+ * Las versiones de FreeRTOS tickless no tienen implementación oficial, esta
  * solucion que si es parte de una solucion oficial tiene bugs, el del macro
  * que hace tiempo esperado igual a 0.
  *

@@ -60,7 +60,6 @@
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_acm_rate()
 {
 	fm_lcd_clear();
@@ -75,10 +74,9 @@ ptr_ret_menu_t fm_menu_show_acm_rate()
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_alert_battery()
 {
-	fm_lcd_battery_low(HIGH_SPEED);
+	fm_lcd_battery_low(OFF_SPEED);
 	fm_lcd_refresh();
 	return ((ptr_ret_menu_t) fm_menu_show_date_hour);
 }
@@ -89,7 +87,6 @@ ptr_ret_menu_t fm_menu_show_alert_battery()
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_date_hour()
 {
 	fm_lcd_clear();
@@ -104,7 +101,6 @@ ptr_ret_menu_t fm_menu_show_date_hour()
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_temp_temp()
 {
 	fm_lcd_clear();
@@ -119,7 +115,6 @@ ptr_ret_menu_t fm_menu_show_temp_temp()
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_ttl_rate()
 {
 	fm_lcd_clear();
@@ -134,7 +129,6 @@ ptr_ret_menu_t fm_menu_show_ttl_rate()
  * @param  None
  * @retval None
  */
-
 ptr_ret_menu_t fm_menu_show_version()
 {
 	fm_lcd_clear();

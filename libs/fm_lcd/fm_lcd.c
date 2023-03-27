@@ -22,7 +22,7 @@
 // Const data.
 
 // Defines.
-
+#define MSG_LENGTH 12
 // Debug.
 
 /*
@@ -58,12 +58,16 @@
 void fm_lcd_acm_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
-	fm_lcd_puts(lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm()),
-	HIGH_ROW);
+	char lcd_msg[MSG_LENGTH];
+
+	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	fm_lcd_puts(lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate()),
-	LOW_ROW);
+	lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
 
 	lcd_set_symbol(ACM, 0x0);
@@ -109,11 +113,18 @@ void fm_lcd_clear()
 void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2)
 {
-	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date());
+
+	char lcd_msg[MSG_LENGTH];
+
+	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point_1);
 	lcd_set_point(HIGH_ROW, high_point_2);
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour());
+	lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg,LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point_1);
 	lcd_set_point(LOW_ROW, low_point_2);
 }
@@ -188,12 +199,18 @@ void fm_lcd_refresh()
 
 void fm_lcd_temp_temp(point_t high_point, point_t low_point)
 {
-	fm_lcd_puts(lcd_format_number_in_line(HIGH_ROW, fm_computer_get_liq_temp()),
-	HIGH_ROW);
+	char lcd_msg[MSG_LENGTH];
+
+	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_liq_temp(), lcd_msg,
+	MSG_LENGTH);
+
+	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	fm_lcd_puts(lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp()),
-	LOW_ROW);
+	lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
+	MSG_LENGTH);
+
+	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
 
 	lcd_set_symbol(CELSIUS, 0x0);
@@ -211,12 +228,16 @@ void fm_lcd_temp_temp(point_t high_point, point_t low_point)
 void fm_lcd_ttl_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
-	fm_lcd_puts(lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl()),
-	HIGH_ROW);
+	char lcd_msg[MSG_LENGTH];
+
+	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	fm_lcd_puts(lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate()),
-	LOW_ROW);
+	lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
 
 	lcd_set_symbol(TTL, 0x0);
@@ -237,8 +258,11 @@ symbols_t right_unit)
 
 void fm_lcd_version(point_t low_point)
 {
-	fm_lcd_puts(lcd_format_number_in_line(LOW_ROW, fm_computer_get_version()),
-	LOW_ROW);
+	char lcd_msg[MSG_LENGTH];
+
+	lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
+	MSG_LENGTH);
+	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
 
 	lcd_set_symbol(VE, 0x0);

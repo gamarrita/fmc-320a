@@ -68,7 +68,7 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 
 // Global variables, statics.
 
-char lcd_msg[LCD_MSG_LENGTH];
+static char lcd_msg[LCD_MSG_LENGTH];
 
 /*
  * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
@@ -401,6 +401,25 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
 }
 
 /*
+ * @brief Función que formatea información pasada como parámetro para ser
+ * colocada en una de las dos filas de la pantalla LCD.
+ * @param Enumeracion rows_t de lcd.h
+ * @retval arreglo con la información formateada tipo char.
+ */
+
+void lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length)
+{
+	if (line == HIGH_ROW)
+	{
+		snprintf(p_str, length, "%8lu", data);
+	}
+	else if (line == LOW_ROW)
+	{
+		snprintf(p_str, length, "%7lu", data);
+	}
+}
+
+/*
  * @brief Inicialización de la pantalla LCD escribiéndola por completo y luego
  * borrándola.
  * @param  None
@@ -595,27 +614,6 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 void lcd_refresh()
 {
 	pcf8553_dump();
-}
-
-/*
- * @brief Función que formatea información pasada como parámetro para ser
- * colocada en una de las dos filas de la pantalla LCD.
- * @param Enumeraciones rows_t y point_t de lcd.h
- * @retval arreglo con la información formateada tipo char.
- */
-
-char* lcd_format_number_in_line(rows_t line, uint32_t data)
-{
-	if (line == HIGH_ROW)
-	{
-		snprintf(lcd_msg, sizeof(lcd_msg), "%8lu", data);
-	}
-	else if (line == LOW_ROW)
-	{
-		snprintf(lcd_msg, sizeof(lcd_msg), "%7lu", data);
-	}
-
-	return (lcd_msg);
 }
 
 /*
