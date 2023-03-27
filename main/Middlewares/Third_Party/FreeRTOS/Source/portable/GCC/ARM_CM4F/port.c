@@ -33,6 +33,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#define configUSE_TICKLESS_IDLE                  1
+
 #ifndef __VFP_FP__
 	#error This port can only be used when the project options are configured to enable hardware floating point support.
 #endif
@@ -568,7 +570,7 @@ void xPortSysTickHandler( void )
 			portNVIC_SYSTICK_CURRENT_VALUE_REG = 0UL;
 
 			/* Restart SysTick. */
-			portNVIC_SYSTICK_CTRL_REG |= portNVIC_SYSTICK_ENABLE_BIT;
+			//portNVIC_SYSTICK_CTRL_REG |= portNVIC_SYSTICK_ENABLE_BIT;
 
 			/* Sleep until something happens.  configPRE_SLEEP_PROCESSING() can
 			set its parameter to 0 to indicate that its implementation contains
@@ -577,12 +579,12 @@ void xPortSysTickHandler( void )
 			time variable must remain unmodified, so a copy is taken. */
 			xModifiableIdleTime = xExpectedIdleTime;
 			configPRE_SLEEP_PROCESSING( xModifiableIdleTime );
-			if( xModifiableIdleTime > 0 )
+			/*if( xModifiableIdleTime > 0 )
 			{
 				__asm volatile( "dsb" ::: "memory" );
 				__asm volatile( "wfi" );
 				__asm volatile( "isb" );
-			}
+			}*/
 			configPOST_SLEEP_PROCESSING( xExpectedIdleTime );
 
 			/* Re-enable interrupts to allow the interrupt that brought the MCU
