@@ -68,8 +68,6 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 
 // Global variables, statics.
 
-static char lcd_msg[LCD_MSG_LENGTH];
-
 /*
  * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
  * buffer. Leer el buffer es la unica manera practica que se tiene para
@@ -498,6 +496,16 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 
 	switch (c)
 	{
+	    case ' ':
+	        lcd_write_line(SEG_A, 1);
+            lcd_write_line(SEG_B, 1);
+            lcd_write_line(SEG_C, 1);
+            lcd_write_line(SEG_D, 0);
+            lcd_write_line(SEG_E, 1);
+            lcd_write_line(SEG_F, 1);
+            lcd_write_line(SEG_G, 1);
+            lcd_write_line(SEG_H, 0);
+            break;
 		case '0':
 			lcd_write_line(SEG_A, 1);
 			lcd_write_line(SEG_B, 1);

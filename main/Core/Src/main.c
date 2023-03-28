@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "../../../libs/fm_keypad/fm_keypad.h"
 #include "../../../libs/fm_menu_user/fm_menu_user.h"
+#include "../../../libs/fm_event/fm_event.h"
 
 
 /* USER CODE END Includes */
@@ -56,12 +57,13 @@ UART_HandleTypeDef huart2;
 osThreadId_t MenuTaskHandle;
 const osThreadAttr_t MenuTask_attributes = {
   .name = "MenuTask",
-  .stack_size = 1024 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
-extern uint16_t g_key_up_counter;
-extern uint16_t g_key_down_counter;
+
+extern osMessageQueueId_t h_event_queue;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -115,9 +117,10 @@ int main(void)
   MX_TIM16_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  fm_lcd_clear();
+
   fm_lcd_init();
   fm_lcd_refresh();
+  fm_event_init();
 
   /* USER CODE END 2 */
 
@@ -396,6 +399,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : KEY_UP_Pin */
+  GPIO_InitStruct.Pin = KEY_UP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(KEY_UP_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : KEY_DOWN_Pin */
+  GPIO_InitStruct.Pin = KEY_DOWN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(KEY_DOWN_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -414,16 +433,25 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	ptr_fun_menu_t ptr_menu = fm_menu_show_acm_rate;
+	ptr_fun_menu_t ptr_menu = fm_menu_show_ttl_rate;
+	fm_event_t event_next = EVENT_LCD_REFRESH;
+	osStatus_t ret_status;
 
 	/* Infinite loop */
 	for (;;)
 	{
-		ptr_menu = (ptr_fun_menu_t)(*ptr_menu)();
-	    osDelay(5000);
+	    ret_status = osMessageQueueGet(h_event_queue, &event_next, 0, 1000);
+		if( ret_status == osOK)
+		{
+		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
+		}
+		else
+		{
+		    // por el momento no tiene sentido esta sentencia.
+		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
+		}
 	}
   /* USER CODE END 5 */
-
 }
 
 /**

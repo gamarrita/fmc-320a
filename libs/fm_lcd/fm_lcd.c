@@ -143,7 +143,7 @@ void fm_lcd_init()
 
 	// All segments will be on for a few seconds after initialization.
 	pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-	HAL_Delay(2000); // @suppress("Avoid magic numbers")
+	HAL_Delay(500); // @suppress("Avoid magic numbers")
 	pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
 }
 
@@ -168,7 +168,7 @@ void fm_lcd_puts(const char *c, const rows_t row)
 
 	while ((*c) && (col < col_limit))
 	{
-		if (*c >= '0' && *c <= '9')
+		if(((*c >= '0') && (*c <= '9')) || (*c == ' '))
 		{
 			lcd_put_char(*c, col, row);
 		}

@@ -1,13 +1,11 @@
 /* USER CODE BEGIN Header */
 /*
- * @brief Este proyecto es con motivo de testo del LCD no que :
- *        - Los archivos del modulo fm_lcd son comunes a todos los proyectos, al
- *        cambiar desde un proyecto algo de este modulo cambia el codigo en
- *        todos.r
- *        - En este proyecto se puede usar STM32CubeMX. El proyecto main por
- *        razones de ser compatible con nuestro code style y code analysis
- *        puede no ser compatible con STM32CubeMX
- *
+ * @brief Este proyecto sirve pare testear el modulo de LCD sin bajo consumo
+ *  Se implementa un contador cada 1 segundo. El retardo es con el RTC, se
+ *  bloque con un semaforo en la tarea y se lo libera un segundo despues
+ *  en la interrupción del RTC.
+ *  A medida de que se agreguen mas fuciones se deberia tener un programa
+ *  de testeo mas completo.
  *
  */
 /* USER CODE END Header */

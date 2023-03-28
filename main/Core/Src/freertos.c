@@ -64,6 +64,7 @@ __weak void PreSleepProcessing(uint32_t ulExpectedIdleTime)
     delay_ms /= 1000;
     fm_debug_uint32_uart(ulExpectedIdleTime);
     HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, delay_ms, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
+    ulExpectedIdleTime = 0;
     HAL_SuspendTick();
 
     __DSB();

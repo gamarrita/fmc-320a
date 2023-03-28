@@ -44,7 +44,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-extern RTC_HandleTypeDef hrtc;
 
 /* USER CODE END Variables */
 

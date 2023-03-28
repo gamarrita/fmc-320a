@@ -9,8 +9,8 @@
 
 // Includes.
 #include "main.h"
-#include "string.h"
 #include "fm_keypad.h"
+#include "../fm_event/fm_event.h"
 
 // Typedef.
 
@@ -28,10 +28,10 @@
 /*
  * Mapeo que tecla correspondea que pin
  */
-#define KEY_ESC 	GPIO_PIN_10
-#define KEY_ENTER	GPIO_PIN_11
-#define KEY_UP		GPIO_PIN_12
-#define KEY_DOWN	GPIO_PIN_13
+#define KEY_UP 	    GPIO_PIN_10
+#define KEY_DOWN	GPIO_PIN_11
+#define KEY_ENTER	GPIO_PIN_12
+#define KEY_ESC     GPIO_PIN_13
 
 //Debug.
 
@@ -52,6 +52,8 @@ uint16_t g_key_esc_counter = 4;
 
 // External variables.
 
+extern osMessageQueueId_t h_event_queue;
+
 // Global variables, statics.
 
 // Private function prototypes.
@@ -64,31 +66,26 @@ uint16_t g_key_esc_counter = 4;
 
 void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for function")
 {
-	switch (gpio_pin)
-	{
-		case KEY_ESC:
-			g_key_esc_counter++;
-		break;
-		case KEY_ENTER:
-			g_key_enter_counter++;
-		break;
-		case KEY_UP:
-			if(g_key_up_counter < 3)
-			{
-				g_key_up_counter++;
-				g_key_down_counter--;
-			}
-		break;
-		case KEY_DOWN:
-			if(g_key_down_counter < 3)
-			{
-				g_key_down_counter++;
-				g_key_up_counter--;
-			}
-		break;
-		default:
-		break;
-	}
+    fm_event_t event_now;
+
+    switch (gpio_pin)
+    {
+        case KEY_UP:
+            event_now = EVENT_KEY_UP;
+        break;
+        case KEY_DOWN:
+            event_now = EVENT_KEY_DOWN;
+        break;
+        case KEY_ENTER:
+            event_now = EVENT_KEY_ENTER;
+        break;
+        case KEY_ESC:
+            event_now = EVENT_KEY_ESC;
+        break;
+        default:
+        break;
+    }
+    osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 }
 
 /*** end of file ***/

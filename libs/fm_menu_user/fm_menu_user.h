@@ -21,6 +21,7 @@
 // includes
 #include "main.h"
 #include "../../../libs/fm_lcd/fm_lcd.h"
+#include "../fm_event/fm_event.h"
 
 // Macros, defines, microcontroller pins (dhs).
 
@@ -29,18 +30,18 @@
 // Lo siguiente es una tecnica para lograr que:
 // Una funcion retorna un puntero a funcion, donde
 // el tipo de funcion retornada es el de la funcion que se esta ejecutando.
-typedef void* (*ptr_ret_menu_t)(void);      // Un puntero a funcion
-typedef ptr_ret_menu_t (*ptr_fun_menu_t)(void);   //
+typedef void* (*ptr_ret_menu_t)(fm_event_t);      // Un puntero a funcion
+typedef ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);   //
 
 // Defines.
 
 // Function prototypes
-ptr_ret_menu_t fm_menu_show_acm_rate();
-ptr_ret_menu_t fm_menu_show_alert_battery();
-ptr_ret_menu_t fm_menu_show_date_hour();
-ptr_ret_menu_t fm_menu_show_temp_temp();
-ptr_ret_menu_t fm_menu_show_ttl_rate();
-ptr_ret_menu_t fm_menu_show_version();
+ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t);
+ptr_ret_menu_t fm_menu_show_alert_battery(fm_event_t);
+ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t);
+ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t);
+ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t);
+ptr_ret_menu_t fm_menu_show_version(fm_event_t);
 
 #endif /* FM_MENU_USER_H_ */
 

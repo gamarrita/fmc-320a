@@ -1,12 +1,45 @@
 /* USER CODE BEGIN Header */
 /*
+ * Este proyecto es para hacer pruebas con el modulo lcd y FreeRTOS tickless
+ * en stop mode 2, en stop mode 2 LPTIM no funciona en este micro)se  usa el RTC
+ * como fuente de interrupcion de wakeup.
+ *
+ * Se usa el leed verde, nativo de Nucleo 64, para controlar visaulmete el
+ * tiempo que se encuentra en stop mode, destella rapidamente.
+ *
+ * Modificaciones que hay que hacer para que funcione:
+ *
+ * - En freeRTOSConfig.h, la macro configPRE_SLEEP_PROCESSING hay que eliminar
+ * la sentencia x = 0, notar que este cambio no es persistente al ejecutar
+ * CubeMX  Generate Code. Se debe volver a eliminar esta linea si se ejecuta
+ * CubeMX.
+ * - En port.c hay que comentar la instruccion:
+ * //portNVIC_SYSTICK_CTRL_REG |= portNVIC_SYSTICK_ENABLE_BIT;
+ * Al igual que antes este cambio no es persistente si se hace Generate Code
+ * - En el MX para el RTC -> Wakeup -> Internal Wakeup luego en NVIC hay que
+ * seleccionar RTC wake-up Interrupt throught EXT1 line 20, esto habilita
+ * la interrupcion, debo investigar mejor como funciona.
+ *
+ * - Demas codigo en freertos.c, si es presevado luego de un Code Generator:
+ * extern RTC_HandleTypeDef hrtc;
+ * Codigo en pre y post sleep processing, calcular el tiempo en ms que el micro
+ * debe dormir, preparar al RTC para que despierte al sistema, detener ticks
+ * ir a dormir, reanudar ticks....
+ *
+ * Esta solucion tiene como ventaja que se deja libre el LPTIM 1, ademas que
+ * se puede usar el LPTIM 2 de cambiar stop 2 por stop 1.
+ * La solucion de usar LPTIM 1 como fuente de systick, en lugar de TIM6, es
+ * superior, no tiene drift, el problema es que solo nos dejaría con LPTIM 2
+ * en stop mode 1, stop mode 2 no representa un gran ahorro.
+ * Las versiones de FreeRTOS tickless no tienen implementación oficial, esta
+ * solucion que si es parte de una solucion oficial tiene bugs, el del macro
+ * que hace tiempo esperado igual a 0.
  * Aca encontre otro bug, en port.c se usa la macro:
  * #if( configUSE_TICKLESS_IDLE == 1 )
  * Que en nuestro caso es true, con lo cual el codigo que se sigue debe estar
  * incluido y no sombreado, aunque esta incluido el codigo aparece sombreado.
  * Este error se produce al importar el ioc, o al menos en esta condicion.
  * No probe con habilitar el tickless mode en un etapa abanzada de un proyecto.
- *
  *
  * La lectura de corriente con el reloj corriendo a 1 segundo es de 13uA
  *

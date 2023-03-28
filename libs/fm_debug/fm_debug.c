@@ -76,7 +76,7 @@ extern UART_HandleTypeDef huart2;
  */
 void fm_debug_uint8_uart(uint8_t num)
 {
-	char str[5];
+	char str[5]; // @suppress("Avoid magic numbers")
 	snprintf(str, sizeof(str), "%u\n", num);
 	fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
@@ -87,7 +87,7 @@ void fm_debug_uint8_uart(uint8_t num)
  */
 void fm_debug_uint32_uart(uint32_t num)
 {
-	char str[12];
+	char str[12]; // @suppress("Avoid magic numbers")
 	snprintf(str, sizeof(str), "%lu\n", num);
 	fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
