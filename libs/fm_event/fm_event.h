@@ -30,6 +30,16 @@ typedef enum
     EVENT_END
 } fm_event_t;
 
+typedef enum
+{
+	STATE_TTL_RATE,
+	STATE_ACM_RATE,
+	STATE_TEMP_TEMP,
+	STATE_DATE_HOUR,
+	STATE_VERSION,
+	STATE_BEGIN
+} fm_state_t;
+
 // Defines.
 
 // Function prototypes

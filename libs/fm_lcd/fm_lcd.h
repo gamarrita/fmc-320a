@@ -53,6 +53,8 @@ void fm_lcd_clear();
 void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2);
 void fm_lcd_fill();
+void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
+int length);
 void fm_lcd_init();
 void fm_lcd_puts(const char *p_str, uint8_t row);
 void fm_lcd_refresh();

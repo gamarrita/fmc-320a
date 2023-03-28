@@ -20,7 +20,6 @@
 #include "fm_menu_user.h"
 #include "stdio.h"
 #include "../../../libs/fm_event/fm_event.h"
-#include "../fm_event/fm_event.h"
 
 // Typedef.
 
@@ -65,7 +64,7 @@ extern osMessageQueueId_t h_event_queue;
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_acm_rate(fm_state_t *actual_state, fm_event_t event_id)
 {
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
     fm_event_t event_now;
@@ -101,7 +100,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_date_hour(fm_state_t *actual_state, fm_event_t event_id)
 {
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_date_hour;
@@ -136,7 +135,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_temp_temp(fm_state_t *actual_state, fm_event_t event_id)
 {
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
     fm_event_t event_now;
@@ -173,9 +172,9 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_ttl_rate(fm_state_t *actual_state, fm_event_t event_id)
 {
-
+	fm_state_t previous_state = *actual_state;
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
     fm_event_t event_now;
 
@@ -188,19 +187,18 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_DOWN:
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_ENTER:
-        break;
+        	break;
         case EVENT_KEY_ESC:
-        break;
-
+        	break;
         default:
-        break;
+        	break;
     }
     return (ret_menu);
 }
@@ -211,7 +209,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_version(fm_state_t *actual_state, fm_event_t event_id)
 {
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_version;

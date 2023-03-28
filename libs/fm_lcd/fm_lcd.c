@@ -54,18 +54,17 @@
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
 void fm_lcd_acm_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
 	char lcd_msg[MSG_LENGTH];
 
-	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
+	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
@@ -86,7 +85,6 @@ symbols_t right_unit)
  * lcd.h.
  * @retval None
  */
-
 void fm_lcd_battery_low(blink_t speed)
 {
 	lcd_set_symbol(BATTERY, speed);
@@ -109,24 +107,42 @@ void fm_lcd_clear()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2)
 {
 
 	char lcd_msg[MSG_LENGTH];
 
-	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date(), lcd_msg,
+	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point_1);
 	lcd_set_point(HIGH_ROW, high_point_2);
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg,LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point_1);
 	lcd_set_point(LOW_ROW, low_point_2);
+}
+
+/*
+ * @brief Función que formatea información pasada como parámetro para ser
+ * colocada en una de las dos filas de la pantalla LCD.
+ * @param Enumeracion rows_t de lcd.h
+ * @retval arreglo con la información formateada tipo char.
+ */
+void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
+int length)
+{
+	if (line == HIGH_ROW)
+	{
+		snprintf(p_str, length, "%8lu", data);
+	}
+	else if (line == LOW_ROW)
+	{
+		snprintf(p_str, length, "%7lu", data);
+	}
 }
 
 /*
@@ -183,7 +199,6 @@ void fm_lcd_puts(const char *c, const rows_t row)
  * @param  None
  * @retval None
  */
-
 void fm_lcd_refresh()
 {
 	lcd_refresh();
@@ -196,18 +211,17 @@ void fm_lcd_refresh()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_temp_temp(point_t high_point, point_t low_point)
 {
 	char lcd_msg[MSG_LENGTH];
 
-	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_liq_temp(), lcd_msg,
+	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_liq_temp(), lcd_msg,
 	MSG_LENGTH);
 
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
 	MSG_LENGTH);
 
 	fm_lcd_puts(lcd_msg, LOW_ROW);
@@ -224,18 +238,17 @@ void fm_lcd_temp_temp(point_t high_point, point_t low_point)
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
 void fm_lcd_ttl_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
 	char lcd_msg[MSG_LENGTH];
 
-	lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
+	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
@@ -255,12 +268,11 @@ symbols_t right_unit)
  * @param puntos de la fila inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_version(point_t low_point)
 {
 	char lcd_msg[MSG_LENGTH];
 
-	lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);

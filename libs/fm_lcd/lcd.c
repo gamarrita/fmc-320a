@@ -71,9 +71,7 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 /*
  * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
  * buffer. Leer el buffer es la unica manera practica que se tiene para
- * saber que esta escrito en la pantalla, no de debe corromper esta ,condicion.
- *
- * Notar que la primera linea tiene
+ * saber que esta escrito en la pantalla, no se debe corromper esta condicion.
  *
  */
 static uint8_t g_buf[LCD_ROWS][LCD_COLS];
@@ -399,25 +397,6 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
 }
 
 /*
- * @brief Función que formatea información pasada como parámetro para ser
- * colocada en una de las dos filas de la pantalla LCD.
- * @param Enumeracion rows_t de lcd.h
- * @retval arreglo con la información formateada tipo char.
- */
-
-void lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length)
-{
-	if (line == HIGH_ROW)
-	{
-		snprintf(p_str, length, "%8lu", data);
-	}
-	else if (line == LOW_ROW)
-	{
-		snprintf(p_str, length, "%7lu", data);
-	}
-}
-
-/*
  * @brief Inicialización de la pantalla LCD escribiéndola por completo y luego
  * borrándola.
  * @param  None
@@ -497,13 +476,13 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 	switch (c)
 	{
 	    case ' ':
-	        lcd_write_line(SEG_A, 1);
-            lcd_write_line(SEG_B, 1);
-            lcd_write_line(SEG_C, 1);
+	        lcd_write_line(SEG_A, 0);
+            lcd_write_line(SEG_B, 0);
+            lcd_write_line(SEG_C, 0);
             lcd_write_line(SEG_D, 0);
-            lcd_write_line(SEG_E, 1);
-            lcd_write_line(SEG_F, 1);
-            lcd_write_line(SEG_G, 1);
+            lcd_write_line(SEG_E, 0);
+            lcd_write_line(SEG_F, 0);
+            lcd_write_line(SEG_G, 0);
             lcd_write_line(SEG_H, 0);
             break;
 		case '0':
