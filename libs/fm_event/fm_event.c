@@ -2,10 +2,10 @@
  *
  * @brief Each source file shall be comprised of some or all of the following
  * sections, in the order listed down below.
- * Comenzar cada nuevo archivo usando un template. Hay un templeate general a
- * todos los proyectos que puede ser usado hata el momento de introducir un 
- * cambio que solo respondera a un proyecto en progreso, es ese caso el
- * template pasara a ser parte del proyecto.
+ * Comenzar cada nuevo archivo usando un template. Hay un template general a
+ * todos los proyectos que puede ser usado hasta el momento de introducir un
+ * cambio que solo responderá a un proyecto en progreso, es ese caso el
+ * template pasará a ser parte del proyecto.
  * 
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
@@ -39,7 +39,7 @@ const osMessageQueueAttr_t event_queue_attributes =
 //Debug.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *

@@ -71,7 +71,9 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 /*
  * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
  * buffer. Leer el buffer es la unica manera practica que se tiene para
- * saber que esta escrito en la pantalla, no se debe corromper esta condicion.
+ * saber que esta escrito en la pantalla, no de debe corromper esta ,condicion.
+ *
+ * Notar que la primera linea tiene
  *
  */
 static uint8_t g_buf[LCD_ROWS][LCD_COLS];
@@ -171,6 +173,24 @@ void lcd_write_line(uint8_t seg, uint8_t data);
  */
 void lcd_clear_all()
 {
+    pcf8553_clear_buff();
+
+    /*
+     * Limpia el buffer intermedio de los números que aparecen en las filas HIGH
+     * y LOW de la pantalla LCD. No es muy eficiente si se pretende usar al
+     * refrescar la pantalla cada x tiempo, pero será necesario usarla por el
+     * momento al pasar de una pantalla a otra.
+     */
+    for(int cont_buff_row = 0; cont_buff_row < PCF8553_DATA_SIZE;
+    cont_buff_row++)
+    {
+        for(int cont_buff_col = 0; cont_buff_col < PCF8553_DATA_SIZE;
+        cont_buff_col++)
+        {
+            g_buf[cont_buff_row][cont_buff_col] = 0;
+        }
+    }
+
 	pcf8553_write_all(NONE_SEGMENTS);
 }
 
@@ -405,18 +425,6 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
 
 void lcd_init()
 {
-	/*
-	 * Inicializo a cero todos los elemento del buffer.
-	 */
-
-	for (int row = 0; row < LCD_ROWS; row++)
-	{
-		for (int col = 0; col < LCD_COLS; col++)
-		{
-			g_buf[row][col] = 0;
-		}
-	}
-
 	pcf8553_init();
 }
 
@@ -476,13 +484,13 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 	switch (c)
 	{
 	    case ' ':
-	        lcd_write_line(SEG_A, 0);
-            lcd_write_line(SEG_B, 0);
-            lcd_write_line(SEG_C, 0);
+	        lcd_write_line(SEG_A, 1);
+            lcd_write_line(SEG_B, 1);
+            lcd_write_line(SEG_C, 1);
             lcd_write_line(SEG_D, 0);
-            lcd_write_line(SEG_E, 0);
-            lcd_write_line(SEG_F, 0);
-            lcd_write_line(SEG_G, 0);
+            lcd_write_line(SEG_E, 1);
+            lcd_write_line(SEG_F, 1);
+            lcd_write_line(SEG_G, 1);
             lcd_write_line(SEG_H, 0);
             break;
 		case '0':

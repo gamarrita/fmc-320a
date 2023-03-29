@@ -20,6 +20,7 @@
 #include "fm_menu_user.h"
 #include "stdio.h"
 #include "../../../libs/fm_event/fm_event.h"
+#include "../fm_event/fm_event.h"
 
 // Typedef.
 
@@ -34,7 +35,7 @@
 
 // Const data.
 // Defines.
-//Debug.
+// Debug.
 /*
  * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
@@ -64,13 +65,22 @@ extern osMessageQueueId_t h_event_queue;
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_acm_rate(fm_state_t *actual_state, fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 {
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
     fm_event_t event_now;
 
     fm_lcd_acm_rate(PNT_5, PNT_5, GL, H);
     fm_lcd_refresh();
+
+    if(new_entry == 1)
+    {
+//        fm_lcd_clear();
+        new_entry = 0;
+    }
 
     switch (event_id)
     {
@@ -78,19 +88,31 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_state_t *actual_state, fm_event_t event_
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_DOWN:
             ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_ENTER:
-        break;
+            break;
         case EVENT_KEY_ESC:
-        break;
+            break;
         default:
-        break;
+            break;
     }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "acm_rate\n";
+        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if(new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
     return (ret_menu);
 }
 
@@ -100,11 +122,19 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_state_t *actual_state, fm_event_t event_
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_date_hour(fm_state_t *actual_state, fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
 {
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_date_hour;
     fm_event_t event_now;
+
+    if(new_entry == 1)
+    {
+//        fm_lcd_clear();
+        new_entry = 0;
+    }
 
     fm_lcd_date_hour(PNT_1, PNT_3, PNT_2, PNT_4);
     fm_lcd_refresh();
@@ -115,17 +145,28 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_state_t *actual_state, fm_event_t event
             ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_DOWN:
-        break;
+            break;
         case EVENT_KEY_ENTER:
-        break;
+            break;
         case EVENT_KEY_ESC:
-        break;
-
+            break;
         default:
-        break;
+            break;
     }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "acm_rate\n";
+        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if(new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
     return (ret_menu);
 }
 
@@ -135,10 +176,19 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_state_t *actual_state, fm_event_t event
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_temp_temp(fm_state_t *actual_state, fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
 {
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
     fm_event_t event_now;
+
+    if(new_entry == 1)
+    {
+//        fm_lcd_clear();
+        new_entry = 0;
+    }
 
     fm_lcd_temp_temp(PNT_6, PNT_5);
     fm_lcd_refresh();
@@ -149,20 +199,31 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_state_t *actual_state, fm_event_t event
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_DOWN:
             ret_menu = (ptr_ret_menu_t) fm_menu_show_date_hour;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_ENTER:
-        break;
+            break;
         case EVENT_KEY_ESC:
-        break;
-
+            break;
         default:
-        break;
+            break;
     }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "acm_rate\n";
+        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if(new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
     return (ret_menu);
 }
 
@@ -172,11 +233,19 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_state_t *actual_state, fm_event_t event
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_ttl_rate(fm_state_t *actual_state, fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
 {
-	fm_state_t previous_state = *actual_state;
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
     fm_event_t event_now;
+
+    if(new_entry == 1)
+    {
+//        fm_lcd_clear();
+        new_entry = 0;
+    }
 
     fm_lcd_ttl_rate(PNT_4, PNT_5, LT, S);
     fm_lcd_refresh();
@@ -194,12 +263,24 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_state_t *actual_state, fm_event_t event_
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             break;
         case EVENT_KEY_ENTER:
-        	break;
+            break;
         case EVENT_KEY_ESC:
-        	break;
+            break;
         default:
-        	break;
+            break;
     }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "acm_rate\n";
+        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if(new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
     return (ret_menu);
 }
 
@@ -209,11 +290,19 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_state_t *actual_state, fm_event_t event_
  * @param  None
  * @retval None
  */
-ptr_ret_menu_t fm_menu_show_version(fm_state_t *actual_state, fm_event_t event_id)
+ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 {
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
     fm_event_t event_now;
+
+    if(new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
 
     fm_lcd_version(PNT_5);
     fm_lcd_refresh();
@@ -221,20 +310,31 @@ ptr_ret_menu_t fm_menu_show_version(fm_state_t *actual_state, fm_event_t event_i
     switch (event_id)
     {
         case EVENT_KEY_UP:
-        break;
+            break;
         case EVENT_KEY_DOWN:
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-        break;
+            break;
         case EVENT_KEY_ENTER:
-        break;
+            break;
         case EVENT_KEY_ESC:
-        break;
-
+            break;
         default:
-        break;
+            break;
     }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "acm_rate\n";
+        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if(new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
     return (ret_menu);
 }
 

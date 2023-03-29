@@ -225,6 +225,18 @@ void pcf8553_blink(pcf_blink_mode_t mode)
 	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
 
+void pcf8553_clear_buff()
+{
+    /*
+     * Limpia el buffer final, que es mandado directamente al controlador de la
+     * pantalla LCD.
+     */
+    for(int cont_buff_t = 0; cont_buff_t < PCF8553_DATA_SIZE; cont_buff_t++)
+    {
+        g_lcd_map[cont_buff_t] = 0;
+    }
+}
+
 /*
  * @brief Aunque es posible encender o apagar los segmentos/símbolos/caracteres
  * en forma individual, lo mas practico es escribir todos los cambios en un

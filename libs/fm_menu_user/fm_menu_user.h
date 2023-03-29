@@ -36,12 +36,12 @@ typedef ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);   //
 // Defines.
 
 // Function prototypes
-ptr_ret_menu_t fm_menu_show_acm_rate(fm_state_t *actual_state, fm_event_t);
-ptr_ret_menu_t fm_menu_show_alert_battery(fm_state_t *actual_state, fm_event_t);
-ptr_ret_menu_t fm_menu_show_date_hour(fm_state_t *actual_state, fm_event_t);
-ptr_ret_menu_t fm_menu_show_temp_temp(fm_state_t *actual_state, fm_event_t);
-ptr_ret_menu_t fm_menu_show_ttl_rate(fm_state_t *actual_state, fm_event_t);
-ptr_ret_menu_t fm_menu_show_version(fm_state_t *actual_state, fm_event_t);
+ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t);
+ptr_ret_menu_t fm_menu_show_alert_battery(fm_event_t);
+ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t);
+ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t);
+ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t);
+ptr_ret_menu_t fm_menu_show_version(fm_event_t);
 
 #endif /* FM_MENU_USER_H_ */
 

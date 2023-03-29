@@ -1,8 +1,6 @@
 /* @file fm_module.h
  *
  * @brief A description of the module’s purpose.
- *
- * @par
  * 
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
@@ -29,16 +27,6 @@ typedef enum
     EVENT_KEY_ESC,
     EVENT_END
 } fm_event_t;
-
-typedef enum
-{
-	STATE_TTL_RATE,
-	STATE_ACM_RATE,
-	STATE_TEMP_TEMP,
-	STATE_DATE_HOUR,
-	STATE_VERSION,
-	STATE_BEGIN
-} fm_state_t;
 
 // Defines.
 
