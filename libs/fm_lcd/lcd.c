@@ -181,10 +181,10 @@ void lcd_clear_all()
      * refrescar la pantalla cada x tiempo, pero será necesario usarla por el
      * momento al pasar de una pantalla a otra.
      */
-    for(int cont_buff_row = 0; cont_buff_row < PCF8553_DATA_SIZE;
+    for(int cont_buff_row = 0; cont_buff_row < LCD_ROWS;
     cont_buff_row++)
     {
-        for(int cont_buff_col = 0; cont_buff_col < PCF8553_DATA_SIZE;
+        for(int cont_buff_col = 0; cont_buff_col < LCD_COLS;
         cont_buff_col++)
         {
             g_buf[cont_buff_row][cont_buff_col] = 0;

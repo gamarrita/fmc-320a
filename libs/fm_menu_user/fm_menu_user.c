@@ -78,18 +78,20 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 
     if(new_entry == 1)
     {
-//        fm_lcd_clear();
+        fm_lcd_clear();
         new_entry = 0;
     }
 
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             break;
         case EVENT_KEY_DOWN:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -109,6 +111,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 
     if(new_exit == 1)
     {
+//        fm_lcd_clear();
         new_entry = 1;
         new_exit = 0;
     }
@@ -132,7 +135,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
 
     if(new_entry == 1)
     {
-//        fm_lcd_clear();
+        fm_lcd_clear();
         new_entry = 0;
     }
 
@@ -142,6 +145,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_temp_temp;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -163,6 +167,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
 
     if(new_exit == 1)
     {
+//        fm_lcd_clear();
         new_entry = 1;
         new_exit = 0;
     }
@@ -186,7 +191,7 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
 
     if(new_entry == 1)
     {
-//        fm_lcd_clear();
+        fm_lcd_clear();
         new_entry = 0;
     }
 
@@ -196,11 +201,13 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             break;
         case EVENT_KEY_DOWN:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_date_hour;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -220,6 +227,7 @@ ptr_ret_menu_t fm_menu_show_temp_temp(fm_event_t event_id)
 
     if(new_exit == 1)
     {
+//        fm_lcd_clear();
         new_entry = 1;
         new_exit = 0;
     }
@@ -243,7 +251,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
 
     if(new_entry == 1)
     {
-//        fm_lcd_clear();
+        fm_lcd_clear();
         new_entry = 0;
     }
 
@@ -253,11 +261,13 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             break;
         case EVENT_KEY_DOWN:
+            new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -277,6 +287,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
 
     if(new_exit == 1)
     {
+//        fm_lcd_clear();
         new_entry = 1;
         new_exit = 0;
     }
@@ -315,6 +326,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            new_exit = 1;
             break;
         case EVENT_KEY_ENTER:
             break;
@@ -331,6 +343,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 
     if(new_exit == 1)
     {
+//        fm_lcd_clear();
         new_entry = 1;
         new_exit = 0;
     }

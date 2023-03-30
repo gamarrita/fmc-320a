@@ -280,11 +280,10 @@ void fm_lcd_version(point_t low_point)
 
 	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
 	MSG_LENGTH);
-	lcd_set_symbol(VE, 0x0);
-
-
 	fm_lcd_puts(lcd_msg, LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point);
+
+    lcd_set_symbol(VE, 0x0);
 }
 
 // Interrupts
