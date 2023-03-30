@@ -173,6 +173,24 @@ void lcd_write_line(uint8_t seg, uint8_t data);
  */
 void lcd_clear_all()
 {
+    pcf8553_clear_buff();
+
+    /*
+     * Limpia el buffer intermedio de los números que aparecen en las filas HIGH
+     * y LOW de la pantalla LCD. No es muy eficiente si se pretende usar al
+     * refrescar la pantalla cada x tiempo, pero será necesario usarla por el
+     * momento al pasar de una pantalla a otra.
+     */
+    for(int cont_buff_row = 0; cont_buff_row < LCD_ROWS;
+    cont_buff_row++)
+    {
+        for(int cont_buff_col = 0; cont_buff_col < LCD_COLS;
+        cont_buff_col++)
+        {
+            g_buf[cont_buff_row][cont_buff_col] = 0;
+        }
+    }
+
 	pcf8553_write_all(NONE_SEGMENTS);
 }
 
@@ -399,25 +417,6 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
 }
 
 /*
- * @brief Función que formatea información pasada como parámetro para ser
- * colocada en una de las dos filas de la pantalla LCD.
- * @param Enumeracion rows_t de lcd.h
- * @retval arreglo con la información formateada tipo char.
- */
-
-void lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length)
-{
-	if (line == HIGH_ROW)
-	{
-		snprintf(p_str, length, "%8lu", data);
-	}
-	else if (line == LOW_ROW)
-	{
-		snprintf(p_str, length, "%7lu", data);
-	}
-}
-
-/*
  * @brief Inicialización de la pantalla LCD escribiéndola por completo y luego
  * borrándola.
  * @param  None
@@ -426,18 +425,6 @@ void lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int leng
 
 void lcd_init()
 {
-	/*
-	 * Inicializo a cero todos los elemento del buffer.
-	 */
-
-	for (int row = 0; row < LCD_ROWS; row++)
-	{
-		for (int col = 0; col < LCD_COLS; col++)
-		{
-			g_buf[row][col] = 0;
-		}
-	}
-
 	pcf8553_init();
 }
 

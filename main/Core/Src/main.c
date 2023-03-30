@@ -26,7 +26,6 @@
 #include "../../../libs/fm_menu_user/fm_menu_user.h"
 #include "../../../libs/fm_event/fm_event.h"
 
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,6 +117,7 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  fm_lcd_clear();
   fm_lcd_init();
   fm_lcd_refresh();
   fm_event_init();
@@ -433,7 +433,7 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	ptr_fun_menu_t ptr_menu = fm_menu_show_ttl_rate;
+	ptr_fun_menu_t ptr_menu = fm_menu_show_version;
 	fm_event_t event_next = EVENT_LCD_REFRESH;
 	osStatus_t ret_status;
 

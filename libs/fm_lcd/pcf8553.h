@@ -119,6 +119,7 @@ typedef union
  *
  */
 void pcf8553_blink(pcf_blink_mode_t mode);
+void pcf8553_clear_buff();
 void pcf8553_dump();
 void pcf8553_init();
 void pcf8553_reset();

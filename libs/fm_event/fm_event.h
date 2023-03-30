@@ -1,8 +1,6 @@
 /* @file fm_module.h
  *
  * @brief A description of the module’s purpose.
- *
- * @par
  * 
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */

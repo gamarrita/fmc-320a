@@ -24,6 +24,9 @@
 
 // Defines.
 
+
+#define FM_DEBUG_MENU 1
+
 // Function prototypes
 
 void fm_debug_msg_itm(const uint8_t *msg, uint8_t len);

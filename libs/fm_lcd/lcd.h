@@ -157,7 +157,6 @@ typedef enum
 void lcd_clear_all();
 void lcd_clear_point(rows_t line, point_t point);
 void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed);
-void lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length);
 void lcd_init();
 void lcd_put_char(char c, uint8_t col, rows_t row);
 void lcd_refresh();
