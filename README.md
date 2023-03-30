@@ -31,4 +31,6 @@ Configuración Diccionario:
 - El diccionario en Español no está completo por lo que se debe actualizar al ver que el IDE subraya en rojo las palabras que están correctamente escritas. Para agregar palabras nuevas se debe apoyar el cursor en la palabra subrayada y seleccionar la opción de "Add PALABRA to dictionary".
 - Se debe conservar este diccionario a lo largo del tiempo o buscar una forma de que incluya un volumen de palabras mucho mayor.
 
+
 Al finalizar, no olvidar de hacer click en la opción de Apply and close del menu Preferences.
+
