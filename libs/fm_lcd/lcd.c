@@ -484,13 +484,13 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 	switch (c)
 	{
 	    case ' ':
-	        lcd_write_line(SEG_A, 1);
-            lcd_write_line(SEG_B, 1);
-            lcd_write_line(SEG_C, 1);
+	        lcd_write_line(SEG_A, 0);
+            lcd_write_line(SEG_B, 0);
+            lcd_write_line(SEG_C, 0);
             lcd_write_line(SEG_D, 0);
-            lcd_write_line(SEG_E, 1);
-            lcd_write_line(SEG_F, 1);
-            lcd_write_line(SEG_G, 1);
+            lcd_write_line(SEG_E, 0);
+            lcd_write_line(SEG_F, 0);
+            lcd_write_line(SEG_G, 0);
             lcd_write_line(SEG_H, 0);
             break;
 		case '0':

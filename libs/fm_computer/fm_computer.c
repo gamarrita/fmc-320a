@@ -30,9 +30,7 @@
 // Const data.
 // Defines.
 #define ACM_INIT_VALUE 140
-#define DATE_INIT_VALUE 22032023
 #define EXT_TEMP_INIT_VALUE 253
-#define HOUR_INIT_VALUE 93000
 #define LIQ_TEMP_INIT_VALUE 53
 #define RATE_INIT_VALUE 100
 #define TTL_INIT_VALUE 9870
@@ -41,7 +39,7 @@
 //Debug.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *
@@ -55,9 +53,7 @@
 
 // Global variables, statics.
 static uint32_t g_acm = ACM_INIT_VALUE;
-static uint32_t g_date = DATE_INIT_VALUE;
 static uint32_t g_ext_temp = EXT_TEMP_INIT_VALUE;
-static uint32_t g_hour = HOUR_INIT_VALUE;
 static uint32_t g_liq_temp = LIQ_TEMP_INIT_VALUE;
 static uint32_t g_rate = RATE_INIT_VALUE;
 static uint32_t g_ttl = TTL_INIT_VALUE;
@@ -82,18 +78,6 @@ uint32_t fm_computer_get_acm()
 }
 
 /*
- * @brief Función que obtiene la fecha actual y lo devuelve como parámetro de
- * retorno.
- * @param  None
- * @retval fecha g_date de tipo uint32_t definido como global.
- */
-
-uint32_t fm_computer_get_date()
-{
-	return (g_date);
-}
-
-/*
  * @brief Función que obtiene el valor de la temperatura externa y lo devuelve
  * como parámetro de retorno.
  * @param  None
@@ -104,18 +88,6 @@ uint32_t fm_computer_get_date()
 uint32_t fm_computer_get_ext_temp()
 {
 	return (g_ext_temp);
-}
-
-/*
- * @brief Función que obtiene el valor de la hora actual y lo devuelve como
- * parámetro de retorno.
- * @param  None
- * @retval hora actual g_hour de tipo uint32_t definido como global.
- */
-
-uint32_t fm_computer_get_hour()
-{
-	return (g_hour);
 }
 
 /*

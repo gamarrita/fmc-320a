@@ -16,6 +16,7 @@
 #include "lcd.h"
 #include "../fm_computer/fm_computer.h"
 #include "../fm_calendar/fm_calendar.h"
+#include "../fm_temperature_sensor/fm_temperature_sensor.h"
 
 // Typedef.
 
@@ -135,7 +136,8 @@ point_t low_point_1, point_t low_point_2)
  * @param Enumeracion rows_t de lcd.h
  * @retval arreglo con la información formateada tipo char.
  */
-void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length)
+void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
+int length)
 {
 	if (line == HIGH_ROW)
 	{
@@ -225,6 +227,9 @@ void fm_lcd_temp_temp(point_t high_point, point_t low_point)
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point);
 
+	/*
+	 * Proximamente tomará su valor de la función fm_int_temperature_format()
+	 */
 	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
 	MSG_LENGTH);
 

@@ -1,4 +1,4 @@
-/* @file fm_calendar.c
+/* @file fm_temperature_sensor.c
  *
  * @brief Each source file shall be comprised of some or all of the following
  * sections, in the order listed down below.
@@ -13,9 +13,7 @@
  */
 
 // Includes.
-#include "fm_calendar.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include "fm_temperature_sensor.h"
 
 // Typedef.
 
@@ -29,11 +27,7 @@
  */
 
 // Const data.
-RTC_TimeTypeDef sTime;
-RTC_DateTypeDef sDate;
-
-extern RTC_HandleTypeDef hrtc;
-
+extern ADC_HandleTypeDef hadc1;
 // Defines.
 
 //Debug.
@@ -59,51 +53,27 @@ extern RTC_HandleTypeDef hrtc;
 
 // Public function bodies.
 
-void fm_calendar_get()
+void fm_int_temperature_get()
 {
-    HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+    HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1, 100);
+    HAL_ADC_Stop(&hadc1);
 }
 
-int fm_calendar_format_time()
+int fm_int_temperature_format()
 {
-    int time = 0;
-    char time_arr[20]; // @suppress("Avoid magic numbers")
+    uint16_t raw_value;
+    int temp_celcius;
 
-    fm_calendar_get();
+    fm_int_temperature_get();
+    raw_value = HAL_ADC_GetValue(&hadc1);
+    temp_celcius = __HAL_ADC_CALC_TEMPERATURE(3285, raw_value, ADC_RESOLUTION_12B);
 
-    sprintf(time_arr, "%02d%02d%02d", sTime.Hours, sTime.Minutes,
-    sTime.Seconds);
-
-    /*
-     * Esta instrucción está de mas ya que después se vuelve a formatear el
-     * entero en un arreglo, pero por ahora se va a quedar así hasta que se
-     * elimine el formatter de la libreria fm_lcd.h
-     */
-    time = atoi(time_arr);
-
-    return (time);
-}
-
-int fm_calendar_format_date()
-{
-    int date = 0;
-    char date_arr[20]; // @suppress("Avoid magic numbers")
-
-    fm_calendar_get();
-
-    sprintf(date_arr, "%02d%02d20%02d", sDate.Date, sDate.Month, sDate.Year);
-
-    /*
-     * Esta instrucción está de mas ya que después se vuelve a formatear el
-     * entero en un arreglo, pero por ahora se va a quedar así hasta que se
-     * elimine el formatter de la libreria fm_lcd.h
-     */
-    date = atoi(date_arr);
-
-    return (date);
+    return(temp_celcius);
 }
 
 // Interrupts
 
 /*** end of file ***/
+

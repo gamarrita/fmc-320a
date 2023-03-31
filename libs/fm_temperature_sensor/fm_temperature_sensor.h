@@ -1,4 +1,4 @@
-/* @file fm_calendar.h
+/* @file fm_temperature_sensor.h
  *
  * @brief A description of the module’s purpose.
  *
@@ -9,6 +9,7 @@
 #define FM_MODULE_H_
 
 // includes
+
 #include "main.h"
 
 // Macros, defines, microcontroller pins (dhs).
@@ -18,10 +19,8 @@
 // Defines.
 
 // Function prototypes
-
-void fm_calendar_get();
-int fm_calendar_format_time();
-int fm_calendar_format_date();
+void fm_int_temperature_get();
+int fm_int_temperature_format();
 
 #endif /* MODULE_H */
 
