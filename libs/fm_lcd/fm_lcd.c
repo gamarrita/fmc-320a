@@ -15,7 +15,7 @@
 #include "fm_lcd.h"
 #include "lcd.h"
 #include "../fm_computer/fm_computer.h"
-
+#include "../fm_calendar/fm_calendar.h"
 
 // Typedef.
 
@@ -116,13 +116,13 @@ point_t low_point_1, point_t low_point_2)
 
 	char lcd_msg[MSG_LENGTH];
 
-	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date(), lcd_msg,
+	fm_lcd_format_number_in_line(HIGH_ROW, fm_calendar_format_date(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg, HIGH_ROW);
 	lcd_set_point(HIGH_ROW, high_point_1);
 	lcd_set_point(HIGH_ROW, high_point_2);
 
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour(), lcd_msg,
+	fm_lcd_format_number_in_line(LOW_ROW, fm_calendar_format_time(), lcd_msg,
 	MSG_LENGTH);
 	fm_lcd_puts(lcd_msg,LOW_ROW);
 	lcd_set_point(LOW_ROW, low_point_1);

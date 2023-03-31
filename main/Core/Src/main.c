@@ -25,6 +25,7 @@
 #include "../../../libs/fm_keypad/fm_keypad.h"
 #include "../../../libs/fm_menu_user/fm_menu_user.h"
 #include "../../../libs/fm_event/fm_event.h"
+#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -235,6 +236,9 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 0 */
 
+  RTC_TimeTypeDef sTime = {0};
+  RTC_DateTypeDef sDate = {0};
+
   /* USER CODE BEGIN RTC_Init 1 */
 
   /* USER CODE END RTC_Init 1 */
@@ -250,6 +254,31 @@ static void MX_RTC_Init(void)
   hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* USER CODE BEGIN Check_RTC_BKUP */
+
+  /* USER CODE END Check_RTC_BKUP */
+
+  /** Initialize RTC and set the Time and Date
+  */
+  sTime.Hours = 0x9;
+  sTime.Minutes = 0x35;
+  sTime.Seconds = 0x0;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sDate.WeekDay = RTC_WEEKDAY_FRIDAY;
+  sDate.Month = RTC_MONTH_MARCH;
+  sDate.Date = 0x31;
+  sDate.Year = 0x23;
+
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {
     Error_Handler();
   }
@@ -440,7 +469,7 @@ void menu_task(void *argument)
 	/* Infinite loop */
 	for (;;)
 	{
-	    ret_status = osMessageQueueGet(h_event_queue, &event_next, 0, 1000);
+	    ret_status = osMessageQueueGet(h_event_queue, &event_next, 0, 1000); // @suppress("Avoid magic numbers")
 		if( ret_status == osOK)
 		{
 		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
