@@ -17,7 +17,7 @@
 
 typedef enum
 {
-	KEY_UP, KEY_DOWN, KEY_ENTER, KEY_ESC
+    KEY_UP, KEY_DOWN, KEY_ENTER, KEY_ESC
 } fm_keypad_t;
 
 // Defines.

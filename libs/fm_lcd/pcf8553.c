@@ -40,13 +40,13 @@
  */
 typedef union
 {
-	uint8_t data;
-	struct
-	{
-		uint8_t address :5;  // @suppress("Avoid magic numbers")
-		uint8_t not_used :2;
-		uint8_t read_write :1;
-	} bits;
+    uint8_t data;
+    struct
+    {
+        uint8_t address :5;  // @suppress("Avoid magic numbers")
+        uint8_t not_used :2;
+        uint8_t read_write :1;
+    } bits;
 } register_address_t;
 
 // Data global constants.
@@ -114,10 +114,10 @@ uint8_t g_lcd_map[PCF8553_DATA_SIZE];
  */
 static device_ctrl_t g_device_ctrl =
 {
-	.reg_bits.clock_ouput = 0, /* disabled (default)*/
-	.reg_bits.internal_oscilator = 0, /* disabled (default)*/
-	.reg_bits.frame_frequency = 0, /* 64Hz (custom)*/
-	.reg_bits.default_value = 0
+    .reg_bits.clock_ouput = 0, /* disabled (default)*/
+    .reg_bits.internal_oscilator = 0, /* disabled (default)*/
+    .reg_bits.frame_frequency = 0, /* 64Hz (custom)*/
+    .reg_bits.default_value = 0
 };
 
 /*
@@ -127,11 +127,11 @@ static device_ctrl_t g_device_ctrl =
  */
 static display_ctrl_1_t g_display_ctrl_1 =
 {
-	.reg_bits.display_enabled = 1, /* enable (not default)*/
-	.reg_bits.bias_mode = 0, /* 1/3 bias (default) */
-	.reg_bits.mux = 0, /* 1:4 (default) */
-	.reg_bits.boost = 0, /* standard power drive, no large display (default) */
-	.reg_bits.default_value = 0
+    .reg_bits.display_enabled = 1, /* enable (not default)*/
+    .reg_bits.bias_mode = 0, /* 1/3 bias (default) */
+    .reg_bits.mux = 0, /* 1:4 (default) */
+    .reg_bits.boost = 0, /* standard power drive, no large display (default) */
+    .reg_bits.default_value = 0
 /* blinking off (default) */
 };
 
@@ -141,9 +141,9 @@ static display_ctrl_1_t g_display_ctrl_1 =
  */
 static display_ctrl_2_t g_display_ctrl_2 =
 {
-	.reg_bits.inversion = 0, /* line inversion (default) */
-	.reg_bits.blink = 0,
-	.reg_bits.default_value = 0
+    .reg_bits.inversion = 0, /* line inversion (default) */
+    .reg_bits.blink = 0,
+    .reg_bits.default_value = 0
 };
 
 // Private function prototypes.
@@ -170,11 +170,11 @@ static void spi1_init(void);
  */
 void static prepare_to_send(uint8_t add)
 {
-	register_address_t reg;
-	reg.bits.address = add;
-	reg.bits.not_used = 0;
-	reg.bits.read_write = WRITE_DATA;
-	HAL_SPI_Transmit(&h_spi1, &(reg.data), 1, DEFAULT_DELAY);
+    register_address_t reg;
+    reg.bits.address = add;
+    reg.bits.not_used = 0;
+    reg.bits.read_write = WRITE_DATA;
+    HAL_SPI_Transmit(&h_spi1, &(reg.data), 1, DEFAULT_DELAY);
 }
 
 /**
@@ -184,24 +184,24 @@ void static prepare_to_send(uint8_t add)
  */
 static void spi1_init(void)
 {
-	h_spi1.Instance = SPI1;
-	h_spi1.Init.Mode = SPI_MODE_MASTER;
-	h_spi1.Init.Direction = SPI_DIRECTION_1LINE;
-	h_spi1.Init.DataSize = SPI_DATASIZE_8BIT;
-	h_spi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-	h_spi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-	h_spi1.Init.NSS = SPI_NSS_SOFT;
-	h_spi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
-	h_spi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-	h_spi1.Init.TIMode = SPI_TIMODE_DISABLE;
-	h_spi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-	h_spi1.Init.CRCPolynomial = 7; // @suppress("Avoid magic numbers")
-	h_spi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-	h_spi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
-	if (HAL_SPI_Init(&h_spi1) != HAL_OK)
-	{
-		Error_Handler();
-	}
+    h_spi1.Instance = SPI1;
+    h_spi1.Init.Mode = SPI_MODE_MASTER;
+    h_spi1.Init.Direction = SPI_DIRECTION_1LINE;
+    h_spi1.Init.DataSize = SPI_DATASIZE_8BIT;
+    h_spi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+    h_spi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+    h_spi1.Init.NSS = SPI_NSS_SOFT;
+    h_spi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+    h_spi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+    h_spi1.Init.TIMode = SPI_TIMODE_DISABLE;
+    h_spi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+    h_spi1.Init.CRCPolynomial = 7; // @suppress("Avoid magic numbers")
+    h_spi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+    h_spi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
+    if (HAL_SPI_Init(&h_spi1) != HAL_OK)
+    {
+        Error_Handler();
+    }
 }
 
 // Public function bodies.
@@ -218,11 +218,11 @@ static void spi1_init(void)
  */
 void pcf8553_blink(pcf_blink_mode_t mode)
 {
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
-	g_display_ctrl_2.reg_bits.blink = mode;
-	prepare_to_send(DISPLAY_CTRL_2_ADDRESS);
-	HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_2.reg_data), 1, DEFAULT_DELAY);
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
+    g_display_ctrl_2.reg_bits.blink = mode;
+    prepare_to_send(DISPLAY_CTRL_2_ADDRESS);
+    HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_2.reg_data), 1, DEFAULT_DELAY);
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
 
 void pcf8553_clear_buff()
@@ -231,7 +231,7 @@ void pcf8553_clear_buff()
      * Limpia el buffer final, que es mandado directamente al controlador de la
      * pantalla LCD.
      */
-    for(int cont_buff_t = 0; cont_buff_t < PCF8553_DATA_SIZE; cont_buff_t++)
+    for (int cont_buff_t = 0; cont_buff_t < PCF8553_DATA_SIZE; cont_buff_t++)
     {
         g_lcd_map[cont_buff_t] = 0;
     }
@@ -258,13 +258,13 @@ void pcf8553_clear_buff()
  */
 void pcf8553_dump()
 {
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
-	prepare_to_send(DATA_ADDRESS);
-	for (int i = 0; i < PCF8553_DATA_SIZE; i++)
-	{
-		HAL_SPI_Transmit(&h_spi1, g_lcd_map + i, 1, DEFAULT_DELAY);
-	}
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
+    prepare_to_send(DATA_ADDRESS);
+    for (int i = 0; i < PCF8553_DATA_SIZE; i++)
+    {
+        HAL_SPI_Transmit(&h_spi1, g_lcd_map + i, 1, DEFAULT_DELAY);
+    }
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
 
 /*
@@ -274,34 +274,34 @@ void pcf8553_dump()
  */
 void pcf8553_init()
 {
-	spi1_init();
-	pcf8553_reset();
-	HAL_Delay(DEFAULT_DELAY);
+    spi1_init();
+    pcf8553_reset();
+    HAL_Delay(DEFAULT_DELAY);
 
-	/*
-	 * @brief El pcf8553 tiene un pin de chip select, la siguiente instruccion
-	 * habilita el chip, el parametro GPIO_PIN_RESET es muy parecido a un
-	 * numero magico, se debe buscar una mejor solucion.
-	 *
-	 */
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
+    /*
+     * @brief El pcf8553 tiene un pin de chip select, la siguiente instruccion
+     * habilita el chip, el parametro GPIO_PIN_RESET es muy parecido a un
+     * numero magico, se debe buscar una mejor solucion.
+     *
+     */
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
 
-	/*
-	 *  Display_crtl_2 = 1 to enable display.
-	 *  Luego de un tiempo olvidé porque hice este comentario, no parece
-	 *  tener sentido.
-	 *
-	 */
-	prepare_to_send(0x1);
-	HAL_SPI_Transmit(&h_spi1, &(g_device_ctrl.reg_data), 1, DEFAULT_DELAY);
-	HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_1.reg_data), 1, DEFAULT_DELAY);
-	HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_2.reg_data), 1, DEFAULT_DELAY);
+    /*
+     *  Display_crtl_2 = 1 to enable display.
+     *  Luego de un tiempo olvidé porque hice este comentario, no parece
+     *  tener sentido.
+     *
+     */
+    prepare_to_send(0x1);
+    HAL_SPI_Transmit(&h_spi1, &(g_device_ctrl.reg_data), 1, DEFAULT_DELAY);
+    HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_1.reg_data), 1, DEFAULT_DELAY);
+    HAL_SPI_Transmit(&h_spi1, &(g_display_ctrl_2.reg_data), 1, DEFAULT_DELAY);
 
-	/*
-	 *  Chip disable.
-	 *
-	 */
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
+    /*
+     *  Chip disable.
+     *
+     */
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
 
 /*
@@ -313,9 +313,9 @@ void pcf8553_init()
  */
 void pcf8553_reset()
 {
-	HAL_GPIO_WritePin(PCF8553_RESET_PORT, PCF8553_RESET_PIN, GPIO_PIN_RESET);
-	HAL_Delay(DEFAULT_DELAY);
-	HAL_GPIO_WritePin(PCF8553_RESET_PORT, PCF8553_RESET_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(PCF8553_RESET_PORT, PCF8553_RESET_PIN, GPIO_PIN_RESET);
+    HAL_Delay(DEFAULT_DELAY);
+    HAL_GPIO_WritePin(PCF8553_RESET_PORT, PCF8553_RESET_Pin, GPIO_PIN_SET);
 }
 
 /*
@@ -332,11 +332,11 @@ void pcf8553_reset()
  */
 void pcf8553_write_all(uint8_t data)
 {
-	for (int i = 0; i < PCF8553_DATA_SIZE; i++)
-	{
-		g_lcd_map[i] = data;
-	}
-	pcf8553_dump();
+    for (int i = 0; i < PCF8553_DATA_SIZE; i++)
+    {
+        g_lcd_map[i] = data;
+    }
+    pcf8553_dump();
 }
 
 /*
@@ -349,10 +349,10 @@ void pcf8553_write_all(uint8_t data)
  */
 void pcf8553_write_byte(uint8_t add, uint8_t data)
 {
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
-	prepare_to_send(add);
-	HAL_SPI_Transmit(&h_spi1, &data, 1, DEFAULT_DELAY);
-	HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
+    prepare_to_send(add);
+    HAL_SPI_Transmit(&h_spi1, &data, 1, DEFAULT_DELAY);
+    HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_SET);
 }
 
 /*** end of file ***/

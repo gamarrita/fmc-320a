@@ -533,7 +533,7 @@ void menu_task(void *argument)
 	for (;;)
 	{
 	    ret_status = osMessageQueueGet(h_event_queue, &event_next, 0, 1000); // @suppress("Avoid magic numbers")
-		if( ret_status == osOK)
+		if(ret_status == osOK)
 		{
 		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
 		}

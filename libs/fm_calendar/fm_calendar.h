@@ -1,12 +1,14 @@
 /* @file fm_calendar.h
  *
- * @brief A description of the module’s purpose.
+ * Este modulo se encarga de recibir los datos de la fecha y hora actuales,
+ * provenientes del periférico RTC, y de formatearlos para que puedan ser
+ * correctamente impresos en la pantalla LCD.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_MODULE_H_
-#define FM_MODULE_H_
+#ifndef FM_CALENDAR_H_
+#define FM_CALENDAR_H_
 
 // includes
 #include "main.h"
@@ -23,6 +25,6 @@ void fm_calendar_get();
 int fm_calendar_format_time();
 int fm_calendar_format_date();
 
-#endif /* MODULE_H */
+#endif /* FM_CALENDAR_H */
 
 /*** end of file ***/

@@ -25,10 +25,10 @@
 
 // Const data.
 // Defines.
-#define DEBOUNCE_TIME 5
+#define DEBOUNCE_TIME 6
 
 /*
- * Mapeo que tecla correspondea que pin
+ * Mapeo que tecla corresponde a que pin
  */
 #define KEY_UP 	    GPIO_PIN_10
 #define KEY_DOWN	GPIO_PIN_11
@@ -38,7 +38,7 @@
 //Debug.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *
@@ -70,7 +70,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for
     fm_event_t event_now;
     uint32_t current_millis = HAL_GetTick();
 
-    if(current_millis - previous_millis > DEBOUNCE_TIME)
+    if (current_millis - previous_millis > DEBOUNCE_TIME)
     {
         switch (gpio_pin)
         {

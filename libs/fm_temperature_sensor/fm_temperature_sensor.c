@@ -1,12 +1,8 @@
 /* @file fm_temperature_sensor.c
  *
- * @brief Each source file shall be comprised of some or all of the following
- * sections, in the order listed down below.
- * Comenzar cada nuevo archivo usando un template. Hay un template general a
- * todos los proyectos que puede ser usado hasta el momento de introducir un
- * cambio que solo responderá a un proyecto en progreso, es ese caso el
- * template pasará a ser parte del proyecto.
- *
+ * Este módulo se encarga de obtener la temperatura interna del micro, con el
+ * objetivo de mostrarla en la pantalla lcd, en el menú "acm_temp". Para esto,
+ * la formatea como un número entero.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -30,7 +26,7 @@
 extern ADC_HandleTypeDef hadc1;
 // Defines.
 
-//Debug.
+// Debug.
 
 /*
  * To temporally disable a block of code, use preprocessor's conditional
@@ -68,9 +64,10 @@ int fm_int_temperature_format()
 
     fm_int_temperature_get();
     raw_value = HAL_ADC_GetValue(&hadc1);
-    temp_celcius = __HAL_ADC_CALC_TEMPERATURE(3285, raw_value, ADC_RESOLUTION_12B);
+    temp_celcius = __HAL_ADC_CALC_TEMPERATURE(3285, raw_value,
+    ADC_RESOLUTION_12B);
 
-    return(temp_celcius);
+    return (temp_celcius);
 }
 
 // Interrupts

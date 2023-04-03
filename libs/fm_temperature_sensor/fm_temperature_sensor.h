@@ -1,12 +1,14 @@
 /* @file fm_temperature_sensor.h
  *
- * @brief A description of the module’s purpose.
+ * Este módulo se encarga de obtener la temperatura interna del micro, con el
+ * objetivo de mostrarla en la pantalla lcd, en el menú "acm_temp". Para esto,
+ * la formatea como un número entero.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_MODULE_H_
-#define FM_MODULE_H_
+#ifndef FM_TEMPERATURE_SENSOR_H_
+#define FM_TEMPERATURE_SENSOR_H_
 
 // includes
 
@@ -19,9 +21,10 @@
 // Defines.
 
 // Function prototypes
+
 void fm_int_temperature_get();
 int fm_int_temperature_format();
 
-#endif /* MODULE_H */
+#endif /* FM_TEMPERATURE_SENSOR_H */
 
 /*** end of file ***/

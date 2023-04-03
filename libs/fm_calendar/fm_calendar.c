@@ -1,12 +1,8 @@
 /* @file fm_calendar.c
  *
- * @brief Each source file shall be comprised of some or all of the following
- * sections, in the order listed down below.
- * Comenzar cada nuevo archivo usando un template. Hay un template general a
- * todos los proyectos que puede ser usado hasta el momento de introducir un
- * cambio que solo responderá a un proyecto en progreso, es ese caso el
- * template pasará a ser parte del proyecto.
- *
+ * Este modulo se encarga de recibir los datos de la fecha y hora actuales,
+ * provenientes del periférico RTC, y de formatearlos para que puedan ser
+ * correctamente impresos en la pantalla LCD.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -36,7 +32,7 @@ extern RTC_HandleTypeDef hrtc;
 
 // Defines.
 
-//Debug.
+// Debug.
 
 /*
  * To temporally disable a block of code, use preprocessor's conditional
@@ -59,12 +55,19 @@ extern RTC_HandleTypeDef hrtc;
 
 // Public function bodies.
 
+/*
+ * Toma los valores de fecha y hora del calendario del RTC, pero no los usa.
+ */
 void fm_calendar_get()
 {
     HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }
 
+/*
+ * Le da formato a la hora, minutos y segundos para que puedan ser impresos en
+ * el lcd. Para esto, se los concatena en una variable entera con atoi.
+ */
 int fm_calendar_format_time()
 {
     int time = 0;
@@ -85,6 +88,12 @@ int fm_calendar_format_time()
     return (time);
 }
 
+/*
+ * Le da formato al día, mes y año para que puedan ser impresos en
+ * el lcd. Para esto, se los concatena en una variable entera con atoi. Se
+ * añade un '20' en frente al año para que se escriba la fecha total en formato
+ * dd.mm.aaaa.
+ */
 int fm_calendar_format_date()
 {
     int date = 0;
