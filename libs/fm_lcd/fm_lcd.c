@@ -99,14 +99,10 @@ void fm_lcd_acm_temp(point_t high_point, point_t low_point)
 
     lcd_set_symbol(ACM, 0x0);
 
-    /*
-     * Proximamente tomará su valor de la función fm_int_temperature_format()
-     */
-    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
+    fm_lcd_format_number_in_line(LOW_ROW, fm_int_temperature_format(), lcd_msg,
     MSG_LENGTH);
 
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point);
 
     lcd_set_symbol(CELSIUS, 0x0);
 }
