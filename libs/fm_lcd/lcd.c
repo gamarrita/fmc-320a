@@ -18,20 +18,11 @@
 
 // Includes.
 #include "lcd.h"
-
-/*
- * Si no es obvio debería decir porque incluyo un modulo, en este caso no lo
- * hice y ahora no lo recuerdo.
- */
 #include "ctype.h"
 #include "stdio.h"
 
 // Typedef.
 
-/*
- *
- *
- */
 typedef struct
 {
     uint8_t pos;
@@ -71,10 +62,7 @@ extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
 /*
  * Lo que se quiera escribir en las líneas 1 y 2 primero se vuelca a este
  * buffer. Leer el buffer es la unica manera practica que se tiene para
- * saber que esta escrito en la pantalla, no de debe corromper esta ,condicion.
- *
- * Notar que la primera linea tiene
- *
+ * saber que esta escrito en la pantalla, no se debe corromper esta condicion.
  */
 static uint8_t g_buf[LCD_ROWS][LCD_COLS];
 static uint8_t g_col;
@@ -92,7 +80,7 @@ static uint8_t g_row;
  *  Solo se necesitan los datos de este caracter, las posiciones de los demas
  *  se obtienen por aritmetica dentro de la funcion lcd_write_line.
  */
-octal_t octal_1[LCD_ROW_0_SIZE] =
+octal_t octal_1[LINE_0_DIGITS - 1] =
 {
     {
         .pos = 6,
@@ -128,7 +116,7 @@ octal_t octal_1[LCD_ROW_0_SIZE] =
     },
 };
 
-octal_t octal_2[LCD_ROW_1_SIZE] =
+octal_t octal_2[LINE_1_DIGITS - 1] =
 {
     {
         .pos = 7,
@@ -438,11 +426,10 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 
     /*
      * Si el buffer contiene lo mismo que se va a escribir salteo la escritura.
-     * Aunque esto mejora mucho la eficiencia, no tengo que escribir
-     * por SPI este caracter, considero muy riesgosa esta tecnica, la
-     * sincronización entre el buffer y el contenido de la memoria del pcf8553
-     * se debe asegurar. El uso del return prematuro no se si es buena practica.
-     *
+     * Aunque esto mejora mucho la eficiencia, no tengo que escribir por SPI
+     * este caracter, considero muy riesgosa esta tecnica, la sincronización
+     * entre el buffer y el contenido de la memoria del pcf8553 se debe
+     * asegurar. El uso del return prematuro no se si es buena práctica.
      */
     if (g_buf[row][col] == c)
     {
@@ -454,7 +441,7 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
     switch (row)
     {
         case 0:
-            if (col < LCD_ROW_0_SIZE)
+            if (col < LINE_0_DIGITS - 1)
             {
                 g_col = col;
             }
@@ -464,7 +451,7 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
             }
         break;
         case 1:
-            if (col < LCD_ROW_1_SIZE)
+            if (col < LINE_1_DIGITS - 1)
             {
                 g_col = 6 - col; // @suppress("Avoid magic numbers")
             }
@@ -490,6 +477,9 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
             lcd_write_line(SEG_F, 0);
             lcd_write_line(SEG_G, 0);
             lcd_write_line(SEG_H, 0);
+        break;
+        case '.':
+            lcd_write_line(SEG_H, 1);
         break;
         case '0':
             lcd_write_line(SEG_A, 1);

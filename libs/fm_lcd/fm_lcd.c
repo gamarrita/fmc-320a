@@ -174,6 +174,144 @@ int length)
 }
 
 /*
+ * Agrega el punto decimal a una string que representa un entero.
+ * Esta funcion es típicamente usada luego de  fm_lcd_u32_to_str();
+ *
+ * @param fp numero con punto decimal
+ * @param p_str puntero al string destino
+ * @param str_size tamaño del string
+ *
+ */
+int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
+{
+    int idx_end;
+    int idx_now;
+
+    /*
+    * Si la resolución asignada por el usuario es 0, no hay nada que hacer.
+    */
+    if(fp.res == 0)
+    {
+        return (0);
+    }
+
+    idx_now = strlen(p_str); //Como indice apunta a terminador nulo.
+
+    /*
+    * Chequeo de contorno para ver si entra el punto o no.
+    */
+
+    if((idx_now + 1 + 1) >= str_size)
+    {
+        return (-1);
+    }
+
+    idx_end = idx_now - fp.res; //Como índice apunta a donde debe ir el '.'
+
+    /*
+    * Desplazo posiciones en el arreglo hasta llegar a la posición donde debe
+    * ir ubicado el '.'
+    */
+    while(idx_now != idx_end)
+    {
+        p_str[idx_now + 1] = p_str[idx_now];
+        idx_now --;
+    }
+    p_str[idx_now + 1] = p_str[idx_now];
+    p_str[idx_now] = '.';
+
+    return (0);
+}
+
+/*
+ * Convierte un numero con punto decimal a una string, pero sin el punto
+ *
+ * @param fp numero con punto decimal.
+ * @param leading_char caracter de relleno, cero para no rellenar.
+ * @param al rellenar debemos indicar a que ancho con esta variable.
+ * @param p_str string destino, por referencia.
+ * @param str_size tamaño del string
+ */
+int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
+int str_size)
+{
+    int idx_1 = 0;
+
+    /*
+     * Este es el unico chequeo de contorno. Verifica que el tamaño del string
+     * no sea menor a LINE_BUFFER_SIZE, calculado como suficiente para operar
+     * con las líneas del lcd.
+     */
+    if(str_size < PCF8553_DATA_SIZE)
+    {
+        return (-1);
+    }
+
+    /*
+     * Esta linea es necesaria para representa bien a num = 0
+     */
+    p_str[idx_1] = fp.num  % 10 + '0';
+
+    uint32_t num_aux = fp.num;
+
+    /*
+     * Almaceno el número de atrás para adelante hasta que llegar al primer
+     * dígito inclusive
+     */
+    while(fp.num/10)
+    {
+        idx_1++;
+        fp.num /= 10;
+        p_str[idx_1] = fp.num % 10 + '0';
+    }
+
+    /*
+     * Si se midió 0 pulsos, se rellena con 0 hasta pasar el punto y asi se
+     * mantiene la resolución deseada.
+     */
+    if(num_aux == 0)
+    {
+        while(idx_1 < fp.res)
+        {
+            idx_1++;
+            p_str[idx_1] = fp.num % 10 + '0';
+        }
+    }
+
+    /*
+     * Si el caracter a completar no es 0, se lo debe agregar al final del
+     * arreglo hasta completar el largo de la linea (7 u 8 caracteres + \0).
+     */
+    if(leading_char)
+    {
+        while(idx_1 < str_width - 1)
+        {
+            idx_1++;
+            p_str[idx_1] = leading_char;
+        }
+    }
+    p_str[idx_1] = '\0';
+    idx_1--;
+
+    /*
+     *Esta sección da vuelta el arreglo ya que se completó al revés.
+     */
+    int idx_2 = 0;
+    char ch_temp;
+
+    while(idx_1 > idx_2)
+    {
+        ch_temp = p_str[idx_1];
+        p_str[idx_1] = p_str[idx_2];
+        p_str[idx_2] = ch_temp;
+        idx_1--;
+        idx_2++;
+    }
+
+    return (0);
+}
+
+/*
  * @brief Es la primera instrucción a llamar para usar el lcd, luego de
  * inicializar el lcd enciende todos los segmentos.
  * Para comprobar que el lcd esta funcionando se encienden todos los
@@ -203,21 +341,25 @@ void fm_lcd_puts(const char *c, const rows_t row)
 
     if (row == 0)
     {
-        col_limit = LCD_ROW_0_SIZE;
+        col_limit = LINE_0_DIGITS - 1;
     }
     else
     {
-        col_limit = LCD_ROW_1_SIZE;
+        col_limit = LINE_1_DIGITS - 1;
     }
 
     while ((*c) && (col < col_limit))
     {
-        if (((*c >= '0') && (*c <= '9')) || (*c == ' '))
+        if (((*c >= '0') && (*c <= '9')) || (*c == ' ') || (*c == '.'))
         {
             lcd_put_char(*c, col, row);
         }
         col++;
         c++;
+        if(*c == '.')
+        {
+            col--;
+        }
     }
 }
 

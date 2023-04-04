@@ -321,7 +321,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         case EVENT_KEY_ESC:
         break;
         default:
-            HAL_Delay(3000);
+            HAL_Delay(3000); // @suppress("Avoid magic numbers")
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);

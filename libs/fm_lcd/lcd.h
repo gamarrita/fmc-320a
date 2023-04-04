@@ -120,15 +120,6 @@ typedef enum
     REG_19
 } reg_t;
 
-/*
- * Enumeración de las velocidades disponibles para hacer parpadear la
- * pantalla en su totalidad.
- */
-typedef enum
-{
-    OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
-} blink_t;
-
 // Defines.
 
 /*
@@ -144,13 +135,6 @@ typedef enum
  */
 #define LCD_ROWS 2
 #define LCD_COLS 8
-
-/*
- * Cantidad de columnas para cada fila.
- *
- */
-#define LCD_ROW_0_SIZE 8
-#define LCD_ROW_1_SIZE 7
 
 // Public function prototypes.
 

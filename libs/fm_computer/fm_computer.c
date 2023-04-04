@@ -28,6 +28,9 @@
  */
 
 // Const data.
+
+static const uint32_t g_scalar[] = {1, 10, 100, 1000, 10000, 100000, 1000000};
+
 // Defines.
 #define ACM_INIT_VALUE 140
 #define EXT_TEMP_INIT_VALUE 253
@@ -118,6 +121,44 @@ uint32_t fm_computer_get_ttl()
 uint32_t fm_computer_get_version()
 {
     return (g_version);
+}
+
+void fmc_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
+{
+    p_totalizer->pulse = 0;
+    fmc_totalizer_refresh(p_totalizer);
+}
+
+fmc_totalizer_t fmc_totalizer_init(fmc_totalizer_t totalizer)
+{
+    fmc_totalizer_refresh(&totalizer);
+
+    return (totalizer);
+}
+
+void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer)
+{
+    uint64_t result;
+
+    /*
+     * result es la cantidad de pulsos almacenados en la estructura p_totalizer,
+     * para el acm en este caso es 123500 .
+     */
+    result = (uint64_t) p_totalizer->pulse;
+
+    /*
+     * Pulsos escalados en el factor y en la resolucion a mostrar.
+     */
+    result *= g_scalar[p_totalizer->factor.res + p_totalizer->volume.res];
+
+    /*
+     * Obtengo el valor numérico del volumen dividiendo los pulsos escalados
+     * por el factor.
+     */
+    result /= p_totalizer->factor.num;
+
+    p_totalizer->volume.num = (uint32_t)result;
+
 }
 
 // Interrupts

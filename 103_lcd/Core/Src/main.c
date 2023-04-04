@@ -54,6 +54,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../../../libs/fm_lcd/fm_lcd.h"
+#include "../../../libs/fm_computer/fm_computer.h"
+#include "../../../libs/fm_factory/fm_factory.h"
 
 /* USER CODE END Includes */
 
@@ -91,7 +93,7 @@ const osThreadAttr_t MenuTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
-
+uint8_t test = 2;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -504,16 +506,51 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
-    uint8_t counter = 0;
-       char msg[10];
+       uint8_t counter = 0;
+       char msg[10]; // @suppress("Avoid magic numbers")
+       char buffer[PCF8553_DATA_SIZE];
+
+       /*
+        * Inicializo una variable de la estructura fmc_totalizer_t para trabajar
+        * con el parametro acm.
+        */
+       fmc_totalizer_t acm;
+
+       /*
+        * Cargo en acm los valores de la configuración inicial de acm.
+        */
+       acm = fm_factory_get_acm();
+
+       /*
+        * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
+        * del factor y del propio volumen, y luego dividirlo por el propio
+        * factor.
+        */
+       acm = fmc_totalizer_init(acm);
+
        /* Infinite loop */
        for (;;)
        {
-           snprintf(msg, sizeof(msg), "%08u", counter);
-           fm_lcd_puts(msg, 0);
-           fm_lcd_refresh();
-           counter++;
-           osDelay(1000);
+           switch(test)
+           {
+               case 1:
+                   snprintf(msg, sizeof(msg), "%08u", counter);
+                   fm_lcd_puts(msg, 0);
+                   fm_lcd_refresh();
+                   counter++;
+                   osDelay(1000); // @suppress("Avoid magic numbers")
+               break;
+               case 2:
+                   fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, buffer,
+                   sizeof(buffer));
+                   fm_lcd_fp_add_dot(acm.volume, buffer, sizeof(buffer));
+                   fm_lcd_puts(buffer, 0);
+                   fm_lcd_refresh();
+                   osDelay(1000); // @suppress("Avoid magic numbers")
+               break;
+               default:
+               break;
+           }
 
        }
   /* USER CODE END 5 */
