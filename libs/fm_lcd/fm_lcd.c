@@ -55,7 +55,6 @@
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
 void fm_lcd_acm_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
@@ -86,7 +85,6 @@ symbols_t right_unit)
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_acm_temp(point_t high_point, point_t low_point)
 {
     char lcd_msg[MSG_LENGTH];
@@ -115,7 +113,6 @@ void fm_lcd_acm_temp(point_t high_point, point_t low_point)
  * lcd.h.
  * @retval None
  */
-
 void fm_lcd_battery_low(blink_t speed)
 {
     lcd_set_symbol(BATTERY, speed);
@@ -138,7 +135,6 @@ void fm_lcd_clear()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2)
 {
@@ -231,7 +227,6 @@ void fm_lcd_puts(const char *c, const rows_t row)
  * @param  None
  * @retval None
  */
-
 void fm_lcd_refresh()
 {
     lcd_refresh();
@@ -245,7 +240,6 @@ void fm_lcd_refresh()
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
 void fm_lcd_ttl_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
@@ -276,7 +270,6 @@ symbols_t right_unit)
  * @param puntos de la fila inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_version(point_t low_point)
 {
     char lcd_msg[MSG_LENGTH];
