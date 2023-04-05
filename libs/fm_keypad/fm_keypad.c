@@ -25,7 +25,7 @@
 
 // Const data.
 // Defines.
-#define DEBOUNCE_TIME 6
+#define DEBOUNCE_TIME 10
 
 /*
  * Mapeo que tecla corresponde a que pin

@@ -116,7 +116,7 @@ octal_t octal_1[LINE_0_DIGITS - 1] =
     },
 };
 
-octal_t octal_2[LINE_1_DIGITS - 1] =
+octal_t octal_2[LINE_0_DIGITS - 1] =
 {
     {
         .pos = 7,
@@ -146,6 +146,10 @@ octal_t octal_2[LINE_1_DIGITS - 1] =
         .pos = 6,
         .reg = 10
     },
+    {
+        .pos = 6,
+        .reg = 5
+    }
 };
 
 // Private function prototypes.

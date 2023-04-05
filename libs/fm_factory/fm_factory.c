@@ -29,31 +29,46 @@
  */
 
 // Const data.
-
 /*Los valores de fabrica por el momento coinciden con los de configuracion,
-no con los de entorno. En algún momento se puede necesitar separar valor
-de fabrica con los de configuración.
-*/
+ no con los de entorno. En algún momento se puede necesitar separar valor
+ de fabrica con los de configuración.
+ */
 static fmc_totalizer_t ttl_config =
 {
-    .pulse = 24680000,
-    .volume.num = 123400,
+    .pulse = 12000,
+    .volume.num = 0,
     .volume.res = 2,
-    .factor.num = 200000, // pulsos/unidad_volumen.
-    .factor.res = 3,
+    .factor.num = 3000, // pulsos/unidad_volumen.
+    .factor.res = 1,
     .unit_volume = UNIT_LITER,
- };
+};
 
 static fmc_totalizer_t acm_config =
 {
-    .pulse = 123500,
+    .pulse = 6000,
     .volume.num = 0,
     .volume.res = 2,
-    .factor.num = 125000, // pulsos/unidad_volumen.
+    .factor.num = 3000, // pulsos/unidad_volumen.
+    .factor.res = 1,
+    .unit_volume = UNIT_LITER,
+};
+
+static fmc_totalizer_t rate_config =
+{
+    .pulse = 123500,
+    .volume.num = 0,
+    .volume.res = 0,
+    .factor.num = 125000,
     .factor.res = 3,
     .unit_volume = UNIT_LITER,
- };
+};
 
+static fmc_temp_t temperature_config =
+{
+    .temperature.num = 205,
+    .temperature.res = 1,
+    .unit_volume_temp = UNIT_CENTIGRADES,
+};
 
 // Defines.
 
@@ -88,6 +103,16 @@ fmc_totalizer_t fm_factory_get_acm()
 fmc_totalizer_t fm_factory_get_ttl()
 {
     return (ttl_config);
+}
+
+fmc_totalizer_t fm_factory_get_rate()
+{
+    return (rate_config);
+}
+
+fmc_temp_t fm_factory_get_temp()
+{
+    return (temperature_config);
 }
 
 // Interrupts

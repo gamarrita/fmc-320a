@@ -28,8 +28,16 @@
  */
 
 // Const data.
-
-static const uint32_t g_scalar[] = {1, 10, 100, 1000, 10000, 100000, 1000000};
+static const uint32_t g_scalar[] =
+{
+    1,
+    10,
+    100,
+    1000,
+    10000,
+    100000,
+    1000000
+};
 
 // Defines.
 #define ACM_INIT_VALUE 140
@@ -141,8 +149,7 @@ void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer)
     uint64_t result;
 
     /*
-     * result es la cantidad de pulsos almacenados en la estructura p_totalizer,
-     * para el acm en este caso es 123500 .
+     * result es la cantidad de pulsos almacenados en la estructura p_totalizer.
      */
     result = (uint64_t) p_totalizer->pulse;
 
@@ -157,7 +164,7 @@ void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer)
      */
     result /= p_totalizer->factor.num;
 
-    p_totalizer->volume.num = (uint32_t)result;
+    p_totalizer->volume.num = (uint32_t) result;
 
 }
 

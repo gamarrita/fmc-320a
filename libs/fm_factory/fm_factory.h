@@ -22,6 +22,8 @@
 
 fmc_totalizer_t fm_factory_get_acm();
 fmc_totalizer_t fm_factory_get_ttl();
+fmc_totalizer_t fm_factory_get_rate();
+fmc_temp_t fm_factory_get_temp();
 
 #endif /* FM_FACTORY_H */
 
