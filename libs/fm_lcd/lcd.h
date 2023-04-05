@@ -35,27 +35,27 @@
  */
 typedef enum
 {
-	BATTERY,
-	POWER,
-	RATE,
-	E,
-	BATCH,
-	TTL,
-	ACM,
-	BACKSLASH,
-	POINT,
-	CELSIUS,
-	H,
-	D,
-	S,
-	M,
-	LT,
-	M3,
-	KG,
-	GL,
-	BR,
-	NOTHING,
-	VE
+    BATTERY,
+    POWER,
+    RATE,
+    E,
+    BATCH,
+    TTL,
+    ACM,
+    BACKSLASH,
+    POINT,
+    CELSIUS,
+    H,
+    D,
+    S,
+    M,
+    LT,
+    M3,
+    KG,
+    GL,
+    BR,
+    NOTHING,
+    VE
 } symbols_t;
 
 /*
@@ -64,7 +64,7 @@ typedef enum
  */
 typedef enum
 {
-	HIGH_ROW, LOW_ROW
+    HIGH_ROW, LOW_ROW
 } rows_t;
 
 /*
@@ -79,7 +79,7 @@ typedef enum
  */
 typedef enum
 {
-	PNT_0, PNT_1, PNT_2, PNT_3, PNT_4, PNT_5, PNT_6
+    PNT_0, PNT_1, PNT_2, PNT_3, PNT_4, PNT_5, PNT_6
 } point_t;
 
 /*
@@ -88,7 +88,7 @@ typedef enum
  */
 typedef enum
 {
-	BIT_0, BIT_1, BIT_2, BIT_3, BIT_4, BIT_5, BIT_6, BIT_7
+    BIT_0, BIT_1, BIT_2, BIT_3, BIT_4, BIT_5, BIT_6, BIT_7
 } bit_t;
 
 /*
@@ -98,26 +98,26 @@ typedef enum
  */
 typedef enum
 {
-	REG_0,
-	REG_1,
-	REG_2,
-	REG_3,
-	REG_4,
-	REG_5,
-	REG_6,
-	REG_7,
-	REG_8,
-	REG_9,
-	REG_10,
-	REG_11,
-	REG_12,
-	REG_13,
-	REG_14,
-	REG_15,
-	REG_16,
-	REG_17,
-	REG_18,
-	REG_19
+    REG_0,
+    REG_1,
+    REG_2,
+    REG_3,
+    REG_4,
+    REG_5,
+    REG_6,
+    REG_7,
+    REG_8,
+    REG_9,
+    REG_10,
+    REG_11,
+    REG_12,
+    REG_13,
+    REG_14,
+    REG_15,
+    REG_16,
+    REG_17,
+    REG_18,
+    REG_19
 } reg_t;
 
 /*
@@ -126,7 +126,7 @@ typedef enum
  */
 typedef enum
 {
-	OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
+    OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
 } blink_t;
 
 // Defines.

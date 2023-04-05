@@ -76,9 +76,9 @@ extern UART_HandleTypeDef huart2;
  */
 void fm_debug_uint8_uart(uint8_t num)
 {
-	char str[5]; // @suppress("Avoid magic numbers")
-	snprintf(str, sizeof(str), "%u\n", num);
-	fm_debug_msg_uart((uint8_t*) str, strlen(str));
+    char str[5]; // @suppress("Avoid magic numbers")
+    snprintf(str, sizeof(str), "%u\n", num);
+    fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
 
 /*
@@ -87,9 +87,9 @@ void fm_debug_uint8_uart(uint8_t num)
  */
 void fm_debug_uint32_uart(uint32_t num)
 {
-	char str[12]; // @suppress("Avoid magic numbers")
-	snprintf(str, sizeof(str), "%lu\n", num);
-	fm_debug_msg_uart((uint8_t*) str, strlen(str));
+    char str[12]; // @suppress("Avoid magic numbers")
+    snprintf(str, sizeof(str), "%lu\n", num);
+    fm_debug_msg_uart((uint8_t*) str, strlen(str));
 }
 
 /*
@@ -112,12 +112,12 @@ void fm_debug_uint32_uart(uint32_t num)
  */
 void fm_debug_msg_itm(const uint8_t *msg, uint8_t len)
 {
-	while (*msg && len)
-	{
-		ITM_SendChar((uint32_t) *msg);
-		len--;
-		msg++;
-	}
+    while (*msg && len)
+    {
+        ITM_SendChar((uint32_t) *msg);
+        len--;
+        msg++;
+    }
 }
 
 /*
@@ -130,19 +130,19 @@ void fm_debug_msg_itm(const uint8_t *msg, uint8_t len)
  */
 void fm_debug_msg_uart(const uint8_t *p_msg, uint8_t len)
 {
-	HAL_StatusTypeDef ret = HAL_BUSY;
+    HAL_StatusTypeDef ret = HAL_BUSY;
 
-	/*
-	 * La funcion HAL_UART_Transmit retornara sn hacer nada si esta siendo
-	 * ejecutada en otro hilo. La siguiente implementacion no es buena porque
-	 * bloquea puede bloquear al sistema, una mejor solucion seria bloquear
-	 * por un corto tiempo, aun mejor seria implementar algo con RTOS.
-	 *
-	 */
-	while (ret == HAL_BUSY)
-	{
-		ret = HAL_UART_Transmit(&huart2, p_msg, len, DELAY_DEFAULT);
-	}
+    /*
+     * La funcion HAL_UART_Transmit retornara sn hacer nada si esta siendo
+     * ejecutada en otro hilo. La siguiente implementacion no es buena porque
+     * bloquea puede bloquear al sistema, una mejor solucion seria bloquear
+     * por un corto tiempo, aun mejor seria implementar algo con RTOS.
+     *
+     */
+    while (ret == HAL_BUSY)
+    {
+        ret = HAL_UART_Transmit(&huart2, p_msg, len, DELAY_DEFAULT);
+    }
 
 }
 

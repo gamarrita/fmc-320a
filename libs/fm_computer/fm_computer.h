@@ -29,10 +29,7 @@
 // Function prototypes
 
 uint32_t fm_computer_get_acm();
-uint32_t fm_computer_get_date();
 uint32_t fm_computer_get_ext_temp();
-uint32_t fm_computer_get_hour();
-uint32_t fm_computer_get_liq_temp();
 uint32_t fm_computer_get_rate();
 uint32_t fm_computer_get_ttl();
 uint32_t fm_computer_get_version();

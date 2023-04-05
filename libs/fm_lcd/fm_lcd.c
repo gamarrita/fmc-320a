@@ -15,7 +15,8 @@
 #include "fm_lcd.h"
 #include "lcd.h"
 #include "../fm_computer/fm_computer.h"
-
+#include "../fm_calendar/fm_calendar.h"
+#include "../fm_temperature_sensor/fm_temperature_sensor.h"
 
 // Typedef.
 
@@ -58,24 +59,52 @@
 void fm_lcd_acm_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
-	char lcd_msg[MSG_LENGTH];
+    char lcd_msg[MSG_LENGTH];
 
-	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, HIGH_ROW);
-	lcd_set_point(HIGH_ROW, high_point);
+    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+    lcd_set_point(HIGH_ROW, high_point);
 
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, LOW_ROW);
-	lcd_set_point(LOW_ROW, low_point);
+    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_set_point(LOW_ROW, low_point);
 
-	lcd_set_symbol(ACM, 0x0);
-	lcd_set_symbol(RATE, 0x0);
+    lcd_set_symbol(ACM, 0x0);
+    lcd_set_symbol(RATE, 0x0);
 
-	lcd_set_symbol(left_unit, 0x0);
-	lcd_set_symbol(BACKSLASH, 0x0);
-	lcd_set_symbol(right_unit, 0x0);
+    lcd_set_symbol(left_unit, 0x0);
+    lcd_set_symbol(BACKSLASH, 0x0);
+    lcd_set_symbol(right_unit, 0x0);
+}
+
+/*
+ * @brief Función que setea una serie de símbolos, puntos y dígitos en la
+ * pantalla LCD, permitiendo mostrar la temperatura del líquido y la exterior,
+ * de forma personalizada según las opciones que se elijan.
+ * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
+ * @retval None
+ */
+
+void fm_lcd_acm_temp(point_t high_point, point_t low_point)
+{
+    char lcd_msg[MSG_LENGTH];
+
+    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
+    MSG_LENGTH);
+
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+    lcd_set_point(HIGH_ROW, high_point);
+
+    lcd_set_symbol(ACM, 0x0);
+
+    fm_lcd_format_number_in_line(LOW_ROW, fm_int_temperature_format(), lcd_msg,
+    MSG_LENGTH);
+
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+
+    lcd_set_symbol(CELSIUS, 0x0);
 }
 
 /*
@@ -89,7 +118,7 @@ symbols_t right_unit)
 
 void fm_lcd_battery_low(blink_t speed)
 {
-	lcd_set_symbol(BATTERY, speed);
+    lcd_set_symbol(BATTERY, speed);
 }
 
 /*
@@ -99,7 +128,7 @@ void fm_lcd_battery_low(blink_t speed)
  */
 void fm_lcd_clear()
 {
-	lcd_clear_all();
+    lcd_clear_all();
 }
 
 /*
@@ -114,19 +143,19 @@ void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2)
 {
 
-	char lcd_msg[MSG_LENGTH];
+    char lcd_msg[MSG_LENGTH];
 
-	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_date(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, HIGH_ROW);
-	lcd_set_point(HIGH_ROW, high_point_1);
-	lcd_set_point(HIGH_ROW, high_point_2);
+    fm_lcd_format_number_in_line(HIGH_ROW, fm_calendar_format_date(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+    lcd_set_point(HIGH_ROW, high_point_1);
+    lcd_set_point(HIGH_ROW, high_point_2);
 
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_hour(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg,LOW_ROW);
-	lcd_set_point(LOW_ROW, low_point_1);
-	lcd_set_point(LOW_ROW, low_point_2);
+    fm_lcd_format_number_in_line(LOW_ROW, fm_calendar_format_time(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_set_point(LOW_ROW, low_point_1);
+    lcd_set_point(LOW_ROW, low_point_2);
 }
 
 /*
@@ -135,16 +164,17 @@ point_t low_point_1, point_t low_point_2)
  * @param Enumeracion rows_t de lcd.h
  * @retval arreglo con la información formateada tipo char.
  */
-void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int length)
+void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
+int length)
 {
-	if (line == HIGH_ROW)
-	{
-		snprintf(p_str, length, "%8lu", data);
-	}
-	else if (line == LOW_ROW)
-	{
-		snprintf(p_str, length, "%7lu", data);
-	}
+    if (line == HIGH_ROW)
+    {
+        snprintf(p_str, length, "%8lu", data);
+    }
+    else if (line == LOW_ROW)
+    {
+        snprintf(p_str, length, "%7lu", data);
+    }
 }
 
 /*
@@ -157,12 +187,12 @@ void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str, int l
  */
 void fm_lcd_init()
 {
-	lcd_clear_all();
-	lcd_init();
-	// All segments will be on for a few seconds after initialization.
-	pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-	HAL_Delay(500); // @suppress("Avoid magic numbers")
-	pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
+    lcd_clear_all();
+    lcd_init();
+    // All segments will be on for a few seconds after initialization.
+    pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
+    HAL_Delay(500); // @suppress("Avoid magic numbers")
+    pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
 }
 
 /*
@@ -172,27 +202,27 @@ void fm_lcd_init()
  */
 void fm_lcd_puts(const char *c, const rows_t row)
 {
-	uint8_t col = 0;
-	uint8_t col_limit;
+    uint8_t col = 0;
+    uint8_t col_limit;
 
-	if (row == 0)
-	{
-		col_limit = LCD_ROW_0_SIZE;
-	}
-	else
-	{
-		col_limit = LCD_ROW_1_SIZE;
-	}
+    if (row == 0)
+    {
+        col_limit = LCD_ROW_0_SIZE;
+    }
+    else
+    {
+        col_limit = LCD_ROW_1_SIZE;
+    }
 
-	while ((*c) && (col < col_limit))
-	{
-		if(((*c >= '0') && (*c <= '9')) || (*c == ' '))
-		{
-			lcd_put_char(*c, col, row);
-		}
-		col++;
-		c++;
-	}
+    while ((*c) && (col < col_limit))
+    {
+        if (((*c >= '0') && (*c <= '9')) || (*c == ' '))
+        {
+            lcd_put_char(*c, col, row);
+        }
+        col++;
+        c++;
+    }
 }
 
 /*
@@ -204,34 +234,7 @@ void fm_lcd_puts(const char *c, const rows_t row)
 
 void fm_lcd_refresh()
 {
-	lcd_refresh();
-}
-
-/*
- * @brief Función que setea una serie de símbolos, puntos y dígitos en la
- * pantalla LCD, permitiendo mostrar la temperatura del líquido y la exterior,
- * de forma personalizada según las opciones que se elijan.
- * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
- * @retval None
- */
-
-void fm_lcd_temp_temp(point_t high_point, point_t low_point)
-{
-	char lcd_msg[MSG_LENGTH];
-
-	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_liq_temp(), lcd_msg,
-	MSG_LENGTH);
-
-	fm_lcd_puts(lcd_msg, HIGH_ROW);
-	lcd_set_point(HIGH_ROW, high_point);
-
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_ext_temp(), lcd_msg,
-	MSG_LENGTH);
-
-	fm_lcd_puts(lcd_msg, LOW_ROW);
-	lcd_set_point(LOW_ROW, low_point);
-
-	lcd_set_symbol(CELSIUS, 0x0);
+    lcd_refresh();
 }
 
 /*
@@ -246,24 +249,24 @@ void fm_lcd_temp_temp(point_t high_point, point_t low_point)
 void fm_lcd_ttl_rate(point_t high_point, point_t low_point, symbols_t left_unit,
 symbols_t right_unit)
 {
-	char lcd_msg[MSG_LENGTH];
+    char lcd_msg[MSG_LENGTH];
 
-	fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, HIGH_ROW);
-	lcd_set_point(HIGH_ROW, high_point);
+    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+    lcd_set_point(HIGH_ROW, high_point);
 
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, LOW_ROW);
-	lcd_set_point(LOW_ROW, low_point);
+    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_set_point(LOW_ROW, low_point);
 
-	lcd_set_symbol(TTL, 0x0);
-	lcd_set_symbol(RATE, 0x0);
+    lcd_set_symbol(TTL, 0x0);
+    lcd_set_symbol(RATE, 0x0);
 
-	lcd_set_symbol(left_unit, 0x0);
-	lcd_set_symbol(BACKSLASH, 0x0);
-	lcd_set_symbol(right_unit, 0x0);
+    lcd_set_symbol(left_unit, 0x0);
+    lcd_set_symbol(BACKSLASH, 0x0);
+    lcd_set_symbol(right_unit, 0x0);
 }
 
 /*
@@ -276,12 +279,12 @@ symbols_t right_unit)
 
 void fm_lcd_version(point_t low_point)
 {
-	char lcd_msg[MSG_LENGTH];
+    char lcd_msg[MSG_LENGTH];
 
-	fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
-	MSG_LENGTH);
-	fm_lcd_puts(lcd_msg, LOW_ROW);
-	lcd_set_point(LOW_ROW, low_point);
+    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
+    MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_set_point(LOW_ROW, low_point);
 
     lcd_set_symbol(VE, 0x0);
 }

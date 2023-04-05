@@ -24,7 +24,6 @@
 
 // Defines.
 
-
 #define FM_DEBUG_MENU 1
 
 // Function prototypes

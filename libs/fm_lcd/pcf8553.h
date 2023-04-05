@@ -40,10 +40,10 @@
  */
 typedef enum
 {
-	LCD_BLINK_OFF,
-	LCD_BLINK_TWO_SECOND,
-	LCD_BLINK_ONE_SECOND,
-	LCD_BLINK_HALF_SECOND,
+    LCD_BLINK_OFF,
+    LCD_BLINK_TWO_SECOND,
+    LCD_BLINK_ONE_SECOND,
+    LCD_BLINK_HALF_SECOND,
 } pcf_blink_mode_t;
 
 /*
@@ -52,14 +52,14 @@ typedef enum
  */
 typedef union
 {
-	uint8_t reg_data;
-	struct
-	{
-		uint8_t clock_ouput :1;
-		uint8_t internal_oscilator :1;
-		uint8_t frame_frequency :2;
-		uint8_t default_value :4; // @suppress("Avoid magic numbers")
-	} reg_bits;
+    uint8_t reg_data;
+    struct
+    {
+        uint8_t clock_ouput :1;
+        uint8_t internal_oscilator :1;
+        uint8_t frame_frequency :2;
+        uint8_t default_value :4; // @suppress("Avoid magic numbers")
+    } reg_bits;
 } device_ctrl_t;
 
 /*
@@ -71,15 +71,15 @@ typedef union
  */
 typedef union
 {
-	uint8_t reg_data;
-	struct
-	{
-		uint8_t display_enabled :1;
-		uint8_t bias_mode :1;
-		uint8_t mux :2;
-		uint8_t boost :1;
-		uint8_t default_value :3; // @suppress("Avoid magic numbers")
-	} reg_bits;
+    uint8_t reg_data;
+    struct
+    {
+        uint8_t display_enabled :1;
+        uint8_t bias_mode :1;
+        uint8_t mux :2;
+        uint8_t boost :1;
+        uint8_t default_value :3; // @suppress("Avoid magic numbers")
+    } reg_bits;
 } display_ctrl_1_t;
 
 /*
@@ -88,13 +88,13 @@ typedef union
  */
 typedef union
 {
-	uint8_t reg_data;
-	struct
-	{
-		uint8_t inversion :1;
-		uint8_t blink :2;
-		uint8_t default_value;
-	} reg_bits;
+    uint8_t reg_data;
+    struct
+    {
+        uint8_t inversion :1;
+        uint8_t blink :2;
+        uint8_t default_value;
+    } reg_bits;
 } display_ctrl_2_t;
 
 // Defines.

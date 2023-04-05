@@ -25,8 +25,10 @@
 
 // Const data.
 // Defines.
+#define DEBOUNCE_TIME 6
+
 /*
- * Mapeo que tecla correspondea que pin
+ * Mapeo que tecla corresponde a que pin
  */
 #define KEY_UP 	    GPIO_PIN_10
 #define KEY_DOWN	GPIO_PIN_11
@@ -36,7 +38,7 @@
 //Debug.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *
@@ -45,10 +47,9 @@
 #endif
 
 // Project variables, non-static, at least used in other file.
-uint16_t g_key_up_counter = 3;
-uint16_t g_key_down_counter = 0;
-uint16_t g_key_enter_counter = 3;
-uint16_t g_key_esc_counter = 4;
+
+uint32_t previous_millis = 0;
+uint32_t current_millis = 0;
 
 // External variables.
 
@@ -67,23 +68,28 @@ extern osMessageQueueId_t h_event_queue;
 void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for function")
 {
     fm_event_t event_now;
+    uint32_t current_millis = HAL_GetTick();
 
-    switch (gpio_pin)
+    if (current_millis - previous_millis > DEBOUNCE_TIME)
     {
-        case KEY_UP:
-            event_now = EVENT_KEY_UP;
-        break;
-        case KEY_DOWN:
-            event_now = EVENT_KEY_DOWN;
-        break;
-        case KEY_ENTER:
-            event_now = EVENT_KEY_ENTER;
-        break;
-        case KEY_ESC:
-            event_now = EVENT_KEY_ESC;
-        break;
-        default:
-        break;
+        switch (gpio_pin)
+        {
+            case KEY_UP:
+                event_now = EVENT_KEY_UP;
+            break;
+            case KEY_DOWN:
+                event_now = EVENT_KEY_DOWN;
+            break;
+            case KEY_ENTER:
+                event_now = EVENT_KEY_ENTER;
+            break;
+            case KEY_ESC:
+                event_now = EVENT_KEY_ESC;
+            break;
+            default:
+            break;
+        }
+        previous_millis = current_millis;
     }
     osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 }
