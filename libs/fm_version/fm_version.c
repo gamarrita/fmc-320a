@@ -27,10 +27,11 @@
  */
 
 // Const data.
+
 // Defines.
 #define VERSION 1
 #define REVISION 0
-#define RELEASE 0
+#define RELEASE 1
 
 //Debug.
 
@@ -55,6 +56,10 @@
 
 // Public function bodies.
 
+/*
+ * Esta función devuelve la versión actual del firmware, mantener actualizado
+ * este valor.
+ */
 uint32_t fm_version_get()
 {
     uint32_t version = 0;

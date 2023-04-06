@@ -80,8 +80,8 @@ void fm_lcd_acm_rate(symbols_t left_unit, symbols_t right_unit)
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    acm = fmc_totalizer_init(acm);
-    rate = fmc_totalizer_init(rate);
+    acm = fm_computer_totalizer_init(acm);
+    rate = fm_computer_totalizer_init(rate);
 
     fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
@@ -127,7 +127,7 @@ void fm_lcd_acm_temp()
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    acm = fmc_totalizer_init(acm);
+    acm = fm_computer_totalizer_init(acm);
 
     fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
@@ -359,7 +359,10 @@ void fm_lcd_init()
 {
     lcd_clear_all();
     lcd_init();
-    // All segments will be on for a few seconds after initialization.
+
+    /*
+     * Se encienden todos los segmentos por 500 milisegundos al iniciar.
+     */
     pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
     HAL_Delay(500); // @suppress("Avoid magic numbers")
     pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
@@ -441,8 +444,8 @@ void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit)
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    ttl = fmc_totalizer_init(ttl);
-    rate = fmc_totalizer_init(rate);
+    ttl = fm_computer_totalizer_init(ttl);
+    rate = fm_computer_totalizer_init(rate);
 
     fm_lcd_fp_to_str(ttl.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(ttl.volume, lcd_msg, sizeof(lcd_msg));

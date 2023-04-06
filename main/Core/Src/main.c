@@ -62,6 +62,18 @@ const osThreadAttr_t MenuTask_attributes = {
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for DebounceTask */
+osThreadId_t DebounceTaskHandle;
+const osThreadAttr_t DebounceTask_attributes = {
+  .name = "DebounceTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityHigh,
+};
+/* Definitions for debounce_semaphore */
+osSemaphoreId_t debounce_semaphoreHandle;
+const osSemaphoreAttr_t debounce_semaphore_attributes = {
+  .name = "debounce_semaphore"
+};
 /* USER CODE BEGIN PV */
 
 extern osMessageQueueId_t h_event_queue;
@@ -77,6 +89,7 @@ static void MX_TIM16_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 void menu_task(void *argument);
+void debounce_task(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -136,6 +149,10 @@ int main(void)
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
+  /* Create the semaphores(s) */
+  /* creation of debounce_semaphore */
+  debounce_semaphoreHandle = osSemaphoreNew(1, 1, &debounce_semaphore_attributes);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
@@ -151,6 +168,9 @@ int main(void)
   /* Create the thread(s) */
   /* creation of MenuTask */
   MenuTaskHandle = osThreadNew(menu_task, NULL, &MenuTask_attributes);
+
+  /* creation of DebounceTask */
+  DebounceTaskHandle = osThreadNew(debounce_task, NULL, &DebounceTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -202,7 +222,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_9;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -218,7 +238,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -273,7 +293,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_92CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -282,11 +302,7 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN ADC1_Init 2 */
-  sConfig.SamplingTime = ADC_SAMPLETIME_24CYCLES_5;
-  if(HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-      Error_Handler();
-  }
+
   /* USER CODE END ADC1_Init 2 */
 
 }
@@ -331,18 +347,18 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x16;
-  sTime.Minutes = 0x58;
-  sTime.Seconds = 0x00;
+  sTime.Hours = 0x9;
+  sTime.Minutes = 0x35;
+  sTime.Seconds = 0x0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
   if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
   {
     Error_Handler();
   }
-  sDate.WeekDay = RTC_WEEKDAY_WEDNESDAY;
-  sDate.Month = RTC_MONTH_APRIL;
-  sDate.Date = 0x5;
+  sDate.WeekDay = RTC_WEEKDAY_FRIDAY;
+  sDate.Month = RTC_MONTH_MARCH;
+  sDate.Date = 0x31;
   sDate.Year = 0x23;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
@@ -548,6 +564,59 @@ void menu_task(void *argument)
 		}
 	}
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_debounce_task */
+/**
+* @brief Function implementing the DebounceTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_debounce_task */
+void debounce_task(void *argument)
+{
+  /* USER CODE BEGIN debounce_task */
+
+  const uint8_t debounce_time = 150; //Tiempo prudente de espera por rebotes.
+
+  /* Infinite loop */
+  for(;;)
+  {
+    /*
+     * Bloqueo el programa con un semáforo que solo se libera luego de presionar
+     * un botón.
+     */
+    osSemaphoreAcquire(debounce_semaphoreHandle, HAL_MAX_DELAY);
+
+    /*
+     * Espero un tiempo prudente para que no haya rebotes, pero que permita
+     * cambiar de pantalla de forma rápida.
+     */
+    osDelay(debounce_time); // @suppress("Avoid magic numbers")
+
+    /*
+     * Al terminar el delay que debería saltearse los rebotes, debo también
+     * limpiar las flags de los EXTI de los botones que fueron presionados (o
+     * fueron víctimas de un rebote) mientras se encontraban deshabilitadas las
+     * interrupciones.
+     */
+    __HAL_GPIO_EXTI_CLEAR_IT(KEY_UP_Pin);
+    __HAL_GPIO_EXTI_CLEAR_IT(KEY_DOWN_Pin);
+//    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
+//    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
+
+    /*
+     * Habilito nuevamente las interrupciones para que puedan presionarse
+     * nuevamente los botones y pueda cambiarse de pantalla.
+     */
+    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+    /*
+     * Luego de esto la tarea debería bloquearse al intentar tomar el semáforo
+     * nuevamente.
+     */
+  }
+  /* USER CODE END debounce_task */
 }
 
 /**

@@ -44,7 +44,6 @@ static const uint32_t g_scalar[] =
 #define EXT_TEMP_INIT_VALUE 253
 #define RATE_INIT_VALUE 100
 #define TTL_INIT_VALUE 9870
-#define VERSION_INIT_VALUE 10
 
 //Debug.
 
@@ -66,7 +65,6 @@ static uint32_t g_acm = ACM_INIT_VALUE;
 static uint32_t g_ext_temp = EXT_TEMP_INIT_VALUE;
 static uint32_t g_rate = RATE_INIT_VALUE;
 static uint32_t g_ttl = TTL_INIT_VALUE;
-static uint32_t g_version = VERSION_INIT_VALUE;
 
 // Private function prototypes.
 
@@ -120,31 +118,38 @@ uint32_t fm_computer_get_ttl()
 }
 
 /*
- * @brief Función que obtiene la versión del caudalímetro y la devuelve como
- * parámetro de retorno.
- * @param  None
- * @retval versión del caudalímetro g_version de tipo uint32_t definido como
- * global.
+ * @brief Esta función limpia la cantidad de pulsos leidos por el contador de
+ * pulsos.
+ * @param  puntero a estructura que contiene datos como la cantidad de pulsos
+ * leidos, valor y resolución del caudal/volumen, entre otros.
+ * @retval None
  */
-uint32_t fm_computer_get_version()
-{
-    return (g_version);
-}
-
-void fmc_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
+void fm_computer_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
 {
     p_totalizer->pulse = 0;
-    fmc_totalizer_refresh(p_totalizer);
+    fm_computer_totalizer_refresh(p_totalizer);
 }
 
-fmc_totalizer_t fmc_totalizer_init(fmc_totalizer_t totalizer)
+/*
+ * @brief
+ * @param
+ * @retval None
+ */
+fmc_totalizer_t fm_computer_totalizer_init(fmc_totalizer_t totalizer)
 {
-    fmc_totalizer_refresh(&totalizer);
+    fm_computer_totalizer_refresh(&totalizer);
 
     return (totalizer);
 }
 
-void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer)
+/*
+ * @brief Esta función refresca el volumen obtenido de dividir los pulsos leidos
+ * por el factor correspondiente.
+ * @param  puntero a estructura que contiene datos como la cantidad de pulsos
+ * leidos, valor y resolución del caudal/volumen, entre otros.
+ * @retval None
+ */
+void fm_computer_totalizer_refresh(fmc_totalizer_t *p_totalizer)
 {
     uint64_t result;
 
