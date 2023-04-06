@@ -27,7 +27,6 @@
  */
 
 // Const data.
-
 // Defines.
 #define VERSION 1
 #define REVISION 0

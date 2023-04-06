@@ -27,9 +27,7 @@
  */
 
 // Const data.
-
 // Defines.
-
 /*
  * Mapeo que tecla corresponde a que pin
  */
@@ -82,7 +80,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for
      */
     fm_event_t event_now;
 
-    #ifdef FM_DEBUG_KEYPAD
+#ifdef FM_DEBUG_KEYPAD
         char msg_buffer[10];
 //        sprintf(msg_buffer,"DIFF = %u\n", diference);
 //        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));

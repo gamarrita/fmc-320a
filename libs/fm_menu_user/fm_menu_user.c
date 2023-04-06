@@ -105,7 +105,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
         break;
     }
 
-    #ifdef FM_DEBUG_MENU
+#ifdef FM_DEBUG_MENU
         char msg_buffer[] = "acm_rate\n";
         fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
     #endif
@@ -164,7 +164,7 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
         break;
     }
 
-    #ifdef FM_DEBUG_MENU
+#ifdef FM_DEBUG_MENU
         char msg_buffer[] = "acm_temp\n";
         fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
     #endif
@@ -219,7 +219,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
         break;
     }
 
-    #ifdef FM_DEBUG_MENU
+#ifdef FM_DEBUG_MENU
         char msg_buffer[] = "date_hour\n";
         fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
     #endif
@@ -274,7 +274,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
         break;
     }
 
-    #ifdef FM_DEBUG_MENU
+#ifdef FM_DEBUG_MENU
         char msg_buffer[] = "ttl_rate\n";
         fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
     #endif
@@ -330,7 +330,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         break;
     }
 
-    #ifdef FM_DEBUG_MENU
+#ifdef FM_DEBUG_MENU
         char msg_buffer[] = "version\n";
         fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
     #endif
