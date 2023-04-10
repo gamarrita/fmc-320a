@@ -41,7 +41,7 @@
 // Defines.
 /*
  * Default minimo 1 mili-segundos,  por defecto 50 mili-segundos, para todo
- * otro deday hay que justificar.
+ * otro delay hay que justificar.
  *
  */
 #define DELAY_MIN 1
@@ -50,7 +50,7 @@
 //Debug.
 
 /*
- * To temporaly disable a block of code, use preprocessor's conditional
+ * To temporally disable a block of code, use preprocessor's conditional
  * compilation features, eg, the following one should be used to increase the
  * the debug output information.
  *
@@ -58,7 +58,7 @@
 #ifndef NDEBUG
 #endif
 
-// Project variables, non-static, at least usedd in other file.
+// Project variables, non-static, at least used in other file.
 
 // Extern variables.
 
@@ -93,21 +93,21 @@ void fm_debug_uint32_uart(uint32_t num)
 }
 
 /*
- * @brief Esta funcion envia mensajes de debug, se pueder ver al momento de
- * debugger. Se tienen que llevar ajuste en tres estapas diferentes:
+ * @brief Esta funcion envía mensajes de debug, se puede ver al momento de
+ * debugger. Se tienen que llevar ajuste en tres etapas diferentes:
  *
  * Al configurar con cubemx:
  * - Sys->Debug->Trace Asynchronous Sw
  * - En Clock configuration puede elegir cualquier frecuencia para HCLK, pero
- * debera recordarla.
+ * deberá recordarla.
  *
  * En Debug Configuration:
- * Debuuger->Serial Wire Viewer SVW->Enable(marcar).
- * Clock Core (Mhz)- El valor que debia recordad, HCLK en Clock Configuration.
+ * Debugger->Serial Wire Viewer SVW->Enable(marcar).
+ * Clock Core (MHz)- El valor que debía recordar, HCLK en Clock Configuration.
  *
- * Iniciada la sescion de debug: en la parte inferior deberia aparecer la
+ * Iniciada la sesión de debug: en la parte inferior debería aparecer la
  * solapa ITM console, si no aparece se la busca y se la agrega, dos pasos
- * necesarias, habiltar el port_0 y click el boton rojo para iniciar "trace".
+ * necesarias, habilitar el port_0 y click el boton rojo para iniciar "trace".
  *
  */
 void fm_debug_msg_itm(const uint8_t *msg, uint8_t len)
@@ -121,7 +121,7 @@ void fm_debug_msg_itm(const uint8_t *msg, uint8_t len)
 }
 
 /*
- * @brief Esta funcion envia mensajes de debug por el uart2, la varible huart2,
+ * @brief Esta funcion envía mensajes de debug por el uart2, la variable huart2,
  * el handler del periferico, se declara como extern. Notar que si el proyecto
  * que estamos usando no inicializo el uart2 fallara en la compilacion, hay que
  * agregar condicionales de pre-compilacion para contemplar el caso donde no
@@ -133,8 +133,8 @@ void fm_debug_msg_uart(const uint8_t *p_msg, uint8_t len)
     HAL_StatusTypeDef ret = HAL_BUSY;
 
     /*
-     * La funcion HAL_UART_Transmit retornara sn hacer nada si esta siendo
-     * ejecutada en otro hilo. La siguiente implementacion no es buena porque
+     * La funcion HAL_UART_Transmit retornará sin hacer nada si esta siendo
+     * ejecutada en otro hilo. La siguiente implementación no es buena porque
      * bloquea puede bloquear al sistema, una mejor solucion seria bloquear
      * por un corto tiempo, aun mejor seria implementar algo con RTOS.
      *

@@ -15,7 +15,9 @@
 #include "fm_lcd.h"
 #include "lcd.h"
 #include "../fm_computer/fm_computer.h"
+#include "../fm_factory/fm_factory.h"
 #include "../fm_calendar/fm_calendar.h"
+#include "../fm_version/fm_version.h"
 #include "../fm_temperature_sensor/fm_temperature_sensor.h"
 
 // Typedef.
@@ -55,21 +57,39 @@
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
-void fm_lcd_acm_rate(point_t high_point, point_t low_point, symbols_t left_unit,
-symbols_t right_unit)
+void fm_lcd_acm_rate(symbols_t left_unit, symbols_t right_unit)
 {
-    char lcd_msg[MSG_LENGTH];
+    char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
-    MSG_LENGTH);
+    /*
+     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
+     * con los parámetros acm y rate.
+     */
+    fmc_totalizer_t acm;
+    fmc_totalizer_t rate;
+
+    /*
+     * Cargo los valores iniciales de acm y rate (que en este punto son los
+     * únicos que se usan (sand))
+     */
+    acm = fm_factory_get_acm();
+    rate = fm_factory_get_rate();
+
+    /*
+     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
+     * del factor y del propio volumen, y luego dividirlo por el propio
+     * factor.
+     */
+    acm = fm_computer_totalizer_init(acm);
+    rate = fm_computer_totalizer_init(rate);
+
+    fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
-    MSG_LENGTH);
+    fm_lcd_fp_to_str(rate.volume, ' ', LINE_1_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(rate.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point);
 
     lcd_set_symbol(ACM, 0x0);
     lcd_set_symbol(RATE, 0x0);
@@ -86,24 +106,39 @@ symbols_t right_unit)
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
-void fm_lcd_acm_temp(point_t high_point, point_t low_point)
+void fm_lcd_acm_temp()
 {
-    char lcd_msg[MSG_LENGTH];
+    char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_acm(), lcd_msg,
-    MSG_LENGTH);
+    /*
+     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
+     * con el parámetro acm.
+     */
+    fmc_totalizer_t acm;
 
+    /*
+     * Cargo los valores iniciales de acm (que en este punto son los
+     * únicos que se usan (sand))
+     */
+    acm = fm_factory_get_acm();
+
+    /*
+     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
+     * del factor y del propio volumen, y luego dividirlo por el propio
+     * factor.
+     */
+    acm = fm_computer_totalizer_init(acm);
+
+    fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point);
-
-    lcd_set_symbol(ACM, 0x0);
 
     fm_lcd_format_number_in_line(LOW_ROW, fm_int_temperature_format(), lcd_msg,
     MSG_LENGTH);
 
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
+    lcd_set_symbol(ACM, 0x0);
     lcd_set_symbol(CELSIUS, 0x0);
 }
 
@@ -115,7 +150,6 @@ void fm_lcd_acm_temp(point_t high_point, point_t low_point)
  * lcd.h.
  * @retval None
  */
-
 void fm_lcd_battery_low(blink_t speed)
 {
     lcd_set_symbol(BATTERY, speed);
@@ -138,11 +172,9 @@ void fm_lcd_clear()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
 void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
 point_t low_point_1, point_t low_point_2)
 {
-
     char lcd_msg[MSG_LENGTH];
 
     fm_lcd_format_number_in_line(HIGH_ROW, fm_calendar_format_date(), lcd_msg,
@@ -178,6 +210,144 @@ int length)
 }
 
 /*
+ * Agrega el punto decimal a una string que representa un entero.
+ * Esta funcion es típicamente usada luego de  fm_lcd_u32_to_str();
+ *
+ * @param fp numero con punto decimal
+ * @param p_str puntero al string destino
+ * @param str_size tamaño del string
+ *
+ */
+int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
+{
+    int idx_end;
+    int idx_now;
+
+    /*
+     * Si la resolución asignada por el usuario es 0, no hay nada que hacer.
+     */
+    if (fp.res == 0)
+    {
+        return (0);
+    }
+
+    idx_now = strlen(p_str); //Como indice apunta a terminador nulo.
+
+    /*
+     * Chequeo de contorno para ver si entra el punto o no.
+     */
+
+    if ((idx_now + 1 + 1) >= str_size)
+    {
+        return (-1);
+    }
+
+    idx_end = idx_now - fp.res; //Como índice apunta a donde debe ir el '.'
+
+    /*
+     * Desplazo posiciones en el arreglo hasta llegar a la posición donde debe
+     * ir ubicado el '.'
+     */
+    while (idx_now != idx_end)
+    {
+        p_str[idx_now + 1] = p_str[idx_now];
+        idx_now--;
+    }
+    p_str[idx_now + 1] = p_str[idx_now];
+    p_str[idx_now] = '.';
+
+    return (0);
+}
+
+/*
+ * Convierte un numero con punto decimal a una string, pero sin el punto
+ *
+ * @param fp numero con punto decimal.
+ * @param leading_char caracter de relleno, cero para no rellenar.
+ * @param al rellenar debemos indicar a que ancho con esta variable.
+ * @param p_str string destino, por referencia.
+ * @param str_size tamaño del string
+ */
+int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
+int str_size)
+{
+    int idx_1 = 0;
+
+    /*
+     * Este es el unico chequeo de contorno. Verifica que el tamaño del string
+     * no sea menor a LINE_BUFFER_SIZE, calculado como suficiente para operar
+     * con las líneas del lcd.
+     */
+    if (str_size < PCF8553_DATA_SIZE)
+    {
+        return (-1);
+    }
+
+    /*
+     * Esta linea es necesaria para representa bien a num = 0
+     */
+    p_str[idx_1] = fp.num % 10 + '0';
+
+    uint32_t num_aux = fp.num;
+
+    /*
+     * Almaceno el número de atrás para adelante hasta que llegar al primer
+     * dígito inclusive
+     */
+    while (fp.num / 10)
+    {
+        idx_1++;
+        fp.num /= 10;
+        p_str[idx_1] = fp.num % 10 + '0';
+    }
+
+    /*
+     * Si se midió 0 pulsos, se rellena con 0 hasta pasar el punto y asi se
+     * mantiene la resolución deseada.
+     */
+    if (num_aux == 0)
+    {
+        while (idx_1 < fp.res)
+        {
+            idx_1++;
+            p_str[idx_1] = fp.num % 10 + '0';
+        }
+    }
+
+    /*
+     * Si el caracter a completar no es 0, se lo debe agregar al final del
+     * arreglo hasta completar el largo de la linea (7 u 8 caracteres + \0).
+     */
+    if (leading_char)
+    {
+        while (idx_1 < str_width - 1)
+        {
+            idx_1++;
+            p_str[idx_1] = leading_char;
+        }
+    }
+    p_str[idx_1] = '\0';
+    idx_1--;
+
+    /*
+     *Esta sección da vuelta el arreglo ya que se completó al revés.
+     */
+    int idx_2 = 0;
+    char ch_temp;
+
+    while (idx_1 > idx_2)
+    {
+        ch_temp = p_str[idx_1];
+        p_str[idx_1] = p_str[idx_2];
+        p_str[idx_2] = ch_temp;
+        idx_1--;
+        idx_2++;
+    }
+
+    return (0);
+}
+
+/*
  * @brief Es la primera instrucción a llamar para usar el lcd, luego de
  * inicializar el lcd enciende todos los segmentos.
  * Para comprobar que el lcd esta funcionando se encienden todos los
@@ -189,7 +359,10 @@ void fm_lcd_init()
 {
     lcd_clear_all();
     lcd_init();
-    // All segments will be on for a few seconds after initialization.
+
+    /*
+     * Se encienden todos los segmentos por 500 milisegundos al iniciar.
+     */
     pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
     HAL_Delay(500); // @suppress("Avoid magic numbers")
     pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
@@ -207,21 +380,25 @@ void fm_lcd_puts(const char *c, const rows_t row)
 
     if (row == 0)
     {
-        col_limit = LCD_ROW_0_SIZE;
+        col_limit = LINE_0_DIGITS - 1;
     }
     else
     {
-        col_limit = LCD_ROW_1_SIZE;
+        col_limit = LINE_1_DIGITS - 1;
     }
 
     while ((*c) && (col < col_limit))
     {
-        if (((*c >= '0') && (*c <= '9')) || (*c == ' '))
+        if (((*c >= '0') && (*c <= '9')) || (*c == ' ') || (*c == '.'))
         {
             lcd_put_char(*c, col, row);
         }
         col++;
         c++;
+        if (*c == '.')
+        {
+            col--;
+        }
     }
 }
 
@@ -231,7 +408,6 @@ void fm_lcd_puts(const char *c, const rows_t row)
  * @param  None
  * @retval None
  */
-
 void fm_lcd_refresh()
 {
     lcd_refresh();
@@ -245,21 +421,39 @@ void fm_lcd_refresh()
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-
-void fm_lcd_ttl_rate(point_t high_point, point_t low_point, symbols_t left_unit,
-symbols_t right_unit)
+void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit)
 {
-    char lcd_msg[MSG_LENGTH];
+    char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, fm_computer_get_ttl(), lcd_msg,
-    MSG_LENGTH);
+    /*
+     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
+     * con los parámetros acm y rate.
+     */
+    fmc_totalizer_t ttl;
+    fmc_totalizer_t rate;
+
+    /*
+     * Cargo los valores iniciales de acm y rate (que en este punto son los
+     * únicos que se usan (sand))
+     */
+    ttl = fm_factory_get_ttl();
+    rate = fm_factory_get_rate();
+
+    /*
+     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
+     * del factor y del propio volumen, y luego dividirlo por el propio
+     * factor.
+     */
+    ttl = fm_computer_totalizer_init(ttl);
+    rate = fm_computer_totalizer_init(rate);
+
+    fm_lcd_fp_to_str(ttl.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(ttl.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_rate(), lcd_msg,
-    MSG_LENGTH);
+    fm_lcd_fp_to_str(rate.volume, ' ', LINE_1_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(rate.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point);
 
     lcd_set_symbol(TTL, 0x0);
     lcd_set_symbol(RATE, 0x0);
@@ -276,15 +470,15 @@ symbols_t right_unit)
  * @param puntos de la fila inferior a imprimir, de tipo point_t.
  * @retval None
  */
-
-void fm_lcd_version(point_t low_point)
+void fm_lcd_version(point_t low_point1, point_t low_point2)
 {
     char lcd_msg[MSG_LENGTH];
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_computer_get_version(), lcd_msg,
+    fm_lcd_format_number_in_line(LOW_ROW, fm_version_get(), lcd_msg,
     MSG_LENGTH);
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point);
+    lcd_set_point(LOW_ROW, low_point1);
+    lcd_set_point(LOW_ROW, low_point2);
 
     lcd_set_symbol(VE, 0x0);
 }

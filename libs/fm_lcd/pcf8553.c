@@ -64,22 +64,13 @@ const uint32_t DEFAULT_DELAY = 20;
 #ifndef NDEBUG
 #endif
 
-/*
- * Tamaño de la memoria interna del pcf8553 para controlas el encendido/apagado
- * de los segmentos, con 20 bytes se controlan 20 * 8 =  160 segmentos.
- *
- */
-#define MEMORY_DATA_SIZE 20
-
 #define DATA_ADDRESS 4 /* First data address */
 
 /*
- *
  * Los dos siguientes #defines se crean para poder inicializar el miembro
  * read_write de struct register_address_t, la solucion actual no me parece
  * buena, dos bloques separados, estimo que incluyendo un enum declarado
  * dentro de struct register_address_t se tendría una mejor solucion.
- *
  */
 #define WRITE_DATA	0	//
 #define READ_DATA	1 	//
@@ -216,7 +207,7 @@ static void spi1_init(void)
  * PCF_BLINK_HALF_SECOND
  * @retval None
  */
-void pcf8553_blink(pcf_blink_mode_t mode)
+void pcf8553_blink(blink_t mode)
 {
     HAL_GPIO_WritePin(PCF8553_CE_PORT, PCF8553_CE_PIN, GPIO_PIN_RESET);
     g_display_ctrl_2.reg_bits.blink = mode;

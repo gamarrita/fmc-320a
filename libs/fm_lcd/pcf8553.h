@@ -34,21 +34,16 @@
 // Typedef.
 
 /*
- * Velocidad de parpadeo de la pantalla LCD. Cumple la misma función que una
- * enumeración utilizada en lcd.h, por lo que en un futuro una de las dos debe
- * ser eliminada, adaptando todo lo que haya que adaptar a la restante.
+ * Enumeración de las velocidades disponibles para hacer parpadear la
+ * pantalla en su totalidad.
  */
 typedef enum
 {
-    LCD_BLINK_OFF,
-    LCD_BLINK_TWO_SECOND,
-    LCD_BLINK_ONE_SECOND,
-    LCD_BLINK_HALF_SECOND,
-} pcf_blink_mode_t;
+    OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
+} blink_t;
 
 /*
  *  Modeling PCF8553 Device_ctrl register.
- *
  */
 typedef union
 {
@@ -99,26 +94,21 @@ typedef union
 
 // Defines.
 
-#define ALL_SEGMENTS 0xFF
-#define NONE_SEGMENTS 0x00
-
 /*
  * Tamaño de la memoria interna del pcf8553 para controlar el encendido/apagado
  * de los segmentos, con 20 bytes se controlan 20 * 8 =  160 segmentos.
- *
  */
 #define PCF8553_DATA_SIZE 20
 
+#define LINE_0_DIGITS (8+1) // Dígitos linea 1 + terminador nulo.
+#define LINE_1_DIGITS (7+1) // Dígitos linea 2 + terminador nulo.
+
+#define ALL_SEGMENTS 0xFF   // Macro para escribir 1 en todos los segmentos
+#define NONE_SEGMENTS 0x00  // Macro para escribir 0 en todos los segmentos
+
 // Public function prototypes.
 
-/*
- * Las funciones cumplen con:
- * Ordenadas alfabeticamente aqui y en el .c
- * Para los nombres se usa la regla: noun-verb
- * Las funciones públicas comienzan con el nombre del modulo
- *
- */
-void pcf8553_blink(pcf_blink_mode_t mode);
+void pcf8553_blink(blink_t mode);
 void pcf8553_clear_buff();
 void pcf8553_dump();
 void pcf8553_init();

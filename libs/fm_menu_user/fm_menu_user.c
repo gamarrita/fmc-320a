@@ -21,6 +21,7 @@
 #include "stdio.h"
 #include "../../../libs/fm_event/fm_event.h"
 #include "../fm_event/fm_event.h"
+#include "../fm_debug/fm_debug.h"
 
 // Typedef.
 
@@ -79,7 +80,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_acm_rate(PNT_5, PNT_5, GL, H);
+    fm_lcd_acm_rate(GL, H);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -138,7 +139,7 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_acm_temp(PNT_5, PNT_5);
+    fm_lcd_acm_temp();
     fm_lcd_refresh();
 
     switch (event_id)
@@ -252,7 +253,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_ttl_rate(PNT_4, PNT_5, LT, S);
+    fm_lcd_ttl_rate(LT, S);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -307,7 +308,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_version(PNT_5);
+    fm_lcd_version(PNT_4, PNT_5);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -321,7 +322,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         case EVENT_KEY_ESC:
         break;
         default:
-            HAL_Delay(3000);
+            HAL_Delay(3000); // @suppress("Avoid magic numbers")
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
