@@ -12,7 +12,7 @@
 #include "fm_calendar.h"
 #include "stdio.h"
 #include "stdlib.h"
-
+#include "../fm_lcd/fm_lcd.h"
 // Typedef.
 
 /*
@@ -71,7 +71,7 @@ void fm_calendar_get()
 int fm_calendar_format_time()
 {
     int time = 0;
-    char time_arr[20]; // @suppress("Avoid magic numbers")
+    char time_arr[PCF8553_DATA_SIZE];
 
     fm_calendar_get();
 
@@ -97,7 +97,7 @@ int fm_calendar_format_time()
 int fm_calendar_format_date()
 {
     int date = 0;
-    char date_arr[20]; // @suppress("Avoid magic numbers")
+    char date_arr[PCF8553_DATA_SIZE];
 
     fm_calendar_get();
 

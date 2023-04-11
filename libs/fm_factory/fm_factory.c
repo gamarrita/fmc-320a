@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fm_factory.h"
-#include "../fm_computer/fm_computer.h"
+#include "../fmc/fmc.h"
 
 // Typedef.
 

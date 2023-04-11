@@ -44,8 +44,8 @@
  * otro delay hay que justificar.
  *
  */
-#define DELAY_MIN 1
-#define DELAY_DEFAULT 10
+#define DELAY_MIN       1
+#define DELAY_DEFAULT   10
 
 //Debug.
 

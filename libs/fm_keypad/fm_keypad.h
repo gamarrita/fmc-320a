@@ -8,8 +8,10 @@
  */
 
 // includes
-#ifndef FM_KEYPAD_H_
-#define FM_KEYPAD_H_
+#include "main.h"
+
+#ifndef     FM_KEYPAD_H_
+#define     FM_KEYPAD_H_
 
 // Macros, defines, microcontroller pins (dhs).
 
@@ -17,7 +19,10 @@
 
 typedef enum
 {
-    KEY_UP, KEY_DOWN, KEY_ENTER, KEY_ESC
+    KEY_UP,
+    KEY_DOWN,
+    KEY_ENTER,
+    KEY_ESC
 } fm_keypad_t;
 
 // Defines.

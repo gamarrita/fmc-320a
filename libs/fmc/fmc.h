@@ -12,8 +12,8 @@
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_COMPUTER_H_
-#define FM_COMPUTER_H_
+#ifndef     FM_COMPUTER_H_
+#define     FM_COMPUTER_H_
 
 // includes
 
@@ -26,18 +26,18 @@
 
 typedef enum
 {
-    UNIT_LITER = 'L',
-    UNIT_METER_CUBIC = 'M',
-    UNIT_CENTIGRADES = 'C',
-    UNIT_VOLUME_END = 0xFF,
+    UNIT_LITER =        'L',
+    UNIT_METER_CUBIC =  'M',
+    UNIT_CENTIGRADES =  'C',
+    UNIT_VOLUME_END =   0xFF,
 } fmc_unit_volume_t;
 
 typedef enum
 {
-    UNIT_DAY = 'D',
-    UNIT_HOUR = 'H',
-    UNIT_MINUTE = 'M',
-    UNIT_SECOND = 'S',
+    UNIT_DAY =      'D',
+    UNIT_HOUR =     'H',
+    UNIT_MINUTE =   'M',
+    UNIT_SECOND =   'S',
     UNIT_TIME_END = 0xFF,
 } fmc_unit_time_t;
 
@@ -67,14 +67,14 @@ typedef struct
 
 // Function prototypes
 
-uint32_t fm_computer_get_acm();
-uint32_t fm_computer_get_ext_temp();
-uint32_t fm_computer_get_rate();
-uint32_t fm_computer_get_ttl();
-uint32_t fm_computer_get_version();
-void fm_computer_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer);
-fmc_totalizer_t fm_computer_totalizer_init(fmc_totalizer_t totalizer);
-void fm_computer_totalizer_refresh(fmc_totalizer_t *p_totalizer);
+uint32_t fmc_get_acm();
+uint32_t fmc_get_ext_temp();
+uint32_t fmc_get_rate();
+uint32_t fmc_get_ttl();
+uint32_t fmc_get_version();
+void fmc_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer);
+fmc_totalizer_t fmc_totalizer_init(fmc_totalizer_t totalizer);
+void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer);
 
 #endif /* FM_COMPUTER_H_ */
 

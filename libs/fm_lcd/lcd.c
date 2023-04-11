@@ -40,16 +40,16 @@ typedef struct
  * por se obtendrán las posiciones de los siguientes dígitos.
  *
  */
-#define SEG_A 0
-#define SEG_B 1
-#define SEG_C 2
-#define SEG_D 3
-#define SEG_E 4
-#define SEG_F 5
-#define SEG_G 6
-#define SEG_H 7
+#define SEG_A               0
+#define SEG_B               1
+#define SEG_C               2
+#define SEG_D               3
+#define SEG_E               4
+#define SEG_F               5
+#define SEG_G               6
+#define SEG_H               7
 
-#define LCD_MSG_LENGTH 12
+#define LCD_MSG_LENGTH      12
 
 // Project variables, non-static, at least used in other file.
 

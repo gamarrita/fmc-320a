@@ -28,7 +28,6 @@
 
 // Includes.
 #include "pcf8553.h"
-#include "main.h"
 
 // Typedef.
 
@@ -64,7 +63,7 @@ const uint32_t DEFAULT_DELAY = 20;
 #ifndef NDEBUG
 #endif
 
-#define DATA_ADDRESS 4 /* First data address */
+#define DATA_ADDRESS            4 /* First data address */
 
 /*
  * Los dos siguientes #defines se crean para poder inicializar el miembro
@@ -72,8 +71,8 @@ const uint32_t DEFAULT_DELAY = 20;
  * buena, dos bloques separados, estimo que incluyendo un enum declarado
  * dentro de struct register_address_t se tendría una mejor solucion.
  */
-#define WRITE_DATA	0	//
-#define READ_DATA	1 	//
+#define WRITE_DATA	            0
+#define READ_DATA	            1
 
 /*
  * Direcciones de memoria para el PCF8553.

@@ -14,7 +14,7 @@
  */
 
 // Includes.
-#include "fm_computer.h"
+#include "fmc.h"
 
 // Typedef.
 
@@ -40,10 +40,10 @@ static const uint32_t g_scalar[] =
 };
 
 // Defines.
-#define ACM_INIT_VALUE 140
+#define ACM_INIT_VALUE      140
 #define EXT_TEMP_INIT_VALUE 253
-#define RATE_INIT_VALUE 100
-#define TTL_INIT_VALUE 9870
+#define RATE_INIT_VALUE     100
+#define TTL_INIT_VALUE      9870
 
 //Debug.
 
@@ -78,7 +78,7 @@ static uint32_t g_ttl = TTL_INIT_VALUE;
  * @param  None
  * @retval caudal acumulado g_acm de tipo uint32_t definido como global.
  */
-uint32_t fm_computer_get_acm()
+uint32_t fmc_get_acm()
 {
     return (g_acm);
 }
@@ -90,7 +90,7 @@ uint32_t fm_computer_get_acm()
  * @retval temperatura externa g_ext_temp de tipo uint32_t definido como
  * global.
  */
-uint32_t fm_computer_get_ext_temp()
+uint32_t fmc_get_ext_temp()
 {
     return (g_ext_temp);
 }
@@ -101,7 +101,7 @@ uint32_t fm_computer_get_ext_temp()
  * @param  None
  * @retval caudal instantaneo g_rate de tipo uint32_t definido como global.
  */
-uint32_t fm_computer_get_rate()
+uint32_t fmc_get_rate()
 {
     return (g_rate);
 }
@@ -112,7 +112,7 @@ uint32_t fm_computer_get_rate()
  * @param  None
  * @retval caudal histórico g_ttl de tipo uint32_t definido como global.
  */
-uint32_t fm_computer_get_ttl()
+uint32_t fmc_get_ttl()
 {
     return (g_ttl);
 }
@@ -124,10 +124,10 @@ uint32_t fm_computer_get_ttl()
  * leidos, valor y resolución del caudal/volumen, entre otros.
  * @retval None
  */
-void fm_computer_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
+void fmc_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
 {
     p_totalizer->pulse = 0;
-    fm_computer_totalizer_refresh(p_totalizer);
+    fmc_totalizer_refresh(p_totalizer);
 }
 
 /*
@@ -135,9 +135,9 @@ void fm_computer_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer)
  * @param
  * @retval None
  */
-fmc_totalizer_t fm_computer_totalizer_init(fmc_totalizer_t totalizer)
+fmc_totalizer_t fmc_totalizer_init(fmc_totalizer_t totalizer)
 {
-    fm_computer_totalizer_refresh(&totalizer);
+    fmc_totalizer_refresh(&totalizer);
 
     return (totalizer);
 }
@@ -149,7 +149,7 @@ fmc_totalizer_t fm_computer_totalizer_init(fmc_totalizer_t totalizer)
  * leidos, valor y resolución del caudal/volumen, entre otros.
  * @retval None
  */
-void fm_computer_totalizer_refresh(fmc_totalizer_t *p_totalizer)
+void fmc_totalizer_refresh(fmc_totalizer_t *p_totalizer)
 {
     uint64_t result;
 

@@ -28,9 +28,9 @@
 
 // Const data.
 // Defines.
-#define VERSION 1
-#define REVISION 0
-#define RELEASE 1
+#define VERSION     1
+#define REVISION    0
+#define RELEASE     2
 
 //Debug.
 

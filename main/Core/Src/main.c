@@ -22,10 +22,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "string.h"
 #include "../../../libs/fm_keypad/fm_keypad.h"
 #include "../../../libs/fm_menu_user/fm_menu_user.h"
+#include "../../../libs/fm_menu_config/fm_menu_config.h"
 #include "../../../libs/fm_event/fm_event.h"
-#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -139,6 +140,7 @@ int main(void)
   fm_lcd_init();
   fm_lcd_refresh();
   fm_event_init();
+  HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
   /* USER CODE END 2 */
 
@@ -511,11 +513,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : KEY_UP_Pin */
-  GPIO_InitStruct.Pin = KEY_UP_Pin;
+  /*Configure GPIO pin : KEY_ESC_Pin */
+  GPIO_InitStruct.Pin = KEY_ESC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(KEY_UP_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(KEY_ESC_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : KEY_UP_Pin KEY_ENTER_Pin */
+  GPIO_InitStruct.Pin = KEY_UP_Pin|KEY_ENTER_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : KEY_DOWN_Pin */
   GPIO_InitStruct.Pin = KEY_DOWN_Pin;
@@ -602,8 +610,8 @@ void debounce_task(void *argument)
      */
     __HAL_GPIO_EXTI_CLEAR_IT(KEY_UP_Pin);
     __HAL_GPIO_EXTI_CLEAR_IT(KEY_DOWN_Pin);
-//    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
-//    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
+    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
+    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
 
     /*
      * Habilito nuevamente las interrupciones para que puedan presionarse
