@@ -26,9 +26,12 @@ typedef       ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);
 
 // Function prototypes
 
-ptr_ret_menu_t fm_menu_conf_volume_unit(fm_event_t);
-ptr_ret_menu_t fm_menu_conf_time_unit(fm_event_t);
-ptr_ret_menu_t fm_menu_conf_k_parameter(fm_event_t);
+ptr_ret_menu_t fm_menu_config_expansion(fm_event_t);
+ptr_ret_menu_t fm_menu_config_k_param(fm_event_t);
+ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t);
+ptr_ret_menu_t fm_menu_config_pass(fm_event_t);
+ptr_ret_menu_t fm_menu_config_span(fm_event_t);
+ptr_ret_menu_t fm_menu_config_units(fm_event_t);
 
 #endif /* MENU_CONFIG_H */
 

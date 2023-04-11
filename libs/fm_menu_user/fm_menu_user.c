@@ -100,7 +100,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_conf_volume_unit;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -123,8 +123,8 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 }
 
 /*
- * @brief Función que imprime el menú de temperatura del líquido y exterior en
- * la pantalla, con puntos específicos.
+ * @brief Función que imprime el menú de acm y temperatura del micro en
+ * la pantalla.
  * @param  None
  * @retval None
  */
@@ -163,7 +163,7 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_conf_volume_unit;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -222,7 +222,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_conf_volume_unit;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -281,7 +281,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_conf_volume_unit;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -311,11 +311,21 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
  */
 ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 {
+    /*
+     * Durante la ejecución de este menú no quiero que se puedan realizar
+     * interrupciones de los botones (ya que si ocurre, se acumulan y luego se
+     * disparan todas juntas después de pasados los delays).
+     */
+    HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
     fm_event_t event_now;
+
+    fm_lcd_init();
+    fm_lcd_refresh();
 
     if (new_entry == 1)
     {
@@ -325,6 +335,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 
     fm_lcd_version(PNT_4, PNT_5);
     fm_lcd_refresh();
+    HAL_Delay(3000); // @suppress("Avoid magic numbers")
 
     switch (event_id)
     {
@@ -337,7 +348,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         case EVENT_KEY_ESC:
         break;
         default:
-            HAL_Delay(3000); // @suppress("Avoid magic numbers")
+            osMessageQueueReset(h_event_queue);
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -352,6 +363,17 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 
     if (new_exit == 1)
     {
+        /*
+         * Borro flags para que no tome interrupciones realizadas con los
+         * botones mientras se está mostrando la pantalla de inicio o la versión
+         * del firmware.
+         */
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_UP_Pin);
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_DOWN_Pin);
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
+        HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
         new_entry = 1;
         new_exit = 0;
     }

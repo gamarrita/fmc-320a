@@ -363,7 +363,7 @@ void fm_lcd_init()
      * Se encienden todos los segmentos por 500 milisegundos al iniciar.
      */
     pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-    HAL_Delay(500); // @suppress("Avoid magic numbers")
+    HAL_Delay(3000); // @suppress("Avoid magic numbers")
     pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
 }
 

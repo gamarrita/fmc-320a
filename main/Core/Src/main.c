@@ -137,8 +137,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   fm_lcd_clear();
-  fm_lcd_init();
-  fm_lcd_refresh();
   fm_event_init();
   HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
