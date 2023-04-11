@@ -55,7 +55,9 @@ typedef enum
     GL,
     BR,
     NOTHING,
-    VE
+    VE,
+    PASS,
+    KO
 } symbols_t;
 
 /*

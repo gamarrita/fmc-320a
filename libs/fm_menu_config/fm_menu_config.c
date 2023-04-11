@@ -165,7 +165,7 @@ ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t event_id)
         new_entry = 0;
     }
 
-    lcd_set_symbol(M, 0x00);
+    lcd_set_symbol(KO, 0x00);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -214,7 +214,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
         new_entry = 0;
     }
 
-    lcd_set_symbol(NOTHING, 0x00);
+    lcd_set_symbol(PASS, 0x00);
     fm_lcd_refresh();
 
     switch (event_id)
