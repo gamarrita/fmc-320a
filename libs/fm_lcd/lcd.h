@@ -57,7 +57,10 @@ typedef enum
     NOTHING,
     VE,
     PASS,
-    KO
+    KO,
+    PASS1,
+    PASS2,
+    PASS3
 } symbols_t;
 
 /*
@@ -66,8 +69,7 @@ typedef enum
  */
 typedef enum
 {
-    HIGH_ROW,
-    LOW_ROW
+    HIGH_ROW, LOW_ROW
 } rows_t;
 
 /*
@@ -82,13 +84,7 @@ typedef enum
  */
 typedef enum
 {
-    PNT_0,
-    PNT_1,
-    PNT_2,
-    PNT_3,
-    PNT_4,
-    PNT_5,
-    PNT_6
+    PNT_0, PNT_1, PNT_2, PNT_3, PNT_4, PNT_5, PNT_6
 } point_t;
 
 /*
@@ -97,14 +93,7 @@ typedef enum
  */
 typedef enum
 {
-    BIT_0,
-    BIT_1,
-    BIT_2,
-    BIT_3,
-    BIT_4,
-    BIT_5,
-    BIT_6,
-    BIT_7
+    BIT_0, BIT_1, BIT_2, BIT_3, BIT_4, BIT_5, BIT_6, BIT_7
 } bit_t;
 
 /*

@@ -20,12 +20,13 @@
 // Typedef.
 
 typedef void* (*ptr_ret_menu_t)(fm_event_t);            // Un puntero a funcion
-typedef       ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);
+typedef ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);
 
 // Defines.
 
 // Function prototypes
 
+ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t);
 ptr_ret_menu_t fm_menu_config_expansion(fm_event_t);
 ptr_ret_menu_t fm_menu_config_k_param(fm_event_t);
 ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t);

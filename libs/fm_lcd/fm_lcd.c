@@ -171,22 +171,21 @@ void fm_lcd_clear()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
-point_t low_point_1, point_t low_point_2)
+void fm_lcd_date_hour(int time, int date)
 {
     char lcd_msg[MSG_LENGTH];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, fm_calendar_format_date(), lcd_msg,
+    fm_lcd_format_number_in_line(HIGH_ROW, date, lcd_msg,
     MSG_LENGTH);
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point_1);
-    lcd_set_point(HIGH_ROW, high_point_2);
+    lcd_set_point(HIGH_ROW, PNT_1);
+    lcd_set_point(HIGH_ROW, PNT_3);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_calendar_format_time(), lcd_msg,
+    fm_lcd_format_number_in_line(LOW_ROW, time, lcd_msg,
     MSG_LENGTH);
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point_1);
-    lcd_set_point(LOW_ROW, low_point_2);
+    lcd_set_point(LOW_ROW, PNT_2);
+    lcd_set_point(LOW_ROW, PNT_4);
 }
 
 /*
@@ -259,13 +258,13 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
 }
 
 /*
- * Convierte un numero con punto decimal a una string, pero sin el punto
+ * @brief Convierte un numero con punto decimal a una string, pero sin el punto
  *
  * @param fp numero con punto decimal.
  * @param leading_char caracter de relleno, cero para no rellenar.
  * @param al rellenar debemos indicar a que ancho con esta variable.
  * @param p_str string destino, por referencia.
- * @param str_size tamaño del string
+ * @param str_size tamaño del string.
  */
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size)
@@ -274,7 +273,7 @@ int str_size)
 
     /*
      * Este es el unico chequeo de contorno. Verifica que el tamaño del string
-     * no sea menor a LINE_BUFFER_SIZE, calculado como suficiente para operar
+     * no sea menor a PCF8553_DATA_SIZE, calculado como suficiente para operar
      * con las líneas del lcd.
      */
     if (str_size < PCF8553_DATA_SIZE)
@@ -368,6 +367,23 @@ void fm_lcd_init()
 }
 
 /*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración del factor de calibración K.
+ * @param  Unidad de volumen y unidad de tiempo.
+ * @retval None
+ */
+void fm_lcd_k_factor(symbols_t volume_unit, point_t high_point)
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_format_number_in_line(HIGH_ROW, 141700, lcd_msg, MSG_LENGTH);
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+    lcd_set_point(HIGH_ROW, high_point);
+
+    lcd_set_symbol(volume_unit, 0x0);
+}
+
+/*
  * @brief Función que imprime en una de las dos filas del lcd, row 0 o row 1.
  * @param
  * @retval None
@@ -456,6 +472,29 @@ void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit)
 
     lcd_set_symbol(TTL, 0x0);
     lcd_set_symbol(RATE, 0x0);
+
+    lcd_set_symbol(left_unit, 0x0);
+    lcd_set_symbol(BACKSLASH, 0x0);
+    lcd_set_symbol(right_unit, 0x0);
+}
+
+/*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración de unidades de volumen y tiempo y la resolución de la medida.
+ * @param  Unidad de volumen y unidad de tiempo.
+ * @retval None
+ */
+void fm_lcd_units(symbols_t left_unit, symbols_t right_unit)
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fmc_fp_t high_number;
+
+    high_number.num = 0;
+    high_number.res = 1;
+    fm_lcd_fp_to_str(high_number, '0', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(high_number, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
 
     lcd_set_symbol(left_unit, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);

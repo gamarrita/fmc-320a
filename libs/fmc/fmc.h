@@ -26,18 +26,18 @@
 
 typedef enum
 {
-    UNIT_LITER =        'L',
-    UNIT_METER_CUBIC =  'M',
-    UNIT_CENTIGRADES =  'C',
-    UNIT_VOLUME_END =   0xFF,
+    UNIT_LITER = 'L',
+    UNIT_METER_CUBIC = 'M',
+    UNIT_CENTIGRADES = 'C',
+    UNIT_VOLUME_END = 0xFF,
 } fmc_unit_volume_t;
 
 typedef enum
 {
-    UNIT_DAY =      'D',
-    UNIT_HOUR =     'H',
-    UNIT_MINUTE =   'M',
-    UNIT_SECOND =   'S',
+    UNIT_DAY = 'D',
+    UNIT_HOUR = 'H',
+    UNIT_MINUTE = 'M',
+    UNIT_SECOND = 'S',
     UNIT_TIME_END = 0xFF,
 } fmc_unit_time_t;
 

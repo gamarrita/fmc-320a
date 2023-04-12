@@ -19,8 +19,8 @@
 // Includes.
 #include "fm_menu_user.h"
 #include "stdio.h"
-#include "../fm_event/fm_event.h"
 #include "../fm_debug/fm_debug.h"
+#include "../fm_calendar/fm_calendar.h"
 
 // Typedef.
 
@@ -62,8 +62,8 @@ extern osMessageQueueId_t h_event_queue;
 /*
  * @brief Función que imprime el menú de acm y rate en la pantalla, con
  * unidades y puntos específicos.
- * @param  None
- * @retval None
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
  */
 ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 {
@@ -109,9 +109,9 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "acm_rate\n";
-        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
+    char msg_buffer[] = "acm_rate\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
 
     if (new_exit == 1)
     {
@@ -125,8 +125,8 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
 /*
  * @brief Función que imprime el menú de acm y temperatura del micro en
  * la pantalla.
- * @param  None
- * @retval None
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
  */
 ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
 {
@@ -172,9 +172,9 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "acm_temp\n";
-        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
+    char msg_buffer[] = "acm_temp\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
 
     if (new_exit == 1)
     {
@@ -188,8 +188,8 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
 /*
  * @brief Función que imprime el menú de fecha y hora en la pantalla, con
  * unidades y puntos específicos.
- * @param  None
- * @retval None
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
  */
 ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
 {
@@ -205,7 +205,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_date_hour(PNT_1, PNT_3, PNT_2, PNT_4);
+    fm_lcd_date_hour(fm_calendar_format_time(), fm_calendar_format_date());
     fm_lcd_refresh();
 
     switch (event_id)
@@ -231,9 +231,9 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "date_hour\n";
-        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
+    char msg_buffer[] = "date_hour\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
 
     if (new_exit == 1)
     {
@@ -247,8 +247,8 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
 /*
  * @brief Función que imprime el menú de ttl y rate en la pantalla, con
  * unidades y puntos específicos.
- * @param  None
- * @retval None
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
  */
 ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
 {
@@ -290,9 +290,9 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "ttl_rate\n";
-        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
+    char msg_buffer[] = "ttl_rate\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
 
     if (new_exit == 1)
     {
@@ -306,8 +306,8 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
 /*
  * @brief Función que imprime el menú con la versión del caudalímetro en la
  * pantalla, con puntos específicos.
- * @param  None
- * @retval None
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
  */
 ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 {
@@ -357,9 +357,9 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "version\n";
-        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
+    char msg_buffer[] = "version\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
 
     if (new_exit == 1)
     {

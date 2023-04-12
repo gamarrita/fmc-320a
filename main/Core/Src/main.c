@@ -583,7 +583,7 @@ void debounce_task(void *argument)
 {
   /* USER CODE BEGIN debounce_task */
 
-  const uint8_t debounce_time = 150; //Tiempo prudente de espera por rebotes.
+  const uint8_t debounce_time = 500; //Tiempo prudente de espera por rebotes.
 
   /* Infinite loop */
   for(;;)
