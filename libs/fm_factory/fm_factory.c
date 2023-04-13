@@ -81,8 +81,8 @@ static fmc_fp_t units_digits =
 
 static fmc_fp_t k_factor_config =
 {
-    .num = 1417,
-    .res = 1,
+    .num = 14170,
+    .res = 2,
 };
 
 // Defines.
@@ -140,6 +140,14 @@ fmc_fp_t fm_factory_get_k_factor()
     return (k_factor_config);
 }
 
+void fm_factory_modify_res(uint8_t units_res, uint8_t acm_res, uint8_t ttl_res,
+uint8_t rate_res)
+{
+    units_digits.res = units_res;
+    acm_config.volume.res = acm_res;
+    ttl_config.volume.res = ttl_res;
+    rate_config.volume.res = rate_res;
+}
 // Interrupts
 
 /*** end of file ***/

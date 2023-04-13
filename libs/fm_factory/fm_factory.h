@@ -26,6 +26,8 @@ fmc_totalizer_t fm_factory_get_rate();
 fmc_temp_t fm_factory_get_temp();
 fmc_fp_t fm_factory_get_units_digits();
 fmc_fp_t fm_factory_get_k_factor();
+void fm_factory_modify_res(uint8_t units_res, uint8_t acm_res, uint8_t ttl_res,
+uint8_t rate_res);
 
 #endif /* FM_FACTORY_H */
 

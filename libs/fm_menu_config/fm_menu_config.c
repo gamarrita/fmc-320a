@@ -11,6 +11,7 @@
 #include "stdio.h"
 #include "../fm_debug/fm_debug.h"
 #include "../fm_calendar/fm_calendar.h"
+#include "../fm_factory/fm_factory.h"
 
 // Typedef.
 
@@ -532,6 +533,25 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
         case EVENT_KEY_DOWN:
         break;
         case EVENT_KEY_ENTER:
+            if(fm_factory_get_units_digits().res == 0)
+            {
+                fm_factory_modify_res(1, 1, 1, 1);
+            }
+            else if(fm_factory_get_units_digits().res == 1)
+            {
+                fm_factory_modify_res(2, 2, 2, 2);
+            }
+            else if(fm_factory_get_units_digits().res == 2)
+            {
+                fm_factory_modify_res(3, 3, 3, 3);
+            }
+            else if(fm_factory_get_units_digits().res == 3)
+            {
+                fm_factory_modify_res(0, 0, 0, 0);
+            }
+
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
