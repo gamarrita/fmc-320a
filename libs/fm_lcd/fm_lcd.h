@@ -48,7 +48,7 @@
 
 // Function prototypes.
 
-void fm_lcd_acm_rate(symbols_t left_unit, symbols_t right_unit);
+void fm_lcd_acm_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit);
 void fm_lcd_acm_temp();
 void fm_lcd_battery_low(blink_t speed);
 void fm_lcd_clear();
@@ -60,11 +60,11 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size);
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size);
 void fm_lcd_init();
-void fm_lcd_k_factor(symbols_t volume_unit, point_t high_point);
+void fm_lcd_k_factor(fmc_unit_volume_t volume_unit, point_t high_point);
 void fm_lcd_puts(const char *p_str, uint8_t row);
 void fm_lcd_refresh();
-void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit);
-void fm_lcd_units(symbols_t left_unit, symbols_t right_unit);
+void fm_lcd_ttl_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit);
+void fm_lcd_units(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit);
 void fm_lcd_version(point_t low_point1, point_t low_point2);
 
 #endif /* FM_LCD_H_ */

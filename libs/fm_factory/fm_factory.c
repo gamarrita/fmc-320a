@@ -40,7 +40,8 @@ static fmc_totalizer_t ttl_config =
     .volume.res = 2,
     .factor.num = 3000, // pulsos/unidad_volumen.
     .factor.res = 1,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_totalizer_t acm_config =
@@ -50,7 +51,8 @@ static fmc_totalizer_t acm_config =
     .volume.res = 2,
     .factor.num = 3000, // pulsos/unidad_volumen.
     .factor.res = 1,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_totalizer_t rate_config =
@@ -60,14 +62,15 @@ static fmc_totalizer_t rate_config =
     .volume.res = 0,
     .factor.num = 125000,
     .factor.res = 3,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_temp_t temperature_config =
 {
     .temperature.num = 205,
     .temperature.res = 1,
-    .unit_volume_temp = UNIT_CENTIGRADES,
+    .unit_volume_temp = CELSIUS,
 };
 
 // Defines.

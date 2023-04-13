@@ -26,42 +26,10 @@
 // includes
 
 #include "main.h"
+#include "../fmc/fmc.h"
 #include "pcf8553.h"
 
 // Typedefs.
-
-/*
- * Todos los símbolos que es posible imprimir en la pantalla LCD.
- */
-typedef enum
-{
-    BATTERY,
-    POWER,
-    RATE,
-    E,
-    BATCH,
-    TTL,
-    ACM,
-    BACKSLASH,
-    POINT,
-    CELSIUS,
-    H,
-    D,
-    S,
-    M,
-    LT,
-    M3,
-    KG,
-    GL,
-    BR,
-    NOTHING,
-    VE,
-    PASS,
-    KO,
-    PASS1,
-    PASS2,
-    PASS3
-} symbols_t;
 
 /*
  * Enumeración de las dos filas de dígitos que tiene la pantalla LCD.
@@ -151,6 +119,8 @@ void lcd_put_char(char c, uint8_t col, rows_t row);
 void lcd_refresh();
 void lcd_set_point(rows_t line, point_t point);
 void lcd_set_symbol(symbols_t symbol, blink_t blink_speed);
+void lcd_set_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed);
+void lcd_set_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed);
 
 #endif /* FM_LCD_H_ */
 

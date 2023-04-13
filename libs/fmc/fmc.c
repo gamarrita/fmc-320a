@@ -15,6 +15,7 @@
 
 // Includes.
 #include "fmc.h"
+#include "../fm_factory/fm_factory.h"
 
 // Typedef.
 
@@ -40,10 +41,8 @@ static const uint32_t g_scalar[] =
 };
 
 // Defines.
-#define ACM_INIT_VALUE      140
+
 #define EXT_TEMP_INIT_VALUE 253
-#define RATE_INIT_VALUE     100
-#define TTL_INIT_VALUE      9870
 
 //Debug.
 
@@ -58,13 +57,19 @@ static const uint32_t g_scalar[] =
 
 // Project variables, non-static, at least used in other file.
 
+/*
+ * Inicializo variables de la estructura fmc_totalizer_t para trabajar
+ * con los parámetros acm, rate y ttl.
+ */
+fmc_totalizer_t acm;
+fmc_totalizer_t rate;
+fmc_totalizer_t ttl;
+
 // External variables.
 
 // Global variables, statics.
-static uint32_t g_acm = ACM_INIT_VALUE;
+
 static uint32_t g_ext_temp = EXT_TEMP_INIT_VALUE;
-static uint32_t g_rate = RATE_INIT_VALUE;
-static uint32_t g_ttl = TTL_INIT_VALUE;
 
 // Private function prototypes.
 
@@ -78,9 +83,13 @@ static uint32_t g_ttl = TTL_INIT_VALUE;
  * @param  None
  * @retval caudal acumulado g_acm de tipo uint32_t definido como global.
  */
-uint32_t fmc_get_acm()
+fmc_totalizer_t fmc_get_acm()
 {
-    return (g_acm);
+    acm = fm_factory_get_acm();
+
+    acm = fmc_totalizer_init(acm);
+
+    return (acm);
 }
 
 /*
@@ -101,9 +110,13 @@ uint32_t fmc_get_ext_temp()
  * @param  None
  * @retval caudal instantaneo g_rate de tipo uint32_t definido como global.
  */
-uint32_t fmc_get_rate()
+fmc_totalizer_t fmc_get_rate()
 {
-    return (g_rate);
+    rate = fm_factory_get_rate();
+
+    rate = fmc_totalizer_init(rate);
+
+    return (rate);
 }
 
 /*
@@ -112,9 +125,13 @@ uint32_t fmc_get_rate()
  * @param  None
  * @retval caudal histórico g_ttl de tipo uint32_t definido como global.
  */
-uint32_t fmc_get_ttl()
+fmc_totalizer_t fmc_get_ttl()
 {
-    return (g_ttl);
+    ttl = fm_factory_get_ttl();
+
+    ttl = fmc_totalizer_init(ttl);
+
+    return (ttl);
 }
 
 /*

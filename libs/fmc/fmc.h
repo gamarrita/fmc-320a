@@ -24,21 +24,46 @@
 
 // Typedef.
 
+/*
+ * Todos los símbolos que es posible imprimir en la pantalla LCD.
+ */
 typedef enum
 {
-    UNIT_LITER = 'L',
-    UNIT_METER_CUBIC = 'M',
-    UNIT_CENTIGRADES = 'C',
-    UNIT_VOLUME_END = 0xFF,
+    BATTERY,
+    POWER,
+    RATE,
+    E,
+    BATCH,
+    TTL,
+    ACM,
+    BACKSLASH,
+    POINT,
+    VE,
+    PASS,
+    KO,
+    PASS1,
+    PASS2,
+    PASS3
+} symbols_t;
+
+typedef enum
+{
+    LT,
+    M3,
+    KG,
+    GL,
+    BR,
+    CELSIUS,
+    NOTHING
 } fmc_unit_volume_t;
 
 typedef enum
 {
-    UNIT_DAY = 'D',
-    UNIT_HOUR = 'H',
-    UNIT_MINUTE = 'M',
-    UNIT_SECOND = 'S',
-    UNIT_TIME_END = 0xFF,
+    H,
+    D,
+    S,
+    M,
+    UNIT_TIME_END
 } fmc_unit_time_t;
 
 // Typedef.
@@ -55,6 +80,7 @@ typedef struct
     fmc_fp_t volume;
     fmc_fp_t factor; // Factor en pulsos / unidad de volumen
     fmc_unit_volume_t unit_volume;
+    fmc_unit_time_t unit_time;
 } fmc_totalizer_t;
 
 typedef struct
@@ -67,10 +93,10 @@ typedef struct
 
 // Function prototypes
 
-uint32_t fmc_get_acm();
-uint32_t fmc_get_ext_temp();
-uint32_t fmc_get_rate();
-uint32_t fmc_get_ttl();
+fmc_totalizer_t fmc_get_acm();
+uint32_t        fmc_get_ext_temp();
+fmc_totalizer_t fmc_get_rate();
+fmc_totalizer_t fmc_get_ttl();
 uint32_t fmc_get_version();
 void fmc_totalizer_clear_pulse(fmc_totalizer_t *p_totalizer);
 fmc_totalizer_t fmc_totalizer_init(fmc_totalizer_t totalizer);

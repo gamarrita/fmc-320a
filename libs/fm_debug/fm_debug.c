@@ -1,22 +1,22 @@
 /* @file fm_debug.c
  *
- * @brief Este modulo envia mensajes al UART o consola ITM
+ * @brief Este modulo envía mensajes al UART o consola ITM
  *
- * Las funciones que terminan con _itm los mesajes de envian a la consola
- * de debuger, para poder ver los mensajes se tienen que configurar:
+ * Las funciones que terminan con _itm los mensajes de envian a la consola
+ * de debugger, para poder ver los mensajes se tienen que configurar:
  *
  * En Cube MX:
  * - Sys->Debug->Trace Asynchronous Sw
  * - En Clock configuration puede elegir cualquier frecuencia para HCLK, pero
- * debera recordarla.
+ * deberá recordarla.
  *
  * En Debug Configuration:
- * Debuuger->Serial Wire Viewer SVW->Enable(marcar).
- * Clock Core (Mhz)- El valor que debia recordad, HCLK en Clock Configuration.
+ * Debugger->Serial Wire Viewer SVW->Enable(marcar).
+ * Clock Core (Mhz)- El valor que debía recordar, HCLK en Clock Configuration.
  *
- * Iniciada la sescion de debug: en la parte inferior deberia aparecer la
+ * Iniciada la sesión de debug: en la parte inferior deberia aparecer la
  * solapa ITM console, si no aparece se la busca y se la agrega, dos pasos
- * necesarias, habiltar el port_0 y click el boton rojo para iniciar "trace".
+ * necesarias, habilitar el port_0 y click el boton rojo para iniciar "trace".
  *
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
