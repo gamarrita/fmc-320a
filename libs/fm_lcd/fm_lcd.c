@@ -56,7 +56,7 @@
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-void fm_lcd_acm_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
+void fm_lcd_acm_rate()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
@@ -73,9 +73,9 @@ void fm_lcd_acm_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
     lcd_set_symbol(ACM, 0x0);
     lcd_set_symbol(RATE, 0x0);
 
-    lcd_set_vol_unit(left_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_time_unit(right_unit, 0x0);
+    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
 }
 
 /*
@@ -94,13 +94,14 @@ void fm_lcd_acm_temp()
     fm_lcd_fp_add_dot(fmc_get_acm().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_temp_stm32_format(), lcd_msg,
-    MSG_LENGTH);
-
+    fm_lcd_fp_to_str(fmc_get_stm32_temp().temperature, ' ', LINE_1_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_stm32_temp().temperature, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
     lcd_set_symbol(ACM, 0x0);
-    lcd_set_vol_unit(CELSIUS, 0x0);
+    lcd_set_vol_unit(fmc_get_stm32_temp().unit_volume_temp, 0x0);
 }
 
 /*
@@ -334,15 +335,16 @@ void fm_lcd_init()
  * @param  Unidad de volumen y unidad de tiempo.
  * @retval None
  */
-void fm_lcd_k_factor(fmc_unit_volume_t volume_unit, point_t high_point)
+void fm_lcd_k_factor()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, 141700, lcd_msg, MSG_LENGTH);
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(), ' ', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point);
 
-    lcd_set_vol_unit(volume_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
 }
 
 /*
@@ -398,7 +400,7 @@ void fm_lcd_refresh()
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-void fm_lcd_ttl_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
+void fm_lcd_ttl_rate()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
@@ -415,9 +417,9 @@ void fm_lcd_ttl_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
     lcd_set_symbol(TTL, 0x0);
     lcd_set_symbol(RATE, 0x0);
 
-    lcd_set_vol_unit(left_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_ttl().unit_volume, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_time_unit(right_unit, 0x0);
+    lcd_set_time_unit(fmc_get_ttl().unit_time, 0x0);
 }
 
 /*
@@ -426,21 +428,18 @@ void fm_lcd_ttl_rate(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
  * @param  Unidad de volumen y unidad de tiempo.
  * @retval None
  */
-void fm_lcd_units(fmc_unit_volume_t left_unit, fmc_unit_time_t right_unit)
+void fm_lcd_units()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fmc_fp_t high_number;
-
-    high_number.num = 0;
-    high_number.res = 1;
-    fm_lcd_fp_to_str(high_number, '0', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(high_number, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fm_factory_get_units_digits(), '0', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_digits(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    lcd_set_vol_unit(left_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_time_unit(right_unit, 0x0);
+    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
 }
 
 /*

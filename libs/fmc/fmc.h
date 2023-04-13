@@ -94,7 +94,7 @@ typedef struct
 // Function prototypes
 
 fmc_totalizer_t fmc_get_acm();
-uint32_t        fmc_get_ext_temp();
+fmc_temp_t      fmc_get_stm32_temp();
 fmc_totalizer_t fmc_get_rate();
 fmc_totalizer_t fmc_get_ttl();
 uint32_t fmc_get_version();

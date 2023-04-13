@@ -183,7 +183,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_k_factor(LT, PNT_4);
+    fm_lcd_k_factor();
     fm_lcd_refresh();
 
     switch (event_id)
@@ -522,7 +522,7 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_units(LT, S);
+    fm_lcd_units();
     fm_lcd_refresh();
 
     switch (event_id)

@@ -16,6 +16,7 @@
 // Includes.
 #include "fmc.h"
 #include "../fm_factory/fm_factory.h"
+#include "../fm_temp_stm32/fm_temp_stm32.h"
 
 // Typedef.
 
@@ -64,12 +65,11 @@ static const uint32_t g_scalar[] =
 fmc_totalizer_t acm;
 fmc_totalizer_t rate;
 fmc_totalizer_t ttl;
+fmc_temp_t int_temperature;
 
 // External variables.
 
 // Global variables, statics.
-
-static uint32_t g_ext_temp = EXT_TEMP_INIT_VALUE;
 
 // Private function prototypes.
 
@@ -81,7 +81,7 @@ static uint32_t g_ext_temp = EXT_TEMP_INIT_VALUE;
  * @brief Función que obtiene el valor del caudal acumulado y lo devuelve como
  * parámetro de retorno.
  * @param  None
- * @retval caudal acumulado g_acm de tipo uint32_t definido como global.
+ * @retval Volumen acumulado como estructura.
  */
 fmc_totalizer_t fmc_get_acm()
 {
@@ -93,22 +93,27 @@ fmc_totalizer_t fmc_get_acm()
 }
 
 /*
- * @brief Función que obtiene el valor de la temperatura externa y lo devuelve
+ * @brief Función que obtiene el valor de la temperatura interna y la devuelve
  * como parámetro de retorno.
  * @param  None
- * @retval temperatura externa g_ext_temp de tipo uint32_t definido como
+ * @retval temperatura interna del microcontrolador como una estructura que
+ * contiene su valor, resolución y unidad.
  * global.
  */
-uint32_t fmc_get_ext_temp()
+fmc_temp_t fmc_get_stm32_temp()
 {
-    return (g_ext_temp);
+    int_temperature.temperature.num = fm_temp_stm32_format();
+    int_temperature.temperature.res = fm_factory_get_temp().temperature.res;
+    int_temperature.unit_volume_temp = fm_factory_get_temp().unit_volume_temp;
+
+    return (int_temperature);
 }
 
 /*
  * @brief Función que obtiene el valor del caudal instantaneo 'rate' y lo
  * devuelve como parámetro de retorno.
  * @param  None
- * @retval caudal instantaneo g_rate de tipo uint32_t definido como global.
+ * @retval caudal instantaneo como estructura.
  */
 fmc_totalizer_t fmc_get_rate()
 {
@@ -123,7 +128,7 @@ fmc_totalizer_t fmc_get_rate()
  * @brief Función que obtiene el valor del caudal histórico y lo devuelve como
  * parámetro de retorno.
  * @param  None
- * @retval caudal histórico g_ttl de tipo uint32_t definido como global.
+ * @retval volumen histórico como estructura.
  */
 fmc_totalizer_t fmc_get_ttl()
 {

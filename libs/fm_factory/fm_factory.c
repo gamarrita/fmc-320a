@@ -68,9 +68,21 @@ static fmc_totalizer_t rate_config =
 
 static fmc_temp_t temperature_config =
 {
-    .temperature.num = 205,
-    .temperature.res = 1,
+    .temperature.num = 20,
+    .temperature.res = 0,
     .unit_volume_temp = CELSIUS,
+};
+
+static fmc_fp_t units_digits =
+{
+    .num = 0,
+    .res = 2,
+};
+
+static fmc_fp_t k_factor_config =
+{
+    .num = 1417,
+    .res = 1,
 };
 
 // Defines.
@@ -116,6 +128,16 @@ fmc_totalizer_t fm_factory_get_rate()
 fmc_temp_t fm_factory_get_temp()
 {
     return (temperature_config);
+}
+
+fmc_fp_t fm_factory_get_units_digits()
+{
+    return (units_digits);
+}
+
+fmc_fp_t fm_factory_get_k_factor()
+{
+    return (k_factor_config);
 }
 
 // Interrupts

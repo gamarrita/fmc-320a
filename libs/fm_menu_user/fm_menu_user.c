@@ -79,7 +79,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_acm_rate(GL, H);
+    fm_lcd_acm_rate();
     fm_lcd_refresh();
 
     switch (event_id)
@@ -264,7 +264,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_ttl_rate(LT, S);
+    fm_lcd_ttl_rate();
     fm_lcd_refresh();
 
     switch (event_id)
