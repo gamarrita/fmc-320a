@@ -16,6 +16,7 @@
 #include <string.h>
 #include "fm_factory.h"
 #include "../fmc/fmc.h"
+#include "../fm_lcd/fm_lcd.h"
 
 // Typedef.
 
@@ -100,6 +101,8 @@ static fmc_fp_t k_factor_config =
 
 // Project variables, non-static, at least used in other file.
 
+sel_value_t k_array[LINE_1_DIGITS]; //Arreglo que almacena al factor K.
+
 // External variables.
 
 // Global variables, statics.
@@ -110,44 +113,174 @@ static fmc_fp_t k_factor_config =
 
 // Public function bodies.
 
+/*
+ * @brief Función que devuelve el parámetro ACM almacenado en fm_factory.
+ * @param None
+ * @retval Parámetro ACM como estructura de tipo fmc_totalizer_t.
+ */
 fmc_totalizer_t fm_factory_get_acm()
 {
     return (acm_config);
 }
 
+/*
+ * @brief Función que devuelve el parámetro TTL almacenado en fm_factory.
+ * @param None
+ * @retval Parámetro TTL como estructura de tipo fmc_totalizer_t.
+ */
 fmc_totalizer_t fm_factory_get_ttl()
 {
     return (ttl_config);
 }
 
+/*
+ * @brief Función que devuelve el parámetro RATE almacenado en fm_factory.
+ * @param None
+ * @retval Parámetro RATE como estructura de tipo fmc_totalizer_t.
+ */
 fmc_totalizer_t fm_factory_get_rate()
 {
     return (rate_config);
 }
 
+/*
+ * @brief Función que devuelve el la temperatura interna del micro almacenado en
+ * fm_factory.
+ * @param None
+ * @retval Temperatura interna del micro como estructura de tipo fmc_temp_t.
+ */
 fmc_temp_t fm_factory_get_temp()
 {
     return (temperature_config);
 }
 
+/*
+ * @brief Función que devuelve la configuración de resoluciones almacenado en
+ * fm_factory.
+ * @param None
+ * @retval Configuración de resoluciones como estructura de tipo fmc_fp_t.
+ */
 fmc_fp_t fm_factory_get_units_digits()
 {
     return (units_digits);
 }
 
+/*
+ * @brief Función que devuelve el factor K almacenado en fm_factory.
+ * @param None
+ * @retval Factor K.
+ */
 fmc_fp_t fm_factory_get_k_factor()
 {
     return (k_factor_config);
 }
 
-void fm_factory_modify_res(uint8_t units_res, uint8_t acm_res, uint8_t ttl_res,
-uint8_t rate_res)
+/*
+ * @brief Función que resta uno al dígito pasado como parámetro del factor K.
+ * @param Digito a modificar del factor K de la enumeración sel_digit_t.
+ * @retval None
+ */
+void fm_factory_modify_k_factor_subs(sel_digit_t digit_k)
+{
+    uint32_t k_new_num = 0;
+    fm_factory_separate_k_factor();
+    if (k_array[LINE_1_DIGITS - 1 - digit_k] > VAL_0)
+    {
+        k_array[LINE_1_DIGITS - 1 - digit_k]--;
+    }
+    else
+    {
+        k_array[LINE_1_DIGITS - 1 - digit_k] = VAL_9;
+    }
+
+    for (int i = 0; i <= LINE_1_DIGITS - 1; i++)
+    {
+        k_new_num = (k_new_num * 10) + k_array[i];
+    }
+
+    k_factor_config.num = k_new_num;
+}
+
+/*
+ * @brief Función que suma uno al dígito pasado como parámetro del factor K.
+ * @param Digito a modificar del factor K de la enumeración sel_digit_t.
+ * @retval None
+ */
+void fm_factory_modify_k_factor_add(sel_digit_t digit_k)
+{
+    uint32_t k_new_num = 0;
+    fm_factory_separate_k_factor();
+    if (k_array[LINE_1_DIGITS - 1 - digit_k] < VAL_9)
+    {
+        k_array[LINE_1_DIGITS - 1 - digit_k]++;
+    }
+    else
+    {
+        k_array[LINE_1_DIGITS - 1 - digit_k] = VAL_0;
+    }
+
+    for (int i = 0; i <= LINE_1_DIGITS - 1; i++)
+    {
+        k_new_num = (k_new_num * 10) + k_array[i];
+    }
+
+    k_factor_config.num = k_new_num;
+}
+
+/*
+ * @brief modifica la resolución de los factores acm y ttl.
+ * @param Resoluciones de fabrica, y de los parámetros ACM y TTL.
+ * @retval None
+ */
+void fm_factory_modify_res_acm_ttl(sel_resolution_t units_res,
+sel_resolution_t acm_res, sel_resolution_t ttl_res)
 {
     units_digits.res = units_res;
     acm_config.volume.res = acm_res;
     ttl_config.volume.res = ttl_res;
-    rate_config.volume.res = rate_res;
 }
+
+void fm_factory_modify_time_units(fmc_unit_time_t time_units)
+{
+    acm_config.unit_time = time_units;
+    ttl_config.unit_time = time_units;
+    rate_config.unit_time = time_units;
+}
+
+void fm_factory_modify_volume_units(fmc_unit_volume_t volume_units)
+{
+    acm_config.unit_volume = volume_units;
+    ttl_config.unit_volume = volume_units;
+    rate_config.unit_volume = volume_units;
+}
+
+/*
+ * @brief Función que separa en dígitos el factor K y los guarda en un arreglo
+ * global.
+ * @param None
+ * @retval None
+ */
+void fm_factory_separate_k_factor()
+{
+    uint32_t k_num;
+    int i = 7;
+    k_num = fm_factory_get_k_factor().num;
+
+    while (i >= 0)
+    {
+        if (k_num > 0)
+        {
+            k_array[i] = k_num % 10;
+            k_num /= 10;
+        }
+        else
+        {
+            k_array[i] = 0;
+        }
+        i--;
+    }
+}
+
 // Interrupts
 
 /*** end of file ***/

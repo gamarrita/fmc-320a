@@ -48,22 +48,12 @@ typedef enum
 
 typedef enum
 {
-    LT,
-    M3,
-    KG,
-    GL,
-    BR,
-    CELSIUS,
-    NOTHING
+    LT, M3, KG, GL, BR, CELSIUS, NOTHING
 } fmc_unit_volume_t;
 
 typedef enum
 {
-    H,
-    D,
-    S,
-    M,
-    UNIT_TIME_END
+    H, D, S, M, UNIT_TIME_END
 } fmc_unit_time_t;
 
 // Typedef.
@@ -94,7 +84,7 @@ typedef struct
 // Function prototypes
 
 fmc_totalizer_t fmc_get_acm();
-fmc_temp_t      fmc_get_stm32_temp();
+fmc_temp_t fmc_get_stm32_temp();
 fmc_totalizer_t fmc_get_rate();
 fmc_totalizer_t fmc_get_ttl();
 uint32_t fmc_get_version();
