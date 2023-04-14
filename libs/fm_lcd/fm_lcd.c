@@ -13,19 +13,18 @@
 
 // Includes.
 #include "fm_lcd.h"
-#include "lcd.h"
-#include "../fm_computer/fm_computer.h"
 #include "../fm_factory/fm_factory.h"
 #include "../fm_calendar/fm_calendar.h"
+#include "../fm_temp_stm32/fm_temp_stm32.h"
 #include "../fm_version/fm_version.h"
-#include "../fm_temperature_sensor/fm_temperature_sensor.h"
+#include "../fmc/fmc.h"
 
 // Typedef.
 
 // Const data.
 
 // Defines.
-#define MSG_LENGTH 12
+#define MSG_LENGTH    12
 // Debug.
 
 /*
@@ -80,8 +79,8 @@ void fm_lcd_acm_rate(symbols_t left_unit, symbols_t right_unit)
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    acm = fm_computer_totalizer_init(acm);
-    rate = fm_computer_totalizer_init(rate);
+    acm = fmc_totalizer_init(acm);
+    rate = fmc_totalizer_init(rate);
 
     fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
@@ -127,13 +126,13 @@ void fm_lcd_acm_temp()
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    acm = fm_computer_totalizer_init(acm);
+    acm = fmc_totalizer_init(acm);
 
     fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_int_temperature_format(), lcd_msg,
+    fm_lcd_format_number_in_line(LOW_ROW, fm_temp_stm32_format(), lcd_msg,
     MSG_LENGTH);
 
     fm_lcd_puts(lcd_msg, LOW_ROW);
@@ -444,8 +443,8 @@ void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit)
      * del factor y del propio volumen, y luego dividirlo por el propio
      * factor.
      */
-    ttl = fm_computer_totalizer_init(ttl);
-    rate = fm_computer_totalizer_init(rate);
+    ttl = fmc_totalizer_init(ttl);
+    rate = fmc_totalizer_init(rate);
 
     fm_lcd_fp_to_str(ttl.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
     fm_lcd_fp_add_dot(ttl.volume, lcd_msg, sizeof(lcd_msg));

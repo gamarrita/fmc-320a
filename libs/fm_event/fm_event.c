@@ -1,12 +1,8 @@
-/* @file fm_module.c
+/* @file fm_event.c
  *
- * @brief Each source file shall be comprised of some or all of the following
- * sections, in the order listed down below.
- * Comenzar cada nuevo archivo usando un template. Hay un template general a
- * todos los proyectos que puede ser usado hasta el momento de introducir un
- * cambio que solo responderá a un proyecto en progreso, es ese caso el
- * template pasará a ser parte del proyecto.
- * 
+ * @brief Este módulo permite inicializar y declarar una serie de eventos que
+ * serán introducidos en una cola de eventos, con el objetivo de que las
+ * máquinas de estado sepan a que estado desplazarse.
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -34,7 +30,7 @@ const osMessageQueueAttr_t event_queue_attributes =
 
 // Defines.
 
-#define EVENT_QUEUE_LENGTH 4
+#define EVENT_QUEUE_LENGTH    4
 
 //Debug.
 

@@ -29,15 +29,16 @@
  *
  */
 
-#ifndef FM_LCD_H_
-#define FM_LCD_H_
+#ifndef     FM_LCD_H_
+#define     FM_LCD_H_
 
 // Includes.
 
 #include "main.h"
 #include "lcd.h"
 #include "stdio.h"
-#include "../fm_computer/fm_computer.h"
+
+#include "../fmc/fmc.h"
 
 // Macros, defines, microcontroller pins (dhs).
 

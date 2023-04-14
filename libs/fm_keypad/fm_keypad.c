@@ -9,7 +9,6 @@
  */
 
 // Includes.
-#include "main.h"
 #include "stdio.h"
 #include "fm_keypad.h"
 #include "../fm_event/fm_event.h"
@@ -48,9 +47,6 @@
 #endif
 
 // Project variables, non-static, at least used in other file.
-
-uint32_t previous_millis = 0;
-uint32_t current_millis = 0;
 
 // External variables.
 

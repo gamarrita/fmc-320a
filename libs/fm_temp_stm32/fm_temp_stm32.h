@@ -7,8 +7,8 @@
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_TEMPERATURE_SENSOR_H_
-#define FM_TEMPERATURE_SENSOR_H_
+#ifndef     FM_TEMPERATURE_SENSOR_H_
+#define     FM_TEMPERATURE_SENSOR_H_
 
 // includes
 
@@ -22,8 +22,8 @@
 
 // Function prototypes
 
-void fm_int_temperature_get();
-int fm_int_temperature_format();
+void fm_temp_stm32_get();
+int fm_temp_stm32_format();
 
 #endif /* FM_TEMPERATURE_SENSOR_H */
 

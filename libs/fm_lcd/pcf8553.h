@@ -10,8 +10,8 @@
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef PCF8553_H_
-#define PCF8553_H_
+#ifndef     PCF8553_H_
+#define     PCF8553_H_
 
 // Includes.
 
@@ -39,7 +39,10 @@
  */
 typedef enum
 {
-    OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
+    OFF_SPEED,
+    LOW_SPEED,
+    MED_SPEED,
+    HIGH_SPEED
 } blink_t;
 
 /*
@@ -98,13 +101,13 @@ typedef union
  * Tamaño de la memoria interna del pcf8553 para controlar el encendido/apagado
  * de los segmentos, con 20 bytes se controlan 20 * 8 =  160 segmentos.
  */
-#define PCF8553_DATA_SIZE 20
+#define PCF8553_DATA_SIZE   20
 
-#define LINE_0_DIGITS (8+1) // Dígitos linea 1 + terminador nulo.
-#define LINE_1_DIGITS (7+1) // Dígitos linea 2 + terminador nulo.
+#define LINE_0_DIGITS       (8+1) // Dígitos linea 1 + terminador nulo.
+#define LINE_1_DIGITS       (7+1) // Dígitos linea 2 + terminador nulo.
 
-#define ALL_SEGMENTS 0xFF   // Macro para escribir 1 en todos los segmentos
-#define NONE_SEGMENTS 0x00  // Macro para escribir 0 en todos los segmentos
+#define ALL_SEGMENTS        0xFF   // Macro para escribir 1 en todos los segmentos
+#define NONE_SEGMENTS       0x00  // Macro para escribir 0 en todos los segmentos
 
 // Public function prototypes.
 

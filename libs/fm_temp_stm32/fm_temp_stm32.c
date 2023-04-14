@@ -9,7 +9,7 @@
  */
 
 // Includes.
-#include "fm_temperature_sensor.h"
+#include "fm_temp_stm32.h"
 
 // Typedef.
 
@@ -49,20 +49,22 @@ extern ADC_HandleTypeDef hadc1;
 
 // Public function bodies.
 
-void fm_int_temperature_get()
+void fm_temp_stm32_get()
 {
+    const uint8_t poll_time = 100;
+
     HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
     HAL_ADC_Start(&hadc1);
-    HAL_ADC_PollForConversion(&hadc1, 100);
+    HAL_ADC_PollForConversion(&hadc1, poll_time);
     HAL_ADC_Stop(&hadc1);
 }
 
-int fm_int_temperature_format()
+int fm_temp_stm32_format()
 {
     uint16_t raw_value;
     int temp_celcius;
 
-    fm_int_temperature_get();
+    fm_temp_stm32_get();
     raw_value = HAL_ADC_GetValue(&hadc1);
     temp_celcius = __HAL_ADC_CALC_TEMPERATURE(3285, raw_value,
     ADC_RESOLUTION_12B);

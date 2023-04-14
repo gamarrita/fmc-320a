@@ -15,23 +15,25 @@
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_MENU_USER_H_
-#define FM_MENU_USER_H_
+#ifndef     FM_MENU_USER_H_
+#define     FM_MENU_USER_H_
 
 // includes
 #include "main.h"
-#include "../../../libs/fm_lcd/fm_lcd.h"
+#include "../fm_lcd/fm_lcd.h"
 #include "../fm_event/fm_event.h"
+#include "../fm_menu_config/fm_menu_config.h"
 
 // Macros, defines, microcontroller pins (dhs).
 
 // Typedef.
 
-// Lo siguiente es una tecnica para lograr que:
-// Una funcion retorna un puntero a funcion, donde
-// el tipo de funcion retornada es el de la funcion que se esta ejecutando.
-typedef void* (*ptr_ret_menu_t)(fm_event_t);      // Un puntero a funcion
-typedef ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);   //
+/* Lo siguiente es una tecnica para lograr que una función retorne un puntero a
+ * función, donde el tipo de función retornada es el de la funcion que se está
+ * ejecutando.
+ */
+typedef void* (*ptr_ret_menu_t)(fm_event_t);            // Un puntero a funcion
+typedef       ptr_ret_menu_t (*ptr_fun_menu_t)(fm_event_t);
 
 // Defines.
 

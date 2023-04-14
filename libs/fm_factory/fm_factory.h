@@ -5,12 +5,12 @@
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  */
 
-#ifndef FM_FACTORY_H_
-#define FM_FACTORY_H_
+#ifndef     FM_FACTORY_H_
+#define     FM_FACTORY_H_
 
 // includes
 #include "main.h"
-#include "../fm_computer/fm_computer.h"
+#include "../fmc/fmc.h"
 
 // Macros, defines, microcontroller pins (dhs).
 

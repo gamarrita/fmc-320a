@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef FM_DEBUG_H_
-#define FM_DEBUG_H_
+#ifndef     FM_DEBUG_H_
+#define     FM_DEBUG_H_
 
 // includes.
 #include "main.h"
@@ -24,7 +24,7 @@
 
 // Defines.
 
-//#define FM_DEBUG_MENU 1
+#define FM_DEBUG_MENU   1
 //#define FM_DEBUG_KEYPAD 1
 
 // Function prototypes
