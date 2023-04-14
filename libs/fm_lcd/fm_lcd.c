@@ -56,46 +56,26 @@
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-void fm_lcd_acm_rate(symbols_t left_unit, symbols_t right_unit)
+void fm_lcd_acm_rate()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    /*
-     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
-     * con los parámetros acm y rate.
-     */
-    fmc_totalizer_t acm;
-    fmc_totalizer_t rate;
-
-    /*
-     * Cargo los valores iniciales de acm y rate (que en este punto son los
-     * únicos que se usan (sand))
-     */
-    acm = fm_factory_get_acm();
-    rate = fm_factory_get_rate();
-
-    /*
-     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
-     * del factor y del propio volumen, y luego dividirlo por el propio
-     * factor.
-     */
-    acm = fmc_totalizer_init(acm);
-    rate = fmc_totalizer_init(rate);
-
-    fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fmc_get_acm().volume, ' ', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_acm().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    fm_lcd_fp_to_str(rate.volume, ' ', LINE_1_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(rate.volume, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fmc_get_rate().volume, ' ', LINE_1_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_rate().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
     lcd_set_symbol(ACM, 0x0);
     lcd_set_symbol(RATE, 0x0);
 
-    lcd_set_symbol(left_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_symbol(right_unit, 0x0);
+    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
 }
 
 /*
@@ -109,36 +89,19 @@ void fm_lcd_acm_temp()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    /*
-     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
-     * con el parámetro acm.
-     */
-    fmc_totalizer_t acm;
-
-    /*
-     * Cargo los valores iniciales de acm (que en este punto son los
-     * únicos que se usan (sand))
-     */
-    acm = fm_factory_get_acm();
-
-    /*
-     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
-     * del factor y del propio volumen, y luego dividirlo por el propio
-     * factor.
-     */
-    acm = fmc_totalizer_init(acm);
-
-    fm_lcd_fp_to_str(acm.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(acm.volume, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fmc_get_acm().volume, ' ', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_acm().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_temp_stm32_format(), lcd_msg,
-    MSG_LENGTH);
-
+    fm_lcd_fp_to_str(fmc_get_stm32_temp().temperature, ' ', LINE_1_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_stm32_temp().temperature, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
     lcd_set_symbol(ACM, 0x0);
-    lcd_set_symbol(CELSIUS, 0x0);
+    lcd_set_vol_unit(fmc_get_stm32_temp().unit_volume_temp, 0x0);
 }
 
 /*
@@ -171,22 +134,21 @@ void fm_lcd_clear()
  * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
  * @retval None
  */
-void fm_lcd_date_hour(point_t high_point_1, point_t high_point_2,
-point_t low_point_1, point_t low_point_2)
+void fm_lcd_date_hour(int time, int date)
 {
     char lcd_msg[MSG_LENGTH];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, fm_calendar_format_date(), lcd_msg,
+    fm_lcd_format_number_in_line(HIGH_ROW, date, lcd_msg,
     MSG_LENGTH);
     fm_lcd_puts(lcd_msg, HIGH_ROW);
-    lcd_set_point(HIGH_ROW, high_point_1);
-    lcd_set_point(HIGH_ROW, high_point_2);
+    lcd_set_point(HIGH_ROW, PNT_1);
+    lcd_set_point(HIGH_ROW, PNT_3);
 
-    fm_lcd_format_number_in_line(LOW_ROW, fm_calendar_format_time(), lcd_msg,
+    fm_lcd_format_number_in_line(LOW_ROW, time, lcd_msg,
     MSG_LENGTH);
     fm_lcd_puts(lcd_msg, LOW_ROW);
-    lcd_set_point(LOW_ROW, low_point_1);
-    lcd_set_point(LOW_ROW, low_point_2);
+    lcd_set_point(LOW_ROW, PNT_2);
+    lcd_set_point(LOW_ROW, PNT_4);
 }
 
 /*
@@ -259,13 +221,13 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
 }
 
 /*
- * Convierte un numero con punto decimal a una string, pero sin el punto
+ * @brief Convierte un numero con punto decimal a una string, pero sin el punto
  *
  * @param fp numero con punto decimal.
  * @param leading_char caracter de relleno, cero para no rellenar.
  * @param al rellenar debemos indicar a que ancho con esta variable.
  * @param p_str string destino, por referencia.
- * @param str_size tamaño del string
+ * @param str_size tamaño del string.
  */
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size)
@@ -274,7 +236,7 @@ int str_size)
 
     /*
      * Este es el unico chequeo de contorno. Verifica que el tamaño del string
-     * no sea menor a LINE_BUFFER_SIZE, calculado como suficiente para operar
+     * no sea menor a PCF8553_DATA_SIZE, calculado como suficiente para operar
      * con las líneas del lcd.
      */
     if (str_size < PCF8553_DATA_SIZE)
@@ -363,8 +325,26 @@ void fm_lcd_init()
      * Se encienden todos los segmentos por 500 milisegundos al iniciar.
      */
     pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-    HAL_Delay(500); // @suppress("Avoid magic numbers")
+    HAL_Delay(3000); // @suppress("Avoid magic numbers")
     pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
+}
+
+/*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración del factor de calibración K.
+ * @param  Unidad de volumen y unidad de tiempo.
+ * @retval None
+ */
+void fm_lcd_k_factor()
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(), ' ', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
 }
 
 /*
@@ -420,46 +400,46 @@ void fm_lcd_refresh()
  * unidades a utilizar en la medición de tipo symbols_t.
  * @retval None
  */
-void fm_lcd_ttl_rate(symbols_t left_unit, symbols_t right_unit)
+void fm_lcd_ttl_rate()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    /*
-     * Inicializo variables de la estructura fmc_totalizer_t para trabajar
-     * con los parámetros acm y rate.
-     */
-    fmc_totalizer_t ttl;
-    fmc_totalizer_t rate;
-
-    /*
-     * Cargo los valores iniciales de acm y rate (que en este punto son los
-     * únicos que se usan (sand))
-     */
-    ttl = fm_factory_get_ttl();
-    rate = fm_factory_get_rate();
-
-    /*
-     * Obtengo el valor del volumen acm al multiplicarlo por las resoluciones
-     * del factor y del propio volumen, y luego dividirlo por el propio
-     * factor.
-     */
-    ttl = fmc_totalizer_init(ttl);
-    rate = fmc_totalizer_init(rate);
-
-    fm_lcd_fp_to_str(ttl.volume, ' ', LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(ttl.volume, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fmc_get_ttl().volume, ' ', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_ttl().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    fm_lcd_fp_to_str(rate.volume, ' ', LINE_1_DIGITS, lcd_msg, sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(rate.volume, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_to_str(fmc_get_rate().volume, ' ', LINE_1_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fmc_get_rate().volume, lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
     lcd_set_symbol(TTL, 0x0);
     lcd_set_symbol(RATE, 0x0);
 
-    lcd_set_symbol(left_unit, 0x0);
+    lcd_set_vol_unit(fmc_get_ttl().unit_volume, 0x0);
     lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_symbol(right_unit, 0x0);
+    lcd_set_time_unit(fmc_get_ttl().unit_time, 0x0);
+}
+
+/*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración de unidades de volumen y tiempo y la resolución de la medida.
+ * @param  Unidad de volumen y unidad de tiempo.
+ * @retval None
+ */
+void fm_lcd_units()
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_fp_to_str(fm_factory_get_units_digits(), '0', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_digits(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+
+    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
+    lcd_set_symbol(BACKSLASH, 0x0);
+    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
 }
 
 /*

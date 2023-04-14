@@ -190,7 +190,6 @@ void lcd_clear_all()
  * @param Enumeraciones rows_t y point_t de lcd.h
  * @retval None
  */
-
 void lcd_clear_point(rows_t line, point_t point)
 {
     if (line == HIGH_ROW)
@@ -256,7 +255,6 @@ void lcd_clear_point(rows_t line, point_t point)
  * @param Enumeraciones symbols_t y blink_t de lcd.h
  * @retval None
  */
-
 void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
 {
     switch (symbol)
@@ -288,116 +286,86 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
         case BACKSLASH:
             g_lcd_map[REG_10] &= ~(1 << BIT_1);
         break;
-        case CELSIUS:
-            g_lcd_map[REG_10] &= (1 << BIT_3);
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_15] &= (1 << BIT_3);
-            g_lcd_map[REG_15] &= (1 << BIT_2);
-            g_lcd_map[REG_0] &= (1 << BIT_4);
-
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_15] &= (1 << BIT_1);
-            g_lcd_map[REG_0] &= (1 << BIT_1);
-            g_lcd_map[REG_5] &= (1 << BIT_1);
-        break;
-        case H:
-            g_lcd_map[REG_5] &= (1 << BIT_6);
-        break;
-        case D:
-            g_lcd_map[REG_9] &= (1 << BIT_5);
-        break;
-        case S:
-            g_lcd_map[REG_10] &= (1 << BIT_5);
-        break;
-        case M:
-            g_lcd_map[REG_9] &= (1 << BIT_7);
-        break;
-        case LT:
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_0] &= (1 << BIT_5);
-            g_lcd_map[REG_5] &= (1 << BIT_5);
-
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_10] &= (1 << BIT_0);
-            g_lcd_map[REG_9] &= (1 << BIT_6);
-        break;
-        case KG:
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_15] &= (1 << BIT_4);
-            g_lcd_map[REG_15] &= (1 << BIT_2);
-            g_lcd_map[REG_0] &= (1 << BIT_5);
-            g_lcd_map[REG_5] &= (1 << BIT_4);
-
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_15] &= (1 << BIT_1);
-            g_lcd_map[REG_0] &= (1 << BIT_0);
-            g_lcd_map[REG_0] &= (1 << BIT_1);
-            g_lcd_map[REG_4] &= (1 << BIT_7);
-            g_lcd_map[REG_5] &= (1 << BIT_1);
-        break;
-        case M3:
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_10] &= (1 << BIT_2);
-            g_lcd_map[REG_15] &= (1 << BIT_4);
-            g_lcd_map[REG_15] &= (1 << BIT_3);
-            g_lcd_map[REG_0] &= (1 << BIT_5);
-            g_lcd_map[REG_0] &= (1 << BIT_3);
-
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_19] &= (1 << BIT_7);
-            g_lcd_map[REG_19] &= (1 << BIT_6);
-            g_lcd_map[REG_0] &= (1 << BIT_0);
-            g_lcd_map[REG_4] &= (1 << BIT_7);
-            g_lcd_map[REG_5] &= (1 << BIT_1);
-        break;
-        case BR:
-            g_lcd_map[REG_10] &= (1 << BIT_3);
-            g_lcd_map[REG_10] &= (1 << BIT_4);
-            g_lcd_map[REG_15] &= (1 << BIT_3);
-            g_lcd_map[REG_0] &= (1 << BIT_4);
-            g_lcd_map[REG_5] &= (1 << BIT_2);
-            g_lcd_map[REG_0] &= (1 << BIT_3);
-            g_lcd_map[REG_5] &= (1 << BIT_5);
-
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_15] &= (1 << BIT_1);
-            g_lcd_map[REG_19] &= (1 << BIT_7);
-            g_lcd_map[REG_19] &= (1 << BIT_6);
-            g_lcd_map[REG_0] &= (1 << BIT_0);
-            g_lcd_map[REG_0] &= (1 << BIT_1);
-            g_lcd_map[REG_5] &= (1 << BIT_0);
-        break;
-        case GL:
-            g_lcd_map[REG_10] &= (1 << BIT_3);
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_0] &= (1 << BIT_4);
-            g_lcd_map[REG_0] &= (1 << BIT_5);
-            g_lcd_map[REG_0] &= (1 << BIT_3);
-            g_lcd_map[REG_5] &= (1 << BIT_5);
-
-            g_lcd_map[REG_15] &= (1 << BIT_1);
-            g_lcd_map[REG_0] &= (1 << BIT_1);
-            g_lcd_map[REG_5] &= (1 << BIT_1);
-        break;
-        case NOTHING:
-            g_lcd_map[REG_15] &= (1 << BIT_2);
-            g_lcd_map[REG_0] &= (1 << BIT_4);
-
-            g_lcd_map[REG_19] &= (1 << BIT_6);
-            g_lcd_map[REG_0] &= (1 << BIT_0);
-        break;
         case VE:
-            g_lcd_map[REG_15] &= (1 << BIT_5);
-            g_lcd_map[REG_15] &= (1 << BIT_4);
-            g_lcd_map[REG_0] &= (1 << BIT_5);
-            g_lcd_map[REG_0] &= (1 << BIT_2);
+            g_lcd_map[REG_15] &= ~(1 << BIT_5);
+            g_lcd_map[REG_15] &= ~(1 << BIT_4);
+            g_lcd_map[REG_0] &= ~(1 << BIT_5);
+            g_lcd_map[REG_0] &= ~(1 << BIT_2);
 
-            g_lcd_map[REG_14] &= (1 << BIT_7);
-            g_lcd_map[REG_15] &= (1 << BIT_1);
-            g_lcd_map[REG_19] &= (1 << BIT_6);
-            g_lcd_map[REG_0] &= (1 << BIT_0);
-            g_lcd_map[REG_0] &= (1 << BIT_1);
-            g_lcd_map[REG_5] &= (1 << BIT_1);
+            g_lcd_map[REG_14] &= ~(1 << BIT_7);
+            g_lcd_map[REG_15] &= ~(1 << BIT_1);
+            g_lcd_map[REG_19] &= ~(1 << BIT_6);
+            g_lcd_map[REG_0] &= ~(1 << BIT_0);
+            g_lcd_map[REG_0] &= ~(1 << BIT_1);
+            g_lcd_map[REG_5] &= ~(1 << BIT_1);
+        break;
+        case PASS:
+            g_lcd_map[REG_13] &= ~(1 << BIT_1);
+            g_lcd_map[REG_13] &= ~(1 << BIT_0);
+            g_lcd_map[REG_18] &= ~(1 << BIT_1);
+            g_lcd_map[REG_18] &= ~(1 << BIT_0);
+            g_lcd_map[REG_3] &= ~(1 << BIT_0);
+
+            g_lcd_map[REG_13] &= ~(1 << BIT_3);
+            g_lcd_map[REG_13] &= ~(1 << BIT_2);
+            g_lcd_map[REG_18] &= ~(1 << BIT_3);
+            g_lcd_map[REG_18] &= ~(1 << BIT_2);
+            g_lcd_map[REG_3] &= ~(1 << BIT_2);
+            g_lcd_map[REG_3] &= ~(1 << BIT_3);
+
+            g_lcd_map[REG_13] &= ~(1 << BIT_5);
+            g_lcd_map[REG_13] &= ~(1 << BIT_4);
+            g_lcd_map[REG_18] &= ~(1 << BIT_4);
+            g_lcd_map[REG_3] &= ~(1 << BIT_5);
+            g_lcd_map[REG_8] &= ~(1 << BIT_4);
+
+            g_lcd_map[REG_13] &= ~(1 << BIT_7);
+            g_lcd_map[REG_13] &= ~(1 << BIT_6);
+            g_lcd_map[REG_18] &= ~(1 << BIT_6);
+            g_lcd_map[REG_3] &= ~(1 << BIT_7);
+            g_lcd_map[REG_8] &= ~(1 << BIT_6);
+
+        break;
+        case KO:
+            g_lcd_map[REG_15] &= ~(1 << BIT_5);
+            g_lcd_map[REG_15] &= ~(1 << BIT_4);
+            g_lcd_map[REG_15] &= ~(1 << BIT_2);
+            g_lcd_map[REG_0] &= ~(1 << BIT_5);
+            g_lcd_map[REG_5] &= ~(1 << BIT_4);
+
+            g_lcd_map[REG_19] &= ~(1 << BIT_6);
+            g_lcd_map[REG_0] &= ~(1 << BIT_0);
+            g_lcd_map[REG_0] &= ~(1 << BIT_1);
+            g_lcd_map[REG_4] &= ~(1 << BIT_7);
+            g_lcd_map[REG_5] &= ~(1 << BIT_1);
+        break;
+        case PASS1:
+            g_lcd_map[REG_12] &= ~(1 << BIT_0);
+            g_lcd_map[REG_12] &= ~(1 << BIT_1);
+            g_lcd_map[REG_17] &= ~(1 << BIT_0);
+            g_lcd_map[REG_17] &= ~(1 << BIT_1);
+            g_lcd_map[REG_2] &= ~(1 << BIT_1);
+            g_lcd_map[REG_2] &= ~(1 << BIT_0);
+            g_lcd_map[REG_7] &= ~(1 << BIT_1);
+
+        break;
+        case PASS2:
+            g_lcd_map[REG_11] &= ~(1 << BIT_6);
+            g_lcd_map[REG_11] &= ~(1 << BIT_7);
+            g_lcd_map[REG_16] &= ~(1 << BIT_6);
+            g_lcd_map[REG_16] &= ~(1 << BIT_7);
+            g_lcd_map[REG_1] &= ~(1 << BIT_7);
+            g_lcd_map[REG_1] &= ~(1 << BIT_6);
+            g_lcd_map[REG_6] &= ~(1 << BIT_7);
+        break;
+        case PASS3:
+            g_lcd_map[REG_11] &= ~(1 << BIT_4);
+            g_lcd_map[REG_11] &= ~(1 << BIT_5);
+            g_lcd_map[REG_16] &= ~(1 << BIT_4);
+            g_lcd_map[REG_16] &= ~(1 << BIT_5);
+            g_lcd_map[REG_1] &= ~(1 << BIT_5);
+            g_lcd_map[REG_1] &= ~(1 << BIT_4);
+            g_lcd_map[REG_6] &= ~(1 << BIT_5);
         break;
         default:
         break;
@@ -412,7 +380,6 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
  * @param  None
  * @retval None
  */
-
 void lcd_init()
 {
     pcf8553_init();
@@ -592,12 +559,11 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
 
 /*
  * @brief Función que envía por medio de un buffer lo escrito en la pantalla
- * anteriormente. Es un método mas eficiente primero escribir todo lo que se
- * quiera enviar en dicho buffer y luego escribir todo junto.
+ * anteriormente. Es un método mas eficiente primero escribir lo que se quiera
+ * enviar en dicho buffer y luego escribir todo junto.
  * @param Enumeraciones rows_t y point_t de lcd.h
  * @retval None
  */
-
 void lcd_refresh()
 {
     pcf8553_dump();
@@ -608,7 +574,6 @@ void lcd_refresh()
  * @param Enumeraciones rows_t y point_t de lcd.h
  * @retval None
  */
-
 void lcd_set_point(rows_t line, point_t point)
 {
     if (line == HIGH_ROW)
@@ -673,7 +638,6 @@ void lcd_set_point(rows_t line, point_t point)
  * @param Enumeraciones symbols_t y blink_t de lcd.h
  * @retval None
  */
-
 void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
 {
     switch (symbol)
@@ -705,18 +669,97 @@ void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
         case BACKSLASH:
             g_lcd_map[REG_10] |= (1 << BIT_1);
         break;
-        case CELSIUS:
-            g_lcd_map[REG_10] |= (1 << BIT_3);
+        case VE:
             g_lcd_map[REG_15] |= (1 << BIT_5);
-            g_lcd_map[REG_15] |= (1 << BIT_3);
-            g_lcd_map[REG_15] |= (1 << BIT_2);
-            g_lcd_map[REG_0] |= (1 << BIT_4);
+            g_lcd_map[REG_15] |= (1 << BIT_4);
+            g_lcd_map[REG_0] |= (1 << BIT_5);
+            g_lcd_map[REG_0] |= (1 << BIT_2);
 
             g_lcd_map[REG_14] |= (1 << BIT_7);
             g_lcd_map[REG_15] |= (1 << BIT_1);
+            g_lcd_map[REG_19] |= (1 << BIT_6);
+            g_lcd_map[REG_0] |= (1 << BIT_0);
             g_lcd_map[REG_0] |= (1 << BIT_1);
             g_lcd_map[REG_5] |= (1 << BIT_1);
         break;
+        case PASS:
+            g_lcd_map[REG_13] |= (1 << BIT_1);
+            g_lcd_map[REG_13] |= (1 << BIT_0);
+            g_lcd_map[REG_18] |= (1 << BIT_1);
+            g_lcd_map[REG_18] |= (1 << BIT_0);
+            g_lcd_map[REG_3] |= (1 << BIT_0);
+
+            g_lcd_map[REG_13] |= (1 << BIT_3);
+            g_lcd_map[REG_13] |= (1 << BIT_2);
+            g_lcd_map[REG_18] |= (1 << BIT_3);
+            g_lcd_map[REG_18] |= (1 << BIT_2);
+            g_lcd_map[REG_3] |= (1 << BIT_2);
+            g_lcd_map[REG_3] |= (1 << BIT_3);
+
+            g_lcd_map[REG_13] |= (1 << BIT_5);
+            g_lcd_map[REG_13] |= (1 << BIT_4);
+            g_lcd_map[REG_18] |= (1 << BIT_4);
+            g_lcd_map[REG_3] |= (1 << BIT_5);
+            g_lcd_map[REG_8] |= (1 << BIT_4);
+
+            g_lcd_map[REG_13] |= (1 << BIT_7);
+            g_lcd_map[REG_13] |= (1 << BIT_6);
+            g_lcd_map[REG_18] |= (1 << BIT_6);
+            g_lcd_map[REG_3] |= (1 << BIT_7);
+            g_lcd_map[REG_8] |= (1 << BIT_6);
+
+        break;
+        case KO:
+            g_lcd_map[REG_15] |= (1 << BIT_5);
+            g_lcd_map[REG_15] |= (1 << BIT_4);
+            g_lcd_map[REG_15] |= (1 << BIT_2);
+            g_lcd_map[REG_0] |= (1 << BIT_5);
+            g_lcd_map[REG_5] |= (1 << BIT_4);
+
+            g_lcd_map[REG_19] |= (1 << BIT_6);
+            g_lcd_map[REG_0] |= (1 << BIT_0);
+            g_lcd_map[REG_0] |= (1 << BIT_1);
+            g_lcd_map[REG_4] |= (1 << BIT_7);
+            g_lcd_map[REG_5] |= (1 << BIT_1);
+        break;
+        case PASS1:
+            g_lcd_map[REG_12] |= (1 << BIT_0);
+            g_lcd_map[REG_12] |= (1 << BIT_1);
+            g_lcd_map[REG_17] |= (1 << BIT_0);
+            g_lcd_map[REG_17] |= (1 << BIT_1);
+            g_lcd_map[REG_2] |= (1 << BIT_1);
+            g_lcd_map[REG_2] |= (1 << BIT_0);
+            g_lcd_map[REG_7] |= (1 << BIT_1);
+        break;
+        case PASS2:
+            g_lcd_map[REG_11] |= (1 << BIT_6);
+            g_lcd_map[REG_11] |= (1 << BIT_7);
+            g_lcd_map[REG_16] |= (1 << BIT_6);
+            g_lcd_map[REG_16] |= (1 << BIT_7);
+            g_lcd_map[REG_1] |= (1 << BIT_7);
+            g_lcd_map[REG_1] |= (1 << BIT_6);
+            g_lcd_map[REG_6] |= (1 << BIT_7);
+        break;
+        case PASS3:
+            g_lcd_map[REG_11] |= (1 << BIT_4);
+            g_lcd_map[REG_11] |= (1 << BIT_5);
+            g_lcd_map[REG_16] |= (1 << BIT_4);
+            g_lcd_map[REG_16] |= (1 << BIT_5);
+            g_lcd_map[REG_1] |= (1 << BIT_5);
+            g_lcd_map[REG_1] |= (1 << BIT_4);
+            g_lcd_map[REG_6] |= (1 << BIT_5);
+        break;
+        default:
+        break;
+    }
+
+    pcf8553_blink(blink_speed);
+}
+
+void lcd_set_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed)
+{
+    switch (time_unit)
+    {
         case H:
             g_lcd_map[REG_5] |= (1 << BIT_6);
         break;
@@ -729,6 +772,16 @@ void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
         case M:
             g_lcd_map[REG_9] |= (1 << BIT_7);
         break;
+        default:
+        break;
+    }
+    pcf8553_blink(blink_speed);
+}
+
+void lcd_set_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed)
+{
+    switch(vol_unit)
+    {
         case LT:
             g_lcd_map[REG_15] |= (1 << BIT_5);
             g_lcd_map[REG_0] |= (1 << BIT_5);
@@ -796,30 +849,27 @@ void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
             g_lcd_map[REG_0] |= (1 << BIT_1);
             g_lcd_map[REG_5] |= (1 << BIT_1);
         break;
+        case CELSIUS:
+            g_lcd_map[REG_10] |= (1 << BIT_3);
+            g_lcd_map[REG_15] |= (1 << BIT_5);
+            g_lcd_map[REG_15] |= (1 << BIT_3);
+            g_lcd_map[REG_15] |= (1 << BIT_2);
+            g_lcd_map[REG_0] |= (1 << BIT_4);
+
+            g_lcd_map[REG_14] |= (1 << BIT_7);
+            g_lcd_map[REG_15] |= (1 << BIT_1);
+            g_lcd_map[REG_0] |= (1 << BIT_1);
+            g_lcd_map[REG_5] |= (1 << BIT_1);
+        break;
         case NOTHING:
             g_lcd_map[REG_15] |= (1 << BIT_2);
             g_lcd_map[REG_0] |= (1 << BIT_4);
             g_lcd_map[REG_19] |= (1 << BIT_6);
             g_lcd_map[REG_0] |= (1 << BIT_0);
         break;
-        case VE:
-            g_lcd_map[REG_15] |= (1 << BIT_5);
-            g_lcd_map[REG_15] |= (1 << BIT_4);
-            g_lcd_map[REG_0] |= (1 << BIT_5);
-            g_lcd_map[REG_0] |= (1 << BIT_2);
-
-            g_lcd_map[REG_14] |= (1 << BIT_7);
-            g_lcd_map[REG_15] |= (1 << BIT_1);
-            g_lcd_map[REG_19] |= (1 << BIT_6);
-            g_lcd_map[REG_0] |= (1 << BIT_0);
-            g_lcd_map[REG_0] |= (1 << BIT_1);
-            g_lcd_map[REG_5] |= (1 << BIT_1);
-        break;
         default:
         break;
     }
-
-    pcf8553_blink(blink_speed);
 }
 
 // Private function bodies.

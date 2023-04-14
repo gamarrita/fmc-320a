@@ -39,10 +39,7 @@
  */
 typedef enum
 {
-    OFF_SPEED,
-    LOW_SPEED,
-    MED_SPEED,
-    HIGH_SPEED
+    OFF_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED
 } blink_t;
 
 /*

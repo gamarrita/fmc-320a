@@ -40,7 +40,8 @@ static fmc_totalizer_t ttl_config =
     .volume.res = 2,
     .factor.num = 3000, // pulsos/unidad_volumen.
     .factor.res = 1,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_totalizer_t acm_config =
@@ -50,7 +51,8 @@ static fmc_totalizer_t acm_config =
     .volume.res = 2,
     .factor.num = 3000, // pulsos/unidad_volumen.
     .factor.res = 1,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_totalizer_t rate_config =
@@ -60,14 +62,27 @@ static fmc_totalizer_t rate_config =
     .volume.res = 0,
     .factor.num = 125000,
     .factor.res = 3,
-    .unit_volume = UNIT_LITER,
+    .unit_volume = LT,
+    .unit_time = S,
 };
 
 static fmc_temp_t temperature_config =
 {
-    .temperature.num = 205,
-    .temperature.res = 1,
-    .unit_volume_temp = UNIT_CENTIGRADES,
+    .temperature.num = 20,
+    .temperature.res = 0,
+    .unit_volume_temp = CELSIUS,
+};
+
+static fmc_fp_t units_digits =
+{
+    .num = 0,
+    .res = 2,
+};
+
+static fmc_fp_t k_factor_config =
+{
+    .num = 14170,
+    .res = 2,
 };
 
 // Defines.
@@ -115,6 +130,24 @@ fmc_temp_t fm_factory_get_temp()
     return (temperature_config);
 }
 
+fmc_fp_t fm_factory_get_units_digits()
+{
+    return (units_digits);
+}
+
+fmc_fp_t fm_factory_get_k_factor()
+{
+    return (k_factor_config);
+}
+
+void fm_factory_modify_res(uint8_t units_res, uint8_t acm_res, uint8_t ttl_res,
+uint8_t rate_res)
+{
+    units_digits.res = units_res;
+    acm_config.volume.res = acm_res;
+    ttl_config.volume.res = ttl_res;
+    rate_config.volume.res = rate_res;
+}
 // Interrupts
 
 /*** end of file ***/

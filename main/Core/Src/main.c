@@ -137,8 +137,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   fm_lcd_clear();
-  fm_lcd_init();
-  fm_lcd_refresh();
   fm_event_init();
   HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
@@ -585,7 +583,7 @@ void debounce_task(void *argument)
 {
   /* USER CODE BEGIN debounce_task */
 
-  const uint8_t debounce_time = 150; //Tiempo prudente de espera por rebotes.
+  const uint8_t debounce_time = 500; //Tiempo prudente de espera por rebotes.
 
   /* Infinite loop */
   for(;;)
