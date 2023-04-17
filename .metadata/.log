@@ -1,0 +1,39 @@
+!SESSION 2023-04-17 09:28:01.851 -----------------------------------------------
+eclipse.buildId=Version 1.12.0
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-04-17 09:28:08.144
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-04-17 09:28:08.166
+!MESSAGE Log4j2 initialized with config file D:\githubs\fmc-320a\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-04-17 09:28:10.403
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2023-04-17 09:28:26.707 -----------------------------------------------
+eclipse.buildId=Version 1.12.0
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-04-17 09:28:34.248
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-04-17 09:28:34.248
+!MESSAGE Log4j2 initialized with config file D:\githubs\fmc-320a\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-04-17 09:28:36.970
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-04-17 09:28:52.033
+!MESSAGE Indexed 'main' (54 sources, 170 headers) in 4,87 sec: 19.577 declarations; 112.190 references; 3 unresolved inclusions; 156 syntax errors; 172 unresolved names (0,13 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-04-17 09:28:55.442
+!MESSAGE Indexed '100_lcd' (54 sources, 170 headers) in 3,41 sec: 19.528 declarations; 111.721 references; 3 unresolved inclusions; 156 syntax errors; 176 unresolved names (0,13 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-04-17 09:28:58.532
+!MESSAGE Indexed '103_lcd' (54 sources, 170 headers) in 3,09 sec: 19.559 declarations; 111.967 references; 4 unresolved inclusions; 156 syntax errors; 176 unresolved names (0,13 %)

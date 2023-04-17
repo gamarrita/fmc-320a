@@ -9,8 +9,6 @@
  * Símbolos RATE, BACH, TTL, ACM, H, M, S, D....
  * Puntos para números decimales de cada fila (7 puntos en la fila HIGH, y
  * 6 en la fila LOW).
- * Tambien formatea los datos pasados como parámetros en funciones de fm_lcd.c
- * con la función lcd_format_number_in_line().
  *
  * COPYRIGHT NOTE: (c) 2023 FLOWMEET. All right reserved.
  *
@@ -756,6 +754,12 @@ void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
     pcf8553_blink(blink_speed);
 }
 
+/*
+ * @brief Función que imprime una de las 4 unidades de tiempo disponibles en la
+ * pantalla LCD custom.
+ * @param Unidad a imprimir y velocidad de parpadeo.
+ * @retval None
+ */
 void lcd_set_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed)
 {
     switch (time_unit)
@@ -778,6 +782,11 @@ void lcd_set_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed)
     pcf8553_blink(blink_speed);
 }
 
+/*
+ * @brief Función que imprime la unidad de volumen a utilizar.
+ * @param Unidad a imprimir y velocidad de parpadeo.
+ * @retval None
+ */
 void lcd_set_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed)
 {
     switch (vol_unit)
@@ -870,6 +879,7 @@ void lcd_set_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed)
         default:
         break;
     }
+    pcf8553_blink(blink_speed);
 }
 
 // Private function bodies.

@@ -1,0 +1,2 @@
+../Core/Src/freertos.c:58:13:PreSleepProcessing	24	static,ignoring_inline_asm
+../Core/Src/freertos.c:76:13:PostSleepProcessing	16	static

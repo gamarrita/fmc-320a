@@ -52,8 +52,7 @@
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar el caudal acumulado y el rate, de forma
  * personalizada según las opciones que se elijan.
- * @param puntos de la fila superior e inferior a imprimir, de tipo point_t, y
- * unidades a utilizar en la medición de tipo symbols_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_acm_rate()
@@ -82,7 +81,7 @@ void fm_lcd_acm_rate()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar la temperatura del líquido y la exterior,
  * de forma personalizada según las opciones que se elijan.
- * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_acm_temp()
@@ -131,7 +130,7 @@ void fm_lcd_clear()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar la fecha y hora actual, de forma
  * personalizada según las opciones que se elijan.
- * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
+ * @param Hora y fecha a imprimir.
  * @retval None
  */
 void fm_lcd_date_hour(int time, int date)
@@ -171,12 +170,12 @@ int length)
 }
 
 /*
- * Agrega el punto decimal a una string que representa un entero.
+ * @brief Agrega el punto decimal a una string que representa un entero.
  * Esta funcion es típicamente usada luego de  fm_lcd_u32_to_str();
- *
- * @param fp numero con punto decimal
- * @param p_str puntero al string destino
- * @param str_size tamaño del string
+ * @param fp numero con punto decimal.
+ * @param p_str puntero al string destino.
+ * @param str_size tamaño del string.
+ * @retval int.
  *
  */
 int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
@@ -221,13 +220,13 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
 }
 
 /*
- * @brief Convierte un numero con punto decimal a una string, pero sin el punto
- *
+ * @brief Convierte un numero con punto decimal a una string, pero sin el punto.
  * @param fp numero con punto decimal.
  * @param leading_char caracter de relleno, cero para no rellenar.
  * @param al rellenar debemos indicar a que ancho con esta variable.
  * @param p_str string destino, por referencia.
  * @param str_size tamaño del string.
+ * @retval int.
  */
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size)
@@ -332,7 +331,7 @@ void fm_lcd_init()
 /*
  * @brief Función que permite escribir lo necesario para la pantalla de
  * configuración del factor de calibración K.
- * @param  Unidad de volumen y unidad de tiempo.
+ * @param  None
  * @retval None
  */
 void fm_lcd_k_factor()
@@ -349,7 +348,8 @@ void fm_lcd_k_factor()
 
 /*
  * @brief Función que imprime en una de las dos filas del lcd, row 0 o row 1.
- * @param
+ * @param Arreglo a imprimir.
+ * @param Fila donde se coloca el arreglo a imprimir.
  * @retval None
  */
 void fm_lcd_puts(const char *c, const rows_t row)
@@ -396,8 +396,7 @@ void fm_lcd_refresh()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar el caudal total y el rate, de forma
  * personalizada según las opciones que se elijan.
- * @param puntos de la fila superior e inferior a imprimir, de tipo point_t, y
- * unidades a utilizar en la medición de tipo symbols_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_ttl_rate()
@@ -425,7 +424,7 @@ void fm_lcd_ttl_rate()
 /*
  * @brief Función que permite escribir lo necesario para la pantalla de
  * configuración de unidades de volumen y tiempo y la resolución de la medida.
- * @param  Unidad de volumen y unidad de tiempo.
+ * @param  None
  * @retval None
  */
 void fm_lcd_units()

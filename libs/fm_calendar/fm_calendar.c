@@ -56,7 +56,10 @@ extern RTC_HandleTypeDef hrtc;
 // Public function bodies.
 
 /*
- * Toma los valores de fecha y hora del calendario del RTC, pero no los usa.
+ * @brief Toma los valores de fecha y hora del calendario del RTC, pero no los
+ * usa.
+ * @param None
+ * @retval None
  */
 void fm_calendar_get()
 {
@@ -65,8 +68,9 @@ void fm_calendar_get()
 }
 
 /*
- * Le da formato a la hora, minutos y segundos para que puedan ser impresos en
- * el lcd. Para esto, se los concatena en una variable entera con atoi.
+ * @brief Formatea la hora en el formato hh.mm.ss.
+ * @param None
+ * @retval Entero que contiene la hora, minutos y segundos concatenados.
  */
 int fm_calendar_format_time()
 {
@@ -89,10 +93,9 @@ int fm_calendar_format_time()
 }
 
 /*
- * Le da formato al día, mes y año para que puedan ser impresos en
- * el lcd. Para esto, se los concatena en una variable entera con atoi. Se
- * añade un '20' en frente al año para que se escriba la fecha total en formato
- * dd.mm.aaaa.
+ * @brief Formatea la fecha en el formato dd.mm.aaaa.
+ * @param None
+ * @retval Entero que contiene el día, el mes y el año concatenados.
  */
 int fm_calendar_format_date()
 {

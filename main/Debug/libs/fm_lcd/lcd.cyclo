@@ -1,0 +1,11 @@
+lcd.c:164:6:lcd_clear_all	3
+lcd.c:191:6:lcd_clear_point	16
+lcd.c:256:6:lcd_clear_symbol	16
+lcd.c:381:6:lcd_init	1
+lcd.c:392:6:lcd_put_char	18
+lcd.c:565:6:lcd_refresh	1
+lcd.c:575:6:lcd_set_point	16
+lcd.c:639:6:lcd_set_symbol	16
+lcd.c:763:6:lcd_set_time_unit	5
+lcd.c:790:6:lcd_set_vol_unit	8
+lcd.c:899:6:lcd_write_line	4

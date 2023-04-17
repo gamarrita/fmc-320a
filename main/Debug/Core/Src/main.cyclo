@@ -1,0 +1,12 @@
+main.c:108:5:main	1
+main.c:201:6:SystemClock_Config	4
+main.c:256:13:MX_ADC1_Init	3
+main.c:315:13:MX_RTC_Init	5
+main.c:386:13:MX_SPI1_Init	2
+main.c:426:13:MX_TIM16_Init	2
+main.c:458:13:MX_USART2_UART_Init	2
+main.c:493:13:MX_GPIO_Init	1
+main.c:551:6:menu_task	2
+main.c:582:6:debounce_task	1
+main.c:636:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:653:6:Error_Handler	1

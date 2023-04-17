@@ -1,0 +1,12 @@
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:121:17:fm_factory_get_acm	24	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:131:17:fm_factory_get_ttl	24	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:141:17:fm_factory_get_rate	24	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:152:12:fm_factory_get_temp	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:163:10:fm_factory_get_units_digits	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:173:10:fm_factory_get_k_factor	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:183:6:fm_factory_modify_k_factor_subs	24	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:209:6:fm_factory_modify_k_factor_add	24	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:235:6:fm_factory_modify_res_acm_ttl	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:249:6:fm_factory_modify_time_units	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:262:6:fm_factory_modify_volume_units	16	static
+D:/githubs/fmc-320a/libs/fm_factory/fm_factory.c:275:6:fm_factory_separate_k_factor	24	static

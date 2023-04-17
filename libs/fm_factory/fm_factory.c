@@ -240,6 +240,12 @@ sel_resolution_t acm_res, sel_resolution_t ttl_res)
     ttl_config.volume.res = ttl_res;
 }
 
+/*
+ * @brief Modifica las unidades de tiempo que se muestran en los menús de
+ * usuario.
+ * @param A que unidad se quiere cambiar.
+ * @retval None
+ */
 void fm_factory_modify_time_units(fmc_unit_time_t time_units)
 {
     acm_config.unit_time = time_units;
@@ -247,6 +253,12 @@ void fm_factory_modify_time_units(fmc_unit_time_t time_units)
     rate_config.unit_time = time_units;
 }
 
+/*
+ * @brief Modifica las unidades de volumen que se muestran en los menús de
+ * usuario.
+ * @param A que unidad se quiere cambiar.
+ * @retval None
+ */
 void fm_factory_modify_volume_units(fmc_unit_volume_t volume_units)
 {
     acm_config.unit_volume = volume_units;
