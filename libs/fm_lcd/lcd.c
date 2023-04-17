@@ -780,7 +780,7 @@ void lcd_set_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed)
 
 void lcd_set_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed)
 {
-    switch(vol_unit)
+    switch (vol_unit)
     {
         case LT:
             g_lcd_map[REG_15] |= (1 << BIT_5);

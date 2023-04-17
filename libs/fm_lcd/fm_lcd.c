@@ -339,7 +339,7 @@ void fm_lcd_k_factor()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_fp_to_str(fm_factory_get_k_factor(), ' ', LINE_0_DIGITS, lcd_msg,
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(), '0', LINE_0_DIGITS, lcd_msg,
     sizeof(lcd_msg));
     fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);

@@ -174,6 +174,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
 {
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
+    static sel_digit_t digit_modify = DIG_0;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_param;
     fm_event_t event_now;
@@ -190,10 +191,59 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_factor_add(digit_modify);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_factor_subs(digit_modify);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if (digit_modify == DIG_0)
+                {
+                    digit_modify = DIG_1;
+                }
+                else if (digit_modify == DIG_1)
+                {
+                    digit_modify = DIG_2;
+                }
+                else if (digit_modify == DIG_2)
+                {
+                    digit_modify = DIG_3;
+                }
+                else if (digit_modify == DIG_3)
+                {
+                    digit_modify = DIG_4;
+                }
+                else if (digit_modify == DIG_4)
+                {
+                    digit_modify = DIG_5;
+                }
+                else if (digit_modify == DIG_5)
+                {
+                    digit_modify = DIG_6;
+                }
+                else if (digit_modify == DIG_6)
+                {
+                    digit_modify = DIG_7;
+                }
+                else if (digit_modify == DIG_7)
+                {
+                    digit_modify = DIG_0;
+                }
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
@@ -529,27 +579,81 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                if (fm_factory_get_acm().unit_volume == LT)
+                {
+                    fm_factory_modify_volume_units(M3);
+                }
+                else if (fm_factory_get_acm().unit_volume == M3)
+                {
+                    fm_factory_modify_volume_units(KG);
+                }
+                else if (fm_factory_get_acm().unit_volume == KG)
+                {
+                    fm_factory_modify_volume_units(GL);
+                }
+                else if (fm_factory_get_acm().unit_volume == GL)
+                {
+                    fm_factory_modify_volume_units(BR);
+                }
+                else if (fm_factory_get_acm().unit_volume == BR)
+                {
+                    fm_factory_modify_volume_units(NOTHING);
+                }
+                else if (fm_factory_get_acm().unit_volume == NOTHING)
+                {
+                    fm_factory_modify_volume_units(LT);
+                }
+                fm_lcd_clear();
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                if (fm_factory_get_acm().unit_time == H)
+                {
+                    fm_factory_modify_time_units(D);
+                }
+                else if (fm_factory_get_acm().unit_time == D)
+                {
+                    fm_factory_modify_time_units(S);
+                }
+                else if (fm_factory_get_acm().unit_time == S)
+                {
+                    fm_factory_modify_time_units(M);
+                }
+                else if (fm_factory_get_acm().unit_time == M)
+                {
+                    fm_factory_modify_time_units(H);
+                }
+                fm_lcd_clear();
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ENTER:
-            if(fm_factory_get_units_digits().res == 0)
+            if (correct_password)
             {
-                fm_factory_modify_res(1, 1, 1, 1);
+                if (fm_factory_get_units_digits().res == RES_0)
+                {
+                    fm_factory_modify_res_acm_ttl(RES_1, RES_1, RES_1);
+                }
+                else if (fm_factory_get_units_digits().res == RES_1)
+                {
+                    fm_factory_modify_res_acm_ttl(RES_2, RES_2, RES_2);
+                }
+                else if (fm_factory_get_units_digits().res == RES_2)
+                {
+                    fm_factory_modify_res_acm_ttl(RES_3, RES_3, RES_3);
+                }
+                else if (fm_factory_get_units_digits().res == RES_3)
+                {
+                    fm_factory_modify_res_acm_ttl(RES_0, RES_0, RES_0);
+                }
             }
-            else if(fm_factory_get_units_digits().res == 1)
-            {
-                fm_factory_modify_res(2, 2, 2, 2);
-            }
-            else if(fm_factory_get_units_digits().res == 2)
-            {
-                fm_factory_modify_res(3, 3, 3, 3);
-            }
-            else if(fm_factory_get_units_digits().res == 3)
-            {
-                fm_factory_modify_res(0, 0, 0, 0);
-            }
-
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
