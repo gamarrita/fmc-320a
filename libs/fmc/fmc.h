@@ -80,11 +80,22 @@ typedef struct
     fmc_unit_volume_t unit_volume_temp;
 } fmc_temp_t;
 
+typedef struct
+{
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
+    int second;
+} fmc_date_time_t;
+
 // Defines.
 
 // Function prototypes
 
 fmc_totalizer_t fmc_get_acm();
+fmc_date_time_t fmc_get_date_time();
 fmc_temp_t fmc_get_stm32_temp();
 fmc_totalizer_t fmc_get_rate();
 fmc_totalizer_t fmc_get_ttl();

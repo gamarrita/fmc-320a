@@ -74,6 +74,16 @@ static fmc_temp_t temperature_config =
     .unit_volume_temp = CELSIUS,
 };
 
+static fmc_date_time_t date_time_config =
+{
+    .day = 17,
+    .month = 4,
+    .year = 23,
+    .hour = 17,
+    .minute = 4,
+    .second = 20,
+};
+
 static fmc_fp_t units_digits_tim =
 {
     .num = 0,
@@ -182,6 +192,20 @@ fmc_fp_t fm_factory_get_units_vol()
     return (units_digits_vol);
 }
 
+void fm_factory_modify_date(int mod_day, int mod_month, int mod_year)
+{
+    date_time_config.day = mod_day;
+    date_time_config.month = mod_month;
+    date_time_config.year = mod_year;
+}
+
+void fm_factory_modify_time(int mod_hour, int mod_minute, int mod_second)
+{
+    date_time_config.hour = mod_hour;
+    date_time_config.minute = mod_minute;
+    date_time_config.second = mod_second;
+}
+
 /*
  * @brief Función que devuelve el factor K almacenado en fm_factory.
  * @param None
@@ -190,6 +214,11 @@ fmc_fp_t fm_factory_get_units_vol()
 fmc_fp_t fm_factory_get_k_factor()
 {
     return (k_factor_config);
+}
+
+fmc_date_time_t fm_factory_get_date_time()
+{
+    return(date_time_config);
 }
 
 /*

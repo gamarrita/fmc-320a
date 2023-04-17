@@ -42,7 +42,10 @@ fmc_temp_t fm_factory_get_temp();
 fmc_fp_t fm_factory_get_units_tim();
 fmc_fp_t fm_factory_get_units_vol();
 fmc_fp_t fm_factory_get_k_factor();
+fmc_date_time_t fm_factory_get_date_time();
 void fm_factory_modify_k_factor_add(sel_digit_t digit_k);
+void fm_factory_modify_date(int mod_day, int mod_month, int mod_year);
+void fm_factory_modify_time(int mod_hour, int mod_minute, int mod_second);
 void fm_factory_modify_k_factor_subs(sel_digit_t digit_k);
 void fm_factory_modify_res_acm_ttl(sel_resolution_t units_res,
 sel_resolution_t acm_res, sel_resolution_t ttl_res);

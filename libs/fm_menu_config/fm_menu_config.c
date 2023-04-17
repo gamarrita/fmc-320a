@@ -9,6 +9,7 @@
 // Includes.
 #include "fm_menu_config.h"
 #include "stdio.h"
+#include "stdlib.h"
 #include "../fm_debug/fm_debug.h"
 #include "../fm_calendar/fm_calendar.h"
 #include "../fm_factory/fm_factory.h"
@@ -26,7 +27,7 @@
 
 // Const data.
 // Defines.
-#define PASSWORD_LENGHT 4
+#define PASSWORD_LENGTH 4
 // Debug.
 
 /*
@@ -65,6 +66,8 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
 {
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
+    static int time_t;
+    static int date_t;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_date_hour;
     fm_event_t event_now;
@@ -75,7 +78,17 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_date_hour(freeze_time, freeze_date);
+    char time_arr[PCF8553_DATA_SIZE];
+    sprintf(time_arr, "%02d%02d%02d", fm_factory_get_date_time().hour,
+    fm_factory_get_date_time().minute, fm_factory_get_date_time().second);
+    time_t = atoi(time_arr);
+
+    char date_arr[PCF8553_DATA_SIZE];
+    sprintf(date_arr, "%02d%02d20%02d", fm_factory_get_date_time().day,
+    fm_factory_get_date_time().month, fm_factory_get_date_time().year);
+    date_t = atoi(date_arr);
+
+    fm_lcd_date_hour(time_t, date_t);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -341,7 +354,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
      * Arreglo estático que almacena la contraseña que ingresa el usuario.
      * Inicialmente está relleno con ceros.
      */
-    static uint8_t password[PASSWORD_LENGHT] =
+    static uint8_t password[PASSWORD_LENGTH] =
     {
         0,
         0,
@@ -375,7 +388,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
     {
         lcd_set_symbol(PASS2, 0x00);
     }
-    else if (password_index == 3)
+    else if (password_index == PASSWORD_LENGTH - 1)
     {
         lcd_set_symbol(PASS3, 0x00);
     }
@@ -386,7 +399,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
         case EVENT_KEY_UP:
             password[password_index] = 1;
 
-            if (password_index < 3)
+            if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -399,14 +412,17 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 
-                freeze_date = fm_calendar_format_date();
-                freeze_time = fm_calendar_format_time();
+                fm_factory_modify_date(fm_calendar_get_day(),
+                fm_calendar_get_month(), fm_calendar_get_year());
+
+                fm_factory_modify_time(fm_calendar_get_hour(),
+                fm_calendar_get_minute(), fm_calendar_get_second());
             }
         break;
         case EVENT_KEY_DOWN:
             password[password_index] = 2;
 
-            if (password_index < 3)
+            if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -419,14 +435,17 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 
-                freeze_date = fm_calendar_format_date();
-                freeze_time = fm_calendar_format_time();
+                fm_factory_modify_date(fm_calendar_get_day(),
+                fm_calendar_get_month(), fm_calendar_get_year());
+
+                fm_factory_modify_time(fm_calendar_get_hour(),
+                fm_calendar_get_minute(), fm_calendar_get_second());
             }
         break;
         case EVENT_KEY_ENTER:
             password[password_index] = 3; // @suppress("Avoid magic numbers")
 
-            if (password_index < 3)
+            if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -439,14 +458,17 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 
-                freeze_date = fm_calendar_format_date();
-                freeze_time = fm_calendar_format_time();
+                fm_factory_modify_date(fm_calendar_get_day(),
+                fm_calendar_get_month(), fm_calendar_get_year());
+
+                fm_factory_modify_time(fm_calendar_get_hour(),
+                fm_calendar_get_minute(), fm_calendar_get_second());
             }
         break;
         case EVENT_KEY_ESC:
             password[password_index] = 4; // @suppress("Avoid magic numbers")
 
-            if (password_index < 3)
+            if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
@@ -459,8 +481,11 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 event_now = EVENT_LCD_REFRESH;
                 osMessageQueuePut(h_event_queue, &event_now, 0, 0);
 
-                freeze_date = fm_calendar_format_date();
-                freeze_time = fm_calendar_format_time();
+                fm_factory_modify_date(fm_calendar_get_day(),
+                fm_calendar_get_month(), fm_calendar_get_year());
+
+                fm_factory_modify_time(fm_calendar_get_hour(),
+                fm_calendar_get_minute(), fm_calendar_get_second());
             }
         break;
         default:
@@ -472,14 +497,14 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
     fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
 #endif
 
-    if (new_exit == 1 && password_index >= 3)
+    if (new_exit == 1 && password_index >= PASSWORD_LENGTH - 1)
     {
         /*
          * Si la contraseña ingresada es correcta, se activa una flag global que
          * permite modificar los parámetros de los menús de configuración.
          */
         if (password[0] == 2 && password[1] == 1 && password[2] == 1
-        && password[3] == 3)
+        && password[PASSWORD_LENGTH - 1] == 3)
         {
             correct_password = 1;
         }
@@ -491,7 +516,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
         password[0] = 0;
         password[1] = 0;
         password[2] = 0;
-        password[3] = 0;
+        password[PASSWORD_LENGTH - 1] = 0;
         new_entry = 1;
         new_exit = 0;
     }

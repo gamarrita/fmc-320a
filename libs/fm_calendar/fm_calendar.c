@@ -67,6 +67,37 @@ void fm_calendar_get()
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }
 
+int fm_calendar_get_hour()
+{
+    fm_calendar_get();
+    return (sTime.Hours);
+}
+int fm_calendar_get_minute()
+{
+    fm_calendar_get();
+    return (sTime.Minutes);
+}
+int fm_calendar_get_second()
+{
+    fm_calendar_get();
+    return (sTime.Seconds);
+}
+int fm_calendar_get_day()
+{
+    fm_calendar_get();
+    return (sDate.Date);
+}
+int fm_calendar_get_month()
+{
+    fm_calendar_get();
+    return (sDate.Month);
+}
+int fm_calendar_get_year()
+{
+    fm_calendar_get();
+    return (sDate.Year);
+}
+
 /*
  * @brief Formatea la hora en el formato hh.mm.ss.
  * @param None
@@ -78,7 +109,6 @@ int fm_calendar_format_time()
     char time_arr[PCF8553_DATA_SIZE];
 
     fm_calendar_get();
-
     sprintf(time_arr, "%02d%02d%02d", sTime.Hours, sTime.Minutes,
     sTime.Seconds);
 
