@@ -74,7 +74,13 @@ static fmc_temp_t temperature_config =
     .unit_volume_temp = CELSIUS,
 };
 
-static fmc_fp_t units_digits =
+static fmc_fp_t units_digits_tim =
+{
+    .num = 0,
+    .res = 2,
+};
+
+static fmc_fp_t units_digits_vol =
 {
     .num = 0,
     .res = 2,
@@ -160,9 +166,20 @@ fmc_temp_t fm_factory_get_temp()
  * @param None
  * @retval Configuración de resoluciones como estructura de tipo fmc_fp_t.
  */
-fmc_fp_t fm_factory_get_units_digits()
+fmc_fp_t fm_factory_get_units_tim()
 {
-    return (units_digits);
+    return (units_digits_tim);
+}
+
+/*
+ * @brief Función que devuelve la configuración de resoluciones almacenado en
+ * fm_factory.
+ * @param None
+ * @retval Configuración de resoluciones como estructura de tipo fmc_fp_t.
+ */
+fmc_fp_t fm_factory_get_units_vol()
+{
+    return (units_digits_vol);
 }
 
 /*
@@ -235,9 +252,21 @@ void fm_factory_modify_k_factor_add(sel_digit_t digit_k)
 void fm_factory_modify_res_acm_ttl(sel_resolution_t units_res,
 sel_resolution_t acm_res, sel_resolution_t ttl_res)
 {
-    units_digits.res = units_res;
+    units_digits_vol.res = units_res;
     acm_config.volume.res = acm_res;
     ttl_config.volume.res = ttl_res;
+}
+
+/*
+ * @brief modifica la resolución del factor rate.
+ * @param Resolución de fabrica, y del parámetro rate.
+ * @retval None
+ */
+void fm_factory_modify_res_rate(sel_resolution_t units_res,
+sel_resolution_t rate_res)
+{
+    units_digits_tim.res = units_res;
+    rate_config.volume.res = rate_res;
 }
 
 /*

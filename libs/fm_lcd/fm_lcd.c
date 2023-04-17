@@ -423,22 +423,42 @@ void fm_lcd_ttl_rate()
 
 /*
  * @brief Función que permite escribir lo necesario para la pantalla de
- * configuración de unidades de volumen y tiempo y la resolución de la medida.
+ * configuración de unidades tiempo y la resolución del factor RATE.
  * @param  None
  * @retval None
  */
-void fm_lcd_units()
+void fm_lcd_units_tim()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_fp_to_str(fm_factory_get_units_digits(), '0', LINE_0_DIGITS, lcd_msg,
+    fm_lcd_fp_to_str(fm_factory_get_units_tim(), '0', LINE_1_DIGITS, lcd_msg,
     sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(fm_factory_get_units_digits(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_tim(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+
+    lcd_set_symbol(RATE, 0x00);
+    lcd_set_time_unit(fmc_get_rate().unit_time, 0x0);
+}
+
+/*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración de unidades de volumen y la resolución de los factores ACM y
+ * TTL.
+ * @param  None
+ * @retval None
+ */
+void fm_lcd_units_vol()
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_fp_to_str(fm_factory_get_units_vol(), '0', LINE_0_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_vol(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
+    lcd_set_symbol(ACM, 0x00);
+    lcd_set_symbol(TTL, 0x00);
     lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
-    lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
 }
 
 /*

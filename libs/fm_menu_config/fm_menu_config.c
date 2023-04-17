@@ -247,7 +247,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_config_units;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -302,7 +302,7 @@ ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_config_units;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -559,12 +559,12 @@ ptr_ret_menu_t fm_menu_config_span(fm_event_t event_id)
  * @param  Evento de presión de botones o refresh.
  * @retval Puntero al retorno de la función.
  */
-ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
+ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
 {
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
 
-    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_units;
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_units_tim;
     fm_event_t event_now;
 
     if (new_entry == 1)
@@ -573,7 +573,107 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_units();
+    fm_lcd_units_tim();
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                if (fm_factory_get_rate().unit_time == H)
+                {
+                    fm_factory_modify_time_units(D);
+                }
+                else if (fm_factory_get_rate().unit_time == D)
+                {
+                    fm_factory_modify_time_units(S);
+                }
+                else if (fm_factory_get_rate().unit_time == S)
+                {
+                    fm_factory_modify_time_units(M);
+                }
+                else if (fm_factory_get_rate().unit_time == M)
+                {
+                    fm_factory_modify_time_units(H);
+                }
+                fm_lcd_clear();
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if (fm_factory_get_units_tim().res == RES_0)
+                {
+                    fm_factory_modify_res_rate(RES_1, RES_1);
+                }
+                else if (fm_factory_get_units_tim().res == RES_1)
+                {
+                    fm_factory_modify_res_rate(RES_2, RES_2);
+                }
+                else if (fm_factory_get_units_tim().res == RES_2)
+                {
+                    fm_factory_modify_res_rate(RES_3, RES_3);
+                }
+                else if (fm_factory_get_units_tim().res == RES_3)
+                {
+                    fm_factory_modify_res_rate(RES_0, RES_0);
+                }
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_date_hour;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+#ifdef FM_DEBUG_MENU
+    char msg_buffer[] = "Configurar unidades de tiempo y resolucion\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
+
+    if (new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+/*
+ * @brief Función que imprime el menú de configuración tanto de las unidades de
+ * volumen y tiempo, como de la resolución de las medidas.
+ * @param  Evento de presión de botones o refresh.
+ * @retval Puntero al retorno de la función.
+ */
+ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_units_vol();
     fm_lcd_refresh();
 
     switch (event_id)
@@ -611,45 +711,25 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_DOWN:
-            if (correct_password)
-            {
-                if (fm_factory_get_acm().unit_time == H)
-                {
-                    fm_factory_modify_time_units(D);
-                }
-                else if (fm_factory_get_acm().unit_time == D)
-                {
-                    fm_factory_modify_time_units(S);
-                }
-                else if (fm_factory_get_acm().unit_time == S)
-                {
-                    fm_factory_modify_time_units(M);
-                }
-                else if (fm_factory_get_acm().unit_time == M)
-                {
-                    fm_factory_modify_time_units(H);
-                }
-                fm_lcd_clear();
-            }
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
             {
-                if (fm_factory_get_units_digits().res == RES_0)
+                if (fm_factory_get_units_vol().res == RES_0)
                 {
                     fm_factory_modify_res_acm_ttl(RES_1, RES_1, RES_1);
                 }
-                else if (fm_factory_get_units_digits().res == RES_1)
+                else if (fm_factory_get_units_vol().res == RES_1)
                 {
                     fm_factory_modify_res_acm_ttl(RES_2, RES_2, RES_2);
                 }
-                else if (fm_factory_get_units_digits().res == RES_2)
+                else if (fm_factory_get_units_vol().res == RES_2)
                 {
                     fm_factory_modify_res_acm_ttl(RES_3, RES_3, RES_3);
                 }
-                else if (fm_factory_get_units_digits().res == RES_3)
+                else if (fm_factory_get_units_vol().res == RES_3)
                 {
                     fm_factory_modify_res_acm_ttl(RES_0, RES_0, RES_0);
                 }
@@ -659,7 +739,7 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_config_date_hour;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_units_tim;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
@@ -668,7 +748,7 @@ ptr_ret_menu_t fm_menu_config_units(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar unidades y resolucion\n";
+    char msg_buffer[] = "Configurar unidades de volumen y resolucion\n";
     fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
 #endif
 

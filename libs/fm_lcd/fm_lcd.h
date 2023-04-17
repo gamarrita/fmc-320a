@@ -64,7 +64,8 @@ void fm_lcd_k_factor();
 void fm_lcd_puts(const char *p_str, uint8_t row);
 void fm_lcd_refresh();
 void fm_lcd_ttl_rate();
-void fm_lcd_units();
+void fm_lcd_units_tim();
+void fm_lcd_units_vol();
 void fm_lcd_version(point_t low_point1, point_t low_point2);
 
 #endif /* FM_LCD_H_ */

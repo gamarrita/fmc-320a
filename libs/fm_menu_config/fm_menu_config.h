@@ -32,7 +32,8 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t);
 ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t);
 ptr_ret_menu_t fm_menu_config_pass(fm_event_t);
 ptr_ret_menu_t fm_menu_config_span(fm_event_t);
-ptr_ret_menu_t fm_menu_config_units(fm_event_t);
+ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t);
+ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t);
 
 #endif /* MENU_CONFIG_H */
 

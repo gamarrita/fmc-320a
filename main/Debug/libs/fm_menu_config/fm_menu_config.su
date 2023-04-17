@@ -4,4 +4,5 @@ D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:173:16:fm_menu_config_k
 D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:278:16:fm_menu_config_ko_param	56	static
 D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:335:16:fm_menu_config_pass	32	static
 D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:507:16:fm_menu_config_span	48	static
-D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:562:16:fm_menu_config_units	424	static
+D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:562:16:fm_menu_config_units_tim	240	static
+D:/githubs/fmc-320a/libs/fm_menu_config/fm_menu_config.c:662:16:fm_menu_config_units_vol	304	static

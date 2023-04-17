@@ -333,7 +333,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_version(PNT_4, PNT_5);
+    fm_lcd_version(PNT_3, PNT_4);
     fm_lcd_refresh();
     HAL_Delay(3000); // @suppress("Avoid magic numbers")
 
