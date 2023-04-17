@@ -40,6 +40,7 @@ typedef enum
     POINT,
     VE,
     PASS,
+    K,
     KO,
     PASS1,
     PASS2,

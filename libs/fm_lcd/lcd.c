@@ -324,6 +324,13 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
             g_lcd_map[REG_8] &= ~(1 << BIT_6);
 
         break;
+        case K:
+            g_lcd_map[REG_15] &= ~(1 << BIT_5);
+            g_lcd_map[REG_15] &= ~(1 << BIT_4);
+            g_lcd_map[REG_15] &= ~(1 << BIT_2);
+            g_lcd_map[REG_0] &= ~(1 << BIT_5);
+            g_lcd_map[REG_5] &= ~(1 << BIT_4);
+        break;
         case KO:
             g_lcd_map[REG_15] &= ~(1 << BIT_5);
             g_lcd_map[REG_15] &= ~(1 << BIT_4);
@@ -345,7 +352,6 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
             g_lcd_map[REG_2] &= ~(1 << BIT_1);
             g_lcd_map[REG_2] &= ~(1 << BIT_0);
             g_lcd_map[REG_7] &= ~(1 << BIT_1);
-
         break;
         case PASS2:
             g_lcd_map[REG_11] &= ~(1 << BIT_6);
@@ -706,6 +712,13 @@ void lcd_set_symbol(symbols_t symbol, blink_t blink_speed)
             g_lcd_map[REG_3] |= (1 << BIT_7);
             g_lcd_map[REG_8] |= (1 << BIT_6);
 
+        break;
+        case K:
+            g_lcd_map[REG_15] |= (1 << BIT_5);
+            g_lcd_map[REG_15] |= (1 << BIT_4);
+            g_lcd_map[REG_15] |= (1 << BIT_2);
+            g_lcd_map[REG_0] |= (1 << BIT_5);
+            g_lcd_map[REG_5] |= (1 << BIT_4);
         break;
         case KO:
             g_lcd_map[REG_15] |= (1 << BIT_5);

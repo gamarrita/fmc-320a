@@ -88,7 +88,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
+            ret_menu = (ptr_ret_menu_t) fm_menu_show_init;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;

@@ -244,6 +244,74 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
     return (ret_menu);
 }
 
+ptr_ret_menu_t fm_menu_show_init(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static uint8_t counter = 0;
+    const  uint8_t counter_max = 30;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_init;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_init();
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+        break;
+        case EVENT_KEY_DOWN:
+        break;
+        case EVENT_KEY_ENTER:
+            osMessageQueueReset(h_event_queue);
+            ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            new_exit = 1;
+        break;
+        case EVENT_KEY_ESC:
+        break;
+        default:
+            if(counter < counter_max)
+            {
+                HAL_Delay(100); // @suppress("Avoid magic numbers")
+                counter++;
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            }
+            else
+            {
+                osMessageQueueReset(h_event_queue);
+                ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                new_exit = 1;
+            }
+        break;
+    }
+
+#ifdef FM_DEBUG_MENU
+    char msg_buffer[] = "version\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+#endif
+
+    if (new_exit == 1)
+    {
+        counter = 0;
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
 /*
  * @brief Función que imprime el menú de ttl y rate en la pantalla, con
  * unidades y puntos específicos.
@@ -311,21 +379,13 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
  */
 ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 {
-    /*
-     * Durante la ejecución de este menú no quiero que se puedan realizar
-     * interrupciones de los botones (ya que si ocurre, se acumulan y luego se
-     * disparan todas juntas después de pasados los delays).
-     */
-    HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
+    static uint8_t counter = 0;
+    const  uint8_t counter_max = 30;
 
     ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
     fm_event_t event_now;
-
-    fm_lcd_init();
-    fm_lcd_refresh();
 
     if (new_entry == 1)
     {
@@ -335,7 +395,6 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 
     fm_lcd_version(PNT_3, PNT_4);
     fm_lcd_refresh();
-    HAL_Delay(3000); // @suppress("Avoid magic numbers")
 
     switch (event_id)
     {
@@ -344,15 +403,30 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         case EVENT_KEY_DOWN:
         break;
         case EVENT_KEY_ENTER:
-        break;
-        case EVENT_KEY_ESC:
-        break;
-        default:
             osMessageQueueReset(h_event_queue);
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             new_exit = 1;
+        break;
+        case EVENT_KEY_ESC:
+        break;
+        default:
+            if(counter < counter_max)
+            {
+                HAL_Delay(100); // @suppress("Avoid magic numbers")
+                counter++;
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            }
+            else
+            {
+                osMessageQueueReset(h_event_queue);
+                ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                new_exit = 1;
+            }
         break;
     }
 
@@ -363,17 +437,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
 
     if (new_exit == 1)
     {
-        /*
-         * Borro flags para que no tome interrupciones realizadas con los
-         * botones mientras se está mostrando la pantalla de inicio o la versión
-         * del firmware.
-         */
-        __HAL_GPIO_EXTI_CLEAR_IT(KEY_UP_Pin);
-        __HAL_GPIO_EXTI_CLEAR_IT(KEY_DOWN_Pin);
-        __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
-        __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
-        HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
+        counter = 0;
         new_entry = 1;
         new_exit = 0;
     }

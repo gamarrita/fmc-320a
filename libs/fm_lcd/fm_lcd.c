@@ -308,10 +308,7 @@ int str_size)
 }
 
 /*
- * @brief Es la primera instrucción a llamar para usar el lcd, luego de
- * inicializar el lcd enciende todos los segmentos.
- * Para comprobar que el lcd esta funcionando se encienden todos los
- * segmentos por unos segundos y luego se lo apaga.
+ * @brief Es la primera instrucción a llamar para usar el lcd.
  * @param  None
  * @retval None
  */
@@ -319,13 +316,6 @@ void fm_lcd_init()
 {
     lcd_clear_all();
     lcd_init();
-
-    /*
-     * Se encienden todos los segmentos por 500 milisegundos al iniciar.
-     */
-    pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-    HAL_Delay(3000); // @suppress("Avoid magic numbers")
-    pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
 }
 
 /*
@@ -343,7 +333,7 @@ void fm_lcd_k_factor()
     fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
+    lcd_set_symbol(K, 0x00);
 }
 
 /*

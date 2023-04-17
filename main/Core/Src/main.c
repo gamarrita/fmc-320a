@@ -551,7 +551,7 @@ static void MX_GPIO_Init(void)
 void menu_task(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	ptr_fun_menu_t ptr_menu = fm_menu_show_version;
+	ptr_fun_menu_t ptr_menu = fm_menu_show_init;
 	fm_event_t event_next = EVENT_LCD_REFRESH;
 	osStatus_t ret_status;
 

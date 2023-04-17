@@ -42,6 +42,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t);
 ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t);
 ptr_ret_menu_t fm_menu_show_alert_battery(fm_event_t);
 ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t);
+ptr_ret_menu_t fm_menu_show_init(fm_event_t);
 ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t);
 ptr_ret_menu_t fm_menu_show_version(fm_event_t);
 
