@@ -63,6 +63,10 @@ extern RTC_HandleTypeDef hrtc;
  */
 void fm_calendar_get()
 {
+    __HAL_RTC_WRITEPROTECTION_DISABLE(&hrtc);
+    HAL_RTC_WaitForSynchro(&hrtc);
+    __HAL_RTC_WRITEPROTECTION_ENABLE(&hrtc);
+
     HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }

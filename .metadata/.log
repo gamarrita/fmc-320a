@@ -2524,3 +2524,3173 @@ java.lang.NullPointerException
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
+!SESSION 2023-04-18 09:07:36.428 -----------------------------------------------
+eclipse.buildId=Version 1.12.0
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-04-18 09:07:55.472
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-04-18 09:07:55.490
+!MESSAGE Log4j2 initialized with config file D:\githubs\fmc-320a\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-04-18 09:08:04.792
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:11:58.741
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:123)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:98)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:335)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:177)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:03.929
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:07.508
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:08.236
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:09.595
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:10.452
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:11.530
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:12.327
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:18.233
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:21.609
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:23.890
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:24.500
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:34.238
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:36.228
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:41.912
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:46.872
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:49.125
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:51.820
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:12:58.031
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:00.375
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:02.454
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:03.834
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:05.717
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:06.437
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:24.164
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:29.259
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 09:13:30.212
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:54.207
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:54.207
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:54.207
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:56.457
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:56.457
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:27:56.457
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:29:40.790
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:29:40.790
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:29:40.790
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:00.163
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:00.163
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:00.163
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:50.283
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:50.283
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:50.283
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:52.283
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:52.283
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:36:52.283
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:11.276
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:11.276
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:11.276
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:13.229
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:13.229
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:42:13.229
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:44:26.157
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:44:26.157
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:44:26.157
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:44:26.157
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:45:35.499
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:45:35.499
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:45:35.499
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:45:35.499
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:34.323
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:34.323
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:34.323
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:34.323
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:36.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:36.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:36.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 09:46:36.278
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:03:40.820
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:123)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:98)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:335)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:177)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:04:15.216
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:05:47.650
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:15:43.286
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarationStatement.accept(CASTDeclarationStatement.java:82)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:15:45.209
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarationStatement.accept(CASTDeclarationStatement.java:82)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:15:48.975
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker$VariableDeclarationVisitor.visit(SymbolShadowingChecker.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTParameterDeclaration.accept(CASTParameterDeclaration.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDeclarator.postAccept(CASTFunctionDeclarator.java:94)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarator.accept(CASTDeclarator.java:179)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTSimpleDeclaration.accept(CASTSimpleDeclaration.java:111)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTDeclarationStatement.accept(CASTDeclarationStatement.java:82)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.SymbolShadowingChecker.processAst(SymbolShadowingChecker.java:68)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:27:16.262
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:28:18.030
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:28:25.169
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:29:29.783
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 10:59:28.259
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:00:30.365
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:03:09.625
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:03:18.704
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:03:24.311
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:03:24.901
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:10:26.445
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker$1.visit(MagicNumberChecker.java:153)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTLiteralExpression.accept(CASTLiteralExpression.java:84)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionCallExpression.accept(CASTFunctionCallExpression.java:114)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFieldReference.accept(CASTFieldReference.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTBinaryExpression.accept(CASTBinaryExpression.java:133)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTExpressionStatement.accept(CASTExpressionStatement.java:80)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker.processAst(MagicNumberChecker.java:104)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:21:10.679
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:21:28.617
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:22:10.008
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:22:37.037
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:24:02.286
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:25:00.504
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:25:06.238
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:25:46.402
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:29:27.419
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:29:50.610
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:31:10.113
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:36:08.670
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:42:10.098
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:46:18.702
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:46:24.251
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 11:46:25.955
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:11:29.751
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker$1.visit(MagicNumberChecker.java:153)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTLiteralExpression.accept(CASTLiteralExpression.java:84)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTBinaryExpression.accept(CASTBinaryExpression.java:133)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTExpressionStatement.accept(CASTExpressionStatement.java:80)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker.processAst(MagicNumberChecker.java:104)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:18.774
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:18.774
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:18.774
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:18.774
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:21.106
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:21.106
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:21.106
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:23:21.106
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:52.394
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:52.394
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:52.394
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:52.394
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:55.534
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:55.534
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:55.534
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:24:55.534
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:51.325
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:51.325
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:51.325
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:51.325
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:55.288
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:55.288
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:55.289
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:55.289
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:59.764
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:59.764
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:59.764
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:26:59.764
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:17.026
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:17.026
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:17.026
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:17.026
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:24.435
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:24.435
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:24.435
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:24.435
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:29.072
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:29.072
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:29.072
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:27:29.072
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:20.058
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:20.058
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:20.058
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:20.058
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:21.714
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:21.714
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:21.714
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:21.714
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:24.386
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:24.386
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:24.386
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:24.386
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:25.308
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:25.324
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:25.324
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:25.324
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:26.699
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:26.699
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:26.699
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:26.699
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:30.308
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:30.308
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:30.308
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:30.308
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:32.668
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:32.668
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:32.668
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:32.668
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:33.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:33.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:33.278
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:33.278
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:38.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:38.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:38.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:38.111
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.111
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.111
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.802
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.802
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.802
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:28:43.802
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:02.538
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:02.538
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:02.538
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:02.538
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:05.258
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:05.258
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:05.258
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:29:05.258
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:21.711
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:21.711
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:21.711
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:21.711
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:25.181
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:25.181
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:25.181
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 12:31:25.181
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:17.037
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:21.535
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:25.082
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:26.129
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:27.879
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:29.729
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:31.182
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:34.710
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:35.538
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:36.351
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:37.838
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:39.030
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:43.575
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:46.731
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:52.403
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:53.325
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:55.013
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:56.185
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:57.654
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:50:59.841
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:03.513
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:04.826
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:06.123
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:07.482
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:08.936
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:10.279
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:12.347
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:17.533
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:20.539
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:22.820
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:24.753
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:32.184
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:33.684
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:35.181
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:37.353
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:39.572
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:41.275
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:43.581
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:46.156
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:48.646
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:52.828
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:56.191
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:51:58.410
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:01.069
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:03.590
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:05.450
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:07.497
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:10.037
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:11.839
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:15.319
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:17.147
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:19.324
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:20.570
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:22.916
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:25.869
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:27.259
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:29.556
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:30.384
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:34.284
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:36.104
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:36.729
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:39.573
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:41.448
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:46.323
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:47.948
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:51.774
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:52:58.040
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:03.744
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:04.369
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:05.400
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:09.542
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:11.808
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:16.464
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:18.511
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:19.855
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:20.716
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:21.466
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:22.856
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:23.653
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:26.027
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:33.316
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:36.290
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:42.399
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:43.774
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:46.368
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:48.718
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:51.838
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:53.469
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:53:56.241
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:01.335
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:05.495
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:10.979
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:20.453
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:23.843
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:26.956
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:27.503
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:28.675
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:33.354
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:35.369
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:36.325
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:38.319
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:54:57.328
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:00.536
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:01.880
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:06.286
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:09.052
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:09.620
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:11.678
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:15.202
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:16.421
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:17.406
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:20.405
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:29.092
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:47.187
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:55:47.999
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:02.585
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:04.288
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:05.350
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:07.069
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:09.585
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:12.693
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:15.644
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:17.191
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:17.753
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:20.633
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:22.277
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:22.918
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:30.653
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:31.591
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:32.606
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:34.794
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:36.045
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:37.444
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:43.045
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:45.713
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:47.511
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:49.985
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:51.886
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:52.724
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:54.964
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:55.605
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:56:58.740
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:00.537
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:03.584
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:05.007
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:05.570
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:08.242
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:10.527
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:14.652
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:16.405
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:17.077
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:22.314
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:23.456
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:28.827
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:30.749
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:32.156
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:34.624
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:36.765
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:39.003
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:41.740
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:42.349
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:47.357
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:48.206
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:50.678
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:52.084
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:53.037
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:57:59.241
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:02.059
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:05.012
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:07.347
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:09.763
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:13.006
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:14.971
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:17.185
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:22.214
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:23.122
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:26.202
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:27.108
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:30.516
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:32.342
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:35.048
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:38.324
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:40.532
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:42.954
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:44.699
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:49.305
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:50.711
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:53.102
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:55.155
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:58:57.367
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:00.057
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:01.182
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:03.952
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:05.641
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:08.098
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:09.273
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:10.965
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:11.653
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:14.846
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:17.736
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:18.751
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:21.310
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:22.732
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:24.753
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:25.977
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:29.484
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:31.814
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:32.986
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:35.921
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:38.614
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:39.708
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:40.739
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:42.306
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:42.853
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:46.391
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:48.240
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:49.287
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:51.822
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:53.841
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:54.544
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:56.495
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:57.151
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 12:59:59.167
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:00.063
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:02.094
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:03.016
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:05.412
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:06.261
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:07.730
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:09.527
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:10.449
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:13.251
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:14.094
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:16.489
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:18.317
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:18.973
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:20.911
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:21.770
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:24.192
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:26.114
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:26.958
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:29.145
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:29.958
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:33.323
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:35.178
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:37.089
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:37.714
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:38.355
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:40.011
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:41.480
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:44.044
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:45.606
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:46.810
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:47.419
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:49.472
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:50.633
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:51.258
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:52.154
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:52.941
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:53.957
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:55.035
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:57.597
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:00:59.884
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:04.751
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:23.329
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:25.428
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:42.413
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:43.604
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:46.742
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:49.638
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:50.534
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:56.769
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:01:58.019
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:02:31.285
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:02:45.663
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:02:47.569
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:02:56.085
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:02:57.789
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:01.570
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:05.044
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:06.189
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:16.553
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:19.968
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:23.558
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:24.698
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:28.878
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:30.539
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:36.589
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:03:54.058
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:04.974
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:06.459
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:12.307
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:15.776
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:18.089
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:19.923
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:21.191
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:22.113
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:23.114
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:26.883
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:29.540
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:04:50.116
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:05:12.776
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:05:14.073
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:05:24.763
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:08:18.821
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 13:09:01.494
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 13:57:53.029
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 13:57:53.029
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 13:57:53.029
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 13:57:53.029
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:10:25.779
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:10:25.779
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:10:25.779
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:10:25.779
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:12:48.321
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:12:48.321
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:12:48.321
+!MESSAGE Unsupported statement type: CASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2023-04-18 14:12:48.321
+!MESSAGE Unsupported statement type: CASTDefaultStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 14:51:09.501
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker$1.visit(MagicNumberChecker.java:153)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTLiteralExpression.accept(CASTLiteralExpression.java:84)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTBinaryExpression.accept(CASTBinaryExpression.java:133)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTExpressionStatement.accept(CASTExpressionStatement.java:80)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTIfStatement.accept(CASTIfStatement.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker.processAst(MagicNumberChecker.java:104)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 14:51:11.565
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker$1.visit(MagicNumberChecker.java:153)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTLiteralExpression.accept(CASTLiteralExpression.java:84)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTBinaryExpression.accept(CASTBinaryExpression.java:133)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTExpressionStatement.accept(CASTExpressionStatement.java:80)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTIfStatement.accept(CASTIfStatement.java:140)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.codan.internal.checkers.MagicNumberChecker.processAst(MagicNumberChecker.java:104)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:116)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:95)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:50)
+	at org.eclipse.cdt.codan.internal.core.CodanBuilder.processResource(CodanBuilder.java:130)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:40)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:60)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3109)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:100)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 15:10:21.321
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 15:13:37.796
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 15:32:34.590
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 15:33:47.537
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2023-04-18 15:44:37.399
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
