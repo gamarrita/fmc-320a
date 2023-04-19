@@ -111,49 +111,37 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
     switch (event_id)
     {
         case EVENT_KEY_UP:
-            if(field == DAY)
+            if(correct_password)
             {
-                if(month_enum == JANUARY ||
-                month_enum == MARCH      ||
-                month_enum == MAY        ||
-                month_enum == JULY       ||
-                month_enum == AUGUST     ||
-                month_enum == OCTOBER    ||
-                month_enum == DECEMBER)
+                if(field == DAY)
                 {
-                    if(day_enum < DAY_31)
+                    if(month_enum == JANUARY ||
+                    month_enum == MARCH      ||
+                    month_enum == MAY        ||
+                    month_enum == JULY       ||
+                    month_enum == AUGUST     ||
+                    month_enum == OCTOBER    ||
+                    month_enum == DECEMBER)
                     {
-                        fm_factory_modify_date(day_enum +
-                        1, month_enum,
-                        year_enum);
+                        if(day_enum < DAY_31)
+                        {
+                            fm_factory_modify_date(day_enum +
+                            1, month_enum,
+                            year_enum);
+                        }
+                        else
+                        {
+                            fm_factory_modify_date(DAY_0,
+                            month_enum,
+                            year_enum);
+                        }
                     }
-                    else
+                    else if(month_enum == APRIL ||
+                    month_enum == JUNE          ||
+                    month_enum == SEPTEMBER     ||
+                    month_enum == NOVEMBER)
                     {
-                        fm_factory_modify_date(DAY_0,
-                        month_enum,
-                        year_enum);
-                    }
-                }
-                else if(month_enum == APRIL ||
-                month_enum == JUNE          ||
-                month_enum == SEPTEMBER     ||
-                month_enum == NOVEMBER)
-                {
-                    if(day_enum < DAY_30)
-                    {
-                        fm_factory_modify_date(day_enum + 1, month_enum,
-                        year_enum);
-                    }
-                    else
-                    {
-                        fm_factory_modify_date(DAY_0, month_enum, year_enum);
-                    }
-                }
-                else
-                {
-                    if(year_enum % YEAR_4 == 0)
-                    {
-                        if(day_enum < DAY_29)
+                        if(day_enum < DAY_30)
                         {
                             fm_factory_modify_date(day_enum + 1, month_enum,
                             year_enum);
@@ -166,146 +154,140 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     }
                     else
                     {
-                        if(day_enum < DAY_28)
+                        if(year_enum % YEAR_4 == 0)
                         {
-                            fm_factory_modify_date(day_enum + 1, month_enum,
-                            year_enum);
+                            if(day_enum < DAY_29)
+                            {
+                                fm_factory_modify_date(day_enum + 1, month_enum,
+                                year_enum);
+                            }
+                            else
+                            {
+                                fm_factory_modify_date(DAY_0, month_enum,
+                                year_enum);
+                            }
                         }
                         else
                         {
-                            fm_factory_modify_date(DAY_0, month_enum,
-                            year_enum);
+                            if(day_enum < DAY_28)
+                            {
+                                fm_factory_modify_date(day_enum + 1, month_enum,
+                                year_enum);
+                            }
+                            else
+                            {
+                                fm_factory_modify_date(DAY_0, month_enum,
+                                year_enum);
+                            }
                         }
                     }
                 }
-            }
-            else if(field == MONTH)
-            {
-                if(month_enum < DECEMBER)
+                else if(field == MONTH)
                 {
-                    if((month_enum + 1 == APRIL || month_enum + 1 == JUNE ||
-                    month_enum + 1 == SEPTEMBER || month_enum + 1 == NOVEMBER)
-                    && (day_enum > DAY_30))
+                    if(month_enum < DECEMBER)
                     {
-                        day_enum = DAY_30;
+                        if((month_enum + 1 == APRIL ||
+                        month_enum + 1 == JUNE      ||
+                        month_enum + 1 == SEPTEMBER ||
+                        month_enum + 1 == NOVEMBER)
+                        && (day_enum > DAY_30))
+                        {
+                            day_enum = DAY_30;
+                        }
+                        else if((month_enum + 1 == FEBRUARY) &&
+                        (year_enum % YEAR_4 == 0) &&
+                        (day_enum > DAY_29))
+                        {
+                            day_enum = DAY_29;
+                        }
+                        else if((month_enum + 1 == FEBRUARY) &&
+                        (year_enum % YEAR_4 != 0) &&
+                        (day_enum > DAY_28))
+                        {
+                            day_enum = DAY_28;
+                        }
+                        fm_factory_modify_date(day_enum, month_enum + 1,
+                        year_enum);
                     }
-                    else if((month_enum + 1 == FEBRUARY) &&
-                    (year_enum % YEAR_4 == 0) &&
-                    (day_enum > DAY_29))
+                    else
                     {
-                        day_enum = DAY_29;
+                        fm_factory_modify_date(day_enum, JANUARY, year_enum);
                     }
-                    else if((month_enum + 1 == FEBRUARY) &&
-                    (year_enum % YEAR_4 != 0) &&
-                    (day_enum > DAY_28))
+                }
+                else if(field == YEAR)
+                {
+                    if(year_enum < YEAR_99)
                     {
-                        day_enum = DAY_28;
+                        if(((year_enum + 1) % YEAR_4 != YEAR_0) &&
+                        (month_enum == FEBRUARY) &&
+                        (day_enum > DAY_28))
+                        {
+                            day_enum = DAY_28;
+                        }
+                        fm_factory_modify_date(day_enum, month_enum, year_enum
+                        + 1);
                     }
-                    fm_factory_modify_date(day_enum, month_enum + 1, year_enum);
-                }
-                else
-                {
-                    fm_factory_modify_date(day_enum, JANUARY, year_enum);
-                }
-            }
-            else if(field == YEAR)
-            {
-                if(year_enum < YEAR_99)
-                {
-                    if(((year_enum + 1) % YEAR_4 != YEAR_0) &&
-                    (month_enum == FEBRUARY) &&
-                    (day_enum > DAY_28))
+                    else
                     {
-                        day_enum = DAY_28;
+                        fm_factory_modify_date(day_enum, month_enum, YEAR_0);
                     }
-                    fm_factory_modify_date(day_enum, month_enum, year_enum + 1);
                 }
-                else
+                else if(field == HOUR)
                 {
-                    fm_factory_modify_date(day_enum, month_enum, YEAR_0);
+                    if(hour_enum < HOUR_23)
+                    {
+                        fm_factory_modify_time(hour_enum + 1,
+                        minute_enum,
+                        second_enum);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(HOUR_0, minute_enum,
+                        second_enum);
+                    }
                 }
+                else if(field == MINUTE)
+                {
+                    if(minute_enum < MINU_59)
+                    {
+                        fm_factory_modify_time(hour_enum,
+                        minute_enum + 1,
+                        second_enum);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(hour_enum,
+                        MINU_0, second_enum);
+                    }
+                }
+                else if(field == SECOND)
+                {
+                    if(second_enum < SEC_59)
+                    {
+                        fm_factory_modify_time(hour_enum,
+                        minute_enum,
+                        second_enum + 1);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(hour_enum,
+                        minute_enum,
+                        SEC_0);
+                    }
+                }
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             }
-            else if(field == HOUR)
-            {
-                if(hour_enum < HOUR_23)
-                {
-                    fm_factory_modify_time(hour_enum + 1,
-                    minute_enum,
-                    second_enum);
-                }
-                else
-                {
-                    fm_factory_modify_time(HOUR_0, minute_enum,
-                    second_enum);
-                }
-            }
-            else if(field == MINUTE)
-            {
-                if(minute_enum < MINU_59)
-                {
-                    fm_factory_modify_time(hour_enum,
-                    minute_enum + 1,
-                    second_enum);
-                }
-                else
-                {
-                    fm_factory_modify_time(hour_enum,
-                    MINU_0, second_enum);
-                }
-
-            }
-            else if(field == SECOND)
-            {
-                if(second_enum < SEC_59)
-                {
-                    fm_factory_modify_time(hour_enum,
-                    minute_enum,
-                    second_enum + 1);
-                }
-                else
-                {
-                    fm_factory_modify_time(hour_enum,
-                    minute_enum,
-                    SEC_0);
-                }
-            }
-            event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_DOWN:
-            if(field == DAY)
+            if(correct_password)
             {
-                if(month_enum == JANUARY || month_enum == MARCH   ||
-                month_enum == MAY        || month_enum == JULY    ||
-                month_enum == AUGUST     || month_enum == OCTOBER ||
-                month_enum == DECEMBER)
+                if(field == DAY)
                 {
-                    if(day_enum > DAY_0)
-                    {
-                        fm_factory_modify_date(day_enum - 1, month_enum,
-                        year_enum);
-                    }
-                    else
-                    {
-                        fm_factory_modify_date(DAY_31, month_enum, year_enum);
-                    }
-                }
-                else if(month_enum == APRIL || month_enum == JUNE ||
-                month_enum == SEPTEMBER     || month_enum == NOVEMBER)
-                {
-                    if(day_enum > DAY_0)
-                    {
-                        fm_factory_modify_date(day_enum - 1, month_enum,
-                        year_enum);
-                    }
-                    else
-                    {
-                        fm_factory_modify_date(DAY_30, month_enum, year_enum);
-                    }
-                }
-                else
-                {
-                    if(year_enum % YEAR_4 == 0)
+                    if(month_enum == JANUARY || month_enum == MARCH   ||
+                    month_enum == MAY        || month_enum == JULY    ||
+                    month_enum == AUGUST     || month_enum == OCTOBER ||
+                    month_enum == DECEMBER)
                     {
                         if(day_enum > DAY_0)
                         {
@@ -314,11 +296,12 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                         }
                         else
                         {
-                            fm_factory_modify_date(DAY_29, month_enum,
+                            fm_factory_modify_date(DAY_31, month_enum,
                             year_enum);
                         }
                     }
-                    else
+                    else if(month_enum == APRIL || month_enum == JUNE ||
+                    month_enum == SEPTEMBER     || month_enum == NOVEMBER)
                     {
                         if(day_enum > DAY_0)
                         {
@@ -327,124 +310,160 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                         }
                         else
                         {
-                            fm_factory_modify_date(DAY_28, month_enum,
+                            fm_factory_modify_date(DAY_30, month_enum,
                             year_enum);
                         }
                     }
-                }
-            }
-            else if(field == MONTH)
-            {
-                if(month_enum > JANUARY)
-                {
-                    if((month_enum - 1 == APRIL || month_enum - 1 == JUNE ||
-                    month_enum - 1 == SEPTEMBER || month_enum - 1 == NOVEMBER)
-                    && (day_enum > DAY_30))
+                    else
                     {
-                        day_enum = DAY_30;
+                        if(year_enum % YEAR_4 == 0)
+                        {
+                            if(day_enum > DAY_0)
+                            {
+                                fm_factory_modify_date(day_enum - 1, month_enum,
+                                year_enum);
+                            }
+                            else
+                            {
+                                fm_factory_modify_date(DAY_29, month_enum,
+                                year_enum);
+                            }
+                        }
+                        else
+                        {
+                            if(day_enum > DAY_0)
+                            {
+                                fm_factory_modify_date(day_enum - 1, month_enum,
+                                year_enum);
+                            }
+                            else
+                            {
+                                fm_factory_modify_date(DAY_28, month_enum,
+                                year_enum);
+                            }
+                        }
                     }
-                    else if((month_enum - 1 == FEBRUARY) &&
-                    (year_enum % YEAR_4 == 0) &&
-                    (day_enum > DAY_29))
+                }
+                else if(field == MONTH)
+                {
+                    if(month_enum > JANUARY)
                     {
-                        day_enum = DAY_29;
+                        if((month_enum - 1 == APRIL ||
+                        month_enum - 1 == JUNE      ||
+                        month_enum - 1 == SEPTEMBER ||
+                        month_enum - 1 == NOVEMBER) && (day_enum > DAY_30))
+                        {
+                            day_enum = DAY_30;
+                        }
+                        else if((month_enum - 1 == FEBRUARY) &&
+                        (year_enum % YEAR_4 == 0) &&
+                        (day_enum > DAY_29))
+                        {
+                            day_enum = DAY_29;
+                        }
+                        else if((month_enum - 1 == FEBRUARY) &&
+                        (year_enum % YEAR_4 != 0) &&
+                        (day_enum > DAY_28))
+                        {
+                            day_enum = DAY_28;
+                        }
+                        fm_factory_modify_date(day_enum, month_enum - 1,
+                        year_enum);
                     }
-                    else if((month_enum - 1 == FEBRUARY) &&
-                    (year_enum % YEAR_4 != 0) &&
-                    (day_enum > DAY_28))
+                    else
                     {
-                        day_enum = DAY_28;
+                        fm_factory_modify_date(day_enum, DECEMBER, year_enum);
                     }
-                    fm_factory_modify_date(day_enum, month_enum - 1, year_enum);
                 }
-                else
+                else if(field == YEAR)
                 {
-                    fm_factory_modify_date(day_enum, DECEMBER, year_enum);
-                }
-            }
-            else if(field == YEAR)
-            {
-                if(year_enum > YEAR_0)
-                {
-                    if(((year_enum - 1) % YEAR_4 != YEAR_0) &&
-                    (month_enum == FEBRUARY) &&
-                    (day_enum > DAY_28))
+                    if(year_enum > YEAR_0)
                     {
-                        day_enum = DAY_28;
+                        if(((year_enum - 1) % YEAR_4 != YEAR_0) &&
+                        (month_enum == FEBRUARY) &&
+                        (day_enum > DAY_28))
+                        {
+                            day_enum = DAY_28;
+                        }
+                        fm_factory_modify_date(day_enum, month_enum,
+                        year_enum - 1);
                     }
-                    fm_factory_modify_date(day_enum, month_enum, year_enum - 1);
+                    else
+                    {
+                        fm_factory_modify_date(day_enum, month_enum, YEAR_99);
+                    }
                 }
-                else
+                else if(field == HOUR)
                 {
-                    fm_factory_modify_date(day_enum, month_enum, YEAR_99);
+                    if(hour_enum > HOUR_0)
+                    {
+                        fm_factory_modify_time(hour_enum - 1, minute_enum,
+                        second_enum);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(HOUR_23, minute_enum,
+                        second_enum);
+                    }
                 }
+                else if(field == MINUTE)
+                {
+                    if(minute_enum > MINU_0)
+                    {
+                        fm_factory_modify_time(hour_enum, minute_enum - 1,
+                        second_enum);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(hour_enum, MINU_59, second_enum);
+                    }
+                }
+                else if(field == SECOND)
+                {
+                    if(second_enum > SEC_0)
+                    {
+                        fm_factory_modify_time(hour_enum, minute_enum,
+                        second_enum - 1);
+                    }
+                    else
+                    {
+                        fm_factory_modify_time(hour_enum, minute_enum, SEC_59);
+                    }
+                }
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             }
-            else if(field == HOUR)
-            {
-                if(hour_enum > HOUR_0)
-                {
-                    fm_factory_modify_time(hour_enum - 1, minute_enum,
-                    second_enum);
-                }
-                else
-                {
-                    fm_factory_modify_time(HOUR_23, minute_enum, second_enum);
-                }
-            }
-            else if(field == MINUTE)
-            {
-                if(minute_enum > MINU_0)
-                {
-                    fm_factory_modify_time(hour_enum, minute_enum - 1,
-                    second_enum);
-                }
-                else
-                {
-                    fm_factory_modify_time(hour_enum, MINU_59, second_enum);
-                }
-            }
-            else if(field == SECOND)
-            {
-                if(second_enum > SEC_0)
-                {
-                    fm_factory_modify_time(hour_enum, minute_enum,
-                    second_enum - 1);
-                }
-                else
-                {
-                    fm_factory_modify_time(hour_enum, minute_enum, SEC_59);
-                }
-            }
-            event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ENTER:
-            if(field == DAY)
+            if(correct_password)
             {
-                field = MONTH;
+                if(field == DAY)
+                {
+                    field = MONTH;
+                }
+                else if(field == MONTH)
+                {
+                    field = YEAR;
+                }
+                else if(field == YEAR)
+                {
+                    field = HOUR;
+                }
+                else if(field == HOUR)
+                {
+                    field = MINUTE;
+                }
+                else if(field == MINUTE)
+                {
+                    field = SECOND;
+                }
+                else if(field == SECOND)
+                {
+                    field = DAY;
+                }
+                event_now = EVENT_LCD_REFRESH;
+                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
             }
-            else if(field == MONTH)
-            {
-                field = YEAR;
-            }
-            else if(field == YEAR)
-            {
-                field = HOUR;
-            }
-            else if(field == HOUR)
-            {
-                field = MINUTE;
-            }
-            else if(field == MINUTE)
-            {
-                field = SECOND;
-            }
-            else if(field == SECOND)
-            {
-                field = DAY;
-            }
-            event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
@@ -463,17 +482,42 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
 
     if (new_exit == 1)
     {
-        date_final.Date = day_enum;
-        date_final.Month = month_enum;
-        date_final.Year = year_enum;
+        if(correct_password)
+        {
+            /*
+             * Es totalmente necesario que cuando se complete las estructuras
+             * del calendario del RTC, al intentar escribir la fecha, se
+             * inicialicen todas las variables de dicha estructura (.Date,
+             * .Month, .Year, .Weekday) a pesar de que alguna sea irrelevante
+             * (como en este caso lo es .WeekDay), ya que de lo contrario, se
+             * deja a la suerte la escritura de los registros del periférico y
+             * puede que al intentar leer nuevamente el calendario, los datos se
+             * encuentren corrompidos y se lea cualquier cosa. Para mas info de
+             * esto ver el link siguiente:
+             *
+             * http://www.efton.sk/STM32/gotcha/g113.html
+             */
+            date_final.Date = day_enum;
+            date_final.Month = month_enum;
+            date_final.Year = year_enum;
+            date_final.WeekDay = RTC_WEEKDAY_FRIDAY;
 
-        HAL_RTC_SetDate(&hrtc, &date_final, RTC_FORMAT_BIN);
+            HAL_RTC_SetDate(&hrtc, &date_final, RTC_FORMAT_BIN);
 
-        time_final.Hours = hour_enum;
-        time_final.Minutes = minute_enum;
-        time_final.Seconds = second_enum;
+            /*
+             * Puede llegar a pasar lo mismo con la hora que con la fecha
+             * explicado en el comentario de arriba, pero en este caso parece no
+             * ocurrir, debido a que el campo faltante es .TimeFormat, y no lo
+             * completa ni siquiera el cubeMX.
+             */
+            time_final.Hours = hour_enum;
+            time_final.Minutes = minute_enum;
+            time_final.Seconds = second_enum;
 
-        HAL_RTC_SetTime(&hrtc, &time_final, RTC_FORMAT_BIN);
+            HAL_RTC_SetTime(&hrtc, &time_final, RTC_FORMAT_BIN);
+
+            correct_password = 0;
+        }
 
         new_entry = 1;
         new_exit = 0;
