@@ -21,6 +21,7 @@
 #include "stdio.h"
 #include "../fm_debug/fm_debug.h"
 #include "../fm_calendar/fm_calendar.h"
+#include "core_cm4.h"
 
 // Typedef.
 
@@ -205,7 +206,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_date_hour(fm_calendar_format_time(), fm_calendar_format_date());
+    fm_lcd_date_hour(USER);
     fm_lcd_refresh();
 
     switch (event_id)

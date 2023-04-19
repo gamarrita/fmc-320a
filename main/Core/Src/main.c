@@ -60,14 +60,14 @@ UART_HandleTypeDef huart2;
 osThreadId_t MenuTaskHandle;
 const osThreadAttr_t MenuTask_attributes = {
   .name = "MenuTask",
-  .stack_size = 1024 * 4,
+  .stack_size = 4096 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for DebounceTask */
 osThreadId_t DebounceTaskHandle;
 const osThreadAttr_t DebounceTask_attributes = {
   .name = "DebounceTask",
-  .stack_size = 128 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for debounce_semaphore */
@@ -347,9 +347,9 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x09;
-  sTime.Minutes = 0x30;
-  sTime.Seconds = 0x00;
+  sTime.Hours = 0x9;
+  sTime.Minutes = 0x35;
+  sTime.Seconds = 0x0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
   if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)

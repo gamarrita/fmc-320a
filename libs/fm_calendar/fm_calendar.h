@@ -28,8 +28,8 @@ int fm_calendar_get_second();
 int fm_calendar_get_day();
 int fm_calendar_get_month();
 int fm_calendar_get_year();
-int fm_calendar_format_time();
-int fm_calendar_format_date();
+void fm_calendar_format_time();
+void fm_calendar_format_date();
 
 #endif /* FM_CALENDAR_H */
 

@@ -13,6 +13,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "../fm_lcd/fm_lcd.h"
+#include "../fm_factory/fm_factory.h"
 // Typedef.
 
 /*
@@ -107,9 +108,9 @@ int fm_calendar_get_year()
  * @param None
  * @retval Entero que contiene la hora, minutos y segundos concatenados.
  */
-int fm_calendar_format_time()
+void fm_calendar_format_time()
 {
-    int time = 0;
+    int  time_int = 0;
     char time_arr[PCF8553_DATA_SIZE];
 
     fm_calendar_get();
@@ -121,9 +122,9 @@ int fm_calendar_format_time()
      * entero en un arreglo, pero por ahora se va a quedar así hasta que se
      * elimine el formatter de la libreria fm_lcd.h
      */
-    time = atoi(time_arr);
 
-    return (time);
+    time_int = atoi(time_arr);
+    fm_factory_modify_fp_time(time_int);
 }
 
 /*
@@ -131,13 +132,12 @@ int fm_calendar_format_time()
  * @param None
  * @retval Entero que contiene el día, el mes y el año concatenados.
  */
-int fm_calendar_format_date()
+void fm_calendar_format_date()
 {
-    int date = 0;
+    int  date_int = 0;
     char date_arr[PCF8553_DATA_SIZE];
 
     fm_calendar_get();
-
     sprintf(date_arr, "%02d%02d20%02d", sDate.Date, sDate.Month, sDate.Year);
 
     /*
@@ -145,9 +145,8 @@ int fm_calendar_format_date()
      * entero en un arreglo, pero por ahora se va a quedar así hasta que se
      * elimine el formatter de la libreria fm_lcd.h
      */
-    date = atoi(date_arr);
-
-    return (date);
+    date_int = atoi(date_arr);
+    fm_factory_modify_fp_date(date_int);
 }
 
 // Interrupts

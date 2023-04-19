@@ -38,7 +38,7 @@ typedef enum
 
 typedef enum
 {
-    DAY_0, DAY_1, DAY_2, DAY_3, DAY_4, DAY_5, DAY_6, DAY_7, DAY_8, DAY_9,
+    DAY_1 = 1, DAY_2, DAY_3, DAY_4, DAY_5, DAY_6, DAY_7, DAY_8, DAY_9,
     DAY_10, DAY_11, DAY_12, DAY_13, DAY_14, DAY_15, DAY_16, DAY_17, DAY_18,
     DAY_19, DAY_20, DAY_21, DAY_22, DAY_23, DAY_24, DAY_25, DAY_26, DAY_27,
     DAY_28, DAY_29, DAY_30, DAY_31
@@ -109,6 +109,12 @@ fmc_fp_t fm_factory_get_units_tim();
 fmc_fp_t fm_factory_get_units_vol();
 fmc_fp_t fm_factory_get_k_factor();
 fmc_date_time_t fm_factory_get_date_time();
+fmc_fp_t fm_factory_get_fp_date();
+fmc_fp_t fm_factory_get_fp_time();
+fmc_fp_t fm_factory_get_fp_date_conf();
+fmc_fp_t fm_factory_get_fp_time_conf();
+void fm_factory_modify_fp_date(int date);
+void fm_factory_modify_fp_time(int time);
 void fm_factory_modify_k_factor_add(sel_digit_t digit_k);
 void fm_factory_modify_date(int mod_day, int mod_month, int mod_year);
 void fm_factory_modify_time(int mod_hour, int mod_minute, int mod_second);

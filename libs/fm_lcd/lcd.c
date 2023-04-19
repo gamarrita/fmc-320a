@@ -378,6 +378,63 @@ void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed)
     pcf8553_blink(blink_speed);
 }
 
+void lcd_clear_digit(screen_digits_t digit, rows_t line)
+{
+    if(line == HIGH_ROW)
+    {
+        switch(digit)
+        {
+            case DIGIT_0:
+            break;
+            case DIGIT_1:
+            break;
+            case DIGIT_2:
+            break;
+            case DIGIT_3:
+            break;
+            case DIGIT_4:
+            break;
+            case DIGIT_5:
+            break;
+            case DIGIT_6:
+            break;
+            case DIGIT_7:
+            break;
+            default:
+            break;
+        }
+    }
+    else if(line == LOW_ROW)
+    {
+        switch(digit)
+        {
+            case DIGIT_0:
+                g_lcd_map[REG_12] &= ~(1 << BIT_2);
+                g_lcd_map[REG_12] &= ~(1 << BIT_3);
+                g_lcd_map[REG_17] &= ~(1 << BIT_2);
+                g_lcd_map[REG_17] &= ~(1 << BIT_3);
+                g_lcd_map[REG_2] &= ~(1 << BIT_2);
+                g_lcd_map[REG_2] &= ~(1 << BIT_3);
+                g_lcd_map[REG_7] &= ~(1 << BIT_3);
+            break;
+            case DIGIT_1:
+            break;
+            case DIGIT_2:
+            break;
+            case DIGIT_3:
+            break;
+            case DIGIT_4:
+            break;
+            case DIGIT_5:
+            break;
+            case DIGIT_6:
+            break;
+            default:
+            break;
+        }
+    }
+}
+
 /*
  * @brief Inicialización de la pantalla LCD escribiéndola por completo y luego
  * borrándola.

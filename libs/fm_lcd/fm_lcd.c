@@ -133,19 +133,37 @@ void fm_lcd_clear()
  * @param Hora y fecha a imprimir.
  * @retval None
  */
-void fm_lcd_date_hour(int time, int date)
+void fm_lcd_date_hour(user_or_configuration_t configuration)
 {
-    char lcd_msg[MSG_LENGTH];
+    fmc_fp_t time_to_str;
+    fmc_fp_t date_to_str;
+    if(configuration)
+    {
+        date_to_str = fm_factory_get_fp_date_conf();
+        time_to_str = fm_factory_get_fp_time_conf();
+    }
+    else
+    {
+        fm_calendar_format_date();
+        date_to_str = fm_factory_get_fp_date();
 
-    fm_lcd_format_number_in_line(HIGH_ROW, date, lcd_msg,
-    MSG_LENGTH);
+        fm_calendar_format_time();
+        time_to_str = fm_factory_get_fp_time();
+    }
+
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+
+    fm_lcd_fp_to_str(date_to_str, '0', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
     lcd_set_point(HIGH_ROW, PNT_1);
     lcd_set_point(HIGH_ROW, PNT_3);
 
-    fm_lcd_format_number_in_line(LOW_ROW, time, lcd_msg,
-    MSG_LENGTH);
+    fm_lcd_fp_to_str(time_to_str, '0', LINE_1_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_clear_digit(DIGIT_0, LOW_ROW);
     lcd_set_point(LOW_ROW, PNT_2);
     lcd_set_point(LOW_ROW, PNT_4);
 }

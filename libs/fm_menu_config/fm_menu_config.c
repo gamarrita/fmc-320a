@@ -66,15 +66,13 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
 {
     static uint8_t new_entry = 1;
     static uint8_t new_exit = 0;
-    static int time_t = 0;
-    static int date_t = 0;
     static sel_date_time_field_t field;
-    static sel_day day_enum = DAY_9;
-    static sel_month month_enum = APRIL;
-    static sel_year year_enum = YEAR_23;
-    static sel_hour hour_enum = HOUR_9;
-    static sel_minute minute_enum = MINU_0;
-    static sel_second second_enum = SEC_0;
+    static sel_day day_enum;
+    static sel_month month_enum;
+    static sel_year year_enum;
+    static sel_hour hour_enum;
+    static sel_minute minute_enum;
+    static sel_second second_enum;
     RTC_TimeTypeDef time_final;
     RTC_DateTypeDef date_final;
     extern RTC_HandleTypeDef hrtc;
@@ -89,24 +87,15 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
+    fm_lcd_date_hour(CONFIGURATION);
+    fm_lcd_refresh();
+
     day_enum = fm_factory_get_date_time().day;
     month_enum = fm_factory_get_date_time().month;
     year_enum = fm_factory_get_date_time().year;
     hour_enum = fm_factory_get_date_time().hour;
     minute_enum = fm_factory_get_date_time().minute;
     second_enum = fm_factory_get_date_time().second;
-
-    time_t = hour_enum * 10000; // @suppress("Avoid magic numbers")
-    time_t += minute_enum * 100; // @suppress("Avoid magic numbers")
-    time_t += second_enum; // @suppress("Avoid magic numbers")
-
-    date_t = day_enum * 1000000; // @suppress("Avoid magic numbers")
-    date_t += month_enum * 10000; // @suppress("Avoid magic numbers")
-    date_t += 2000; // @suppress("Avoid magic numbers")
-    date_t += year_enum; // @suppress("Avoid magic numbers")
-
-    fm_lcd_date_hour(time_t, date_t);
-    fm_lcd_refresh();
 
     switch (event_id)
     {
@@ -131,7 +120,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                         }
                         else
                         {
-                            fm_factory_modify_date(DAY_0,
+                            fm_factory_modify_date(DAY_1,
                             month_enum,
                             year_enum);
                         }
@@ -148,7 +137,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                         }
                         else
                         {
-                            fm_factory_modify_date(DAY_0, month_enum,
+                            fm_factory_modify_date(DAY_1, month_enum,
                             year_enum);
                         }
                     }
@@ -163,7 +152,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                             }
                             else
                             {
-                                fm_factory_modify_date(DAY_0, month_enum,
+                                fm_factory_modify_date(DAY_1, month_enum,
                                 year_enum);
                             }
                         }
@@ -176,7 +165,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                             }
                             else
                             {
-                                fm_factory_modify_date(DAY_0, month_enum,
+                                fm_factory_modify_date(DAY_1, month_enum,
                                 year_enum);
                             }
                         }
@@ -289,7 +278,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     month_enum == AUGUST     || month_enum == OCTOBER ||
                     month_enum == DECEMBER)
                     {
-                        if(day_enum > DAY_0)
+                        if(day_enum > DAY_1)
                         {
                             fm_factory_modify_date(day_enum - 1, month_enum,
                             year_enum);
@@ -303,7 +292,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     else if(month_enum == APRIL || month_enum == JUNE ||
                     month_enum == SEPTEMBER     || month_enum == NOVEMBER)
                     {
-                        if(day_enum > DAY_0)
+                        if(day_enum > DAY_1)
                         {
                             fm_factory_modify_date(day_enum - 1, month_enum,
                             year_enum);
@@ -318,7 +307,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     {
                         if(year_enum % YEAR_4 == 0)
                         {
-                            if(day_enum > DAY_0)
+                            if(day_enum > DAY_1)
                             {
                                 fm_factory_modify_date(day_enum - 1, month_enum,
                                 year_enum);
@@ -331,7 +320,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                         }
                         else
                         {
-                            if(day_enum > DAY_0)
+                            if(day_enum > DAY_1)
                             {
                                 fm_factory_modify_date(day_enum - 1, month_enum,
                                 year_enum);
