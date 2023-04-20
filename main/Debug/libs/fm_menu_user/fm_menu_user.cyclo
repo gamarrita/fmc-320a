@@ -1,6 +1,6 @@
-fm_menu_user.c:68:16:fm_menu_show_acm_rate	6
-fm_menu_user.c:131:16:fm_menu_show_acm_temp	6
-fm_menu_user.c:194:16:fm_menu_show_date_hour	5
-fm_menu_user.c:247:16:fm_menu_show_init	6
-fm_menu_user.c:321:16:fm_menu_show_ttl_rate	5
-fm_menu_user.c:380:16:fm_menu_show_version	6
+fm_menu_user.c:69:16:fm_menu_show_acm_rate	6
+fm_menu_user.c:132:16:fm_menu_show_acm_temp	6
+fm_menu_user.c:195:16:fm_menu_show_date_hour	5
+fm_menu_user.c:249:16:fm_menu_show_init	6
+fm_menu_user.c:323:16:fm_menu_show_ttl_rate	5
+fm_menu_user.c:382:16:fm_menu_show_version	6

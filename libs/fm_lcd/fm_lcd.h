@@ -44,6 +44,11 @@
 
 // Typedef.
 
+typedef enum
+{
+    USER, CONFIGURATION
+} user_or_configuration_t;
+
 // Defines.
 
 // Function prototypes.
@@ -52,7 +57,7 @@ void fm_lcd_acm_rate();
 void fm_lcd_acm_temp();
 void fm_lcd_battery_low(blink_t speed);
 void fm_lcd_clear();
-void fm_lcd_date_hour(int time, int date);
+void fm_lcd_date_hour(user_or_configuration_t configuration);
 void fm_lcd_fill();
 void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
 int length);
