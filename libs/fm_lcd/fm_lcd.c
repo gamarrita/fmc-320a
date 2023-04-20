@@ -346,12 +346,53 @@ void fm_lcd_k_factor()
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_fp_to_str(fm_factory_get_k_factor(), '0', LINE_0_DIGITS, lcd_msg,
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(K_FACTOR), '0',
+    LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(K_FACTOR), lcd_msg,
     sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
     lcd_set_symbol(K, 0x00);
+}
+
+void fm_lcd_k_lin(sel_k k_sel)
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(k_sel), '0', LINE_0_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(k_sel), lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+
+    fm_lcd_fp_to_str(fm_factory_get_frec_lin(k_sel), '0', LINE_1_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_clear_digit(DIGIT_0, LOW_ROW);
+    lcd_clear_digit(DIGIT_1, LOW_ROW);
+    lcd_clear_digit(DIGIT_2, LOW_ROW);
+
+    lcd_set_symbol(F, 0x00);
+    if(k_sel == K_LIN_1)
+    {
+        lcd_set_symbol(LIN_1, 0x00);
+    }
+    if(k_sel == K_LIN_2)
+    {
+        lcd_set_symbol(LIN_2, 0x00);
+    }
+    if(k_sel == K_LIN_3)
+    {
+        lcd_set_symbol(LIN_3, 0x00);
+    }
+    if(k_sel == K_LIN_4)
+    {
+        lcd_set_symbol(LIN_4, 0x00);
+    }
+    if(k_sel == K_LIN_5)
+    {
+        lcd_set_symbol(LIN_5, 0x00);
+    }
 }
 
 /*

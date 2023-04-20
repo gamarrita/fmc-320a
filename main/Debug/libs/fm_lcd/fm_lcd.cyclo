@@ -8,9 +8,10 @@ fm_lcd.c:199:5:fm_lcd_fp_add_dot	4
 fm_lcd.c:249:5:fm_lcd_fp_to_str	8
 fm_lcd.c:333:6:fm_lcd_init	1
 fm_lcd.c:345:6:fm_lcd_k_factor	1
-fm_lcd.c:363:6:fm_lcd_puts	9
-fm_lcd.c:398:6:fm_lcd_refresh	1
-fm_lcd.c:410:6:fm_lcd_ttl_rate	1
-fm_lcd.c:438:6:fm_lcd_units_tim	1
-fm_lcd.c:458:6:fm_lcd_units_vol	1
-fm_lcd.c:479:6:fm_lcd_version	1
+fm_lcd.c:358:6:fm_lcd_k_lin	6
+fm_lcd.c:404:6:fm_lcd_puts	9
+fm_lcd.c:439:6:fm_lcd_refresh	1
+fm_lcd.c:451:6:fm_lcd_ttl_rate	1
+fm_lcd.c:479:6:fm_lcd_units_tim	1
+fm_lcd.c:499:6:fm_lcd_units_vol	1
+fm_lcd.c:520:6:fm_lcd_version	1

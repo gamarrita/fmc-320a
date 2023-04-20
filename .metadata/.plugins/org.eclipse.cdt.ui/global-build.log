@@ -1,4 +1,4 @@
-10:02:04 **** Incremental Build of configuration Debug for project main ****
+17:01:51 **** Incremental Build of configuration Debug for project main ****
 make -j12 all 
 arm-none-eabi-gcc "D:/githubs/fmc-320a/libs/fm_version/fm_version.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L452xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"libs/fm_version/fm_version.d" -MT"libs/fm_version/fm_version.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "libs/fm_version/fm_version.o"
 arm-none-eabi-gcc -o "main.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\githubs\fmc-320a\main\STM32L452RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="main.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -7,7 +7,7 @@ Finished building target: main.elf
 arm-none-eabi-size   main.elf 
 arm-none-eabi-objdump -h -S  main.elf  > "main.list"
    text	   data	    bss	    dec	    hex	filename
-  59744	    356	  26064	  86164	  15094	main.elf
+  63108	    440	  26096	  89644	  15e2c	main.elf
 Finished building: default.size.stdout
  
 Finished building: main.list

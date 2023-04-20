@@ -28,6 +28,12 @@ typedef enum
 
 typedef enum
 {
+    DIG_LIN_0, DIG_LIN_1, DIG_LIN_2, DIG_LIN_3, DIG_LIN_4, DIG_LIN_5, DIG_LIN_6,
+    DIG_LIN_7, DIG_LIN_8, DIG_LIN_9, DIG_LIN_10, DIG_LIN_11
+} sel_digit_k_lin_t;
+
+typedef enum
+{
     VAL_0, VAL_1, VAL_2, VAL_3, VAL_4, VAL_5, VAL_6, VAL_7, VAL_8, VAL_9
 } sel_value_t;
 
@@ -97,6 +103,11 @@ typedef enum
     SEC_49, SEC_50, SEC_51, SEC_52, SEC_53, SEC_54, SEC_55, SEC_56,
     SEC_57, SEC_58, SEC_59
 } sel_second;
+
+typedef enum
+{
+    K_FACTOR, K_LIN_1, K_LIN_2, K_LIN_3, K_LIN_4, K_LIN_5
+} sel_k;
 // Defines.
 
 // Function prototypes
@@ -107,7 +118,8 @@ fmc_totalizer_t fm_factory_get_rate();
 fmc_temp_t fm_factory_get_temp();
 fmc_fp_t fm_factory_get_units_tim();
 fmc_fp_t fm_factory_get_units_vol();
-fmc_fp_t fm_factory_get_k_factor();
+fmc_fp_t fm_factory_get_k_factor(sel_k k_sel);
+fmc_fp_t fm_factory_get_frec_lin(sel_k k_sel);
 fmc_date_time_t fm_factory_get_date_time();
 fmc_fp_t fm_factory_get_fp_date();
 fmc_fp_t fm_factory_get_fp_time();
@@ -116,9 +128,11 @@ fmc_fp_t fm_factory_get_fp_time_conf();
 void fm_factory_modify_fp_date(int date);
 void fm_factory_modify_fp_time(int time);
 void fm_factory_modify_k_factor_add(sel_digit_t digit_k);
+void fm_factory_modify_k_factor_subs(sel_digit_t digit_k);
+void fm_factory_modify_k_lin_add(sel_digit_k_lin_t digit_k_lin, sel_k k_sel);
+void fm_factory_modify_k_lin_subs(sel_digit_k_lin_t digit_k_lin, sel_k k_sel);
 void fm_factory_modify_date(int mod_day, int mod_month, int mod_year);
 void fm_factory_modify_time(int mod_hour, int mod_minute, int mod_second);
-void fm_factory_modify_k_factor_subs(sel_digit_t digit_k);
 void fm_factory_modify_res_acm_ttl(sel_resolution_t units_res,
 sel_resolution_t acm_res, sel_resolution_t ttl_res);
 void fm_factory_modify_res_rate(sel_resolution_t units_res,
@@ -126,6 +140,7 @@ sel_resolution_t rate_res);
 void fm_factory_modify_time_units(fmc_unit_time_t time_units);
 void fm_factory_modify_volume_units(fmc_unit_volume_t volume_units);
 void fm_factory_separate_k_factor();
+void fm_factory_separate_k_lin_and_frec(sel_k k_sel);
 
 #endif /* FM_FACTORY_H */
 

@@ -8,9 +8,10 @@ D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:199:5:fm_lcd_fp_add_dot	40	static
 D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:249:5:fm_lcd_fp_to_str	40	static
 D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:333:6:fm_lcd_init	8	static
 D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:345:6:fm_lcd_k_factor	56	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:363:6:fm_lcd_puts	24	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:398:6:fm_lcd_refresh	8	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:410:6:fm_lcd_ttl_rate	232	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:438:6:fm_lcd_units_tim	88	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:458:6:fm_lcd_units_vol	88	static
-D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:479:6:fm_lcd_version	32	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:358:6:fm_lcd_k_lin	72	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:404:6:fm_lcd_puts	24	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:439:6:fm_lcd_refresh	8	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:451:6:fm_lcd_ttl_rate	232	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:479:6:fm_lcd_units_tim	88	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:499:6:fm_lcd_units_vol	88	static
+D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c:520:6:fm_lcd_version	32	static

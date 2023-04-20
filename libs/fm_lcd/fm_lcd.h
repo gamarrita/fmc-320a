@@ -39,6 +39,7 @@
 #include "stdio.h"
 
 #include "../fmc/fmc.h"
+#include "../fm_factory/fm_factory.h"
 
 // Macros, defines, microcontroller pins (dhs).
 
@@ -66,6 +67,7 @@ int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size);
 void fm_lcd_init();
 void fm_lcd_k_factor();
+void fm_lcd_k_lin(sel_k k_sel);
 void fm_lcd_puts(const char *p_str, uint8_t row);
 void fm_lcd_refresh();
 void fm_lcd_ttl_rate();

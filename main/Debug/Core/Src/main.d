@@ -50,6 +50,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h \
  d:\githubs\fmc-320a\libs\fm_lcd\lcd.h d:\githubs\fmc-320a\libs\fmc\fmc.h \
  d:\githubs\fmc-320a\libs\fm_lcd\pcf8553.h \
+ d:\githubs\fmc-320a\libs\fm_factory\fm_factory.h \
+ d:\githubs\fmc-320a\libs\fmc\fmc.h \
  d:\githubs\fmc-320a\libs\fm_event\fm_event.h \
  d:\githubs\fmc-320a\libs\fm_menu_config\fm_menu_config.h \
  d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h \
@@ -110,6 +112,8 @@ d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h:
 d:\githubs\fmc-320a\libs\fm_lcd\lcd.h:
 d:\githubs\fmc-320a\libs\fmc\fmc.h:
 d:\githubs\fmc-320a\libs\fm_lcd\pcf8553.h:
+d:\githubs\fmc-320a\libs\fm_factory\fm_factory.h:
+d:\githubs\fmc-320a\libs\fmc\fmc.h:
 d:\githubs\fmc-320a\libs\fm_event\fm_event.h:
 d:\githubs\fmc-320a\libs\fm_menu_config\fm_menu_config.h:
 d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h:

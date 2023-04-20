@@ -80,31 +80,68 @@ void fm_calendar_get()
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }
 
+/*
+ * @brief Función que lee la hora desde el RTC y la devuelve como parámetro.
+ * @param None
+ * @retval Hora leida del calendario.
+ */
 int fm_calendar_get_hour()
 {
     fm_calendar_get();
     return (sTime.Hours);
 }
+
+/*
+ * @brief Función que lee los minutos desde el RTC y los devuelve como
+ * parámetro.
+ * @param None
+ * @retval Minutos leidos del calendario.
+ */
 int fm_calendar_get_minute()
 {
     fm_calendar_get();
     return (sTime.Minutes);
 }
+
+/*
+ * @brief Función que lee los segundos desde el RTC y los devuelve como
+ * parámetro.
+ * @param None
+ * @retval Segundos leidos del calendario.
+ */
 int fm_calendar_get_second()
 {
     fm_calendar_get();
     return (sTime.Seconds);
 }
+
+/*
+ * @brief Función que lee el día desde el RTC y lo devuelve como parámetro.
+ * @param None
+ * @retval Día leido del calendario.
+ */
 int fm_calendar_get_day()
 {
     fm_calendar_get();
     return (sDate.Date);
 }
+
+/*
+ * @brief Función que lee el mes desde el RTC y lo devuelve como parámetro.
+ * @param None
+ * @retval Mes leida del calendario.
+ */
 int fm_calendar_get_month()
 {
     fm_calendar_get();
     return (sDate.Month);
 }
+
+/*
+ * @brief Función que lee el año desde el RTC y lo devuelve como parámetro.
+ * @param None
+ * @retval Año leido del calendario.
+ */
 int fm_calendar_get_year()
 {
     fm_calendar_get();
@@ -112,9 +149,10 @@ int fm_calendar_get_year()
 }
 
 /*
- * @brief Formatea la hora en el formato hh.mm.ss.
+ * @brief Formatea la hora en el formato hh.mm.ss y lo mete en un punto fijo en
+ * fm_factory.
  * @param None
- * @retval Entero que contiene la hora, minutos y segundos concatenados.
+ * @retval None
  */
 void fm_calendar_format_time()
 {
@@ -136,9 +174,10 @@ void fm_calendar_format_time()
 }
 
 /*
- * @brief Formatea la fecha en el formato dd.mm.aaaa.
+ * @brief Formatea la fecha en el formato dd.mm.aaaa y lo mete en un punto fijo
+ * en fm_factory.
  * @param None
- * @retval Entero que contiene el día, el mes y el año concatenados.
+ * @retval None
  */
 void fm_calendar_format_date()
 {

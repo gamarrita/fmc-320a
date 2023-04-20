@@ -39,7 +39,8 @@ libs/fm_factory/fm_factory.o: \
  d:\githubs\fmc-320a\libs\fmc\fmc.h \
  d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h \
  d:\githubs\fmc-320a\libs\fm_lcd\lcd.h d:\githubs\fmc-320a\libs\fmc\fmc.h \
- d:\githubs\fmc-320a\libs\fm_lcd\pcf8553.h
+ d:\githubs\fmc-320a\libs\fm_lcd\pcf8553.h \
+ d:\githubs\fmc-320a\libs\fm_factory\fm_factory.h
 D:/githubs/fmc-320a/libs/fm_factory/fm_factory.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
@@ -82,3 +83,4 @@ d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h:
 d:\githubs\fmc-320a\libs\fm_lcd\lcd.h:
 d:\githubs\fmc-320a\libs\fmc\fmc.h:
 d:\githubs\fmc-320a\libs\fm_lcd\pcf8553.h:
+d:\githubs\fmc-320a\libs\fm_factory\fm_factory.h:

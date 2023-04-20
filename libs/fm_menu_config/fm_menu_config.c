@@ -102,6 +102,14 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         case EVENT_KEY_UP:
             if(correct_password)
             {
+                /*
+                 * En toda esta sección se realiza el calculo para modificar la
+                 * fecha y hora del calendario del RTC. Para eso se debe tener
+                 * en cuenta la cantidad de días de cada mes, si es un año
+                 * bisiesto o no, y que al pasarse del valor máximo o mínimo de
+                 * cada parámetro, se vuelva a iniciar desde el valor mínimo o
+                 * máximo respectivamente.
+                 */
                 if(field == DAY)
                 {
                     if(month_enum == JANUARY ||
@@ -271,6 +279,14 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         case EVENT_KEY_DOWN:
             if(correct_password)
             {
+                /*
+                 * En toda esta sección se realiza el calculo para modificar la
+                 * fecha y hora del calendario del RTC. Para eso se debe tener
+                 * en cuenta la cantidad de días de cada mes, si es un año
+                 * bisiesto o no, y que al pasarse del valor máximo o mínimo de
+                 * cada parámetro, se vuelva a iniciar desde el valor mínimo o
+                 * máximo respectivamente.
+                 */
                 if(field == DAY)
                 {
                     if(month_enum == JANUARY || month_enum == MARCH   ||
@@ -426,6 +442,10 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         case EVENT_KEY_ENTER:
             if(correct_password)
             {
+                /*
+                 * Se cambia qué parámetro se va a modificar según cual estaba
+                 * seleccionado para modificarse actualmente.
+                 */
                 if(field == DAY)
                 {
                     field = MONTH;
@@ -494,14 +514,17 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
             HAL_RTC_SetDate(&hrtc, &date_final, RTC_FORMAT_BIN);
 
             /*
-             * Puede llegar a pasar lo mismo con la hora que con la fecha
-             * explicado en el comentario de arriba, pero en este caso parece no
-             * ocurrir, debido a que el campo faltante es .TimeFormat, y no lo
-             * completa ni siquiera el cubeMX.
+             * Idem que lo de la fecha escrito arriba, pero para la hora, y en
+             * general siempre que se use la HAL completando estructuras.
              */
             time_final.Hours = hour_enum;
             time_final.Minutes = minute_enum;
             time_final.Seconds = second_enum;
+            time_final.SecondFraction = 0;
+            time_final.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+            time_final.StoreOperation = RTC_STOREOPERATION_RESET;
+            time_final.SubSeconds = 0;
+            time_final.TimeFormat = RTC_HOURFORMAT12_AM;
 
             HAL_RTC_SetTime(&hrtc, &time_final, RTC_FORMAT_BIN);
 
@@ -559,6 +582,121 @@ ptr_ret_menu_t fm_menu_config_expansion(fm_event_t event_id)
     char msg_buffer[] = "Configurar factor de expansion\n";
     fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
 #endif
+
+    if (new_exit == 1)
+    {
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static sel_digit_k_lin_t digit_lin_modify = DIG_LIN_0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_1;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_k_lin(K_LIN_1);
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_1);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_1);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if (digit_lin_modify == DIG_LIN_0)
+                {
+                    digit_lin_modify = DIG_LIN_1;
+                }
+                else if (digit_lin_modify == DIG_LIN_1)
+                {
+                    digit_lin_modify = DIG_LIN_2;
+                }
+                else if (digit_lin_modify == DIG_LIN_2)
+                {
+                    digit_lin_modify = DIG_LIN_3;
+                }
+                else if (digit_lin_modify == DIG_LIN_3)
+                {
+                    digit_lin_modify = DIG_LIN_4;
+                }
+                else if (digit_lin_modify == DIG_LIN_4)
+                {
+                    digit_lin_modify = DIG_LIN_5;
+                }
+                else if (digit_lin_modify == DIG_LIN_5)
+                {
+                    digit_lin_modify = DIG_LIN_6;
+                }
+                else if (digit_lin_modify == DIG_LIN_6)
+                {
+                    digit_lin_modify = DIG_LIN_7;
+                }
+                else if (digit_lin_modify == DIG_LIN_7)
+                {
+                    digit_lin_modify = DIG_LIN_8;
+                }
+                else if (digit_lin_modify == DIG_LIN_8)
+                {
+                    digit_lin_modify = DIG_LIN_9;
+                }
+                else if (digit_lin_modify == DIG_LIN_9)
+                {
+                    digit_lin_modify = DIG_LIN_10;
+                }
+                else if (digit_lin_modify == DIG_LIN_10)
+                {
+                    digit_lin_modify = DIG_LIN_11;
+                }
+                else if (digit_lin_modify == DIG_LIN_11)
+                {
+                    digit_lin_modify = DIG_LIN_0;
+                }
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K_lin_1\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -652,7 +790,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
-            ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_1;
             event_now = EVENT_LCD_REFRESH;
             osMessageQueuePut(h_event_queue, &event_now, 0, 0);
         break;

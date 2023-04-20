@@ -1,8 +1,9 @@
 fm_menu_config.c:65:16:fm_menu_config_date_hour	99
-fm_menu_config.c:523:16:fm_menu_config_expansion	4
-fm_menu_config.c:578:16:fm_menu_config_k_param	18
-fm_menu_config.c:683:16:fm_menu_config_ko_param	4
-fm_menu_config.c:740:16:fm_menu_config_pass	19
-fm_menu_config.c:904:16:fm_menu_config_span	4
-fm_menu_config.c:959:16:fm_menu_config_units_tim	17
-fm_menu_config.c:1059:16:fm_menu_config_units_vol	19
+fm_menu_config.c:546:16:fm_menu_config_expansion	4
+fm_menu_config.c:595:16:fm_menu_config_k_lin_1	22
+fm_menu_config.c:716:16:fm_menu_config_k_param	18
+fm_menu_config.c:821:16:fm_menu_config_ko_param	4
+fm_menu_config.c:878:16:fm_menu_config_pass	19
+fm_menu_config.c:1042:16:fm_menu_config_span	4
+fm_menu_config.c:1097:16:fm_menu_config_units_tim	17
+fm_menu_config.c:1197:16:fm_menu_config_units_vol	19
