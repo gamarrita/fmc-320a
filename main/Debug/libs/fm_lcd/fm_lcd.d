@@ -41,7 +41,8 @@ libs/fm_lcd/fm_lcd.o: D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.c \
  d:\githubs\fmc-320a\libs\fmc\fmc.h \
  d:\githubs\fmc-320a\libs\fm_calendar\fm_calendar.h \
  d:\githubs\fmc-320a\libs\fm_temp_stm32\fm_temp_stm32.h \
- d:\githubs\fmc-320a\libs\fm_version\fm_version.h
+ d:\githubs\fmc-320a\libs\fm_version\fm_version.h \
+ d:\githubs\fmc-320a\libs\fm_debug\fm_debug.h
 D:/githubs/fmc-320a/libs/fm_lcd/fm_lcd.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
@@ -87,3 +88,4 @@ d:\githubs\fmc-320a\libs\fmc\fmc.h:
 d:\githubs\fmc-320a\libs\fm_calendar\fm_calendar.h:
 d:\githubs\fmc-320a\libs\fm_temp_stm32\fm_temp_stm32.h:
 d:\githubs\fmc-320a\libs\fm_version\fm_version.h:
+d:\githubs\fmc-320a\libs\fm_debug\fm_debug.h:

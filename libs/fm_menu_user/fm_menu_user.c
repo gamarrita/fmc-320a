@@ -207,6 +207,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
     }
 
     fm_lcd_date_hour(USER);
+
     fm_lcd_refresh();
 
     switch (event_id)
@@ -232,8 +233,8 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
     }
 
 #ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "date_hour\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    char msg_buffer3[] = "date_hour\n";
+    fm_debug_msg_uart((uint8_t*) msg_buffer3, sizeof(msg_buffer3));
 #endif
 
     if (new_exit == 1)

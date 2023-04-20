@@ -18,6 +18,7 @@
 #include "../fm_temp_stm32/fm_temp_stm32.h"
 #include "../fm_version/fm_version.h"
 #include "../fmc/fmc.h"
+#include "../fm_debug/fm_debug.h"
 
 // Typedef.
 
@@ -137,6 +138,8 @@ void fm_lcd_date_hour(user_or_configuration_t configuration)
 {
     fmc_fp_t time_to_str;
     fmc_fp_t date_to_str;
+    char lcd_msg[PCF8553_DATA_SIZE];
+
     if(configuration)
     {
         date_to_str = fm_factory_get_fp_date_conf();
@@ -145,14 +148,11 @@ void fm_lcd_date_hour(user_or_configuration_t configuration)
     else
     {
         fm_calendar_format_date();
-        date_to_str = fm_factory_get_fp_date();
-
         fm_calendar_format_time();
+
+        date_to_str = fm_factory_get_fp_date();
         time_to_str = fm_factory_get_fp_time();
     }
-
-    char lcd_msg[PCF8553_DATA_SIZE];
-
 
     fm_lcd_fp_to_str(date_to_str, '0', LINE_0_DIGITS, lcd_msg,
     sizeof(lcd_msg));

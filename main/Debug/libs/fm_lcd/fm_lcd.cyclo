@@ -1,8 +1,8 @@
-fm_lcd.c:58:6:fm_lcd_acm_rate	1
-fm_lcd.c:87:6:fm_lcd_acm_temp	1
-fm_lcd.c:114:6:fm_lcd_battery_low	1
-fm_lcd.c:124:6:fm_lcd_clear	1
-fm_lcd.c:136:6:fm_lcd_date_hour	2
+fm_lcd.c:59:6:fm_lcd_acm_rate	1
+fm_lcd.c:88:6:fm_lcd_acm_temp	1
+fm_lcd.c:115:6:fm_lcd_battery_low	1
+fm_lcd.c:125:6:fm_lcd_clear	1
+fm_lcd.c:137:6:fm_lcd_date_hour	2
 fm_lcd.c:177:6:fm_lcd_format_number_in_line	3
 fm_lcd.c:199:5:fm_lcd_fp_add_dot	4
 fm_lcd.c:249:5:fm_lcd_fp_to_str	8

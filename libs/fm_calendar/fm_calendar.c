@@ -14,6 +14,7 @@
 #include "stdlib.h"
 #include "../fm_lcd/fm_lcd.h"
 #include "../fm_factory/fm_factory.h"
+#include "../fm_debug/fm_debug.h"
 // Typedef.
 
 /*
@@ -64,9 +65,16 @@ extern RTC_HandleTypeDef hrtc;
  */
 void fm_calendar_get()
 {
-    __HAL_RTC_WRITEPROTECTION_DISABLE(&hrtc);
-    HAL_RTC_WaitForSynchro(&hrtc);
-    __HAL_RTC_WRITEPROTECTION_ENABLE(&hrtc);
+    /*
+     * Si el programa en sí depende del timing y de que las operaciones se
+     * realicen en menos de 1 segundo (tiempo de refresco de la pantalla), no se
+     * puede esperar a la sincronización del RTC, tarda demasiado, por eso estas
+     * instrucciones no deben colocarse:
+     *
+     *     __HAL_RTC_WRITEPROTECTION_DISABLE(&hrtc);
+     *     HAL_RTC_WaitForSynchro(&hrtc);
+     *     __HAL_RTC_WRITEPROTECTION_ENABLE(&hrtc);
+     */
 
     HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
