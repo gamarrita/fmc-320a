@@ -43,6 +43,8 @@
 
 // Global variables, statics.
 
+static int blink = 1;
+
 // Private function prototypes.
 
 // Private function bodies.
@@ -140,7 +142,6 @@ fm_event_t event_id, sel_date_time_field_t field)
     fmc_fp_t time_to_str;
     fmc_fp_t date_to_str;
     char lcd_msg[PCF8553_DATA_SIZE];
-    static int blink = 1;
 
     /*
      * Se comprueba si se está en el menú de configuración o de usuario.
@@ -174,10 +175,10 @@ fm_event_t event_id, sel_date_time_field_t field)
 
     if(configuration)
     {
-        if(event_id != EVENT_LCD_REFRESH)
-        {
-            blink = 1;
-        }
+//        if(event_id != EVENT_LCD_REFRESH)
+//        {
+//            blink = 1;
+//        }
 
         if(blink == 1)
         {
@@ -400,7 +401,6 @@ void fm_lcd_init()
 void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
-    static int blink = 1;
 
     fm_lcd_fp_to_str(fm_factory_get_k_factor(K_FACTOR), '0',
     LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
@@ -408,10 +408,10 @@ void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify)
     sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    if(event_id != EVENT_LCD_REFRESH)
-    {
-        blink = 1;
-    }
+//    if(event_id != EVENT_LCD_REFRESH)
+//    {
+//        blink = 1;
+//    }
 
     if(blink == 1)
     {
@@ -429,7 +429,6 @@ void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify)
 void fm_lcd_k_lin(sel_k k_sel, fm_event_t event_id, sel_digit_k_lin_t digit_lin_modify)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
-    static int blink = 1;
 
     fm_lcd_fp_to_str(fm_factory_get_k_factor(k_sel), '0', LINE_0_DIGITS,
     lcd_msg, sizeof(lcd_msg));
@@ -444,10 +443,10 @@ void fm_lcd_k_lin(sel_k k_sel, fm_event_t event_id, sel_digit_k_lin_t digit_lin_
     lcd_clear_digit(DIGIT_1, LOW_ROW);
     lcd_clear_digit(DIGIT_2, LOW_ROW);
 
-    if(event_id != EVENT_LCD_REFRESH)
-    {
-        blink = 1;
-    }
+//    if(event_id != EVENT_LCD_REFRESH)
+//    {
+//        blink = 1;
+//    }
 
     if(digit_lin_modify <= DIG_LIN_7)
     {
@@ -581,7 +580,6 @@ void fm_lcd_ttl_rate()
 void fm_lcd_units_tim(fm_event_t event_id)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
-    static int blink = 1;
     point_t resolution_modify;
 
     fm_lcd_fp_to_str(fm_factory_get_units_tim(), '0', LINE_1_DIGITS, lcd_msg,
@@ -630,7 +628,6 @@ void fm_lcd_units_tim(fm_event_t event_id)
 void fm_lcd_units_vol(fm_event_t event_id)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
-    static int blink = 1;
     point_t resolution_modify;
 
     fm_lcd_fp_to_str(fm_factory_get_units_vol(), '0', LINE_0_DIGITS,
@@ -638,10 +635,10 @@ void fm_lcd_units_vol(fm_event_t event_id)
     fm_lcd_fp_add_dot(fm_factory_get_units_vol(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    if(event_id != EVENT_LCD_REFRESH)
-    {
-        blink = 1;
-    }
+//    if(event_id != EVENT_LCD_REFRESH)
+//    {
+//        blink = 1;
+//    }
 
     if(blink == 1)
     {
