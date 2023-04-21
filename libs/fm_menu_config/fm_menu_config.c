@@ -87,7 +87,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_date_hour(CONFIGURATION);
+    fm_lcd_date_hour(CONFIGURATION, event_id, field);
     fm_lcd_refresh();
 
     day_enum = fm_factory_get_date_time().day;
@@ -607,7 +607,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_k_lin(K_LIN_1);
+    fm_lcd_k_lin(K_LIN_1, event_id, digit_lin_modify);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -631,51 +631,315 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
         case EVENT_KEY_ENTER:
             if (correct_password)
             {
-                if (digit_lin_modify == DIG_LIN_0)
+                if(digit_lin_modify < DIG_LIN_11)
                 {
-                    digit_lin_modify = DIG_LIN_1;
+                    digit_lin_modify++;
                 }
-                else if (digit_lin_modify == DIG_LIN_1)
+                else
                 {
-                    digit_lin_modify = DIG_LIN_2;
+                    digit_lin_modify = DIG_LIN_0;
                 }
-                else if (digit_lin_modify == DIG_LIN_2)
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_2;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K_lin_1\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if (new_exit == 1)
+    {
+        digit_lin_modify = DIG_LIN_0;
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static sel_digit_k_lin_t digit_lin_modify = DIG_LIN_0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_2;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_k_lin(K_LIN_2, event_id, digit_lin_modify);
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_2);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_2);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if(digit_lin_modify < DIG_LIN_11)
                 {
-                    digit_lin_modify = DIG_LIN_3;
+                    digit_lin_modify++;
                 }
-                else if (digit_lin_modify == DIG_LIN_3)
+                else
                 {
-                    digit_lin_modify = DIG_LIN_4;
+                    digit_lin_modify = DIG_LIN_0;
                 }
-                else if (digit_lin_modify == DIG_LIN_4)
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_3;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K_lin_2\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if (new_exit == 1)
+    {
+        digit_lin_modify = DIG_LIN_0;
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static sel_digit_k_lin_t digit_lin_modify = DIG_LIN_0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_3;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_k_lin(K_LIN_3, event_id, digit_lin_modify);
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_3);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_3);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if(digit_lin_modify < DIG_LIN_11)
                 {
-                    digit_lin_modify = DIG_LIN_5;
+                    digit_lin_modify++;
                 }
-                else if (digit_lin_modify == DIG_LIN_5)
+                else
                 {
-                    digit_lin_modify = DIG_LIN_6;
+                    digit_lin_modify = DIG_LIN_0;
                 }
-                else if (digit_lin_modify == DIG_LIN_6)
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_4;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K_lin_3\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if (new_exit == 1)
+    {
+        digit_lin_modify = DIG_LIN_0;
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static sel_digit_k_lin_t digit_lin_modify = DIG_LIN_0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_4;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_k_lin(K_LIN_4, event_id, digit_lin_modify);
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_4);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_4);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if(digit_lin_modify < DIG_LIN_11)
                 {
-                    digit_lin_modify = DIG_LIN_7;
+                    digit_lin_modify++;
                 }
-                else if (digit_lin_modify == DIG_LIN_7)
+                else
                 {
-                    digit_lin_modify = DIG_LIN_8;
+                    digit_lin_modify = DIG_LIN_0;
                 }
-                else if (digit_lin_modify == DIG_LIN_8)
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ESC:
+            new_exit = 1;
+            ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_5;
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        default:
+        break;
+    }
+
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K_lin_4\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
+
+    if (new_exit == 1)
+    {
+        digit_lin_modify = DIG_LIN_0;
+        new_entry = 1;
+        new_exit = 0;
+    }
+
+    return (ret_menu);
+}
+
+ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
+{
+    static uint8_t new_entry = 1;
+    static uint8_t new_exit = 0;
+    static sel_digit_k_lin_t digit_lin_modify = DIG_LIN_0;
+
+    ptr_ret_menu_t ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_5;
+    fm_event_t event_now;
+
+    if (new_entry == 1)
+    {
+        fm_lcd_clear();
+        new_entry = 0;
+    }
+
+    fm_lcd_k_lin(K_LIN_5, event_id, digit_lin_modify);
+    fm_lcd_refresh();
+
+    switch (event_id)
+    {
+        case EVENT_KEY_UP:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_5);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_DOWN:
+            if (correct_password)
+            {
+                fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_5);
+            }
+            event_now = EVENT_LCD_REFRESH;
+            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+        break;
+        case EVENT_KEY_ENTER:
+            if (correct_password)
+            {
+                if(digit_lin_modify < DIG_LIN_11)
                 {
-                    digit_lin_modify = DIG_LIN_9;
+                    digit_lin_modify++;
                 }
-                else if (digit_lin_modify == DIG_LIN_9)
-                {
-                    digit_lin_modify = DIG_LIN_10;
-                }
-                else if (digit_lin_modify == DIG_LIN_10)
-                {
-                    digit_lin_modify = DIG_LIN_11;
-                }
-                else if (digit_lin_modify == DIG_LIN_11)
+                else
                 {
                     digit_lin_modify = DIG_LIN_0;
                 }
@@ -694,12 +958,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
     }
 
     #ifdef FM_DEBUG_MENU
-        char msg_buffer[] = "Configurar parametro K_lin_1\n";
+        char msg_buffer[] = "Configurar parametro K_lin_5\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
     #endif
 
     if (new_exit == 1)
     {
+        digit_lin_modify = DIG_LIN_0;
         new_entry = 1;
         new_exit = 0;
     }
@@ -728,7 +993,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_k_factor();
+    fm_lcd_k_factor(event_id, digit_modify);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -805,6 +1070,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
 
     if (new_exit == 1)
     {
+        digit_modify = DIG_0;
         new_entry = 1;
         new_exit = 0;
     }
@@ -1108,7 +1374,7 @@ ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_units_tim();
+    fm_lcd_units_tim(event_id);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -1208,7 +1474,7 @@ ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_units_vol();
+    fm_lcd_units_vol(event_id);
     fm_lcd_refresh();
 
     switch (event_id)

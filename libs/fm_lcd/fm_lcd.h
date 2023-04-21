@@ -40,6 +40,7 @@
 
 #include "../fmc/fmc.h"
 #include "../fm_factory/fm_factory.h"
+#include "../fm_event/fm_event.h"
 
 // Macros, defines, microcontroller pins (dhs).
 
@@ -58,7 +59,8 @@ void fm_lcd_acm_rate();
 void fm_lcd_acm_temp();
 void fm_lcd_battery_low(blink_t speed);
 void fm_lcd_clear();
-void fm_lcd_date_hour(user_or_configuration_t configuration);
+void fm_lcd_date_hour(user_or_configuration_t configuration,
+fm_event_t event_id, sel_date_time_field_t field);
 void fm_lcd_fill();
 void fm_lcd_format_number_in_line(rows_t line, uint32_t data, char *p_str,
 int length);
@@ -66,13 +68,14 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size);
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size);
 void fm_lcd_init();
-void fm_lcd_k_factor();
-void fm_lcd_k_lin(sel_k k_sel);
+void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify);
+void fm_lcd_k_lin(sel_k k_sel, fm_event_t event_id,
+sel_digit_k_lin_t digit_lin_modify);
 void fm_lcd_puts(const char *p_str, uint8_t row);
 void fm_lcd_refresh();
 void fm_lcd_ttl_rate();
-void fm_lcd_units_tim();
-void fm_lcd_units_vol();
+void fm_lcd_units_tim(fm_event_t event_id);
+void fm_lcd_units_vol(fm_event_t event_id);
 void fm_lcd_version(point_t low_point1, point_t low_point2);
 
 #endif /* FM_LCD_H_ */

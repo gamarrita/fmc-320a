@@ -53,6 +53,7 @@ libs/fm_menu_config/fm_menu_config.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
+ d:\githubs\fmc-320a\libs\fm_event\fm_event.h \
  d:\githubs\fmc-320a\libs\fm_menu_user\fm_menu_user.h \
  d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h \
  d:\githubs\fmc-320a\libs\fm_event\fm_event.h \
@@ -115,6 +116,7 @@ d:\githubs\fmc-320a\libs\fm_event\fm_event.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
+d:\githubs\fmc-320a\libs\fm_event\fm_event.h:
 d:\githubs\fmc-320a\libs\fm_menu_user\fm_menu_user.h:
 d:\githubs\fmc-320a\libs\fm_lcd\fm_lcd.h:
 d:\githubs\fmc-320a\libs\fm_event\fm_event.h:

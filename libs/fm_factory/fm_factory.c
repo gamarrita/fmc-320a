@@ -158,7 +158,7 @@ static fmc_fp_t k_lin_5_config =
 
 static fmc_fp_t k_factor_config =
 {
-    .num = 14170,
+    .num = 14171,
     .res = 2,
 };
 

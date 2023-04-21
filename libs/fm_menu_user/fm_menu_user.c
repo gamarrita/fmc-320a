@@ -206,7 +206,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_date_hour(USER);
+    fm_lcd_date_hour(USER, event_id, DAY);
 
     fm_lcd_refresh();
 
