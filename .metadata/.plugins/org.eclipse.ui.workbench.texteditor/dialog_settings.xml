@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="k_sel"/>
+		<item key="selection" value="blink"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="blink"/>
+			<item value="h_event_queue"/>
 			<item value="frec"/>
 			<item value="k_sel"/>
 			<item value="DIG_"/>
@@ -21,8 +23,6 @@
 			<item value="m_factory_get_date_time().year"/>
 			<item value="fm_factory_get_date_time().day"/>
 			<item value="fm_factory_get_date_time().month"/>
-			<item value="MINU"/>
-			<item value="YEAR"/>
 		</list>
 		<list key="replacehistory">
 			<item value="frec_lin_selected"/>

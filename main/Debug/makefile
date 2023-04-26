@@ -20,13 +20,13 @@ RM := rm -rf
 -include libs/fm_event/subdir.mk
 -include libs/fm_debug/subdir.mk
 -include libs/fm_calendar/subdir.mk
--include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
--include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
--include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/subdir.mk
--include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
+-include Middlewares/ST/threadx/utility/low_power/subdir.mk
+-include Middlewares/ST/threadx/ports/cortex_m4/gnu/src/subdir.mk
+-include Middlewares/ST/threadx/common/src/subdir.mk
 -include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
+-include AZURE_RTOS/App/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

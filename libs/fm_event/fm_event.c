@@ -23,14 +23,8 @@
  */
 
 // Const data.
-const osMessageQueueAttr_t event_queue_attributes =
-{
-    .name = "event_queue"
-};
 
 // Defines.
-
-#define EVENT_QUEUE_LENGTH    4
 
 //Debug.
 
@@ -44,7 +38,6 @@ const osMessageQueueAttr_t event_queue_attributes =
 #endif
 
 // Project variables, non-static, at least used in other file.
-osMessageQueueId_t h_event_queue;
 
 // External variables.
 
@@ -55,12 +48,6 @@ osMessageQueueId_t h_event_queue;
 // Private function bodies.
 
 // Public function bodies.
-
-void fm_event_init()
-{
-    h_event_queue = osMessageQueueNew(EVENT_QUEUE_LENGTH, sizeof(fm_event_t),
-    &event_queue_attributes);
-}
 
 // Interrupts
 

@@ -47,7 +47,7 @@ uint8_t correct_password;
 
 // External variables.
 
-extern osMessageQueueId_t h_event_queue;
+extern TX_QUEUE event_queue_ptr;
 
 // Global variables, statics.
 
@@ -273,7 +273,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     }
                 }
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_DOWN:
@@ -436,7 +436,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     }
                 }
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_ENTER:
@@ -471,14 +471,14 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
                     field = DAY;
                 }
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_init;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -572,7 +572,7 @@ ptr_ret_menu_t fm_menu_config_expansion(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -618,7 +618,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
                 fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_1);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -626,7 +626,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
                 fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_1);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -641,13 +641,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_2;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -694,7 +694,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
                 fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_2);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -702,7 +702,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
                 fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_2);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -717,13 +717,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_3;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -770,7 +770,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
                 fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_3);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -778,7 +778,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
                 fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_3);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -793,13 +793,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_4;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -846,7 +846,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
                 fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_4);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -854,7 +854,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
                 fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_4);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -869,13 +869,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_5;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -922,7 +922,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
                 fm_factory_modify_k_lin_add(digit_lin_modify, K_LIN_5);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -930,7 +930,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
                 fm_factory_modify_k_lin_subs(digit_lin_modify, K_LIN_5);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -945,13 +945,13 @@ ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -1004,7 +1004,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
                 fm_factory_modify_k_factor_add(digit_modify);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             if (correct_password)
@@ -1012,7 +1012,7 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
                 fm_factory_modify_k_factor_subs(digit_modify);
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -1051,13 +1051,13 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_1;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -1113,7 +1113,7 @@ ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -1198,7 +1198,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
             if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 password_index++;
             }
             else
@@ -1206,7 +1206,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 new_exit = 1;
                 ret_menu = (ptr_ret_menu_t) fm_menu_config_k_param;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_DOWN:
@@ -1215,7 +1215,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
             if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 password_index++;
             }
             else
@@ -1223,7 +1223,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 new_exit = 1;
                 ret_menu = (ptr_ret_menu_t) fm_menu_config_k_param;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_ENTER:
@@ -1232,7 +1232,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
             if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 password_index++;
             }
             else
@@ -1240,7 +1240,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 new_exit = 1;
                 ret_menu = (ptr_ret_menu_t) fm_menu_config_k_param;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         case EVENT_KEY_ESC:
@@ -1249,7 +1249,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
             if (password_index < PASSWORD_LENGTH - 1)
             {
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 password_index++;
             }
             else
@@ -1257,7 +1257,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 new_exit = 1;
                 ret_menu = (ptr_ret_menu_t) fm_menu_config_k_param;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
         default:
@@ -1334,7 +1334,7 @@ ptr_ret_menu_t fm_menu_config_span(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_expansion;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -1401,11 +1401,11 @@ ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
                 fm_lcd_clear();
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -1428,13 +1428,13 @@ ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_date_hour;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -1509,11 +1509,11 @@ ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
                 fm_lcd_clear();
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
             if (correct_password)
@@ -1536,13 +1536,13 @@ ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
                 }
             }
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ESC:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_tim;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;

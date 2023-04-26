@@ -32,8 +32,8 @@
 // Defines.
 
 #define VERSION     1
-#define REVISION    0
-#define RELEASE     14
+#define REVISION    1
+#define RELEASE     0
 
 //Debug.
 

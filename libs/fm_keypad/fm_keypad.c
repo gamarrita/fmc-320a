@@ -11,7 +11,6 @@
 // Includes.
 #include "stdio.h"
 #include "fm_keypad.h"
-#include "../fm_event/fm_event.h"
 #include "../fm_debug/fm_debug.h"
 
 // Typedef.
@@ -49,9 +48,8 @@
 // Project variables, non-static, at least used in other file.
 
 // External variables.
-
-extern osMessageQueueId_t h_event_queue;
-extern osSemaphoreId_t debounce_semaphoreHandle;
+extern TX_QUEUE event_queue_ptr;
+extern TX_SEMAPHORE debounce_semaphore_ptr;
 
 // Global variables, statics.
 
@@ -76,14 +74,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for
      */
     fm_event_t event_now;
 
-#ifdef FM_DEBUG_KEYPAD
-        char msg_buffer[10];
-//        sprintf(msg_buffer,"DIFF = %u\n", diference);
-//        fm_debug_msg_uart((uint8_t *)msg_buffer, sizeof(msg_buffer));
-    #endif
-
     /*
-     * Compruebo que botón fue el presionado.
+     * Compruebo qué botón fue el presionado.
      */
     switch (gpio_pin)
     {
@@ -108,8 +100,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t gpio_pin) // @suppress("Name convention for
      * semáforo de la tarea task_debounce, para que esta se bloquee durante el
      * tiempo necesario para que no haya rebotes de los botones.
      */
-    osMessageQueuePut(h_event_queue, &event_now, 0, 0);
-    osSemaphoreRelease(debounce_semaphoreHandle);
+    tx_queue_send(&event_queue_ptr,&event_now,TX_NO_WAIT);
+    tx_semaphore_ceiling_put(&debounce_semaphore_ptr, 1);
 }
 
 /*** end of file ***/

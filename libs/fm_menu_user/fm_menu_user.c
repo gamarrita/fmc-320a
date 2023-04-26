@@ -21,7 +21,6 @@
 #include "stdio.h"
 #include "../fm_debug/fm_debug.h"
 #include "../fm_calendar/fm_calendar.h"
-#include "core_cm4.h"
 
 // Typedef.
 
@@ -50,7 +49,7 @@
 
 // External variables.
 
-extern osMessageQueueId_t h_event_queue;
+extern TX_QUEUE event_queue_ptr;
 
 // Global variables, statics.
 
@@ -89,13 +88,13 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_temp;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
         break;
@@ -103,7 +102,7 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -152,13 +151,13 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_date_hour;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
         break;
@@ -166,7 +165,7 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -216,7 +215,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_temp;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_DOWN:
         break;
@@ -226,7 +225,7 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -272,10 +271,10 @@ ptr_ret_menu_t fm_menu_show_init(fm_event_t event_id)
         case EVENT_KEY_DOWN:
         break;
         case EVENT_KEY_ENTER:
-            osMessageQueueReset(h_event_queue);
+            tx_queue_flush(&event_queue_ptr);
             ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             new_exit = 1;
         break;
         case EVENT_KEY_ESC:
@@ -286,14 +285,14 @@ ptr_ret_menu_t fm_menu_show_init(fm_event_t event_id)
                 HAL_Delay(100); // @suppress("Avoid magic numbers")
                 counter++;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
             else
             {
-                osMessageQueueReset(h_event_queue);
+                tx_queue_flush(&event_queue_ptr);
                 ret_menu = (ptr_ret_menu_t) fm_menu_show_version;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 new_exit = 1;
             }
         break;
@@ -345,7 +344,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_show_acm_rate;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         case EVENT_KEY_ENTER:
         break;
@@ -353,7 +352,7 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
             new_exit = 1;
             ret_menu = (ptr_ret_menu_t) fm_menu_config_pass;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
         default:
         break;
@@ -405,10 +404,10 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         case EVENT_KEY_DOWN:
         break;
         case EVENT_KEY_ENTER:
-            osMessageQueueReset(h_event_queue);
+            tx_queue_flush(&event_queue_ptr);
             ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
             event_now = EVENT_LCD_REFRESH;
-            osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+            tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             new_exit = 1;
         break;
         case EVENT_KEY_ESC:
@@ -419,14 +418,14 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
                 HAL_Delay(100); // @suppress("Avoid magic numbers")
                 counter++;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
             else
             {
-                osMessageQueueReset(h_event_queue);
+                tx_queue_flush(&event_queue_ptr);
                 ret_menu = (ptr_ret_menu_t) fm_menu_show_ttl_rate;
                 event_now = EVENT_LCD_REFRESH;
-                osMessageQueuePut(h_event_queue, &event_now, 0, 0);
+                tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 new_exit = 1;
             }
         break;
