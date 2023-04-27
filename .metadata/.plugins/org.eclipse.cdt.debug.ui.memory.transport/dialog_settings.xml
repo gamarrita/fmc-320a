@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="EXPORT_DIALOG">
+		<item key="Start" value="0x20000000"/>
+		<item key="End" value="0x2000fa00"/>
+		<item key="Initial address" value="0x20000000"/>
+		<item key="File" value="D:\Dropbox (FLOWMEET)\flowmeet\id\equipos\fmc-320a\desarrollo\firmware\test\sand_pruebas\Pruebas Azure RTOS\fmc320_a.trx"/>
+		<item key="SELECTED_EXPORTER" value="PlainTextExporter"/>
+	</section>
+</section>

@@ -104,6 +104,8 @@ ptr_ret_menu_t fm_menu_show_acm_rate(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -167,6 +169,8 @@ ptr_ret_menu_t fm_menu_show_acm_temp(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -227,6 +231,8 @@ ptr_ret_menu_t fm_menu_show_date_hour(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -279,7 +285,7 @@ ptr_ret_menu_t fm_menu_show_init(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
         break;
-        default:
+        case EVENT_LCD_REFRESH:
             if(counter < counter_max)
             {
                 HAL_Delay(100); // @suppress("Avoid magic numbers")
@@ -296,10 +302,12 @@ ptr_ret_menu_t fm_menu_show_init(fm_event_t event_id)
                 new_exit = 1;
             }
         break;
+        default:
+        break;
     }
 
 #ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "version\n";
+    char msg_buffer[] = "INIT\n";
     fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
 #endif
 
@@ -354,6 +362,8 @@ ptr_ret_menu_t fm_menu_show_ttl_rate(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -394,7 +404,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         new_entry = 0;
     }
 
-    fm_lcd_version(PNT_3, PNT_4);
+    fm_lcd_version(PNT_4, PNT_5);
     fm_lcd_refresh();
 
     switch (event_id)
@@ -412,7 +422,7 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
         break;
         case EVENT_KEY_ESC:
         break;
-        default:
+        case EVENT_LCD_REFRESH:
             if(counter < counter_max)
             {
                 HAL_Delay(100); // @suppress("Avoid magic numbers")
@@ -428,6 +438,8 @@ ptr_ret_menu_t fm_menu_show_version(fm_event_t event_id)
                 tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
                 new_exit = 1;
             }
+        break;
+        default:
         break;
     }
 

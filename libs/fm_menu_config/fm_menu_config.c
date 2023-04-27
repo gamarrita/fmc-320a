@@ -480,6 +480,8 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -574,6 +576,8 @@ ptr_ret_menu_t fm_menu_config_expansion(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -648,6 +652,8 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_2;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -725,6 +731,8 @@ ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -800,6 +808,8 @@ ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_k_lin_4;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -877,6 +887,8 @@ ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -952,6 +964,8 @@ ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -1059,6 +1073,8 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -1114,6 +1130,8 @@ ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_vol;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -1260,6 +1278,8 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
                 tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
             }
         break;
+        case EVENT_LCD_REFRESH:
+        break;
         default:
         break;
     }
@@ -1335,6 +1355,8 @@ ptr_ret_menu_t fm_menu_config_span(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_expansion;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -1435,6 +1457,8 @@ ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_date_hour;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
@@ -1543,6 +1567,8 @@ ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
             ret_menu = (ptr_ret_menu_t) fm_menu_config_units_tim;
             event_now = EVENT_LCD_REFRESH;
             tx_queue_send(&event_queue_ptr, &event_now, TX_NO_WAIT);
+        break;
+        case EVENT_LCD_REFRESH:
         break;
         default:
         break;
