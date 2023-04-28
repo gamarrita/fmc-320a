@@ -40,7 +40,7 @@
 // Project variables, non-static, at least used in other file.
 
 // External variables.
-
+extern fm_event_t previous_event;
 // Global variables, statics.
 
 static int blink = 1;
@@ -175,10 +175,18 @@ fm_event_t event_id, sel_date_time_field_t field)
 
     if(configuration)
     {
-//        if(event_id != EVENT_LCD_REFRESH)
-//        {
-//            blink = 1;
-//        }
+        if(event_id == EVENT_KEY_ENTER ||
+        (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+        {
+            blink = 1;
+        }
+        else if(event_id == EVENT_KEY_DOWN ||
+        (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+        event_id == EVENT_KEY_UP ||
+        (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+        {
+            blink = 0;
+        }
 
         if(blink == 1)
         {
@@ -408,10 +416,18 @@ void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify)
     sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-//    if(event_id != EVENT_LCD_REFRESH)
-//    {
-//        blink = 1;
-//    }
+    if(event_id == EVENT_KEY_ENTER ||
+    (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 1;
+    }
+    else if(event_id == EVENT_KEY_DOWN ||
+    (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+    event_id == EVENT_KEY_UP ||
+    (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
 
     if(blink == 1)
     {
@@ -443,10 +459,18 @@ void fm_lcd_k_lin(sel_k k_sel, fm_event_t event_id, sel_digit_k_lin_t digit_lin_
     lcd_clear_digit(DIGIT_1, LOW_ROW);
     lcd_clear_digit(DIGIT_2, LOW_ROW);
 
-//    if(event_id != EVENT_LCD_REFRESH)
-//    {
-//        blink = 1;
-//    }
+    if(event_id == EVENT_KEY_ENTER ||
+    (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 1;
+    }
+    else if(event_id == EVENT_KEY_DOWN ||
+    (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+    event_id == EVENT_KEY_UP ||
+    (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
 
     if(digit_lin_modify <= DIG_LIN_7)
     {
@@ -587,6 +611,12 @@ void fm_lcd_units_tim(fm_event_t event_id)
     fm_lcd_fp_add_dot(fm_factory_get_units_tim(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
 
+    if(event_id != EVENT_LCD_REFRESH ||
+    (previous_event != EVENT_LCD_REFRESH && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
+
     if(blink == 1)
     {
         if(fm_factory_get_units_tim().res == 1)
@@ -635,10 +665,11 @@ void fm_lcd_units_vol(fm_event_t event_id)
     fm_lcd_fp_add_dot(fm_factory_get_units_vol(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-//    if(event_id != EVENT_LCD_REFRESH)
-//    {
-//        blink = 1;
-//    }
+    if(event_id != EVENT_LCD_REFRESH ||
+    (previous_event != EVENT_LCD_REFRESH && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
 
     if(blink == 1)
     {

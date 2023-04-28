@@ -44,6 +44,8 @@
 int freeze_time;
 int freeze_date;
 uint8_t correct_password;
+fm_event_t previous_event;
+uint8_t in_configuration;
 
 // External variables.
 
@@ -486,10 +488,11 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar fecha y hora\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar fecha y hora\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -532,7 +535,7 @@ ptr_ret_menu_t fm_menu_config_date_hour(fm_event_t event_id)
 
             correct_password = 0;
         }
-
+        in_configuration = 0;
         new_entry = 1;
         new_exit = 0;
     }
@@ -582,10 +585,11 @@ ptr_ret_menu_t fm_menu_config_expansion(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar factor de expansion\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar factor de expansion\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -659,6 +663,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_1(fm_event_t event_id)
         break;
     }
 
+    previous_event = event_id;
     #ifdef FM_DEBUG_MENU
         char msg_buffer[] = "Configurar parametro K_lin_1\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
@@ -737,6 +742,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_2(fm_event_t event_id)
         break;
     }
 
+    previous_event = event_id;
     #ifdef FM_DEBUG_MENU
         char msg_buffer[] = "Configurar parametro K_lin_2\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
@@ -815,6 +821,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_3(fm_event_t event_id)
         break;
     }
 
+    previous_event = event_id;
     #ifdef FM_DEBUG_MENU
         char msg_buffer[] = "Configurar parametro K_lin_3\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
@@ -893,6 +900,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_4(fm_event_t event_id)
         break;
     }
 
+    previous_event = event_id;
     #ifdef FM_DEBUG_MENU
         char msg_buffer[] = "Configurar parametro K_lin_4\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
@@ -971,6 +979,7 @@ ptr_ret_menu_t fm_menu_config_k_lin_5(fm_event_t event_id)
         break;
     }
 
+    previous_event = event_id;
     #ifdef FM_DEBUG_MENU
         char msg_buffer[] = "Configurar parametro K_lin_5\n";
         fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
@@ -1079,10 +1088,11 @@ ptr_ret_menu_t fm_menu_config_k_param(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar parametro K\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro K\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -1137,10 +1147,11 @@ ptr_ret_menu_t fm_menu_config_ko_param(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar parametro Ko\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar parametro Ko\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -1182,6 +1193,7 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
 
     if (new_entry == 1)
     {
+        in_configuration = 1;
         correct_password = 0;
         fm_lcd_clear();
         new_entry = 0;
@@ -1284,10 +1296,11 @@ ptr_ret_menu_t fm_menu_config_pass(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Password\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Password\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1 && password_index >= PASSWORD_LENGTH - 1)
     {
@@ -1362,10 +1375,11 @@ ptr_ret_menu_t fm_menu_config_span(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar Span\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar Span\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -1464,10 +1478,11 @@ ptr_ret_menu_t fm_menu_config_units_tim(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar unidades de tiempo y resolucion\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar unidades de tiempo y resolucion\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {
@@ -1574,10 +1589,11 @@ ptr_ret_menu_t fm_menu_config_units_vol(fm_event_t event_id)
         break;
     }
 
-#ifdef FM_DEBUG_MENU
-    char msg_buffer[] = "Configurar unidades de volumen y resolucion\n";
-    fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
-#endif
+    previous_event = event_id;
+    #ifdef FM_DEBUG_MENU
+        char msg_buffer[] = "Configurar unidades de volumen y resolucion\n";
+        fm_debug_msg_uart((uint8_t*) msg_buffer, sizeof(msg_buffer));
+    #endif
 
     if (new_exit == 1)
     {

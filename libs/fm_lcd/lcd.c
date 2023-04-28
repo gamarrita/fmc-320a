@@ -54,6 +54,7 @@ typedef struct
 // Extern variables.
 
 extern uint8_t g_lcd_map[PCF8553_DATA_SIZE];
+extern uint8_t in_configuration;
 
 // Global variables, statics.
 
@@ -677,11 +678,18 @@ void lcd_put_char(char c, uint8_t col, uint8_t row)
      * este caracter, considero muy riesgosa esta tecnica, la sincronización
      * entre el buffer y el contenido de la memoria del pcf8553 se debe
      * asegurar. El uso del return prematuro no se si es buena práctica.
+     *
+     * No se activa esta funcionalidad si se está en el menú de configuración,
+     * debido a que entra en conflicto con la funcionalidad del parpadeo de los
+     * campos a modificar.
      */
-//    if (g_buf[row][col] == c)
-//    {
-//        return;
-//    }
+    if(in_configuration == 0)
+    {
+        if (g_buf[row][col] == c)
+        {
+            return;
+        }
+    }
 
     g_buf[row][col] = c;
 
