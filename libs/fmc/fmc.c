@@ -66,6 +66,7 @@ fmc_totalizer_t acm;
 fmc_totalizer_t rate;
 fmc_totalizer_t ttl;
 fmc_temp_t int_temperature;
+fmc_date_time_t date_time;
 
 // External variables.
 

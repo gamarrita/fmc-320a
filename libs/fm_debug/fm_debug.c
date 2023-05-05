@@ -71,8 +71,9 @@ extern UART_HandleTypeDef huart2;
 // Public function bodies.
 
 /*
- * @brief
- *
+ * @brief Función que envía un número de 8 bits por el puerto UART.
+ * @param Número a imprimir.
+ * @retval None
  */
 void fm_debug_uint8_uart(uint8_t num)
 {
@@ -82,8 +83,9 @@ void fm_debug_uint8_uart(uint8_t num)
 }
 
 /*
- * @brief
- *
+ * @brief Función que envía un número de 32 bits por el puerto UART.
+ * @param Número a imprimir.
+ * @retval None
  */
 void fm_debug_uint32_uart(uint32_t num)
 {
@@ -126,6 +128,8 @@ void fm_debug_msg_itm(const uint8_t *msg, uint8_t len)
  * que estamos usando no inicializo el uart2 fallara en la compilacion, hay que
  * agregar condicionales de pre-compilacion para contemplar el caso donde no
  * se use el uart2.
+ * @param Mensaje a transmitir y su longitud.
+ * @retval None
  *
  */
 void fm_debug_msg_uart(const uint8_t *p_msg, uint8_t len)

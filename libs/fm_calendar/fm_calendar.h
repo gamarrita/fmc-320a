@@ -22,8 +22,14 @@
 // Function prototypes
 
 void fm_calendar_get();
-int fm_calendar_format_time();
-int fm_calendar_format_date();
+int fm_calendar_get_hour();
+int fm_calendar_get_minute();
+int fm_calendar_get_second();
+int fm_calendar_get_day();
+int fm_calendar_get_month();
+int fm_calendar_get_year();
+void fm_calendar_format_time();
+void fm_calendar_format_date();
 
 #endif /* FM_CALENDAR_H */
 

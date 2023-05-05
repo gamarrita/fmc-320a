@@ -10,6 +10,7 @@
  */
 
 // Includes.
+
 #include "fm_version.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -27,10 +28,12 @@
  */
 
 // Const data.
+
 // Defines.
+
 #define VERSION     1
-#define REVISION    0
-#define RELEASE     8
+#define REVISION    1
+#define RELEASE     2
 
 //Debug.
 
@@ -56,8 +59,10 @@
 // Public function bodies.
 
 /*
- * Esta función devuelve la versión actual del firmware, mantener actualizado
- * este valor.
+ * @brief Esta función devuelve la versión actual del firmware, mantener
+ * actualizado este valor.
+ * @param None
+ * @retval Número de versión en formato VRR.
  */
 uint32_t fm_version_get()
 {

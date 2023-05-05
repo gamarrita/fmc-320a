@@ -18,16 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
-#include "../../../libs/fm_keypad/fm_keypad.h"
-#include "../../../libs/fm_menu_user/fm_menu_user.h"
-#include "../../../libs/fm_menu_config/fm_menu_config.h"
-#include "../../../libs/fm_event/fm_event.h"
-
+#include "../../../libs/fm_lcd/fm_lcd.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +42,8 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
+LPTIM_HandleTypeDef hlptim1;
+
 RTC_HandleTypeDef hrtc;
 
 SPI_HandleTypeDef hspi1;
@@ -56,29 +52,8 @@ TIM_HandleTypeDef htim16;
 
 UART_HandleTypeDef huart2;
 
-/* Definitions for MenuTask */
-osThreadId_t MenuTaskHandle;
-const osThreadAttr_t MenuTask_attributes = {
-  .name = "MenuTask",
-  .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for DebounceTask */
-osThreadId_t DebounceTaskHandle;
-const osThreadAttr_t DebounceTask_attributes = {
-  .name = "DebounceTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh,
-};
-/* Definitions for debounce_semaphore */
-osSemaphoreId_t debounce_semaphoreHandle;
-const osSemaphoreAttr_t debounce_semaphore_attributes = {
-  .name = "debounce_semaphore"
-};
 /* USER CODE BEGIN PV */
-
-extern osMessageQueueId_t h_event_queue;
-
+volatile uint8_t g_wait_in_low_power_flag = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,9 +64,7 @@ static void MX_RTC_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
-void menu_task(void *argument);
-void debounce_task(void *argument);
-
+static void MX_LPTIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -134,54 +107,17 @@ int main(void)
   MX_TIM16_Init();
   MX_USART2_UART_Init();
   MX_ADC1_Init();
+  MX_LPTIM1_Init();
   /* USER CODE BEGIN 2 */
 
   fm_lcd_clear();
-  fm_event_init();
   HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+  HAL_LPTIM_Counter_Start(&hlptim1, 0xffff);
 
   /* USER CODE END 2 */
 
-  /* Init scheduler */
-  osKernelInitialize();
+  MX_ThreadX_Init();
 
-  /* USER CODE BEGIN RTOS_MUTEX */
-  /* add mutexes, ... */
-  /* USER CODE END RTOS_MUTEX */
-
-  /* Create the semaphores(s) */
-  /* creation of debounce_semaphore */
-  debounce_semaphoreHandle = osSemaphoreNew(1, 1, &debounce_semaphore_attributes);
-
-  /* USER CODE BEGIN RTOS_SEMAPHORES */
-  /* add semaphores, ... */
-  /* USER CODE END RTOS_SEMAPHORES */
-
-  /* USER CODE BEGIN RTOS_TIMERS */
-  /* start timers, add new ones, ... */
-  /* USER CODE END RTOS_TIMERS */
-
-  /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
-  /* USER CODE END RTOS_QUEUES */
-
-  /* Create the thread(s) */
-  /* creation of MenuTask */
-  MenuTaskHandle = osThreadNew(menu_task, NULL, &MenuTask_attributes);
-
-  /* creation of DebounceTask */
-  DebounceTaskHandle = osThreadNew(debounce_task, NULL, &DebounceTask_attributes);
-
-  /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
-  /* USER CODE END RTOS_THREADS */
-
-  /* USER CODE BEGIN RTOS_EVENTS */
-  /* add events, ... */
-  /* USER CODE END RTOS_EVENTS */
-
-  /* Start scheduler */
-  osKernelStart();
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -218,11 +154,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_LSE
+                              |RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_9;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -238,7 +176,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -308,6 +246,40 @@ static void MX_ADC1_Init(void)
 }
 
 /**
+  * @brief LPTIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_LPTIM1_Init(void)
+{
+
+  /* USER CODE BEGIN LPTIM1_Init 0 */
+
+  /* USER CODE END LPTIM1_Init 0 */
+
+  /* USER CODE BEGIN LPTIM1_Init 1 */
+
+  /* USER CODE END LPTIM1_Init 1 */
+  hlptim1.Instance = LPTIM1;
+  hlptim1.Init.Clock.Source = LPTIM_CLOCKSOURCE_APBCLOCK_LPOSC;
+  hlptim1.Init.Clock.Prescaler = LPTIM_PRESCALER_DIV16;
+  hlptim1.Init.Trigger.Source = LPTIM_TRIGSOURCE_SOFTWARE;
+  hlptim1.Init.OutputPolarity = LPTIM_OUTPUTPOLARITY_HIGH;
+  hlptim1.Init.UpdateMode = LPTIM_UPDATE_IMMEDIATE;
+  hlptim1.Init.CounterSource = LPTIM_COUNTERSOURCE_INTERNAL;
+  hlptim1.Init.Input1Source = LPTIM_INPUT1SOURCE_GPIO;
+  hlptim1.Init.Input2Source = LPTIM_INPUT2SOURCE_GPIO;
+  if (HAL_LPTIM_Init(&hlptim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN LPTIM1_Init 2 */
+
+  /* USER CODE END LPTIM1_Init 2 */
+
+}
+
+/**
   * @brief RTC Initialization Function
   * @param None
   * @retval None
@@ -368,7 +340,7 @@ static void MX_RTC_Init(void)
 
   /** Enable the WakeUp
   */
-  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2048, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0xffff, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
   {
     Error_Handler();
   }
@@ -530,7 +502,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(KEY_DOWN_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -538,92 +510,12 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+__weak void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
+{
+    UNUSED(hrtc);
+    HAL_RTCEx_DeactivateWakeUpTimer(hrtc);
+}
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_menu_task */
-/**
-  * @brief  Function implementing the MENU_TASK thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_menu_task */
-void menu_task(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-	ptr_fun_menu_t ptr_menu = fm_menu_show_version;
-	fm_event_t event_next = EVENT_LCD_REFRESH;
-	osStatus_t ret_status;
-
-	/* Infinite loop */
-	for (;;)
-	{
-	    ret_status = osMessageQueueGet(h_event_queue, &event_next, 0, 1000); // @suppress("Avoid magic numbers")
-		if(ret_status == osOK)
-		{
-		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
-		}
-		else
-		{
-		    // por el momento no tiene sentido esta sentencia.
-		    ptr_menu = (ptr_fun_menu_t)(*ptr_menu)(event_next);
-		}
-	}
-  /* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_debounce_task */
-/**
-* @brief Function implementing the DebounceTask thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_debounce_task */
-void debounce_task(void *argument)
-{
-  /* USER CODE BEGIN debounce_task */
-
-  const uint8_t debounce_time = 500; //Tiempo prudente de espera por rebotes.
-
-  /* Infinite loop */
-  for(;;)
-  {
-    /*
-     * Bloqueo el programa con un semáforo que solo se libera luego de presionar
-     * un botón.
-     */
-    osSemaphoreAcquire(debounce_semaphoreHandle, HAL_MAX_DELAY);
-
-    /*
-     * Espero un tiempo prudente para que no haya rebotes, pero que permita
-     * cambiar de pantalla de forma rápida.
-     */
-    osDelay(debounce_time); // @suppress("Avoid magic numbers")
-
-    /*
-     * Al terminar el delay que debería saltearse los rebotes, debo también
-     * limpiar las flags de los EXTI de los botones que fueron presionados (o
-     * fueron víctimas de un rebote) mientras se encontraban deshabilitadas las
-     * interrupciones.
-     */
-    __HAL_GPIO_EXTI_CLEAR_IT(KEY_UP_Pin);
-    __HAL_GPIO_EXTI_CLEAR_IT(KEY_DOWN_Pin);
-    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ENTER_Pin);
-    __HAL_GPIO_EXTI_CLEAR_IT(KEY_ESC_Pin);
-
-    /*
-     * Habilito nuevamente las interrupciones para que puedan presionarse
-     * nuevamente los botones y pueda cambiarse de pantalla.
-     */
-    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
-    /*
-     * Luego de esto la tarea debería bloquearse al intentar tomar el semáforo
-     * nuevamente.
-     */
-  }
-  /* USER CODE END debounce_task */
-}
 
 /**
   * @brief  Period elapsed callback in non blocking mode

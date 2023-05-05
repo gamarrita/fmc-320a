@@ -18,6 +18,7 @@
 #include "../fm_temp_stm32/fm_temp_stm32.h"
 #include "../fm_version/fm_version.h"
 #include "../fmc/fmc.h"
+#include "../fm_debug/fm_debug.h"
 
 // Typedef.
 
@@ -39,8 +40,10 @@
 // Project variables, non-static, at least used in other file.
 
 // External variables.
-
+extern fm_event_t previous_event;
 // Global variables, statics.
+
+static int blink = 1;
 
 // Private function prototypes.
 
@@ -52,8 +55,7 @@
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar el caudal acumulado y el rate, de forma
  * personalizada según las opciones que se elijan.
- * @param puntos de la fila superior e inferior a imprimir, de tipo point_t, y
- * unidades a utilizar en la medición de tipo symbols_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_acm_rate()
@@ -82,7 +84,7 @@ void fm_lcd_acm_rate()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar la temperatura del líquido y la exterior,
  * de forma personalizada según las opciones que se elijan.
- * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_acm_temp()
@@ -131,24 +133,103 @@ void fm_lcd_clear()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar la fecha y hora actual, de forma
  * personalizada según las opciones que se elijan.
- * @param Puntos de la fila superior e inferior a imprimir, de tipo point_t.
+ * @param Hora y fecha a imprimir.
  * @retval None
  */
-void fm_lcd_date_hour(int time, int date)
+void fm_lcd_date_hour(user_or_configuration_t configuration,
+fm_event_t event_id, sel_date_time_field_t field)
 {
-    char lcd_msg[MSG_LENGTH];
+    fmc_fp_t time_to_str;
+    fmc_fp_t date_to_str;
+    char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_format_number_in_line(HIGH_ROW, date, lcd_msg,
-    MSG_LENGTH);
+    /*
+     * Se comprueba si se está en el menú de configuración o de usuario.
+     */
+    if(configuration)
+    {
+        date_to_str = fm_factory_get_fp_date_conf();
+        time_to_str = fm_factory_get_fp_time_conf();
+    }
+    else
+    {
+        fm_calendar_format_date();
+        fm_calendar_format_time();
+
+        date_to_str = fm_factory_get_fp_date();
+        time_to_str = fm_factory_get_fp_time();
+    }
+
+    fm_lcd_fp_to_str(date_to_str, '0', LINE_0_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
     lcd_set_point(HIGH_ROW, PNT_1);
     lcd_set_point(HIGH_ROW, PNT_3);
 
-    fm_lcd_format_number_in_line(LOW_ROW, time, lcd_msg,
-    MSG_LENGTH);
+    fm_lcd_fp_to_str(time_to_str, '0', LINE_1_DIGITS, lcd_msg,
+    sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_clear_digit(DIGIT_0, LOW_ROW);
     lcd_set_point(LOW_ROW, PNT_2);
     lcd_set_point(LOW_ROW, PNT_4);
+
+    if(configuration)
+    {
+        if(event_id == EVENT_KEY_ENTER ||
+        (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+        {
+            blink = 1;
+        }
+        else if(event_id == EVENT_KEY_DOWN ||
+        (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+        event_id == EVENT_KEY_UP ||
+        (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+        {
+            blink = 0;
+        }
+
+        if(blink == 1)
+        {
+            if(field == DAY)
+            {
+                lcd_clear_digit(DIGIT_1, HIGH_ROW);
+                lcd_clear_digit(DIGIT_0, HIGH_ROW);
+            }
+            else if(field == MONTH)
+            {
+                lcd_clear_digit(DIGIT_3, HIGH_ROW);
+                lcd_clear_digit(DIGIT_2, HIGH_ROW);
+            }
+            else if(field == YEAR)
+            {
+                lcd_clear_digit(DIGIT_7, HIGH_ROW);
+                lcd_clear_digit(DIGIT_6, HIGH_ROW);
+                lcd_clear_digit(DIGIT_5, HIGH_ROW);
+                lcd_clear_digit(DIGIT_4, HIGH_ROW);
+            }
+            else if(field == HOUR)
+            {
+                lcd_clear_digit(DIGIT_2, LOW_ROW);
+                lcd_clear_digit(DIGIT_1, LOW_ROW);
+            }
+            else if(field == MINUTE)
+            {
+                lcd_clear_digit(DIGIT_4, LOW_ROW);
+                lcd_clear_digit(DIGIT_3, LOW_ROW);
+            }
+            else if(field == SECOND)
+            {
+                lcd_clear_digit(DIGIT_6, LOW_ROW);
+                lcd_clear_digit(DIGIT_5, LOW_ROW);
+            }
+
+            blink = 0;
+        }
+        else
+        {
+            blink = 1;
+        }
+    }
 }
 
 /*
@@ -171,12 +252,12 @@ int length)
 }
 
 /*
- * Agrega el punto decimal a una string que representa un entero.
+ * @brief Agrega el punto decimal a una string que representa un entero.
  * Esta funcion es típicamente usada luego de  fm_lcd_u32_to_str();
- *
- * @param fp numero con punto decimal
- * @param p_str puntero al string destino
- * @param str_size tamaño del string
+ * @param fp numero con punto decimal.
+ * @param p_str puntero al string destino.
+ * @param str_size tamaño del string.
+ * @retval int.
  *
  */
 int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
@@ -221,13 +302,13 @@ int fm_lcd_fp_add_dot(fmc_fp_t fp, char *p_str, int str_size)
 }
 
 /*
- * @brief Convierte un numero con punto decimal a una string, pero sin el punto
- *
+ * @brief Convierte un numero con punto decimal a una string, pero sin el punto.
  * @param fp numero con punto decimal.
  * @param leading_char caracter de relleno, cero para no rellenar.
  * @param al rellenar debemos indicar a que ancho con esta variable.
  * @param p_str string destino, por referencia.
  * @param str_size tamaño del string.
+ * @retval int.
  */
 int fm_lcd_fp_to_str(fmc_fp_t fp, char leading_char, int str_width, char *p_str,
 int str_size)
@@ -309,10 +390,7 @@ int str_size)
 }
 
 /*
- * @brief Es la primera instrucción a llamar para usar el lcd, luego de
- * inicializar el lcd enciende todos los segmentos.
- * Para comprobar que el lcd esta funcionando se encienden todos los
- * segmentos por unos segundos y luego se lo apaga.
+ * @brief Es la primera instrucción a llamar para usar el lcd.
  * @param  None
  * @retval None
  */
@@ -320,36 +398,132 @@ void fm_lcd_init()
 {
     lcd_clear_all();
     lcd_init();
-
-    /*
-     * Se encienden todos los segmentos por 500 milisegundos al iniciar.
-     */
-    pcf8553_write_all(0xFF); // @suppress("Avoid magic numbers")
-    HAL_Delay(3000); // @suppress("Avoid magic numbers")
-    pcf8553_write_all(0x00); // @suppress("Avoid magic numbers")
 }
 
 /*
  * @brief Función que permite escribir lo necesario para la pantalla de
  * configuración del factor de calibración K.
- * @param  Unidad de volumen y unidad de tiempo.
+ * @param  None
  * @retval None
  */
-void fm_lcd_k_factor()
+void fm_lcd_k_factor(fm_event_t event_id, sel_digit_t digit_modify)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
 
-    fm_lcd_fp_to_str(fm_factory_get_k_factor(), '0', LINE_0_DIGITS, lcd_msg,
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(K_FACTOR), '0',
+    LINE_0_DIGITS, lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(K_FACTOR), lcd_msg,
     sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(fm_factory_get_k_factor(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
+    if(event_id == EVENT_KEY_ENTER ||
+    (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 1;
+    }
+    else if(event_id == EVENT_KEY_DOWN ||
+    (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+    event_id == EVENT_KEY_UP ||
+    (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
+
+    if(blink == 1)
+    {
+        lcd_clear_digit(DIG_7 - digit_modify, HIGH_ROW);
+        blink = 0;
+    }
+    else
+    {
+        blink = 1;
+    }
+
+    lcd_set_symbol(K, 0x00);
+}
+
+void fm_lcd_k_lin(sel_k k_sel, fm_event_t event_id, sel_digit_k_lin_t digit_lin_modify)
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+
+    fm_lcd_fp_to_str(fm_factory_get_k_factor(k_sel), '0', LINE_0_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_k_factor(k_sel), lcd_msg,
+    sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, HIGH_ROW);
+
+    fm_lcd_fp_to_str(fm_factory_get_frec_lin(k_sel), '0', LINE_1_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+    lcd_clear_digit(DIGIT_0, LOW_ROW);
+    lcd_clear_digit(DIGIT_1, LOW_ROW);
+    lcd_clear_digit(DIGIT_2, LOW_ROW);
+
+    if(event_id == EVENT_KEY_ENTER ||
+    (previous_event == EVENT_KEY_ENTER && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 1;
+    }
+    else if(event_id == EVENT_KEY_DOWN ||
+    (previous_event == EVENT_KEY_DOWN && event_id == EVENT_LCD_REFRESH) ||
+    event_id == EVENT_KEY_UP ||
+    (previous_event == EVENT_KEY_UP && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
+
+    if(digit_lin_modify <= DIG_LIN_7)
+    {
+        if(blink == 1)
+        {
+            lcd_clear_digit(DIG_LIN_7 - digit_lin_modify, HIGH_ROW);
+            blink = 0;
+        }
+        else
+        {
+            blink = 1;
+        }
+    }
+    else
+    {
+        if(blink == 1)
+        {
+            lcd_clear_digit(DIG_LIN_6 - digit_lin_modify + DIG_LIN_8, LOW_ROW);
+            blink = 0;
+        }
+        else
+        {
+            blink = 1;
+        }
+    }
+
+    lcd_set_symbol(F, 0x00);
+    if(k_sel == K_LIN_1)
+    {
+        lcd_set_symbol(LIN_1, 0x00);
+    }
+    if(k_sel == K_LIN_2)
+    {
+        lcd_set_symbol(LIN_2, 0x00);
+    }
+    if(k_sel == K_LIN_3)
+    {
+        lcd_set_symbol(LIN_3, 0x00);
+    }
+    if(k_sel == K_LIN_4)
+    {
+        lcd_set_symbol(LIN_4, 0x00);
+    }
+    if(k_sel == K_LIN_5)
+    {
+        lcd_set_symbol(LIN_5, 0x00);
+    }
 }
 
 /*
  * @brief Función que imprime en una de las dos filas del lcd, row 0 o row 1.
- * @param
+ * @param Arreglo a imprimir.
+ * @param Fila donde se coloca el arreglo a imprimir.
  * @retval None
  */
 void fm_lcd_puts(const char *c, const rows_t row)
@@ -396,8 +570,7 @@ void fm_lcd_refresh()
  * @brief Función que setea una serie de símbolos, puntos y dígitos en la
  * pantalla LCD, permitiendo mostrar el caudal total y el rate, de forma
  * personalizada según las opciones que se elijan.
- * @param puntos de la fila superior e inferior a imprimir, de tipo point_t, y
- * unidades a utilizar en la medición de tipo symbols_t.
+ * @param None
  * @retval None
  */
 void fm_lcd_ttl_rate()
@@ -424,22 +597,110 @@ void fm_lcd_ttl_rate()
 
 /*
  * @brief Función que permite escribir lo necesario para la pantalla de
- * configuración de unidades de volumen y tiempo y la resolución de la medida.
- * @param  Unidad de volumen y unidad de tiempo.
+ * configuración de unidades tiempo y la resolución del factor RATE.
+ * @param  None
  * @retval None
  */
-void fm_lcd_units()
+void fm_lcd_units_tim(fm_event_t event_id)
 {
     char lcd_msg[PCF8553_DATA_SIZE];
+    point_t resolution_modify;
 
-    fm_lcd_fp_to_str(fm_factory_get_units_digits(), '0', LINE_0_DIGITS, lcd_msg,
+    fm_lcd_fp_to_str(fm_factory_get_units_tim(), '0', LINE_1_DIGITS, lcd_msg,
     sizeof(lcd_msg));
-    fm_lcd_fp_add_dot(fm_factory_get_units_digits(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_tim(), lcd_msg, sizeof(lcd_msg));
+    fm_lcd_puts(lcd_msg, LOW_ROW);
+
+    if(event_id != EVENT_LCD_REFRESH ||
+    (previous_event != EVENT_LCD_REFRESH && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
+
+    if(blink == 1)
+    {
+        if(fm_factory_get_units_tim().res == 1)
+        {
+            resolution_modify = PNT_5;
+            lcd_clear_point(LOW_ROW, resolution_modify);
+        }
+        else if(fm_factory_get_units_tim().res == 2)
+        {
+            resolution_modify = PNT_4;
+            lcd_clear_point(LOW_ROW, resolution_modify);
+        }
+        else if(fm_factory_get_units_tim().res == 3)
+        {
+            resolution_modify = PNT_3;
+            lcd_clear_point(LOW_ROW, resolution_modify);
+        }
+
+        lcd_clear_time_unit(fmc_get_rate().unit_time, 0x0);
+
+        blink = 0;
+    }
+    else
+    {
+        lcd_set_time_unit(fmc_get_rate().unit_time, 0x0);
+        blink = 1;
+    }
+
+    lcd_set_symbol(RATE, 0x00);
+}
+
+/*
+ * @brief Función que permite escribir lo necesario para la pantalla de
+ * configuración de unidades de volumen y la resolución de los factores ACM y
+ * TTL.
+ * @param  None
+ * @retval None
+ */
+void fm_lcd_units_vol(fm_event_t event_id)
+{
+    char lcd_msg[PCF8553_DATA_SIZE];
+    point_t resolution_modify;
+
+    fm_lcd_fp_to_str(fm_factory_get_units_vol(), '0', LINE_0_DIGITS,
+    lcd_msg, sizeof(lcd_msg));
+    fm_lcd_fp_add_dot(fm_factory_get_units_vol(), lcd_msg, sizeof(lcd_msg));
     fm_lcd_puts(lcd_msg, HIGH_ROW);
 
-    lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
-    lcd_set_symbol(BACKSLASH, 0x0);
-    lcd_set_time_unit(fmc_get_acm().unit_time, 0x0);
+    if(event_id != EVENT_LCD_REFRESH ||
+    (previous_event != EVENT_LCD_REFRESH && event_id == EVENT_LCD_REFRESH))
+    {
+        blink = 0;
+    }
+
+    if(blink == 1)
+    {
+        if(fm_factory_get_units_vol().res == 1)
+        {
+            resolution_modify = PNT_6;
+            lcd_clear_point(HIGH_ROW, resolution_modify);
+        }
+        else if(fm_factory_get_units_vol().res == 2)
+        {
+            resolution_modify = PNT_5;
+            lcd_clear_point(HIGH_ROW, resolution_modify);
+        }
+        else if(fm_factory_get_units_vol().res == 3)
+        {
+            resolution_modify = PNT_4;
+            lcd_clear_point(HIGH_ROW, resolution_modify);
+        }
+
+        lcd_clear_vol_unit(fmc_get_acm().unit_volume, 0x0);
+
+        blink = 0;
+    }
+    else
+    {
+        lcd_set_vol_unit(fmc_get_acm().unit_volume, 0x0);
+        blink = 1;
+    }
+
+    lcd_set_symbol(ACM, 0x00);
+    lcd_set_symbol(TTL, 0x00);
 }
 
 /*

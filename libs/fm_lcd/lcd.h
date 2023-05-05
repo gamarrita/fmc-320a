@@ -93,6 +93,11 @@ typedef enum
     REG_19
 } reg_t;
 
+typedef enum
+{
+    DIGIT_0, DIGIT_1, DIGIT_2, DIGIT_3, DIGIT_4, DIGIT_5, DIGIT_6, DIGIT_7
+} screen_digits_t;
+
 // Defines.
 
 /*
@@ -112,8 +117,11 @@ typedef enum
 // Public function prototypes.
 
 void lcd_clear_all();
+void lcd_clear_digit(screen_digits_t digit, rows_t line);
 void lcd_clear_point(rows_t line, point_t point);
 void lcd_clear_symbol(symbols_t symbol, blink_t blink_speed);
+void lcd_clear_time_unit(fmc_unit_time_t time_unit, blink_t blink_speed);
+void lcd_clear_vol_unit(fmc_unit_volume_t vol_unit, blink_t blink_speed);
 void lcd_init();
 void lcd_put_char(char c, uint8_t col, rows_t row);
 void lcd_refresh();
