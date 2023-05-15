@@ -1,1 +1,6 @@
-#cubeide
+# Eclipse
+.metadata
+.settings
+Release
+Debug
+.launch
